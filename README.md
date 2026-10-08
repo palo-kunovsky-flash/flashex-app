@@ -9,7 +9,7 @@ Its own VT core, an editor with language servers, Source Control and agent-aware
 
 [![Latest release](https://img.shields.io/github/v/release/palo-kunovsky-flash/flashex-app?label=release&color=f28c28)](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest)
 [![macOS 13+ Apple Silicon](https://img.shields.io/badge/macOS-13%2B%20%C2%B7%20Apple%20Silicon-black?logo=apple)](#requirements)
-[![Linux](https://img.shields.io/badge/Linux-coming%20soon-lightgrey?logo=linux&logoColor=white)](#requirements)
+[![Linux beta](https://img.shields.io/badge/Linux-beta%20%C2%B7%20x86__64%20%C2%B7%20arm64-f2a33a?logo=linux&logoColor=white)](#linux-beta)
 [![Windows](https://img.shields.io/badge/Windows-planned-lightgrey)](#requirements)
 [![Free to use](https://img.shields.io/badge/price-free-3fb950)](#licence)
 [![Downloads](https://img.shields.io/github/downloads/palo-kunovsky-flash/flashex-app/total?color=555)](https://github.com/palo-kunovsky-flash/flashex-app/releases)
@@ -17,7 +17,7 @@ Its own VT core, an editor with language servers, Source Control and agent-aware
 | | Download |
 |---|---|
 | **macOS** (Apple Silicon, 13+) | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
-| **Linux** | coming soon |
+| **Linux** (beta, x86_64 / arm64) | [AppImage, .deb or .tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) · see [Linux (beta)](#linux-beta) |
 | **Windows** | planned |
 
 [Install](#install) · [Features](#features) · [Performance](#performance-and-memory) · [Shortcuts](#keyboard-shortcuts) · [Privacy](#privacy) · [Changelog](CHANGELOG.md) · [All releases](https://github.com/palo-kunovsky-flash/flashex-app/releases)
@@ -231,6 +231,32 @@ ln -s /Applications/Flashex.app/Contents/MacOS/flashex /opt/homebrew/bin/flashex
 
 (Inside a Flashex terminal the command is always available.)
 
+### Linux (beta)
+
+Download from the [latest release](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) for your architecture (`x86_64` or `aarch64`):
+
+- **AppImage** (updates itself):
+
+  ```sh
+  chmod +x Flashex-<version>-linux-<arch>.AppImage
+  ./Flashex-<version>-linux-<arch>.AppImage
+  ```
+
+  It needs FUSE (`fuse3` / `fusermount3`); without it, run it with `--appimage-extract-and-run`.
+- **Debian / Ubuntu:** `sudo apt install ./flashex_<version>_<arch>.deb`. When a new version is out, Flashex downloads the verified package and shows the same command.
+- **tar.gz:** extract it anywhere and run `flashex-app`.
+
+Each file has a `.sha256` next to it, and updates are verified with the same signature as on macOS.
+
+The Linux build is new, so expect rough edges. Known gaps:
+
+- There is no built-in browser panel; links open in your browser.
+- There is no menu bar; every command is in the command palette (the Search button at the top right).
+- Shortcut labels still show the macOS `⌘` symbols.
+- On Wayland the window has no close or minimise buttons yet.
+
+[Bug reports](https://github.com/palo-kunovsky-flash/flashex-app/issues) are very welcome.
+
 ## Updates
 
 Flashex checks for a new release at start and then once a day, by asking GitHub for the latest release of this repository. When one is available, a card offers **Release Notes**, **Update** and **Later**. Nothing is downloaded or installed until you choose **Update**, and the restart waits for **Restart Now**.
@@ -261,7 +287,8 @@ If you installed with Homebrew, `brew upgrade --cask flashex` also works. The ca
 
 - A Mac with **Apple Silicon** (M1 or later). Intel Macs are not supported.
 - **macOS 13 Ventura or later.**
-- Linux: coming soon. Windows: later.
+- **Linux (beta):** x86_64 or arm64 with glibc 2.35 or later (Ubuntu 22.04, Debian 12, Fedora 36 and newer), X11 or Wayland.
+- Windows: later.
 
 ## Keyboard shortcuts
 

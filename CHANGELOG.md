@@ -8,7 +8,17 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-Nothing yet.
+### Added
+- **Claude Code updates while you work.** When a newer Claude Code is installed while a session runs in a terminal, a refresh icon appears after that terminal's tab title and in the sidebar. Click it to restart the session on the new version; the conversation continues, with the options you started it with. If Claude Code is busy, choose **Restart when idle** and it restarts on its own once the task is done. The palette's "Restart Idle Claude Sessions on the New Version" does it for all idle sessions, and Settings › AI agents turns the icon off. Run `flashex setup claude` again to add the hook this needs.
+
+## [0.1.1] - 2026-10-08
+
+### Added
+- **Linux (beta)** for x86_64 and arm64: an AppImage that updates itself, a `.deb` for Debian and Ubuntu, and a `.tar.gz`. The restart keeper, shell integration and signed updates work as on macOS. See the README for the current gaps.
+
+### Fixed
+- **Block characters and Powerline symbols are drawn exactly to the cell.** Characters such as `▛▜▝▘`, Powerline arrows and round caps, sextants and braille no longer leave gaps or sit off the baseline. Claude Code's logo is now solid, and rounded statusline "pills" are smooth capsules that meet their background with no seam. Screens full of block characters also draw about four times faster.
+- **The block menu (`⋯`) can be used again.** It used to be cut off by the pane and to close while you moved the mouse into it. It now opens above all panes, flips up or left near the edges, stays open on the way in, and works with the arrow keys.
 
 ## [0.1.0] - 2026-10-08
 
@@ -50,5 +60,6 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.1
 [0.1.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.0
