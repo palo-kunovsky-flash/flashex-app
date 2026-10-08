@@ -49,6 +49,7 @@ Flashex is free to use. It runs on Apple Silicon Macs with macOS 13 or later. [I
 - [Keyboard shortcuts](#keyboard-shortcuts)
 - [Configuration](#configuration)
 - [Privacy](#privacy)
+- [Support Flashex](#support-flashex)
 - [Licence](#licence)
 
 ## Features
@@ -317,6 +318,16 @@ The network connections it makes are:
 - **Language servers** are programs already installed on your system, started by Flashex as local processes. Flashex does not download them. What a server itself does (rust-analyzer running `cargo`, for example) is up to that server.
 
 Everything else stays local. The `flashex` command talks to the app over a Unix socket that only your user can open (`0600`). Programs in the terminal may write to the clipboard (OSC 52, `[terminal] clipboard_write`) but can never read it. Command lines that look like they contain a secret are never saved in the session.
+
+## Support Flashex
+
+Flashex is free, and the best way to support it costs nothing:
+
+- **Star** [this repository](https://github.com/palo-kunovsky-flash/flashex-app). It helps other people find Flashex.
+- **Tell a friend** or a colleague who lives in the terminal or works with AI agents.
+- **Report bugs and share ideas** in [Issues](https://github.com/palo-kunovsky-flash/flashex-app/issues). A clear bug report with steps to reproduce it is worth a lot.
+
+Thank you!
 
 ## Licence
 
