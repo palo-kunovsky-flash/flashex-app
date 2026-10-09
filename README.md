@@ -65,6 +65,17 @@ Run Claude Code (or any agent) in as many terminals as you like and see them all
 - Any program can notify: OSC 9, 777 and 99, a bell, or `flashex notify`. A command that took 10 s or more and finished out of sight notifies too.
 - The `flashex` command controls the app from scripts and agents: `flashex split right`, `flashex send`, `flashex read --last-block`, `flashex open src/main.rs:10`, `flashex agent waiting`, `flashex events` (a JSON stream of commands, notifications and agent states). Programs that can write to a Unix socket can use the same JSON-RPC API.
 
+### AI help (optional)
+
+Flashex works with the AI you already have, and never needs an API key: Claude Code, Codex or Gemini CLI (their own login), your own command, or any OpenAI-compatible server, including local models in Ollama, LM Studio or llama.cpp. Nothing is sent until you press Enter on a `#` line or click.
+
+- **`# <what you want>` + Enter** at an empty prompt, for example `# find files bigger than 100 MB`, asks for one shell command for your system, shell and folder. The command is put into the line for you to check; it never runs by itself, and the `#` line never reaches your shell or its history. Esc cancels.
+- **Explain** and **Fix** on a failed command's block. With an agent running in the project, the question is typed into its terminal (you press Enter there); otherwise the answer from your provider shows next to the block, and **Insert fix into prompt** puts a suggested command into the line.
+- **Send to Claude / Codex / Gemini…** on a block types its command, folder, exit code and output (only its start and end when long) into that agent. With several agents running you pick one; with none, **Send to AI…** asks your provider.
+- **Suggestions from your history** as you type, in grey after the cursor (no AI, offline): the command you ran in this folder first, then in this project, then anywhere. → or End takes it, ⌥→ one word. Commands that look like they contain a password or a token are never suggested. If your shell suggests on its own (zsh-autosuggestions, fish), Flashex leaves its line alone.
+
+Settings › AI picks the provider (by default the first of Claude Code, Codex and Gemini CLI that is installed), the server and model, stores the API key in the Keychain, and has **Test connection**, which lists the server's models. `[ai] enabled = false` turns every AI feature off.
+
 ### Command blocks and inline images
 
 ![A wide terminal with command blocks, durations and an exit code, block tools on hover, and an inline latency chart](screenshots/blocks-and-images.png)
@@ -329,6 +340,13 @@ profile = "flashex"       # or "sublime", "vscode"
 
 [updates]
 check = true
+
+[ai]
+enabled = true
+# provider = "openai-compatible"           # or claude, codex, gemini, command
+# base_url = "http://localhost:11434/v1"   # Ollama; LM Studio: http://localhost:1234/v1
+# model = "qwen2.5-coder:7b"
+ghost_text = true                          # suggestions from your history
 ```
 
 Other files: `keybindings.toml`, `layouts.toml` (layout templates) and `workflows.toml` (saved commands) in the same folder, and `<project>/.flashex/workflows.toml` for a project's own workflows. App data (session, backups of unsaved editors) is in `~/Library/Application Support/flashex`, logs in `~/Library/Logs/flashex`.
@@ -343,6 +361,13 @@ The network connections it makes are:
 - **The browser panel:** only the pages you open in it. Text typed in its address bar that is not an address is searched with DuckDuckGo (`[browser] search_url`, `""` turns it off).
 - **Git:** only what you start (fetch, pull, push, branch Fetch), using your own git and credentials. Background fetching is off unless you set `[git] autofetch_minutes`.
 - **Language servers** are programs already installed on your system, started by Flashex as local processes. Flashex does not download them. What a server itself does (rust-analyzer running `cargo`, for example) is up to that server.
+- **AI help, only when you ask.** Nothing is sent until you press Enter on a `# …` line at a prompt, or click Explain, Fix, Send to AI… or Test connection. Then:
+  - **`#` → command** sends your request (only what you typed after `#`), your operating system, your shell's name and the current folder (as `~/…`). Your last command and its exit code are sent only if you turn on Settings › AI › "# also sends your last command" (`[ai] send_last_command`, off by default), and never when it looks like it contains a secret. No environment variables, files or other output.
+  - **Explain, Fix and Send to AI…** send that block's command (passwords and tokens in it replaced by `***`), folder, exit code and output, trimmed to its first and last lines (`[ai] output_lines`, 200 by default, and `output_kb`, 16 KB), saying that it was trimmed. The row's tooltip says what it sends, and its name says where it goes ("Fix with Claude (tab 2)").
+  - **Where it goes** is your `[ai] provider`: the `claude`, `codex` or `gemini` program on your computer, which sends it to Anthropic, OpenAI or Google under your own login and their terms, run in an empty temporary folder so it reads none of your project's files, with no tools it could act with (Claude Code: no tools, no MCP servers, plan mode; Codex: read-only sandbox; Gemini: never auto-approve); your own `command`, which gets it on its standard input; or an OpenAI-compatible server at `[ai] base_url` (`POST /chat/completions`, through `/usr/bin/curl`, HTTPS except for `localhost`, `127.0.0.1` and `::1`), which with a local model never leaves your computer. **Test connection** sends `GET /models` to that server and nothing else.
+  - **Send to Claude / Codex / Gemini** with an agent running in a terminal only types the same report into that terminal; it is sent when you press Enter there. Nothing is typed into a terminal that is back at its shell prompt, or one that does not accept pasted text safely.
+  - The API key is kept in the macOS Keychain (Linux: a file only you can read), never in `config.toml`, and is sent only to your server, as an `Authorization` header that does not appear in the process list. Opening Settings never reads it; if it cannot be read (Keychain access denied), nothing is sent.
+  - Suggestions from your history are computed on your computer and never sent.
 
 Everything else stays local. The `flashex` command talks to the app over a Unix socket that only your user can open (`0600`). Programs in the terminal may write to the clipboard (OSC 52, `[terminal] clipboard_write`) but can never read it. Command lines that look like they contain a secret are never saved in the session.
 
