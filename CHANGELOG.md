@@ -8,7 +8,20 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-Nothing yet.
+## [0.1.4] - 2026-10-10
+
+macOS only. The Linux beta stays at 0.1.2 for now.
+
+### Changed
+- **Dashboard bars warm up as they fill**, as in flash-top: the filled part runs from green through yellow and amber to red along the bar, and the number after it takes the colour of its value (no more jump to red at 90 %). A battery is the other way round (full is green), temperatures run from 30 to 95 °C. This applies to CPU, memory, pressure, GPU, disk, temperatures, the cores, the Usage limits and the Agents context bar, in the dark and the light theme.
+- **Each System chart has its own colour**: CPU blue, GPU violet, memory green, temperature amber, disk reads slate and writes teal, download light blue and upload orange (darker in the light theme).
+- **The System cards come in order of importance**: CPU, GPU, Memory, Temperatures, Disk, Network, System, Processes, read left to right and then down, at every width. Narrowing the pane no longer pushes CPU or GPU down the page.
+- **Resizing shows the size of every pane**, not only terminals: a dashboard, editor or preview shows "1018 × 640 pt" while it changes, and the System dashboard adds how many columns it uses.
+
+### Fixed
+- **System Dashboard charts fill the chart.** Right after you open the dashboard a chart no longer sits as a short stub at the right edge of a mostly empty five-minute window: it spans the whole chart from its first sample to now, and the time axis says how far back that is ("-40s … now"). Once five minutes are collected it becomes the fixed "-5m … now" window without a jump. Until there are a few samples a chart shows a faint "collecting…" instead of a dot. The charts also start exactly where the card's bars and numbers start, with the scale beside them instead of a wide column of its own, so they are wider and no longer pushed to the right; the scale never covers the line, and a peak no longer pokes above the top of the chart.
+- **Pointing at a Usage chart no longer makes the cards jump.** The value under the pointer is drawn over the chart instead of in the line above it, which in a narrow pane wrapped and moved everything on every mouse move.
+- **System Dashboard history survives switching tabs.** While a System dashboard is open in any tab, also behind another tab or in a minimised window, its charts keep sampling in the background (without drawing, and without the process and network-process tables, so `ps` and `nettop` still run only while it is on screen). Closing it keeps sampling for ten more minutes, so reopening it soon shows the history; an hour after closing, the history is freed. A pause in sampling shows as a gap.
 
 ## [0.1.3] - 2026-10-10
 
@@ -107,7 +120,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.4
 [0.1.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.3
 [0.1.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.2
 [0.1.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.1
