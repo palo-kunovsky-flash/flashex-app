@@ -8,6 +8,7 @@
 Its own VT core, an editor with language servers, Source Control and agent-aware panes, in one native app.
 
 [![Latest release](https://img.shields.io/github/v/release/palo-kunovsky-flash/flashex-app?label=release&color=f28c28)](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest)
+[![Changelog](https://img.shields.io/badge/changelog-latest-f28c28)](CHANGELOG.md)
 [![macOS 13+ Apple Silicon](https://img.shields.io/badge/macOS-13%2B%20%C2%B7%20Apple%20Silicon-black?logo=apple)](#requirements)
 [![Linux beta](https://img.shields.io/badge/Linux-beta%20%C2%B7%20x86__64%20%C2%B7%20arm64-f2a33a?logo=linux&logoColor=white)](#linux-beta)
 [![Windows](https://img.shields.io/badge/Windows-planned-lightgrey)](#requirements)
@@ -17,7 +18,7 @@ Its own VT core, an editor with language servers, Source Control and agent-aware
 | | Download |
 |---|---|
 | **macOS** (Apple Silicon, 13+) | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
-| **Linux** (beta, x86_64 / arm64) | [AppImage, .deb or .tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) · see [Linux (beta)](#linux-beta) |
+| **Linux** (beta, x86_64 / arm64) | [AppImage, .deb or .tar.gz (0.1.2)](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.2) · see [Linux (beta)](#linux-beta) |
 | **Windows** | planned |
 
 [Install](#install) · [Features](#features) · [Performance](#performance-and-memory) · [Shortcuts](#keyboard-shortcuts) · [Privacy](#privacy) · [Changelog](CHANGELOG.md) · [All releases](https://github.com/palo-kunovsky-flash/flashex-app/releases)
@@ -118,7 +119,7 @@ Projects live in the sidebar, optionally in groups, each with its own tabs and s
 
 ### Light and dark
 
-Flashex follows the macOS appearance by default. `theme` takes `dark`, `light`, `system` or the name of any Ghostty theme file (`"light:<name>,dark:<name>"` picks one for each appearance), and the accent colour can be orange, green, blue, indigo, teal or amber. The grid and the Markdown preview above are in the light theme.
+Flashex follows the macOS appearance by default. Settings › Terminal colors offers Flashex's own colour schemes (Graphite, Harbor, Ember), each with a dark and a light variant; `theme` takes `dark`, `light`, `system`, a scheme such as `graphite-dark`, or the name of a theme file in `~/.config/flashex/themes` (`"light:<name>,dark:<name>"` picks one for each appearance), and the accent colour can be orange, green, blue, indigo, teal or amber. The grid and the Markdown preview above are in the light theme.
 
 ### Restart keeper
 
@@ -244,7 +245,7 @@ ln -s /Applications/Flashex.app/Contents/MacOS/flashex /opt/homebrew/bin/flashex
 
 ### Linux (beta)
 
-Download from the [latest release](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) for your architecture (`x86_64` or `aarch64`):
+Download from the [0.1.2 release](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.2) for your architecture (the newest Linux build; later versions are macOS only for now) (`x86_64` or `aarch64`):
 
 - **AppImage** (updates itself):
 
@@ -323,7 +324,7 @@ Flashex reads `~/.config/flashex/config.toml` and applies changes as soon as you
 
 ```toml
 [appearance]
-theme = "system"          # dark | light | system | a Ghostty theme name
+theme = "system"          # dark | light | system | graphite-dark | …
 accent = "orange"         # green, blue, indigo, teal, amber
 animations = true
 
@@ -368,6 +369,11 @@ The network connections it makes are:
   - **Send to Claude / Codex / Gemini** with an agent running in a terminal only types the same report into that terminal; it is sent when you press Enter there. Nothing is typed into a terminal that is back at its shell prompt, or one that does not accept pasted text safely.
   - The API key is kept in the macOS Keychain (Linux: a file only you can read), never in `config.toml`, and is sent only to your server, as an `Authorization` header that does not appear in the process list. Opening Settings never reads it; if it cannot be read (Keychain access denied), nothing is sent.
   - Suggestions from your history are computed on your computer and never sent.
+- **The Usage dashboard** reads Claude Code's transcripts (`~/.claude/projects`, or `$CLAUDE_CONFIG_DIR`) on your computer while it is on screen: only timestamps, model names, token counts, the length of visible text, the session id and the last name of the working folder. No message text is kept or logged; its summary cache in Flashex's cache folder (`~/Library/Caches/flashex`) holds those numbers only. Rate limits come from Claude Code's status line, through a file your status-line script writes (`~/Library/Caches/flashex/statusline.json`, on Linux `$XDG_CACHE_HOME/flashex` or `~/.cache/flashex`, or cc-meter's `~/.cache/cc-meter/statusline.json`); Flashex never edits your status line or Claude Code's settings. Two network requests exist, both off unless you turn them on:
+  - **Show Claude status** (a button in the dashboard, `[agents] claude_status`): a `GET` of `https://status.claude.com/api/v2/summary.json`, Anthropic's public status page, once a minute while the dashboard is open. Nothing is sent but the request itself (your IP address and a `Flashex/<version>` user agent).
+  - **Use the Anthropic usage API when status-line data is missing** (Settings › AI agents, `[agents] usage_api`): when no status line has reported your limits for a minute, Flashex reads Claude Code's own login (the macOS Keychain item "Claude Code-credentials", or `.credentials.json`) and sends a `GET` to `https://api.anthropic.com/api/oauth/usage` with it, at most once a minute while the dashboard is open (`u` asks at once), backing off when Anthropic answers HTTP 429. The token goes to curl on its standard input, never on the command line, and nowhere else. With the setting off, the login is never read.
+- **The System dashboard** reads this Mac's own counters, in-process and without root (Mach and `sysctl` for CPU and memory, libproc for your processes, IOKit for the GPU, disks, battery and temperature sensors, the interface counters and SystemConfiguration for the network), only while it is on screen. Two commands run on their own: `ps` every 16 seconds for processes of other users (the window server, root's daemons), which an app cannot read itself, and `nettop` every 10 seconds for the busiest processes on the network. Nothing is stored; the charts' history lives in memory and goes when the dashboard closes. One network request exists, off unless you turn it on:
+  - **Public IP** (a button in the dashboard's header, `[dashboards] public_ip`): a `GET` of `https://api.ipify.org` every five minutes while the dashboard is on screen, to show the address the internet sees. Nothing is sent but the request itself (your IP address and a `Flashex/<version>` user agent). Off, the address is never asked for.
 
 Everything else stays local. The `flashex` command talks to the app over a Unix socket that only your user can open (`0600`). Programs in the terminal may write to the clipboard (OSC 52, `[terminal] clipboard_write`) but can never read it. Command lines that look like they contain a secret are never saved in the session.
 
