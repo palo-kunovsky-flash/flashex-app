@@ -105,7 +105,7 @@ The sidebar and the status bar show each project's branch with `↑` commits to 
 
 ### Projects, groups, splits
 
-Projects live in the sidebar, optionally in groups, each with its own tabs and split layout. Splits can be resized by cells or percent (`flashex size 60%`), zoomed (`Cmd+Shift+Enter`) or shown as a list on a small screen. Layouts can be saved as templates, and closed projects, tabs and panes come back with `Cmd+Shift+T`. The whole session (groups, projects, tabs, splits, editors) is restored at the next start.
+Projects live in the sidebar, optionally in groups, each with its own tabs and split layout. Drag a pane by its tab (or by the free part of its tab strip, to take all its tabs) into another pane's middle to join them as tabs, onto an edge to split there, into a tab strip to put it in place, or onto the top tab bar to give it a tab of its own; a highlighted preview shows where it lands, Esc cancels, and terminals keep running. The palette's "Merge Pane into Tabs", "Join All Panes as Tabs" and "Move Pane to New Tab" do the same from the keyboard. Splits can be resized by cells or percent (`flashex size 60%`), zoomed (`Cmd+Shift+Enter`) or shown as a list on a small screen. Layouts can be saved as templates, and closed projects, tabs and panes come back with `Cmd+Shift+T`. The whole session (groups, projects, tabs, splits, editors) is restored at the next start.
 
 ![A 2×2 grid of terminals in the light theme: an agent at work, a dev server whose port shows in the sidebar, tests and a docs repository](screenshots/hero-light.png)
 
