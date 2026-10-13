@@ -85,6 +85,8 @@ Shell integration for zsh, bash and fish turns every command into a block. `Cmd+
 
 Pictures from `kitty +kitten icat`, `chafa`, `timg`, `yazi`, `img2sixel` or `imgcat` show inline and belong to their block (folding the block hides them). Each terminal keeps at most 64 MB of decoded images by default.
 
+Paths of pictures that programs print (`Saved screenshot to ./shots/a.png`, `` `chart.svg` ``, `~/Desktop/x.jpg`) underline when you point at them and show a small preview after a moment. `Cmd+click` opens the picture beside the terminal; a right click offers Open, Reveal in Finder, Copy Path and Copy Image (`[terminal] image_hover_preview` turns the preview off).
+
 Also in the terminal: `Cmd+F` search across the whole history (regex, whole word, case), `Cmd+click` on paths such as `src/main.rs:10:5` and on links, an input editor with syntax colours and history suggestions, and ssh that works with nothing installed on the server.
 
 ### Editor and language servers
