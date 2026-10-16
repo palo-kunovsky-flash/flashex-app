@@ -8,6 +8,13 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-10-16
+
+### Fixed
+- **The ‹ arrow in Settings steps back.** In a Settings row with a value between arrows (Font weight, Font size, Line height, Theme, Scrollback and every other choice or number), a click on the left arrow `‹` moved to the next value, the same as a click on `›`: the arrows were only drawn, and the click went to the row, which steps forward. Each arrow is now a button of its own, with a hover highlight and a slightly larger target: `‹` steps back and `›` steps on, the same as `←` and `→`. A click elsewhere on the row still moves to the next value, as Space does.
+- **No web server chip for Claude Code's own port.** Claude Code listens on a random local port of its own (its bridge to an IDE), and since it answers a browser with "Not Found" like any web API, Flashex took it for a web server: a terminal running Claude Code got a globe chip with a port such as `56053` that opened an empty page, and while that terminal's row was folded away or behind "+N more", the chip sat on the project's row. Ports that a coding agent's program itself listens on (Claude Code, also its native and npm installs, Codex, Gemini CLI, Qwen Code, Cursor Agent, Amp) are now left out. A server the agent starts for you, such as `npm run dev` from Claude Code, is its own program and still gets its chip on that terminal's row.
+- **The System dashboard's Network card no longer grows with every interface.** The interfaces table listed every interface with an address or traffic (Wi-Fi, Ethernet, each VPN tunnel, bridges for virtual machines and containers), so on a Mac with many of them the Network card, and with it the whole dashboard, got taller and taller. The table now shows at most five interfaces, the main one first, and the rest scroll inside the card with the trackpad or mouse wheel, a thin bar beside them showing where you are. Once the list reaches its end, scrolling goes on to the dashboard as before. The card stays the same height whether there are five interfaces or twenty; with fewer than five it is as short as before. The table of programs using the network was already limited to five.
+
 ## [0.2.2] - 2026-10-16
 
 ### Added
@@ -348,7 +355,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.3
 [0.2.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.2
 [0.2.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.1
 [0.2.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.0
