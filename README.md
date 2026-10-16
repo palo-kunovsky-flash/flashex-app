@@ -333,6 +333,7 @@ animations = true
 [terminal]
 font_family = "Geist Mono"
 font_size = 13
+font_weight = "regular"   # thin … light, medium, semibold … black, or 100–900
 scrollback_lines = 10000
 
 [session]
