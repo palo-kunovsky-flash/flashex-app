@@ -1,0 +1,104 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Editor, Git and browser · Flashex docs</title>
+<meta name="description" content="The code editor and language servers, Source Control, the Markdown preview and the browser panel.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row active" aria-current="page" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Editor, Git and browser</span><span class="crumb">Flashex docs › Using Flashex</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Editor, Git and the browser panel</h1>
+<p class="lede">Open files next to your terminals, commit without leaving the window, and look at your local pages in a pane.</p>
+
+<h2 id="editor">The code editor</h2>
+<p>Open a file with <kbd>⌘P</kbd> (files of the project), from the file tree (<kbd>⌘B</kbd>; <kbd>⌘0</kbd> focuses it), with <kbd>⌘</kbd>-click on a path in a terminal, or with <a href="cli.html#flashex-open"><code>flashex open src/main.rs:10</code></a>. <kbd>⌥⌘N</kbd> makes a new file, <kbd>⌘S</kbd> saves and <kbd>⇧⌘S</kbd> saves as.</p>
+<ul>
+<li><strong>Highlighting</strong> (tree-sitter) for Rust, TypeScript, JavaScript, Python, Go, Swift, Kotlin, JSON, TOML, YAML, Markdown, Bash, HTML, CSS and SQL, including languages embedded in others. Click the language in the status bar to pick another; click the indentation for what <kbd>Tab</kbd> inserts or to convert the file's indentation; click LF or CRLF for the line endings it is saved with.</li>
+<li><strong>Multiple cursors</strong> in the style of Sublime Text and VS Code: <kbd>⌘D</kbd> adds the next occurrence, <kbd>⌃⌘G</kbd> selects all, <kbd>⇧⌘L</kbd> puts a cursor on every selected line, <kbd>⌥↑</kbd> <kbd>⌥↓</kbd> move lines, <kbd>⌘/</kbd> comments. <a href="configuration.html#cfg-keys-profile"><code>[keys] profile</code></a> switches to <a href="shortcuts.html#profile-sublime">Sublime Text</a> or <a href="shortcuts.html#profile-vscode">VS Code</a> conventions.</li>
+<li><strong>Find</strong> <kbd>⌘F</kbd>, <strong>replace</strong> <kbd>⌥⌘F</kbd>, <strong>go to line</strong> <kbd>⌃G</kbd>, <strong>word wrap</strong> <kbd>⌥Z</kbd>, <strong>diff against git</strong> <kbd>⌃⇧G</kbd>.</li>
+<li><strong>A minimap</strong> on the right of a pane wide enough for it (<a href="configuration.html#cfg-editor-minimap"><code>minimap</code></a>).</li>
+<li><strong>Hot exit</strong>: untitled files and unsaved changes come back after quitting, as in Sublime Text (<a href="configuration.html#cfg-editor-hot_exit"><code>hot_exit</code></a>).</li>
+<li><strong>Pictures</strong> (PNG, JPEG, GIF, WebP, HEIC, SVG and more) open in an image tab with their size.</li>
+</ul>
+
+<h3 id="lsp">Language servers</h3>
+<p>Language servers already installed on your system (rust-analyzer, typescript-language-server, pyright, gopls, sourcekit-lsp, …) give diagnostics, go to definition (<kbd>F12</kbd>), references (<kbd>⇧F12</kbd>), hover (<kbd>⌘I</kbd>), completion (<kbd>⌃Space</kbd> or <kbd>⌥Esc</kbd>) and rename (<kbd>F2</kbd>); <kbd>⌃-</kbd> goes back. Flashex does not download servers: the palette's <span class="ui">Language Servers…</span> lists each language's server, whether it is found and how to install it. A server starts with the first file of its language and stops after 10 minutes without use. Servers that run a project's own code (Rust, TypeScript, Go, Swift, Kotlin) ask first in a folder that is not one of your projects (<a href="configuration.html#cfg-lsp-trust"><code>[lsp] trust</code></a>). <a href="configuration.html#cfg-lsp"><code>[lsp]</code></a> turns servers off or sets their command.</p>
+
+<h3 id="markdown">Markdown preview</h3>
+<p><kbd>⇧⌘V</kbd> shows a Markdown file's preview in place of its text, and <kbd>⌥⌘V</kbd> opens it to the side, following what you type. Tables, checklists, pictures from your Mac and links to headings work.</p>
+<figure>
+<img src="screenshots/markdown-preview-light.png" alt="A Markdown blog post, its rendered preview with a table, a checklist and a code block, and a terminal below the editor, in the light theme" width="2880" height="1800" loading="lazy">
+</figure>
+
+<h2 id="git">Source Control</h2>
+<figure>
+<img src="screenshots/source-control.png" alt="Source Control on a new branch with Publish Branch, a staged and an unstaged change, and a side-by-side diff of App.tsx against HEAD" width="2880" height="1800" loading="lazy">
+</figure>
+<p>The file tree's <span class="ui">Source Control</span> view shows the branch, how it stands against its upstream, and staged and unstaged changes. Click a file for its side-by-side diff against HEAD (a staged file: the staged version against HEAD), then stage, unstage or discard it. Commit with <kbd>⌘↩</kbd>, using your own git config (signing and hooks). One button does Pull, Push, Sync, Publish Branch or Fetch, whichever fits; <span class="ui">Git: Pull</span>, <span class="ui">Git: Push</span> and <span class="ui">Git: Sync</span> are in the Git menu and the palette too. <kbd>⌥⌘B</kbd> switches or creates branches.</p>
+<p>Git never prompts for credentials (a pull or push that needs a sign-in says so and how to fix it), and nothing is stashed, merged or forced without asking. Background fetching is off unless you set <a href="configuration.html#cfg-git-autofetch_minutes"><code>[git] autofetch_minutes</code></a>.</p>
+
+<h2 id="browser">The browser panel</h2>
+<p><kbd>⇧⌘B</kbd> opens a browser panel. <kbd>⌘</kbd>-click on a <code>localhost</code> or <code>127.0.0.1</code> link in a terminal opens it there (other links open in your browser; <a href="configuration.html#cfg-browser-local_urls_in_panel"><code>local_urls_in_panel</code></a>), as does a <a href="projects.html#web-servers">web server chip</a> or <a href="cli.html#flashex-browse"><code>flashex browse localhost:3000</code></a>.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>In a browser panel</th><th>Press</th></tr></thead>
+<tbody>
+<tr><td>Focus the address bar</td><td class="keys"><kbd>⌘L</kbd></td></tr>
+<tr><td>Reload</td><td class="keys"><kbd>⌘R</kbd></td></tr>
+<tr><td>Back / forward</td><td class="keys"><kbd>⌘[</kbd> <kbd>⌘]</kbd></td></tr>
+<tr><td>Developer tools (when <a href="configuration.html#cfg-browser-devtools"><code>devtools</code></a> is on)</td><td class="keys"><kbd>⌥⌘I</kbd></td></tr>
+</tbody></table></div>
+<h3 id="local-pages">Local pages</h3>
+<figure>
+<img src="screenshots/browser-docs.png" alt="The browser panel showing a local copy of the Flashex documentation next to a terminal in its folder" width="2880" height="1800" loading="lazy">
+<figcaption>A local copy of these docs, opened with <code>flashex browse ./agents.html</code>.</figcaption>
+</figure>
+<p>The browser panel shows HTML, SVG and PDF files from your Mac too. Type a path in the address bar (<code>/Users/you/site/index.html</code>, <code>~/site/index.html</code>, <code>./docs/index.html</code> or a name in the project's folder) or a <code>file://</code> address; a folder shows its <code>index.html</code>. The bar shows the path, with your home folder as <code>~</code>. Other ways in: <span class="ui">Open in Browser</span> in the file tree's right-click menu, <span class="ui">Open Preview</span> (<kbd>⇧⌘V</kbd>) in an HTML file's editor, dropping a file on a browser panel, and <a href="cli.html#flashex-browse"><code>flashex browse ./index.html</code></a>.</p>
+<p>A page may read its own folder, so its styles, scripts, pictures and links to the pages next to it work (and a folder linked from it one level up, such as a docs site's <code>screenshots</code>); nothing else on the disk. <kbd>⌘R</kbd> reads the file again after you change it. Web pages can never open your files.</p>
+<p>Text typed in the address bar that is not an address is searched with DuckDuckGo (<a href="configuration.html#cfg-browser-search_url"><code>search_url</code></a>; <code>""</code> turns it off). Browser tabs out of sight for 10 minutes are unloaded (<a href="configuration.html#cfg-browser-sleep_after_minutes"><code>sleep_after_minutes</code></a>). The Linux beta has no browser panel.</p>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="dashboards.html"><span>Previous</span>Dashboards</a>
+<a class="next" href="configuration.html"><span>Next</span>Configuration</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

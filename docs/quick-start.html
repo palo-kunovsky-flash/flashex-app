@@ -1,0 +1,130 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Quick start · Flashex docs</title>
+<meta name="description" content="Your first project, terminals, splits, Claude Code and the command palette.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row active" aria-current="page" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Quick start</span><span class="crumb">Flashex docs › Get started</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Quick start</h1>
+<p class="lede">From an empty window to an agent at work in a few minutes.</p>
+
+<h2 id="the-window">The window</h2>
+<ul>
+<li><strong>The sidebar</strong> on the left lists your projects, optionally in groups. Under each project are its terminals, editors and browser panels, with an agent's state as a dot. <kbd>⌘\</kbd> shows or hides it.</li>
+<li><strong>The top row</strong> holds the active project's tabs. Each tab has its own layout of panes.</li>
+<li><strong>Panes</strong> fill the rest. A pane can hold several tabs of its own (terminals, editors, a browser, a dashboard), shown in its tab strip.</li>
+<li><strong>The status bar</strong> at the bottom shows the focused terminal's folder and the project's branch, or the focused editor's language, indentation and line endings (click them to change them).</li>
+</ul>
+
+<h2 id="first-project">Your first project</h2>
+<p>A project is a folder you work in. Click <span class="ui">+ Project</span> at the foot of the sidebar or press <kbd>⌘N</kbd>. The dialog lists folders it found (git repositories, folders your terminals are in, projects you closed lately); type to filter, or type a path such as <code>~/Dev/app</code>. <span class="ui">Choose Folder…</span> opens the macOS folder panel, and <span class="ui">New Folder…</span> makes a new folder (optionally with <code>git init</code>) and opens it. <kbd>⌘O</kbd> opens a folder as a project straight from the folder panel.</p>
+<p>The project opens with a terminal in its folder. The file tree (<kbd>⌘B</kbd>) shows its files and its Source Control view. See <a href="projects.html">Projects and the sidebar</a> for groups, colours and more.</p>
+
+<h2 id="terminals">Terminals and splits</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>To</th><th>Press</th></tr></thead>
+<tbody>
+<tr><td>Split the focused pane to the right / down</td><td class="keys"><kbd>⌘D</kbd> <kbd>⇧⌘D</kbd></td></tr>
+<tr><td>Move the focus between panes</td><td class="keys"><kbd>⌥⌘←</kbd> <kbd>⌥⌘→</kbd> <kbd>⌥⌘↑</kbd> <kbd>⌥⌘↓</kbd></td></tr>
+<tr><td>A new tab in the project (top row)</td><td class="keys"><kbd>⌘T</kbd></td></tr>
+<tr><td>A new terminal tab in the focused pane</td><td class="keys"><kbd>⌥⌘T</kbd></td></tr>
+<tr><td>Zoom the focused pane</td><td class="keys"><kbd>⇧⌘↩</kbd></td></tr>
+<tr><td>Close the focused pane tab / the whole tab</td><td class="keys"><kbd>⌘W</kbd> <kbd>⇧⌘W</kbd></td></tr>
+<tr><td>Bring back what you closed</td><td class="keys"><kbd>⇧⌘T</kbd></td></tr>
+</tbody></table></div>
+<p>A new split starts in the focused terminal's folder. The <span class="ui">+</span> in a pane's tab strip opens a terminal; its <span class="ui">⌄</span> opens a menu with New Terminal, New Claude Code, New File, Open File…, New Browser, Split Right and Split Down. More in <a href="panes.html">Panes, tabs and layouts</a>.</p>
+
+<h2 id="claude-code">Running Claude Code</h2>
+<p>Type <code>claude</code> in any terminal, or choose <span class="ui">New Claude Code</span> from the <span class="ui">⌄</span> menu (it starts the <code>claude</code> your login shell would). To let Flashex know when an agent is running, waiting for you or done, install Claude Code's hooks once:</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex setup claude</code></pre></div>
+<p>It shows the change to <code>~/.claude/settings.json</code> and asks first (Settings › AI agents › Claude Code hooks does the same). From then on:</p>
+<ul>
+<li>the sidebar shows a dot for each agent: <span class="dot waiting"></span> orange when it waits for you, <span class="dot running"></span> green while it runs, <span class="dot error"></span> red on an error;</li>
+<li>when an agent finishes or needs you while you look elsewhere, its terminal is marked unread and you get a notification; <kbd>⇧⌘U</kbd> jumps to the oldest unread one;</li>
+<li>the Agents dashboard (<kbd>⌘K</kbd> › Agents Dashboard) shows every session at once.</li>
+</ul>
+<p>Everything about agents is in <a href="agents.html">Working with agents</a>.</p>
+
+<h2 id="palette">The command palette</h2>
+<p><kbd>⌘K</kbd> finds any action, project or tab: type a few letters and press Return. Actions show their shortcut, so the palette is also the quickest way to learn them. Some things live only there, such as the dashboards, layouts, Keep Mac Awake, Reload Claude Session and Restart Flashex. <kbd>⌘P</kbd> opens a file of the project, and <kbd>⌘?</kbd> lists every shortcut in effect.</p>
+<figure>
+<img src="screenshots/shortcuts.png" alt="The keyboard shortcuts overlay over a terminal" width="2880" height="1800" loading="lazy">
+<figcaption>Keyboard Shortcuts (<kbd>⌘?</kbd>), filtered as you type.</figcaption>
+</figure>
+
+<h2 id="terminal">More in the terminal</h2>
+<h3 id="blocks">Command blocks</h3>
+<p>Shell integration for zsh, bash and fish (set up automatically) turns every command into a block with its folder, duration and exit code. <kbd>⌘↑</kbd> and <kbd>⌘↓</kbd> jump between commands, <kbd>⇧⌘↑</kbd> and <kbd>⇧⌘↓</kbd> select whole ones, and <kbd>⌥⌘[</kbd> folds a finished command's output (<kbd>⌥⌘]</kbd> unfolds it). Point at a block for its tools: copy the command or its output, rerun it, fold it, send it to an agent, or save it as a workflow with parameters. While Claude Code or another full-screen program runs, its terminal looks as in any other terminal; it becomes a block again when it ends.</p>
+<p>The compact prompt shows the folder and the git branch; click the folder to go to another one. <kbd>⇧⌘E</kbd> turns the prompt's editor (syntax colours, multi-line editing) off and on for one terminal.</p>
+<h3 id="ai-help">AI help (optional)</h3>
+<p>At an empty prompt, type <code># find files bigger than 100 MB</code> and press Return: a command for your system, shell and folder is put into the line for you to check. It never runs by itself, and the <code>#</code> line never reaches your shell or its history. A failed command's block offers <span class="ui">Explain</span> and <span class="ui">Fix</span>. Flashex uses the AI you already have: Claude Code, Codex or Gemini CLI with their own login, your own command, or any OpenAI-compatible server, local models included. It never needs an API key of its own, and nothing is sent until you press Return or click. Grey suggestions from your history appear as you type (no AI, offline); <kbd>→</kbd> takes one, <kbd>⌥→</kbd> one word. Settings › AI chooses the provider; <a href="configuration.html#cfg-ai"><code>[ai]</code></a> has the details.</p>
+<h3 id="command-history">Command history</h3>
+<p><span class="ui">History › Command History…</span> (<kbd>⌥⌘R</kbd> anywhere, <kbd>⌃R</kbd> at a prompt with the prompt's editor on, or <span class="ui">Command History</span> in the palette) lists the commands you ran, each once with how often, where it ran last, when, and whether it failed. Five scopes sit above the list: <span class="ui">This folder</span> and <span class="ui">This project</span> (the focused terminal's), <span class="ui">All</span> (your shell's own history too), <span class="ui">Frequent</span> (often and lately first) and <span class="ui">Favorites</span>. <kbd>⇥</kbd>, <kbd>⇧⇥</kbd> or <kbd>⌘1</kbd>–<kbd>⌘5</kbd> switch between them, and the picker opens on the one you used last. Typing filters as in the palette, also by a favorite's label.</p>
+<ul>
+<li><kbd>↩</kbd> puts the command at the prompt; it never runs by itself. <kbd>⌘↩</kbd> runs it now, <kbd>⌥↩</kbd> opens a new tab in the folder where it last ran and puts it there.</li>
+<li><kbd>⌘D</kbd> or the star adds it to Favorites, <kbd>⌘L</kbd> gives a favorite a short label, and in Favorites <kbd>⌥↑</kbd> and <kbd>⌥↓</kbd> move it (or <span class="ui">Sort by Use</span>).</li>
+<li><kbd>⌘C</kbd> copies it; <kbd>⌘⌫</kbd> removes it from Flashex's history, and the notice's <span class="ui">Undo</span> (or <kbd>⌘Z</kbd>) puts it back. Your shell's own history file is never changed. Right-click a row for the same.</li>
+<li>Commands that start with a space are never saved, and lines that look like they hold a password or token are shown masked.</li>
+</ul>
+<figure>
+<img src="screenshots/command-history.png" alt="Command History in its Frequent scope: commands with their folder, count and exit status, a starred favorite, and two lines whose tokens are masked" width="2880" height="1800" loading="lazy">
+</figure>
+<h3 id="images-and-links">Images, links and search</h3>
+<ul>
+<li>Pictures from <code>kitty +kitten icat</code>, <code>chafa</code>, <code>timg</code>, <code>yazi</code>, <code>img2sixel</code> or <code>imgcat</code> show inline and scroll with their block.</li>
+<li>Paths that programs print (<code>src/main.rs:10:5</code>, <code>./shots/a.png</code>) and links open with <kbd>⌘</kbd>-click; a picture's path shows a small preview when you rest the pointer on it.</li>
+<li><kbd>⌘F</kbd> searches the whole history (regex, whole word, case).</li>
+<li><kbd>⌘V</kbd> with only a picture on the clipboard pastes it into Claude Code, as its own Ctrl+V does.</li>
+</ul>
+
+<h2 id="settings">Settings</h2>
+<p><kbd>⌘,</kbd> opens Settings, grouped as Appearance, Terminal, Editor, AI, Browser and General. It edits <code>~/.config/flashex/config.toml</code> and keeps your comments; you can also edit the file yourself, and changes apply as soon as you save. Every setting is in the <a href="configuration.html">Configuration</a> reference.</p>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="install.html"><span>Previous</span>Install</a>
+<a class="next" href="agents.html"><span>Next</span>Working with agents</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

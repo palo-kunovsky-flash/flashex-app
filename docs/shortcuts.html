@@ -1,0 +1,415 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Keyboard shortcuts · Flashex docs</title>
+<meta name="description" content="Every default shortcut, the key profiles and keybindings.toml.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row active" aria-current="page" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Keyboard shortcuts</span><span class="crumb">Flashex docs › Reference</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Keyboard shortcuts</h1>
+<p class="lede">The default shortcuts, the key profiles, and how to change any of them. In the app, <kbd>⌘?</kbd> lists every shortcut in effect and filters them as you type.</p>
+
+<h2 id="profiles">Key profiles</h2>
+<p><a href="configuration.html#cfg-keys-profile"><code>[keys] profile</code></a> picks a set of conventions: <code>"flashex"</code> (the default), <code>"sublime"</code> or <code>"vscode"</code>. The defaults already follow Sublime Text and VS Code for most editing keys; a profile changes only <a href="#profile-sublime">the few</a> <a href="#profile-vscode">that differ</a>. <code>keybindings.toml</code> applies on top of the profile.</p>
+
+<h2 id="keybindings-toml"><code>keybindings.toml</code></h2>
+<p>Flashex reads <code>~/.config/flashex/keybindings.toml</code> next to <code>config.toml</code>. Changes apply immediately. A line that is wrong (an unknown action, a keystroke Flashex cannot use, the same keys twice) is reported with its line number and left out; the rest applies.</p>
+<div class="term"><div class="term-bar">~/.config/flashex/keybindings.toml</div><pre><code><span class="c"># Add a shortcut (the action keeps its default one).</span>
+<span class="s">"cmd-shift-y"</span> = <span class="s">"new_tab"</span>
+<span class="c"># Remove a shortcut.</span>
+<span class="s">"cmd-d"</span> = <span class="s">"none"</span>
+<span class="c"># Give a key another action (its old action loses this key).</span>
+<span class="s">"cmd-t"</span> = <span class="s">"split_right"</span>
+
+<span class="k">[editor]</span>      <span class="c"># while a code editor has focus; wins over the global ones there</span>
+<span class="s">"cmd-alt-w"</span> = <span class="s">"toggle_wrap"</span>
+
+<span class="k">[browser]</span>     <span class="c"># while a browser panel has focus</span>
+<span class="s">"cmd-shift-r"</span> = <span class="s">"browser_reload"</span></code></pre></div>
+<p><strong>Keystrokes:</strong> modifiers <code>cmd</code>, <code>ctrl</code>, <code>alt</code> (<code>option</code>), <code>shift</code>, <code>fn</code>, then one key: a character, <code>enter</code>, <code>escape</code>, <code>tab</code>, <code>space</code>, <code>backspace</code>, <code>delete</code>, <code>insert</code>, <code>home</code>, <code>end</code>, <code>pageup</code>, <code>pagedown</code>, <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code> or <code>f1</code>…<code>f24</code>. The <code>-</code> key is written <code>cmd--</code>. Shifted punctuation is written as the character it types (<code>cmd-{</code>). The order and case of the modifiers do not matter.</p>
+<ul>
+<li>Global and browser shortcuts need <code>cmd</code> or <code>ctrl</code> (or a function key), so they never take away typing. Outside the editor, <code>ctrl</code> without <code>cmd</code> may not go with a letter or <code>[ \ ] ^ _ / @</code> or <code>space</code>: those are control characters the shell needs (^C, ^R, ^D).</li>
+<li>In <code>[editor]</code>, <code>alt</code> alone only goes with a named key or a function key (<code>alt-left</code>, <code>alt-f5</code>), since Option with a character types <code>@ [ ] { }</code> on many layouts.</li>
+<li><code>"none"</code> removes any shortcut. Sequences of keystrokes (<code>cmd-k cmd-i</code>) are not supported.</li>
+</ul>
+<p>Shortcuts follow your keyboard layout: a shortcut written with a character fires on the key that types that character, and the labels in the app show your layout's keys. The names of all actions are in <a href="#keys-actions">the last table</a>.</p>
+
+<h2 id="defaults">Default shortcuts</h2>
+<p>As Keyboard Shortcuts (<kbd>⌘?</kbd>) groups them. Generated from the app's key map.</p>
+<!-- generated:shortcuts -->
+<h3 id="keys-window-tabs">Window &amp; Tabs</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Keys</th></tr></thead>
+<tbody>
+<tr><td>Close Pane</td><td class="keys"><kbd>⌘W</kbd></td></tr>
+<tr><td>Close Tab</td><td class="keys"><kbd>⇧⌘W</kbd></td></tr>
+<tr><td>New Tab</td><td class="keys"><kbd>⌘T</kbd></td></tr>
+<tr><td>Next Tab</td><td class="keys"><kbd>⌘}</kbd></td></tr>
+<tr><td>Previous Tab</td><td class="keys"><kbd>⌘{</kbd></td></tr>
+<tr><td>Go to Tab</td><td class="keys"><kbd>⌘1</kbd> … <kbd>⌘8</kbd></td></tr>
+<tr><td>Last Tab</td><td class="keys"><kbd>⌘9</kbd></td></tr>
+<tr><td>Reopen Closed</td><td class="keys"><kbd>⇧⌘T</kbd></td></tr>
+<tr><td>New Project…</td><td class="keys"><kbd>⌘N</kbd></td></tr>
+<tr><td>New Group</td><td class="keys"><kbd>⇧⌘N</kbd></td></tr>
+<tr><td>Toggle Sidebar</td><td class="keys"><kbd>⌘\</kbd></td></tr>
+<tr><td>Open Folder as Project…</td><td class="keys"><kbd>⌘O</kbd></td></tr>
+</tbody></table></div>
+<h3 id="keys-panes">Panes</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Keys</th></tr></thead>
+<tbody>
+<tr><td>Split Right</td><td class="keys"><kbd>⌘D</kbd></td></tr>
+<tr><td>Split Down</td><td class="keys"><kbd>⇧⌘D</kbd></td></tr>
+<tr><td>Focus Left</td><td class="keys"><kbd>⌥⌘←</kbd></td></tr>
+<tr><td>Focus Right</td><td class="keys"><kbd>⌥⌘→</kbd></td></tr>
+<tr><td>Focus Up</td><td class="keys"><kbd>⌥⌘↑</kbd></td></tr>
+<tr><td>Focus Down</td><td class="keys"><kbd>⌥⌘↓</kbd></td></tr>
+<tr><td>Focus Last Pane</td><td class="keys"><kbd>⌘;</kbd></td></tr>
+<tr><td>Focus Next Pane</td><td class="keys"><kbd>⌃⌥Tab</kbd></td></tr>
+<tr><td>Focus Previous Pane</td><td class="keys"><kbd>⌃⌥⇧Tab</kbd></td></tr>
+<tr><td>Move Pane Left</td><td class="keys"><kbd>⌥⇧⌘←</kbd></td></tr>
+<tr><td>Move Pane Right</td><td class="keys"><kbd>⌥⇧⌘→</kbd></td></tr>
+<tr><td>Move Pane Up</td><td class="keys"><kbd>⌥⇧⌘↑</kbd></td></tr>
+<tr><td>Move Pane Down</td><td class="keys"><kbd>⌥⇧⌘↓</kbd></td></tr>
+<tr><td>Grow Pane Left</td><td class="keys"><kbd>⌃⌘←</kbd></td></tr>
+<tr><td>Grow Pane Right</td><td class="keys"><kbd>⌃⌘→</kbd></td></tr>
+<tr><td>Grow Pane Up</td><td class="keys"><kbd>⌃⌘↑</kbd></td></tr>
+<tr><td>Grow Pane Down</td><td class="keys"><kbd>⌃⌘↓</kbd></td></tr>
+<tr><td>Toggle Zoom</td><td class="keys"><kbd>⇧⌘↩</kbd></td></tr>
+<tr><td>Show Panes as List</td><td class="keys"><kbd>⌥⌘L</kbd></td></tr>
+<tr><td>Equalize Splits</td><td class="keys"><kbd>⌃⌘=</kbd></td></tr>
+<tr><td>New Tab in Pane</td><td class="keys"><kbd>⌥⌘T</kbd></td></tr>
+<tr><td>New File</td><td class="keys"><kbd>⌥⌘N</kbd></td></tr>
+<tr><td>Next Tab in Pane</td><td class="keys"><kbd>⌃Tab</kbd></td></tr>
+</tbody></table></div>
+<h3 id="keys-terminal">Terminal</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Keys</th></tr></thead>
+<tbody>
+<tr><td>Jump to Unread Notification</td><td class="keys"><kbd>⇧⌘U</kbd></td></tr>
+<tr><td>Command History…</td><td class="keys"><kbd>⌥⌘R</kbd></td></tr>
+<tr><td>Copy</td><td class="keys"><kbd>⌘C</kbd></td></tr>
+<tr><td>Paste</td><td class="keys"><kbd>⌘V</kbd></td></tr>
+<tr><td>Select All</td><td class="keys"><kbd>⌘A</kbd></td></tr>
+<tr><td>Toggle Input Editor</td><td class="keys"><kbd>⇧⌘E</kbd></td></tr>
+<tr><td>Find</td><td class="keys"><kbd>⌘F</kbd></td></tr>
+<tr><td>Find Next</td><td class="keys"><kbd>⌘G</kbd></td></tr>
+<tr><td>Find Previous</td><td class="keys"><kbd>⇧⌘G</kbd></td></tr>
+</tbody></table></div>
+<h3 id="keys-blocks">Blocks</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Keys</th></tr></thead>
+<tbody>
+<tr><td>Previous Command</td><td class="keys"><kbd>⌘↑</kbd></td></tr>
+<tr><td>Next Command</td><td class="keys"><kbd>⌘↓</kbd></td></tr>
+<tr><td>Select Previous Command</td><td class="keys"><kbd>⇧⌘↑</kbd></td></tr>
+<tr><td>Select Next Command</td><td class="keys"><kbd>⇧⌘↓</kbd></td></tr>
+<tr><td>Collapse Command Output</td><td class="keys"><kbd>⌥⌘[</kbd></td></tr>
+<tr><td>Expand Command Output</td><td class="keys"><kbd>⌥⌘]</kbd></td></tr>
+</tbody></table></div>
+<h3 id="keys-editor">Editor</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Keys</th></tr></thead>
+<tbody>
+<tr><td>Cut</td><td class="keys"><kbd>⌘X</kbd></td></tr>
+<tr><td>Undo</td><td class="keys"><kbd>⌘Z</kbd></td></tr>
+<tr><td>Redo</td><td class="keys"><kbd>⇧⌘Z</kbd></td></tr>
+<tr><td>Toggle File Tree</td><td class="keys"><kbd>⌘B</kbd></td></tr>
+<tr><td>Focus File Tree</td><td class="keys"><kbd>⌘0</kbd></td></tr>
+<tr><td>Save</td><td class="keys"><kbd>⌘S</kbd></td></tr>
+<tr><td>Save As…</td><td class="keys"><kbd>⇧⌘S</kbd></td></tr>
+<tr><td>Find and Replace</td><td class="keys"><kbd>⌥⌘F</kbd></td></tr>
+<tr><td>Go to Line…</td><td class="keys"><kbd>⌃G</kbd></td></tr>
+<tr><td>Add Next Occurrence</td><td class="keys"><kbd>⌘D</kbd></td></tr>
+<tr><td>Toggle Word Wrap</td><td class="keys"><kbd>⌥Z</kbd></td></tr>
+<tr><td>Show Diff</td><td class="keys"><kbd>⌃⇧G</kbd></td></tr>
+<tr><td>Toggle Line Comment</td><td class="keys"><kbd>⌘/</kbd></td></tr>
+<tr><td>Duplicate Line or Selection</td><td class="keys"><kbd>⇧⌘D</kbd></td></tr>
+<tr><td>Move Line Up</td><td class="keys"><kbd>⌥↑</kbd></td></tr>
+<tr><td>Move Line Down</td><td class="keys"><kbd>⌥↓</kbd></td></tr>
+<tr><td>Delete Line</td><td class="keys"><kbd>⇧⌘K</kbd></td></tr>
+<tr><td>Select Line</td><td class="keys"><kbd>⌘L</kbd></td></tr>
+<tr><td>Split Selection into Lines</td><td class="keys"><kbd>⇧⌘L</kbd></td></tr>
+<tr><td>Select All Occurrences</td><td class="keys"><kbd>⌃⌘G</kbd></td></tr>
+<tr><td>Skip Occurrence</td><td class="keys"><kbd>⌥⇧⌘D</kbd></td></tr>
+<tr><td>Undo Selection</td><td class="keys"><kbd>⌘U</kbd></td></tr>
+<tr><td>Go to Matching Bracket</td><td class="keys"><kbd>⌃M</kbd></td></tr>
+<tr><td>Indent Lines</td><td class="keys"><kbd>⌘]</kbd></td></tr>
+<tr><td>Outdent Lines</td><td class="keys"><kbd>⌘[</kbd></td></tr>
+<tr><td>Markdown: Toggle Preview</td><td class="keys"><kbd>⇧⌘V</kbd></td></tr>
+<tr><td>Markdown: Open Preview to the Side</td><td class="keys"><kbd>⌥⌘V</kbd></td></tr>
+</tbody></table></div>
+<h3 id="keys-language-server">Language Server</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Keys</th></tr></thead>
+<tbody>
+<tr><td>Go to Definition</td><td class="keys"><kbd>F12</kbd></td></tr>
+<tr><td>Find References</td><td class="keys"><kbd>⇧F12</kbd></td></tr>
+<tr><td>Show Hover</td><td class="keys"><kbd>⌘I</kbd></td></tr>
+<tr><td>Go Back</td><td class="keys"><kbd>⌃-</kbd> <kbd>⌃⌥←</kbd></td></tr>
+<tr><td>Go Forward</td><td class="keys"><kbd>⌃⇧-</kbd> <kbd>⌃⌥→</kbd></td></tr>
+<tr><td>Trigger Suggest</td><td class="keys"><kbd>⌃Space</kbd> <kbd>⌥Esc</kbd></td></tr>
+<tr><td>Rename Symbol</td><td class="keys"><kbd>F2</kbd></td></tr>
+</tbody></table></div>
+<h3 id="keys-browser">Browser</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Keys</th></tr></thead>
+<tbody>
+<tr><td>Open Browser</td><td class="keys"><kbd>⇧⌘B</kbd></td></tr>
+<tr><td>Browser: Focus Address Bar</td><td class="keys"><kbd>⌘L</kbd></td></tr>
+<tr><td>Browser: Reload</td><td class="keys"><kbd>⌘R</kbd></td></tr>
+<tr><td>Browser: Back</td><td class="keys"><kbd>⌘[</kbd></td></tr>
+<tr><td>Browser: Forward</td><td class="keys"><kbd>⌘]</kbd></td></tr>
+<tr><td>Browser: Toggle Developer Tools</td><td class="keys"><kbd>⌥⌘I</kbd></td></tr>
+</tbody></table></div>
+<h3 id="keys-app">App</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Keys</th></tr></thead>
+<tbody>
+<tr><td>Command Palette</td><td class="keys"><kbd>⌘K</kbd></td></tr>
+<tr><td>Go to File…</td><td class="keys"><kbd>⌘P</kbd></td></tr>
+<tr><td>Settings…</td><td class="keys"><kbd>⌘,</kbd></td></tr>
+<tr><td>Keyboard Shortcuts</td><td class="keys"><kbd>⌘?</kbd></td></tr>
+<tr><td>Git: Switch Branch…</td><td class="keys"><kbd>⌥⌘B</kbd></td></tr>
+<tr><td>Toggle Full Screen</td><td class="keys"><kbd>⌃⌘F</kbd></td></tr>
+<tr><td>Increase Font Size</td><td class="keys"><kbd>⌘=</kbd></td></tr>
+<tr><td>Decrease Font Size</td><td class="keys"><kbd>⌘-</kbd></td></tr>
+<tr><td>Heavier Font</td><td class="keys"><kbd>⌥⌘=</kbd></td></tr>
+<tr><td>Lighter Font</td><td class="keys"><kbd>⌥⌘-</kbd></td></tr>
+<tr><td>Reset Font Size</td><td class="keys"><kbd>⌃⌘0</kbd></td></tr>
+<tr><td>Increase Font Size in All Panes</td><td class="keys"><kbd>⌃⌥⌘=</kbd></td></tr>
+<tr><td>Decrease Font Size in All Panes</td><td class="keys"><kbd>⌃⌥⌘-</kbd></td></tr>
+<tr><td>Reset Font Size and Weight in All Panes</td><td class="keys"><kbd>⌃⌥⌘0</kbd></td></tr>
+<tr><td>Quit Flashex</td><td class="keys"><kbd>⌘Q</kbd></td></tr>
+</tbody></table></div>
+<h3 id="keys-no-default">Actions without a default shortcut</h3>
+<p>In the command palette (<kbd>⌘K</kbd>); give them keys in <code>keybindings.toml</code>.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Action</th><th>Name in keybindings.toml</th></tr></thead>
+<tbody>
+<tr><td>Reload Claude Session</td><td><code>reload_claude_session</code></td></tr>
+<tr><td>Reload All Idle Claude Sessions</td><td><code>reload_idle_claude_sessions</code></td></tr>
+<tr><td>Agents Dashboard</td><td><code>agents_dashboard</code></td></tr>
+<tr><td>Usage Dashboard</td><td><code>usage_dashboard</code></td></tr>
+<tr><td>System Dashboard</td><td><code>system_dashboard</code></td></tr>
+<tr><td>Keep Mac Awake…</td><td><code>keep_mac_awake</code></td></tr>
+<tr><td>Stop Keeping Mac Awake</td><td><code>stop_keeping_mac_awake</code></td></tr>
+<tr><td>Toggle Keep Mac Awake</td><td><code>toggle_keep_mac_awake</code></td></tr>
+<tr><td>Git: Pull</td><td><code>git_pull</code></td></tr>
+<tr><td>Git: Push</td><td><code>git_push</code></td></tr>
+<tr><td>Git: Sync (Pull, then Push)</td><td><code>git_sync</code></td></tr>
+<tr><td>Go to Folder…</td><td><code>go_to_folder</code></td></tr>
+<tr><td>Vault…</td><td><code>vault</code></td></tr>
+</tbody></table></div>
+<h3 id="profile-sublime">The <code>sublime</code> profile</h3>
+<p>What <code>[keys] profile = "sublime"</code> changes from the defaults.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Keys</th><th>Where</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td class="keys"><kbd>⌃⌘↑</kbd></td><td><code>[editor]</code></td><td>Move Line Up</td></tr>
+<tr><td class="keys"><kbd>⌃⌘↓</kbd></td><td><code>[editor]</code></td><td>Move Line Down</td></tr>
+<tr><td class="keys"><kbd>⌃⇧K</kbd></td><td><code>[editor]</code></td><td>Delete Line</td></tr>
+<tr><td class="keys"><kbd>⇧⌘P</kbd></td><td>everywhere</td><td>Command Palette</td></tr>
+<tr><td class="keys"><kbd>⌘N</kbd></td><td>everywhere</td><td>New File</td></tr>
+</tbody></table></div>
+<h3 id="profile-vscode">The <code>vscode</code> profile</h3>
+<p>What <code>[keys] profile = "vscode"</code> changes from the defaults.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Keys</th><th>Where</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td class="keys"><kbd>⇧⌘L</kbd></td><td><code>[editor]</code></td><td>Select All Occurrences</td></tr>
+<tr><td class="keys"><kbd>⌘F2</kbd></td><td><code>[editor]</code></td><td>Select All Occurrences</td></tr>
+<tr><td class="keys"><kbd>⌥⇧I</kbd></td><td><code>[editor]</code></td><td>Split Selection into Lines</td></tr>
+<tr><td class="keys"><kbd>⌘|</kbd></td><td><code>[editor]</code></td><td>Go to Matching Bracket</td></tr>
+<tr><td class="keys"><kbd>⇧⌘P</kbd></td><td>everywhere</td><td>Command Palette</td></tr>
+<tr><td class="keys"><kbd>⌘N</kbd></td><td>everywhere</td><td>New File</td></tr>
+</tbody></table></div>
+<h3 id="keys-actions">Every action name</h3>
+<p>The names <code>keybindings.toml</code> uses, with their default keys.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Name</th><th>Action</th><th>Default keys</th></tr></thead>
+<tbody>
+<tr id="action-split_right"><td><code>split_right</code></td><td>Split Right</td><td class="keys"><kbd>⌘D</kbd></td></tr>
+<tr id="action-split_down"><td><code>split_down</code></td><td>Split Down</td><td class="keys"><kbd>⇧⌘D</kbd></td></tr>
+<tr id="action-close"><td><code>close</code></td><td>Close Pane</td><td class="keys"><kbd>⌘W</kbd></td></tr>
+<tr id="action-close_tab"><td><code>close_tab</code></td><td>Close Tab</td><td class="keys"><kbd>⇧⌘W</kbd></td></tr>
+<tr id="action-new_tab"><td><code>new_tab</code></td><td>New Tab</td><td class="keys"><kbd>⌘T</kbd></td></tr>
+<tr id="action-next_tab"><td><code>next_tab</code></td><td>Next Tab</td><td class="keys"><kbd>⌘}</kbd></td></tr>
+<tr id="action-prev_tab"><td><code>prev_tab</code></td><td>Previous Tab</td><td class="keys"><kbd>⌘{</kbd></td></tr>
+<tr id="action-select_tab_1"><td><code>select_tab_1</code></td><td>Go to Tab</td><td class="keys"><kbd>⌘1</kbd></td></tr>
+<tr id="action-select_tab_2"><td><code>select_tab_2</code></td><td>Go to Tab</td><td class="keys"><kbd>⌘2</kbd></td></tr>
+<tr id="action-select_tab_3"><td><code>select_tab_3</code></td><td>Go to Tab</td><td class="keys"><kbd>⌘3</kbd></td></tr>
+<tr id="action-select_tab_4"><td><code>select_tab_4</code></td><td>Go to Tab</td><td class="keys"><kbd>⌘4</kbd></td></tr>
+<tr id="action-select_tab_5"><td><code>select_tab_5</code></td><td>Go to Tab</td><td class="keys"><kbd>⌘5</kbd></td></tr>
+<tr id="action-select_tab_6"><td><code>select_tab_6</code></td><td>Go to Tab</td><td class="keys"><kbd>⌘6</kbd></td></tr>
+<tr id="action-select_tab_7"><td><code>select_tab_7</code></td><td>Go to Tab</td><td class="keys"><kbd>⌘7</kbd></td></tr>
+<tr id="action-select_tab_8"><td><code>select_tab_8</code></td><td>Go to Tab</td><td class="keys"><kbd>⌘8</kbd></td></tr>
+<tr id="action-select_last_tab"><td><code>select_last_tab</code></td><td>Last Tab</td><td class="keys"><kbd>⌘9</kbd></td></tr>
+<tr id="action-focus_left"><td><code>focus_left</code></td><td>Focus Left</td><td class="keys"><kbd>⌥⌘←</kbd></td></tr>
+<tr id="action-focus_right"><td><code>focus_right</code></td><td>Focus Right</td><td class="keys"><kbd>⌥⌘→</kbd></td></tr>
+<tr id="action-focus_up"><td><code>focus_up</code></td><td>Focus Up</td><td class="keys"><kbd>⌥⌘↑</kbd></td></tr>
+<tr id="action-focus_down"><td><code>focus_down</code></td><td>Focus Down</td><td class="keys"><kbd>⌥⌘↓</kbd></td></tr>
+<tr id="action-focus_previous"><td><code>focus_previous</code></td><td>Focus Last Pane</td><td class="keys"><kbd>⌘;</kbd></td></tr>
+<tr id="action-focus_next_pane"><td><code>focus_next_pane</code></td><td>Focus Next Pane</td><td class="keys"><kbd>⌃⌥Tab</kbd></td></tr>
+<tr id="action-focus_prev_pane"><td><code>focus_prev_pane</code></td><td>Focus Previous Pane</td><td class="keys"><kbd>⌃⌥⇧Tab</kbd></td></tr>
+<tr id="action-move_pane_left"><td><code>move_pane_left</code></td><td>Move Pane Left</td><td class="keys"><kbd>⌥⇧⌘←</kbd></td></tr>
+<tr id="action-move_pane_right"><td><code>move_pane_right</code></td><td>Move Pane Right</td><td class="keys"><kbd>⌥⇧⌘→</kbd></td></tr>
+<tr id="action-move_pane_up"><td><code>move_pane_up</code></td><td>Move Pane Up</td><td class="keys"><kbd>⌥⇧⌘↑</kbd></td></tr>
+<tr id="action-move_pane_down"><td><code>move_pane_down</code></td><td>Move Pane Down</td><td class="keys"><kbd>⌥⇧⌘↓</kbd></td></tr>
+<tr id="action-grow_left"><td><code>grow_left</code></td><td>Grow Pane Left</td><td class="keys"><kbd>⌃⌘←</kbd></td></tr>
+<tr id="action-grow_right"><td><code>grow_right</code></td><td>Grow Pane Right</td><td class="keys"><kbd>⌃⌘→</kbd></td></tr>
+<tr id="action-grow_up"><td><code>grow_up</code></td><td>Grow Pane Up</td><td class="keys"><kbd>⌃⌘↑</kbd></td></tr>
+<tr id="action-grow_down"><td><code>grow_down</code></td><td>Grow Pane Down</td><td class="keys"><kbd>⌃⌘↓</kbd></td></tr>
+<tr id="action-zoom"><td><code>zoom</code></td><td>Toggle Zoom</td><td class="keys"><kbd>⇧⌘↩</kbd></td></tr>
+<tr id="action-toggle_stack"><td><code>toggle_stack</code></td><td>Show Panes as List</td><td class="keys"><kbd>⌥⌘L</kbd></td></tr>
+<tr id="action-equalize"><td><code>equalize</code></td><td>Equalize Splits</td><td class="keys"><kbd>⌃⌘=</kbd></td></tr>
+<tr id="action-new_surface"><td><code>new_surface</code></td><td>New Tab in Pane</td><td class="keys"><kbd>⌥⌘T</kbd></td></tr>
+<tr id="action-reopen_closed"><td><code>reopen_closed</code></td><td>Reopen Closed</td><td class="keys"><kbd>⇧⌘T</kbd></td></tr>
+<tr id="action-new_file"><td><code>new_file</code></td><td>New File</td><td class="keys"><kbd>⌥⌘N</kbd></td></tr>
+<tr id="action-next_surface"><td><code>next_surface</code></td><td>Next Tab in Pane</td><td class="keys"><kbd>⌃Tab</kbd></td></tr>
+<tr id="action-new_project"><td><code>new_project</code></td><td>New Project…</td><td class="keys"><kbd>⌘N</kbd></td></tr>
+<tr id="action-new_group"><td><code>new_group</code></td><td>New Group</td><td class="keys"><kbd>⇧⌘N</kbd></td></tr>
+<tr id="action-toggle_sidebar"><td><code>toggle_sidebar</code></td><td>Toggle Sidebar</td><td class="keys"><kbd>⌘\</kbd></td></tr>
+<tr id="action-palette"><td><code>palette</code></td><td>Command Palette</td><td class="keys"><kbd>⌘K</kbd></td></tr>
+<tr id="action-find_file"><td><code>find_file</code></td><td>Go to File…</td><td class="keys"><kbd>⌘P</kbd></td></tr>
+<tr id="action-open_project"><td><code>open_project</code></td><td>Open Folder as Project…</td><td class="keys"><kbd>⌘O</kbd></td></tr>
+<tr id="action-jump_to_unread"><td><code>jump_to_unread</code></td><td>Jump to Unread Notification</td><td class="keys"><kbd>⇧⌘U</kbd></td></tr>
+<tr id="action-open_settings"><td><code>open_settings</code></td><td>Settings…</td><td class="keys"><kbd>⌘,</kbd></td></tr>
+<tr id="action-show_shortcuts"><td><code>show_shortcuts</code></td><td>Keyboard Shortcuts</td><td class="keys"><kbd>⌘?</kbd></td></tr>
+<tr id="action-switch_branch"><td><code>switch_branch</code></td><td>Git: Switch Branch…</td><td class="keys"><kbd>⌥⌘B</kbd></td></tr>
+<tr id="action-git_pull"><td><code>git_pull</code></td><td>Git: Pull</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-git_push"><td><code>git_push</code></td><td>Git: Push</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-git_sync"><td><code>git_sync</code></td><td>Git: Sync (Pull, then Push)</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-go_to_folder"><td><code>go_to_folder</code></td><td>Go to Folder…</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-vault"><td><code>vault</code></td><td>Vault…</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-command_history"><td><code>command_history</code></td><td>Command History…</td><td class="keys"><kbd>⌥⌘R</kbd></td></tr>
+<tr id="action-toggle_full_screen"><td><code>toggle_full_screen</code></td><td>Toggle Full Screen</td><td class="keys"><kbd>⌃⌘F</kbd></td></tr>
+<tr id="action-font_bigger"><td><code>font_bigger</code></td><td>Increase Font Size</td><td class="keys"><kbd>⌘=</kbd></td></tr>
+<tr id="action-font_smaller"><td><code>font_smaller</code></td><td>Decrease Font Size</td><td class="keys"><kbd>⌘-</kbd></td></tr>
+<tr id="action-font_heavier"><td><code>font_heavier</code></td><td>Heavier Font</td><td class="keys"><kbd>⌥⌘=</kbd></td></tr>
+<tr id="action-font_lighter"><td><code>font_lighter</code></td><td>Lighter Font</td><td class="keys"><kbd>⌥⌘-</kbd></td></tr>
+<tr id="action-font_reset"><td><code>font_reset</code></td><td>Reset Font Size</td><td class="keys"><kbd>⌃⌘0</kbd></td></tr>
+<tr id="action-font_bigger_all"><td><code>font_bigger_all</code></td><td>Increase Font Size in All Panes</td><td class="keys"><kbd>⌃⌥⌘=</kbd></td></tr>
+<tr id="action-font_smaller_all"><td><code>font_smaller_all</code></td><td>Decrease Font Size in All Panes</td><td class="keys"><kbd>⌃⌥⌘-</kbd></td></tr>
+<tr id="action-font_reset_all"><td><code>font_reset_all</code></td><td>Reset Font Size and Weight in All Panes</td><td class="keys"><kbd>⌃⌥⌘0</kbd></td></tr>
+<tr id="action-reload_claude_session"><td><code>reload_claude_session</code></td><td>Reload Claude Session</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-reload_idle_claude_sessions"><td><code>reload_idle_claude_sessions</code></td><td>Reload All Idle Claude Sessions</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-agents_dashboard"><td><code>agents_dashboard</code></td><td>Agents Dashboard</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-usage_dashboard"><td><code>usage_dashboard</code></td><td>Usage Dashboard</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-system_dashboard"><td><code>system_dashboard</code></td><td>System Dashboard</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-keep_mac_awake"><td><code>keep_mac_awake</code></td><td>Keep Mac Awake…</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-stop_keeping_mac_awake"><td><code>stop_keeping_mac_awake</code></td><td>Stop Keeping Mac Awake</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-toggle_keep_mac_awake"><td><code>toggle_keep_mac_awake</code></td><td>Toggle Keep Mac Awake</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-copy"><td><code>copy</code></td><td>Copy</td><td class="keys"><kbd>⌘C</kbd></td></tr>
+<tr id="action-paste"><td><code>paste</code></td><td>Paste</td><td class="keys"><kbd>⌘V</kbd></td></tr>
+<tr id="action-cut"><td><code>cut</code></td><td>Cut</td><td class="keys"><kbd>⌘X</kbd></td></tr>
+<tr id="action-select_all"><td><code>select_all</code></td><td>Select All</td><td class="keys"><kbd>⌘A</kbd></td></tr>
+<tr id="action-undo"><td><code>undo</code></td><td>Undo</td><td class="keys"><kbd>⌘Z</kbd></td></tr>
+<tr id="action-redo"><td><code>redo</code></td><td>Redo</td><td class="keys"><kbd>⇧⌘Z</kbd></td></tr>
+<tr id="action-prev_block"><td><code>prev_block</code></td><td>Previous Command</td><td class="keys"><kbd>⌘↑</kbd></td></tr>
+<tr id="action-next_block"><td><code>next_block</code></td><td>Next Command</td><td class="keys"><kbd>⌘↓</kbd></td></tr>
+<tr id="action-select_block_up"><td><code>select_block_up</code></td><td>Select Previous Command</td><td class="keys"><kbd>⇧⌘↑</kbd></td></tr>
+<tr id="action-select_block_down"><td><code>select_block_down</code></td><td>Select Next Command</td><td class="keys"><kbd>⇧⌘↓</kbd></td></tr>
+<tr id="action-fold_block"><td><code>fold_block</code></td><td>Collapse Command Output</td><td class="keys"><kbd>⌥⌘[</kbd></td></tr>
+<tr id="action-unfold_block"><td><code>unfold_block</code></td><td>Expand Command Output</td><td class="keys"><kbd>⌥⌘]</kbd></td></tr>
+<tr id="action-toggle_input_editor"><td><code>toggle_input_editor</code></td><td>Toggle Input Editor</td><td class="keys"><kbd>⇧⌘E</kbd></td></tr>
+<tr id="action-toggle_file_tree"><td><code>toggle_file_tree</code></td><td>Toggle File Tree</td><td class="keys"><kbd>⌘B</kbd></td></tr>
+<tr id="action-focus_file_tree"><td><code>focus_file_tree</code></td><td>Focus File Tree</td><td class="keys"><kbd>⌘0</kbd></td></tr>
+<tr id="action-save"><td><code>save</code></td><td>Save</td><td class="keys"><kbd>⌘S</kbd></td></tr>
+<tr id="action-save_as"><td><code>save_as</code></td><td>Save As…</td><td class="keys"><kbd>⇧⌘S</kbd></td></tr>
+<tr id="action-find"><td><code>find</code></td><td>Find</td><td class="keys"><kbd>⌘F</kbd></td></tr>
+<tr id="action-replace"><td><code>replace</code></td><td>Find and Replace</td><td class="keys"><kbd>⌥⌘F</kbd></td></tr>
+<tr id="action-find_next"><td><code>find_next</code></td><td>Find Next</td><td class="keys"><kbd>⌘G</kbd></td></tr>
+<tr id="action-find_prev"><td><code>find_prev</code></td><td>Find Previous</td><td class="keys"><kbd>⇧⌘G</kbd></td></tr>
+<tr id="action-go_to_line"><td><code>go_to_line</code></td><td>Go to Line…</td><td class="keys"><kbd>⌃G</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-add_next_occurrence"><td><code>add_next_occurrence</code></td><td>Add Next Occurrence</td><td class="keys"><kbd>⌘D</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-toggle_wrap"><td><code>toggle_wrap</code></td><td>Toggle Word Wrap</td><td class="keys"><kbd>⌥Z</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-show_diff"><td><code>show_diff</code></td><td>Show Diff</td><td class="keys"><kbd>⌃⇧G</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-go_to_definition"><td><code>go_to_definition</code></td><td>Go to Definition</td><td class="keys"><kbd>F12</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-find_references"><td><code>find_references</code></td><td>Find References</td><td class="keys"><kbd>⇧F12</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-show_hover"><td><code>show_hover</code></td><td>Show Hover</td><td class="keys"><kbd>⌘I</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-navigate_back"><td><code>navigate_back</code></td><td>Go Back</td><td class="keys"><kbd>⌃-</kbd> <kbd>⌃⌥←</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-navigate_forward"><td><code>navigate_forward</code></td><td>Go Forward</td><td class="keys"><kbd>⌃⇧-</kbd> <kbd>⌃⌥→</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-trigger_suggest"><td><code>trigger_suggest</code></td><td>Trigger Suggest</td><td class="keys"><kbd>⌃Space</kbd> <kbd>⌥Esc</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-rename_symbol"><td><code>rename_symbol</code></td><td>Rename Symbol</td><td class="keys"><kbd>F2</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-toggle_comment"><td><code>toggle_comment</code></td><td>Toggle Line Comment</td><td class="keys"><kbd>⌘/</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-duplicate_line"><td><code>duplicate_line</code></td><td>Duplicate Line or Selection</td><td class="keys"><kbd>⇧⌘D</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-move_line_up"><td><code>move_line_up</code></td><td>Move Line Up</td><td class="keys"><kbd>⌥↑</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-move_line_down"><td><code>move_line_down</code></td><td>Move Line Down</td><td class="keys"><kbd>⌥↓</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-delete_line"><td><code>delete_line</code></td><td>Delete Line</td><td class="keys"><kbd>⇧⌘K</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-select_line"><td><code>select_line</code></td><td>Select Line</td><td class="keys"><kbd>⌘L</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-split_into_lines"><td><code>split_into_lines</code></td><td>Split Selection into Lines</td><td class="keys"><kbd>⇧⌘L</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-select_all_occurrences"><td><code>select_all_occurrences</code></td><td>Select All Occurrences</td><td class="keys"><kbd>⌃⌘G</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-skip_occurrence"><td><code>skip_occurrence</code></td><td>Skip Occurrence</td><td class="keys"><kbd>⌥⇧⌘D</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-undo_selection"><td><code>undo_selection</code></td><td>Undo Selection</td><td class="keys"><kbd>⌘U</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-jump_to_bracket"><td><code>jump_to_bracket</code></td><td>Go to Matching Bracket</td><td class="keys"><kbd>⌃M</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-indent_lines"><td><code>indent_lines</code></td><td>Indent Lines</td><td class="keys"><kbd>⌘]</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-outdent_lines"><td><code>outdent_lines</code></td><td>Outdent Lines</td><td class="keys"><kbd>⌘[</kbd> in <code>[editor]</code></td></tr>
+<tr id="action-toggle_preview"><td><code>toggle_preview</code></td><td>Markdown: Toggle Preview</td><td class="keys"><kbd>⇧⌘V</kbd></td></tr>
+<tr id="action-preview_to_side"><td><code>preview_to_side</code></td><td>Markdown: Open Preview to the Side</td><td class="keys"><kbd>⌥⌘V</kbd></td></tr>
+<tr id="action-open_browser"><td><code>open_browser</code></td><td>Open Browser</td><td class="keys"><kbd>⇧⌘B</kbd></td></tr>
+<tr id="action-browser_address"><td><code>browser_address</code></td><td>Browser: Focus Address Bar</td><td class="keys"><kbd>⌘L</kbd> in <code>[browser]</code></td></tr>
+<tr id="action-browser_reload"><td><code>browser_reload</code></td><td>Browser: Reload</td><td class="keys"><kbd>⌘R</kbd> in <code>[browser]</code></td></tr>
+<tr id="action-browser_back"><td><code>browser_back</code></td><td>Browser: Back</td><td class="keys"><kbd>⌘[</kbd> in <code>[browser]</code></td></tr>
+<tr id="action-browser_forward"><td><code>browser_forward</code></td><td>Browser: Forward</td><td class="keys"><kbd>⌘]</kbd> in <code>[browser]</code></td></tr>
+<tr id="action-browser_dev_tools"><td><code>browser_dev_tools</code></td><td>Browser: Toggle Developer Tools</td><td class="keys"><kbd>⌥⌘I</kbd> in <code>[browser]</code></td></tr>
+<tr id="action-quit"><td><code>quit</code></td><td>Quit Flashex</td><td class="keys"><kbd>⌘Q</kbd></td></tr>
+</tbody></table></div>
+<!-- /generated:shortcuts -->
+
+<h2 id="fixed-keys">Other keys</h2>
+<ul>
+<li><strong>File tree</strong> (<kbd>⌘0</kbd> gives it the keyboard): <kbd>↑</kbd> <kbd>↓</kbd> move, <kbd>→</kbd> opens a folder, <kbd>←</kbd> closes it, Return opens a file, Esc gives the keyboard back.</li>
+<li><strong>Source Control</strong>: <kbd>⌘↩</kbd> commits from the message field. Before moving something to the Trash or discarding a change, <kbd>⌘↩</kbd> confirms and Esc cancels.</li>
+<li><strong>Closing</strong>: a question about running programs or unsaved files closes with <kbd>⌘↩</kbd> and cancels with Esc.</li>
+<li><strong>Menus and popovers</strong>: <kbd>↑</kbd> <kbd>↓</kbd> (or <kbd>←</kbd> <kbd>→</kbd>, <kbd>Tab</kbd> for buttons) choose, Return or Space runs, Esc closes.</li>
+<li><strong>Settings</strong>: <kbd>⌘]</kbd> and <kbd>⌘[</kbd> go to the next and previous category.</li>
+</ul>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="configuration.html"><span>Previous</span>Configuration</a>
+<a class="next" href="cli.html"><span>Next</span>CLI reference</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

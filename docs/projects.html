@@ -1,0 +1,96 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Projects and the sidebar · Flashex docs</title>
+<meta name="description" content="Projects, groups, colours, new folders, the sidebar's terminal rows and web server chips.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row active" aria-current="page" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Projects and the sidebar</span><span class="crumb">Flashex docs › Using Flashex</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Projects and the sidebar</h1>
+<p class="lede">A project is a folder with its own tabs and layout. The sidebar lists them, optionally in groups, with what runs in each.</p>
+
+<h2 id="projects">Projects</h2>
+<p><span class="ui">+ Project</span> at the foot of the sidebar, <kbd>⌘N</kbd> or <span class="ui">New Project…</span> in the palette opens the New project dialog:</p>
+<ul>
+<li>It lists folders it found, tagged as an open project, a terminal's folder, a git repo or <strong>recently closed</strong> (picking a closed project brings it back with its tabs). Type to filter, or type a path such as <code>~/Dev/app</code> or <code>/opt/work</code>: it shows at the top as soon as it exists.</li>
+<li><span class="ui">Choose Folder…</span> opens the macOS folder panel. <kbd>⌘O</kbd> opens that panel directly.</li>
+<li>The <strong>Group</strong> field picks the group the project goes in: <kbd>Tab</kbd> and <kbd>⇧Tab</kbd> step through your groups and "No group".</li>
+</ul>
+<p>Picking a folder that is already a project switches to that project (and moves it into the chosen group).</p>
+
+<h3 id="new-folder">Making a new folder</h3>
+<p><span class="ui">New Folder…</span> in the dialog opens a small form: the folder's name, where it goes (next to your last project's folder, or your home folder; type a path or click <span class="ui">Choose…</span>) and <span class="ui">Initialize git repository</span> (ticked when git is installed). <span class="ui">Create and Open</span> makes the folder and opens it as a project in the chosen group. A name with a <code>/</code>, a folder that is already there or a location you cannot write to is reported in the form, and nothing is made. <kbd>Tab</kbd> moves between the fields, <kbd>Space</kbd> ticks the box, Return creates, Esc cancels.</p>
+
+<h3 id="project-menu">A project's menu</h3>
+<p>Right-click a project in the sidebar for <span class="ui">Rename</span>, its colour, <span class="ui">Set Project Folder…</span>, <span class="ui">Move to Group…</span>, <span class="ui">Remove from Group</span> and <span class="ui">Close Project</span>. The menus work from the keyboard too: <kbd>↑</kbd> <kbd>↓</kbd> to choose, Return or Space to run, Esc to close.</p>
+<p><strong>Colours.</strong> A project or group gets a colour automatically; pick another from the swatches (Blue, Indigo, Teal, Amber, Orange, Green, Purple, Cyan, Red, Pink, Lime, Brown, Slate, Gray) or <span class="ui">Custom…</span>, where you type a hex value (<code>#3B82F6</code>, <code>#F80</code>) or pick one with the mouse. The palette's <span class="ui">Set Project Color</span> and <span class="ui">Set Group Color</span> do the same from the keyboard.</p>
+
+<h2 id="groups">Groups</h2>
+<p><span class="ui">+ Group</span> or <kbd>⇧⌘N</kbd> makes a group. Drag projects into it, or use a group's <span class="ui">+</span> (shown on hover, always for an empty group), its <span class="ui">Add a project…</span> row, or <span class="ui">Add Project…</span> in its right-click menu: the New project dialog opens with that group chosen. A group's menu also has <span class="ui">Ungroup</span> (keeps its projects) and <span class="ui">Close Group</span> (closes them, asking first). Click a group's header to fold it.</p>
+
+<h2 id="rows">What a project's row shows</h2>
+<ul>
+<li><strong>The branch</strong> of the project's repository with <code>↑</code> commits to push, <code>↓</code> commits to pull and <code>±</code> changed files (<code>main ↑1 ±4</code>); hover for the same in words.</li>
+<li><strong>Unread notifications</strong> as a count, and the state of its agent as a <span class="dot waiting"></span> dot.</li>
+<li><strong>Its terminals, editors and browsers</strong> underneath (<a href="configuration.html#cfg-sidebar-show_terminals"><code>[sidebar] show_terminals</code></a>), each with its agent's state and unread notifications. The chevron on the project's row folds the list; a long list ends in "+N more". A terminal's row has a right-click menu with <span class="ui">Rename</span> and <span class="ui">Close</span>, and the rows of the tab on screen can be dragged into a pane.</li>
+</ul>
+
+<h2 id="web-servers">Web server chips</h2>
+<p>When a program in a terminal serves web pages (<code>npm run dev</code>, <code>python3 -m http.server</code>, an <code>ssh -L</code> tunnel), a small chip with a globe and its port appears on that terminal's row: <span class="chip">◍ 5173</span>. Its tooltip names the program; a click opens the page in a browser panel. With several servers the chip shows the first and "+2", which lists the others. While the terminal's row is folded away or behind "+N more", the chip sits on the project's row instead. In a narrow sidebar it is the globe alone.</p>
+<p>Flashex asks each new port once with a short local HTTP request and shows only the ones that answer like a web server, so debuggers, IDE bridges and the ports agents themselves listen on are left out. <span class="ui">Open Port in Browser…</span> in the palette lists all of the project's servers.</p>
+
+<h2 id="workflows">Workflows</h2>
+<p>A workflow is a saved command with optional parameters. Save one from a command block's tools, or with <span class="ui">Save Last Command as Workflow…</span>; run them from <kbd>⌘K</kbd>; <span class="ui">Manage Workflows…</span> edits, duplicates, moves and deletes them. They live in <code>~/.config/flashex/workflows.toml</code> (every project) or <code>&lt;project&gt;/.flashex/workflows.toml</code> (that project only, and it wins over a global one of the same name):</p>
+<div class="term"><div class="term-bar">.flashex/workflows.toml</div><pre><code><span class="k">[[workflow]]</span>
+name = <span class="s">"deploy"</span>
+command = <span class="s">"./deploy.sh {{env:staging}}"</span>
+description = <span class="s">"Deploy to an environment"</span></code></pre></div>
+<p>Parameters are <code>{{name}}</code> or <code>{{name:default}}</code>, filled in at the prompt with <kbd>Tab</kbd>.</p>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="panes.html"><span>Previous</span>Panes, tabs and layouts</a>
+<a class="next" href="dashboards.html"><span>Next</span>Dashboards</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

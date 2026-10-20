@@ -1,0 +1,142 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Working with agents · Flashex docs</title>
+<meta name="description" content="Claude Code hooks, accounts, the status line, notifications, resuming sessions and terminals that survive a quit.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row active" aria-current="page" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Working with agents</span><span class="crumb">Flashex docs › Using Flashex</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Working with agents</h1>
+<p class="lede">Run Claude Code, Codex, Gemini CLI or any other agent in as many terminals as you like, and let Flashex tell you which one needs you.</p>
+
+<h2 id="hooks">Claude Code hooks</h2>
+<p>Claude Code's hooks are how Flashex learns that a session is running, waiting for you, done or failed, which tool it is using and which conversation it is. Install them once:</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex setup claude
+<span class="o">(shows the change to ~/.claude/settings.json and asks first)</span></code></pre></div>
+<p>Or use Settings › AI agents › <span class="ui">Claude Code hooks</span>, which also says whether they are installed, outdated, incomplete or customised. Flashex only touches the commands exactly as it wrote them; your other hooks, keys and formatting stay. The old file is kept as <code>settings.json.flashex-backup</code> (and, the first time, <code>settings.json.flashex-backup.orig</code>). Running it again is safe. When the hooks are installed but come from an older Flashex, the app updates them in place at start; it never installs them unless you ask. Sessions already running pick new hooks up on their next start. Details: <a href="cli.html#flashex-setup-claude"><code>flashex setup claude</code></a>.</p>
+
+<h2 id="states">What you see</h2>
+<ul>
+<li><strong>The sidebar</strong> lists each project's terminals with a robot icon for one running Claude Code and a dot for its state: <span class="dot waiting"></span> orange when it waits for you, <span class="dot running"></span> green while it runs, <span class="dot error"></span> red on an error. An agent's row is called by the name you gave the terminal, else by the agent ("Claude Code", "Claude Code · 2").</li>
+<li><strong>The pane</strong> of a terminal that wants your attention (an agent finished or waits, a long command ended while you looked elsewhere) gets a highlighted frame, and its tab a dot.</li>
+<li><strong>The Agents dashboard</strong> (<kbd>⌘K</kbd> › Agents Dashboard) shows every session, what it is doing and for how long: see <a href="dashboards.html#agents">Dashboards</a>.</li>
+</ul>
+<p>Other agents work without hooks: Flashex recognises Claude Code, Codex, Gemini CLI, Aider and others running in a terminal (for <span class="ui">Send to…</span> on a block), and any program can report its state with <a href="cli.html#flashex-agent"><code>flashex agent waiting</code></a> or post a notification.</p>
+
+<h2 id="notifications">Notifications</h2>
+<p>A terminal gets a notification when Claude Code finishes or needs you, when a program asks for one (OSC 9, 777 and 99, a bell, or <a href="cli.html#flashex-notify"><code>flashex notify</code></a>), and when a command that took 10 seconds or more finishes in a terminal you are not looking at (<a href="configuration.html#cfg-notifications-long_command_seconds"><code>long_command_seconds</code></a>).</p>
+<ul>
+<li>The terminal's tab gets a dot, its project an unread count, and the Dock a number. They clear once that terminal has been in front of you for a second, or as soon as you type into it.</li>
+<li><kbd>⇧⌘U</kbd> jumps to the oldest unread notification. The bell at the top opens the notification history; each entry points at its terminal.</li>
+<li>When the terminal is out of sight, macOS shows a banner too: "Claude Code is waiting for you" or "Claude Code finished", with the project and the terminal. <a href="configuration.html#cfg-notifications-system"><code>[notifications] system = false</code></a> keeps only the dot, the bell and the Dock. How long a banner stays is up to macOS: Settings › Notifications › <span class="ui">Keep notifications on screen</span> opens the place in System Settings where <span class="ui">Alerts</span> keeps them until dismissed.</li>
+</ul>
+<h3 id="notification-text">What a notification says</h3>
+<p>The title names the agent, with the project and terminal under it. The text says what the agent said:</p>
+<ul>
+<li><strong>Finished:</strong> the start of Claude's reply ("Fixed the failing test and updated the snapshot…"), as plain text (no code fences, <code>**</code> or headings; list bullets become "•"), cut at a word with "…".</li>
+<li><strong>Permission:</strong> the tool and what it acts on, such as "Bash: npm run build" or "Edit: src/main.rs" (paths relative to the session's folder, passwords and tokens in a command masked).</li>
+<li><strong>A question</strong> Claude asks you: the question itself.</li>
+</ul>
+<p>The same text appears in Flashex's notification center. The reply comes from Claude Code 2.1.47 or later; with an older version Flashex reads it from the end of the session's conversation file, which can delay the notification by up to a second. If nothing readable is found, the notification uses the short generic text. Settings › Notifications › <span class="ui">Show what the agent said in notifications</span>, or <a href="configuration.html#cfg-notifications-show_text"><code>[notifications] show_text = false</code></a>, always uses the generic text.</p>
+
+<h2 id="accounts">Claude accounts and aliases</h2>
+<p>Claude Code keeps one account per folder: <code>~/.claude</code>, or the folder an alias sets, for example a personal and a work login:</p>
+<div class="term"><div class="term-bar">~/.zshrc</div><pre><code>alias claude-work=<span class="s">'CLAUDE_CONFIG_DIR=~/.claude-work claude'</span></code></pre></div>
+<p>Flashex finds <code>~/.claude</code> and any <code>~/.claude-*</code>, <code>~/.claude_*</code> or <code>~/.config/claude*</code> folder that holds transcripts or a login, plus the <code>CLAUDE_CONFIG_DIR</code> your shell exports (also when Flashex starts from the Dock). List other folders in <a href="configuration.html#cfg-agents-claude_accounts"><code>[agents] claude_accounts</code></a>.</p>
+<ul>
+<li>Settings › AI agents has a <span class="ui">Claude account</span> row: the hooks and status line rows under it work with that account's <code>settings.json</code>. Install the hooks in each account you use, so its sessions show up too.</li>
+<li>Flashex remembers how each session was started (the alias, path, wrapper such as <code>op run -- claude</code>, variables, and options such as <code>--model</code> or <code>--dangerously-skip-permissions</code>) and types that again whenever it restarts or resumes the session, so it continues under the right account. A variable that looks like a secret is never remembered or typed again.</li>
+<li>With more than one account, the Usage dashboard shows account chips, and resume offers and the Agents dashboard name the account.</li>
+</ul>
+
+<h2 id="status-line">The status line and rate limits</h2>
+<p>The <a href="dashboards.html#usage">Usage dashboard</a> reads your 5-hour and weekly rate limits from Claude Code's status line. Settings › AI agents › <span class="ui">Claude Code status line</span> sets that up: <span class="ui">Apply</span> points the account's status line at a small script in Flashex's folder that saves only the limits, on your Mac. A status line you already have keeps running and showing exactly as before; <span class="ui">Remove</span> puts it back. Both ask first and back <code>settings.json</code> up. If a project or managed settings file sets its own status line, the row names that file (Flashex does not edit those).</p>
+<p>Optional, off by default: <a href="configuration.html#cfg-agents-usage_api"><code>usage_api</code></a> asks Anthropic's usage API when no status line has reported the limits, <a href="configuration.html#cfg-agents-usage_meter"><code>usage_meter</code></a> shows "5h 62%" in the status bar, and <a href="configuration.html#cfg-agents-usage_notice"><code>usage_notice</code></a> posts a notice at 90 %.</p>
+
+<h2 id="resume">Resume and reload</h2>
+<ul>
+<li><strong>Resume Claude</strong>: when Claude Code ends, its finished block offers to resume that conversation in the folder it ran in.</li>
+<li><strong>After a restart</strong> (of Flashex or of the Mac), a terminal whose last Claude Code session is known offers "Resume the Claude Code session that ran here", with the line it will run. Nothing runs until you click <span class="ui">Resume</span>; <span class="ui">Dismiss</span> (or Esc at an empty prompt) forgets it for that terminal. If the session skipped permissions, the offer says so.</li>
+<li><strong>Resume Last Claude Session</strong> in the palette resumes the same session.</li>
+<li><strong>Reload Claude Session</strong> (palette) restarts Claude Code in the focused terminal and continues the conversation with the options it was started with: handy after changing Claude Code's settings, plugins or MCP servers. If Claude is working you choose <span class="ui">Restart when idle</span>, <span class="ui">Restart now</span> or <span class="ui">Cancel</span>. <strong>Reload All Idle Claude Sessions</strong> does it for every idle one. In the palette, typing "restart", "restart session", "restart claude" or "resume" finds both. Right-clicking a terminal's row in the sidebar where Claude Code runs offers <span class="ui">Reload Claude Session</span> for that terminal. Neither command has a default shortcut (<code>reload_claude_session</code>, <code>reload_idle_claude_sessions</code> in <a href="shortcuts.html#keys-no-default"><code>keybindings.toml</code></a>).</li>
+<li><strong>A newer Claude Code</strong> installed while a session runs shows a refresh icon after the terminal's tab title and in the sidebar; a click restarts the session on the new version (<a href="configuration.html#cfg-agents-claude_update"><code>claude_update</code></a> turns it off). The palette's "Restart Idle Claude Sessions on the New Version" does it for all idle ones.</li>
+</ul>
+<p>While a restart runs, the terminal shows "Restarting Claude Code…" with a <span class="ui">Cancel</span> button; what you type meanwhile is sent once Claude Code is back.</p>
+
+<h2 id="session-search">Searching past sessions</h2>
+<p><strong>Search Agent Sessions…</strong> in the command palette (also found by "history", "conversations", "sessions" or "find") searches every Claude Code conversation of every account Flashex finds. Type a few words: sessions with a prompt, a reply or a tool call holding all of them are listed, best and newest first, each with its title (Claude Code's summary, else your first prompt), project folder, account and date, and the matching lines with the words highlighted. Accents do not matter ("sipka" finds "šípka") and the last word may be unfinished. With nothing typed, the newest sessions are listed.</p>
+<ul>
+<li><strong>Filters</strong>: <span class="ui">This project</span> / <span class="ui">All projects</span> (<kbd>⌥P</kbd>), an account when you have more than one (<kbd>⌥A</kbd>), <span class="ui">Today</span>, <span class="ui">7 days</span>, <span class="ui">30 days</span> or <span class="ui">All time</span> (<kbd>⌥D</kbd>), and <span class="ui">My prompts</span>, <span class="ui">Agent replies</span>, <span class="ui">Tools</span> (<kbd>⌥1</kbd>–<kbd>⌥3</kbd>; none picked searches all three).</li>
+<li><strong>Keys</strong>: <kbd>↑</kbd> <kbd>↓</kbd> pick a session, <kbd>⌥→</kbd> shows all its matching lines (<kbd>⌥←</kbd> fewer), <kbd>Return</kbd> opens its conversation (your prompts, the replies, tool calls one line each) with the match in view, <kbd>Esc</kbd> goes back.</li>
+<li><strong><kbd>⌘Return</kbd> resumes it</strong> in a new terminal in the session's folder, started the way you start that account (<code>claude-personal --resume &lt;id&gt;</code> when you use such an alias, else <code>claude</code> with the account's <code>CLAUDE_CONFIG_DIR</code>). A launcher that may not be Claude Code is only typed, for you to check and run. <kbd>⌥Return</kbd> copies the session id.</li>
+</ul>
+<p>The search uses an index Flashex keeps in its own data folder on your Mac: words and where they are, not your conversations' text, which is read from Claude Code's own files when shown (with passwords and tokens masked). It is updated in the background when you open the search, reading only what is new. Settings › AI agents › <span class="ui">Agent session search index</span> shows its size and clears it; <a href="configuration.html#cfg-sessions-search_index"><code>search_index = false</code></a> turns the search off. Codex and Gemini sessions are not searched yet.</p>
+
+<figure>
+<img src="screenshots/session-search.png" alt="Search Agent Sessions: past conversations of two accounts matching &quot;fixed&quot;, each with its project, account, date and the matching reply highlighted" width="2880" height="1800" loading="lazy">
+</figure>
+
+<h2 id="keeper">Sessions that survive quitting and updates</h2>
+<p>A small helper, the restart keeper, holds your terminals while Flashex is gone, so shells, agents and running jobs carry on:</p>
+<ul>
+<li><strong>Updates, Restart Flashex and crashes.</strong> The next start takes the terminals back with the same processes, shows "Reconnected N terminals", what they showed and what they printed meanwhile.</li>
+<li><strong>Quitting.</strong> By default quitting keeps them too. When programs still run, <kbd>⌘Q</kbd> asks first and names them: <span class="ui">Quit and Keep Running</span> (the default; Return or <kbd>⌘Q</kbd> again), <span class="ui">Quit and End All</span>, or Cancel. If a Claude Code session skips permissions, the question says so and has no default. Opening Flashex again brings everything back.</li>
+<li><strong>How long.</strong> Kept terminals wait <a href="configuration.html#cfg-session-keeper_grace_minutes"><code>keeper_grace_minutes</code></a> (10 by default, up to a day), with up to <a href="configuration.html#cfg-session-keeper_buffer_mb"><code>keeper_buffer_mb</code></a> of output each, then they are ended. Logging out, restarting or shutting down the Mac ends them.</li>
+<li><strong>Your choice.</strong> Settings › Session › <span class="ui">Terminals when Flashex quits</span>, or <a href="configuration.html#cfg-session-keeper_on_quit"><code>keeper_on_quit</code></a>: <code>"ask"</code> (keep, ask if busy), <code>"keep"</code> (never asks) or <code>"end"</code>. <a href="configuration.html#cfg-session-keeper"><code>keeper = false</code></a> turns the helper off.</li>
+<li><strong>From a shell.</strong> <a href="cli.html#flashex-keeper-status"><code>flashex keeper status</code></a> shows what is kept and for how long; <a href="cli.html#flashex-keeper-stop"><code>flashex keeper stop</code></a> ends kept terminals without opening Flashex.</li>
+</ul>
+<p>On macOS the helper also starts the shells (it is Flashex itself, a second <code>flashex-app</code> process without a Dock icon), so programs in a terminal keep the permissions you gave Flashex (Screen Recording, Accessibility, Files) across restarts and updates. See <a href="configuration.html#cfg-session-keeper_spawns"><code>keeper_spawns</code></a>.</p>
+
+<h2 id="send-to">Sending work to an agent</h2>
+<p>A command block's <span class="ui">Send to Claude / Codex / Gemini…</span> types the command, its folder, exit code and output (only the start and end of a long one, secrets replaced by <code>***</code>) into the agent running in your project; you press Return there. With several agents you pick one. <span class="ui">Explain</span> and <span class="ui">Fix</span> on a failed block do the same with a question. Agents and scripts can drive Flashex in return with the <a href="cli.html"><code>flashex</code> command</a>: <code>flashex read --last-block</code>, <code>flashex open src/main.rs:10</code>, <code>flashex events</code> and more.</p>
+
+<h2 id="keep-awake">Keep Mac Awake</h2>
+<p><kbd>⌘K</kbd> › Keep Mac Awake… keeps your Mac (and by default the display) awake for 1, 2 or 4 hours, a duration you type (<code>1h30</code>, <code>until 18:30</code>), until you turn it off, or <strong>while agents run</strong>: on while any Claude Code session is running or waiting for you, off three minutes after the last one goes idle. A cup in the status bar shows the time left; click it to extend, change or stop. It never turns on by itself, and it ends when Flashex quits. macOS only.</p>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="quick-start.html"><span>Previous</span>Quick start</a>
+<a class="next" href="panes.html"><span>Next</span>Panes, tabs and layouts</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

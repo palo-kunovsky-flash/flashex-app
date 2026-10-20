@@ -1,0 +1,111 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Panes, tabs and layouts · Flashex docs</title>
+<meta name="description" content="Splits, tabs, pane tabs, dragging panes, sizes, zoom, lists and layout templates.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row active" aria-current="page" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Panes, tabs and layouts</span><span class="crumb">Flashex docs › Using Flashex</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Panes, tabs and layouts</h1>
+<p class="lede">Each project has tabs in the top row; each tab is a layout of panes; each pane can hold several tabs of its own.</p>
+
+<h2 id="tabs">Tabs</h2>
+<ul>
+<li><strong>Project tabs</strong> are in the top row. <kbd>⌘T</kbd> opens one, <kbd>⇧⌘W</kbd> closes it (asking first when something still runs or is unsaved), <kbd>⌘1</kbd> … <kbd>⌘8</kbd> go to a tab, <kbd>⌘9</kbd> to the last one, and <kbd>⌘}</kbd> / <kbd>⌘{</kbd> to the next and previous. The tabs that have no room are listed under <span class="ui">»</span>.</li>
+<li><strong>Pane tabs</strong> are in each pane's own strip. <kbd>⌥⌘T</kbd> opens a terminal tab in the focused pane, <kbd>⌃Tab</kbd> goes to its next tab, and the <span class="ui">+</span> / <span class="ui">⌄</span> buttons open terminals, files, a browser or Claude Code there. <kbd>⌘W</kbd> closes the focused pane tab, and the pane with its last tab.</li>
+</ul>
+<p>A tab's title follows what runs in it ("api — make"); give a terminal a name of its own with <span class="ui">Rename</span> in its sidebar row's right-click menu.</p>
+
+<h2 id="splits">Splits</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>To</th><th>Press</th></tr></thead>
+<tbody>
+<tr><td>Split right / down</td><td class="keys"><kbd>⌘D</kbd> <kbd>⇧⌘D</kbd></td></tr>
+<tr><td>Focus the pane in a direction</td><td class="keys"><kbd>⌥⌘←</kbd> <kbd>⌥⌘→</kbd> <kbd>⌥⌘↑</kbd> <kbd>⌥⌘↓</kbd></td></tr>
+<tr><td>Focus the next / previous pane, in reading order</td><td class="keys"><kbd>⌃⌥Tab</kbd> <kbd>⌃⌥⇧Tab</kbd></td></tr>
+<tr><td>Back to the last focused pane</td><td class="keys"><kbd>⌘;</kbd></td></tr>
+<tr><td>Move the pane: swap it with its neighbour</td><td class="keys"><kbd>⌥⇧⌘←</kbd> <kbd>⌥⇧⌘→</kbd> <kbd>⌥⇧⌘↑</kbd> <kbd>⌥⇧⌘↓</kbd></td></tr>
+<tr><td>Grow the pane on that side</td><td class="keys"><kbd>⌃⌘←</kbd> <kbd>⌃⌘→</kbd> <kbd>⌃⌘↑</kbd> <kbd>⌃⌘↓</kbd></td></tr>
+<tr><td>Equalize the splits</td><td class="keys"><kbd>⌃⌘=</kbd></td></tr>
+<tr><td>Zoom the pane (and back)</td><td class="keys"><kbd>⇧⌘↩</kbd></td></tr>
+<tr><td>Show the tab's panes as a list</td><td class="keys"><kbd>⌥⌘L</kbd></td></tr>
+</tbody></table></div>
+<p>Drag a divider to resize; a double click on a divider equalizes the split. A dragged size is kept as a ratio, so a layout made on a wide monitor looks the same on a laptop. In a code editor <kbd>⌘D</kbd> and <kbd>⇧⌘D</kbd> are editing keys instead (see <a href="shortcuts.html#keys-editor">Keyboard shortcuts</a>).</p>
+<p><kbd>⌃⌥Tab</kbd> goes round the panes of the tab, left to right and top to bottom, and back to the first after the last (<kbd>⌃Tab</kbd> alone goes round the tabs inside a pane). Moving a pane swaps it with the pane on that side: the two trade places, each place keeps its size, and the focus stays with the pane you moved. Both do nothing while a pane is zoomed; in a list they follow the list. The menu has them under <span class="ui">Window</span>, the command palette finds them as <span class="ui">switch pane</span> or <span class="ui">move pane</span>.</p>
+
+<h3 id="size">Exact sizes</h3>
+<p>Type <code>size 60%</code> or <code>size 80</code> (columns) into the command palette, or run <a href="cli.html#flashex-size"><code>flashex size</code></a>: <code>N</code> columns or rows, or <code>N%</code> of the split; <code>cols</code> or <code>rows</code> picks the direction. A pinned size stays when the window is resized, until you drag that divider or equalize.</p>
+
+<h3 id="list">Panes as a list</h3>
+<p><span class="ui">Show Panes as List</span> (<kbd>⌥⌘L</kbd>) shows one pane of the tab at a time with a list of the others, keeping the layout for later: useful on a small screen. Each row has a × to close that pane, and rows can be dragged to reorder them. <a href="configuration.html#cfg-layout-auto_stack_below"><code>[layout] auto_stack_below</code></a> does it automatically below a window width.</p>
+
+<h2 id="drag">Dragging panes</h2>
+<p>Grab a pane by one of its tabs, or by the free part of its tab strip (or the grip after <span class="ui">+⌄</span>) to take the whole pane with all its tabs, and drop it:</p>
+<ul>
+<li>in the <strong>middle</strong> of another pane: it becomes a tab there;</li>
+<li>near an <strong>edge</strong>: it splits that side;</li>
+<li>in a pane's <strong>tab strip</strong>: it goes exactly where the marker shows;</li>
+<li>on the free part of the <strong>top tab bar</strong>: it becomes a tab of its own.</li>
+</ul>
+<p>A highlighted preview shows where it lands; Esc cancels. Terminals keep running. The palette's <span class="ui">Merge Pane into Tabs</span>, <span class="ui">Join All Panes as Tabs</span>, <span class="ui">Move Pane to New Tab</span> and <span class="ui">Merge Tab into Current</span> do the same from the keyboard. A terminal's row in the sidebar can be dragged into a pane too.</p>
+
+<h2 id="layouts">Layouts and templates</h2>
+<p>The palette has ready layouts for the current tab: <span class="ui">Layout: 2 Columns</span>, <span class="ui">3 Columns</span>, <span class="ui">2 Rows</span>, <span class="ui">2×2 Grid</span> and <span class="ui">Main + Side</span>. <span class="ui">Save Layout as Template…</span> keeps the current one in <code>~/.config/flashex/layouts.toml</code>, and <span class="ui">Apply Layout Template…</span> applies one. The file is plain text you can edit:</p>
+<div class="term"><div class="term-bar">~/.config/flashex/layouts.toml</div><pre><code><span class="k">[[layout]]</span>
+name = <span class="s">"dev"</span>
+tree = <span class="s">"cols(60c pane, rows(pane, 30% pane))"</span></code></pre></div>
+<p><code>cols(…)</code> puts its children side by side, <code>rows(…)</code> stacks them, and <code>pane</code> is a slot. A child may start with its size: a weight (<code>2</code>; the default is 1), cells (<code>60c</code>: the terminal's own columns or rows) or a share of the split (<code>30%</code>).</p>
+
+<h2 id="reopen">Closing and reopening</h2>
+<p>Closing asks first when something still runs or is unsaved. <kbd>⇧⌘T</kbd> brings back the last closed project, tab or pane tab, and <span class="ui">Reopen Closed…</span> in the palette lists them. The whole session (groups, projects, tabs, splits, editors) is restored at the next start (<a href="configuration.html#cfg-session-restore"><code>[session] restore</code></a>), and a restored terminal offers to run again the command that was running in it, never by itself (<a href="configuration.html#cfg-session-offer_rerun"><code>offer_rerun</code></a>).</p>
+
+<h2 id="fonts">Font size and weight</h2>
+<p><kbd>⌘=</kbd> and <kbd>⌘-</kbd> make the focused pane's text bigger or smaller, a point at a time, as a browser zooms one tab: a terminal gets the columns and rows of its new size (its program sees the resize, as when the pane is dragged), an editor its lines, a dashboard its text, rows and charts, 10 % at a time. A notice says what changed and where (<span class="ui">This pane: 16 pt (+2)</span>, <span class="ui">Dashboard text 120%</span>). The pane keeps its size across restarts, a split of it starts at the same size, and <kbd>⌃⌘0</kbd> puts it back. With <kbd>⌃⌥⌘=</kbd>, <kbd>⌃⌥⌘-</kbd> and <kbd>⌃⌥⌘0</kbd> the same goes for every pane: the window's size for the session (zoomed panes keep their steps from it), and Reset back to <code>config.toml</code>'s size and weight with every pane's own size cleared. <kbd>⌥⌘=</kbd> and <kbd>⌥⌘-</kbd> step the weight of every pane. In a browser panel the page gets <kbd>⌘=</kbd> and <kbd>⌘-</kbd>. <kbd>⌃⌘F</kbd> toggles full screen. Animations for splits, zoom, tabs and popups follow the display's frame rate and turn off with macOS Reduce motion or <a href="configuration.html#cfg-appearance-animations"><code>animations = false</code></a>.</p>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="agents.html"><span>Previous</span>Working with agents</a>
+<a class="next" href="projects.html"><span>Next</span>Projects and the sidebar</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

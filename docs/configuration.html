@@ -1,0 +1,574 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Configuration · Flashex docs</title>
+<meta name="description" content="Every setting in config.toml, and the other files Flashex reads.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row active" aria-current="page" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Configuration</span><span class="crumb">Flashex docs › Reference</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Configuration</h1>
+<p class="lede">Flashex reads <code>~/.config/flashex/config.toml</code> and applies changes as soon as you save.</p>
+
+<h2 id="the-file">The file</h2>
+<p>The file is created at the first start with a comment for every option. Settings (<kbd>⌘,</kbd>) edits the same file and keeps your comments, so you can use either. Settings that only apply to new terminals or at the next start say so in their comment. An unknown setting or a wrong value is reported in a notice with its line.</p>
+<div class="term"><div class="term-bar">~/.config/flashex/config.toml</div><pre><code><span class="k">[appearance]</span>
+theme = <span class="s">"system"</span>          <span class="c"># dark | light | system | graphite-dark | …</span>
+accent = <span class="s">"orange"</span>         <span class="c"># green, blue, indigo, teal, amber</span>
+
+<span class="k">[terminal]</span>
+font_family = <span class="s">"Geist Mono"</span>
+font_size = <span class="k">13</span>
+
+<span class="k">[session]</span>
+keeper_on_quit = <span class="s">"ask"</span>     <span class="c"># keep terminals running after a quit</span></code></pre></div>
+
+<h2 id="other-files">Other files</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>File</th><th>What it holds</th></tr></thead>
+<tbody>
+<tr><td><code>~/.config/flashex/keybindings.toml</code></td><td>Your shortcuts: <a href="shortcuts.html#keybindings-toml">Keyboard shortcuts</a>.</td></tr>
+<tr><td><code>~/.config/flashex/layouts.toml</code></td><td>Layout templates: <a href="panes.html#layouts">Layouts and templates</a>.</td></tr>
+<tr><td><code>~/.config/flashex/workflows.toml</code>, <code>&lt;project&gt;/.flashex/workflows.toml</code></td><td>Saved commands: <a href="projects.html#workflows">Workflows</a>.</td></tr>
+<tr><td><code>~/.config/flashex/themes/</code></td><td>Terminal colour themes (<code>key = value</code> lines such as <code>background = #1e1e2e</code> and <code>palette = 1=#f38ba8</code>). Settings › Appearance › <span class="ui">Import a terminal color theme</span> copies one here; <code>theme</code> names it.</td></tr>
+<tr><td><code>~/Library/Application Support/flashex</code></td><td>App data: the session, backups of unsaved editors, the restart keeper's folder.</td></tr>
+<tr><td><code>~/Library/Caches/flashex</code>, <code>~/Library/Logs/flashex</code></td><td>Caches (the Usage dashboard's summary, status-line data) and logs.</td></tr>
+</tbody></table></div>
+
+<h2 id="themes">Themes and colours</h2>
+<p><code>theme</code> takes <code>dark</code>, <code>light</code>, <code>system</code> (follows macOS, the default), one of Flashex's colour schemes (<code>graphite-dark</code>, <code>graphite-light</code>, <code>harbor-dark</code>, <code>harbor-light</code>, <code>ember-dark</code>, <code>ember-light</code>), or the name of a theme file in <code>~/.config/flashex/themes</code>. <code>"light:&lt;name&gt;,dark:&lt;name&gt;"</code> picks one for each macOS appearance. The <code>accent</code> can be orange, green, blue, indigo, teal or amber.</p>
+
+<h2 id="reference">Reference</h2>
+<p>Every section and key, generated from the defaults Flashex writes. Each table lists the keys with the value the new file has (or the commented-out example); the pane under it is the section exactly as the file has it, with what each option does.</p>
+<!-- generated:config -->
+<h3 id="cfg-general"><code>[general]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-general-keep_awake_mode"><td><code>keep_awake_mode</code></td><td><code>&quot;1h&quot;</code></td></tr>
+<tr id="cfg-general-keep_awake_display"><td><code>keep_awake_display</code></td><td><code>&quot;keep-on&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-general-keep_awake_lock"><td><code>keep_awake_lock</code></td><td><code>&quot;prevent&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-general-keep_awake_custom"><td><code>keep_awake_custom</code></td><td>not in the file · The custom duration typed last in the Keep Mac Awake chooser (such as <code>"1h30"</code> or <code>"until 18:30"</code>). The chooser writes it; <code>keep_awake_mode = "custom"</code> starts it.</td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [general]</div><pre><code><span class="k">[general]</span>
+<span class="c"># Keep Mac Awake (Cmd+K): the mode preselected in its chooser and the one</span>
+<span class="c"># toggle_keep_mac_awake turns on (the chooser writes the one picked last):</span>
+<span class="c"># &quot;1h&quot;, &quot;2h&quot;, &quot;4h&quot;, &quot;on&quot; (until turned off), &quot;agents&quot; (while Claude Code</span>
+<span class="c"># runs or waits, off 3 minutes after) or &quot;custom&quot; (the duration typed last</span>
+<span class="c"># in the chooser, such as &quot;1h30&quot; or &quot;until 18:30&quot;).</span>
+<span class="c"># It never turns on by itself. macOS only.</span>
+keep_awake_mode = <span class="s">&quot;1h&quot;</span>
+<span class="c"># While it is on (the chooser's toggles write them): the display &quot;keep-on&quot;</span>
+<span class="c"># (the default) or &quot;may-sleep&quot; (the Mac and its jobs keep running, the</span>
+<span class="c"># screen goes dark and locks as macOS says); the screen saver and lock</span>
+<span class="c"># with the display on: &quot;prevent&quot; (the default) or &quot;allow&quot; (as your macOS</span>
+<span class="c"># settings say).</span>
+<span class="c"># keep_awake_display = &quot;keep-on&quot;</span>
+<span class="c"># keep_awake_lock = &quot;prevent&quot;</span></code></pre></div>
+<h3 id="cfg-appearance"><code>[appearance]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-appearance-accent"><td><code>accent</code></td><td><code>&quot;orange&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-theme"><td><code>theme</code></td><td><code>&quot;system&quot;</code></td></tr>
+<tr id="cfg-appearance-animations"><td><code>animations</code></td><td><code>true</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [appearance]</div><pre><code><span class="k">[appearance]</span>
+<span class="c"># orange (the default) | green | blue | indigo | teal | amber</span>
+<span class="c"># accent = &quot;orange&quot;</span>
+<span class="c"># dark | light | system (follows macOS). Other terminal colours:</span>
+<span class="c"># graphite-dark, graphite-light, harbor-dark, harbor-light, ember-dark,</span>
+<span class="c"># ember-light (Settings › Terminal colors), or a theme file's name in</span>
+<span class="c"># ~/.config/flashex/themes. &quot;light:&lt;name&gt;,dark:&lt;name&gt;&quot; picks one for each</span>
+<span class="c"># macOS appearance.</span>
+theme = <span class="s">&quot;system&quot;</span>
+<span class="c"># Panes, tabs, panels and popups move smoothly; false makes every change</span>
+<span class="c"># instant. macOS &quot;Reduce motion&quot; turns them off too.</span>
+animations = <span class="k">true</span></code></pre></div>
+<h3 id="cfg-terminal"><code>[terminal]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-terminal-font_family"><td><code>font_family</code></td><td><code>&quot;Geist Mono&quot;</code></td></tr>
+<tr id="cfg-terminal-font_size"><td><code>font_size</code></td><td><code>13</code></td></tr>
+<tr id="cfg-terminal-line_height"><td><code>line_height</code></td><td><code>1.2</code></td></tr>
+<tr id="cfg-terminal-font_weight"><td><code>font_weight</code></td><td><code>&quot;regular&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-terminal-font_weight_bold"><td><code>font_weight_bold</code></td><td><code>&quot;bold&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-terminal-font_fallbacks"><td><code>font_fallbacks</code></td><td><code>[&quot;Symbols Nerd Font Mono&quot;]</code></td></tr>
+<tr id="cfg-terminal-core"><td><code>core</code></td><td><code>&quot;flashex&quot;</code></td></tr>
+<tr id="cfg-terminal-clipboard_write"><td><code>clipboard_write</code></td><td><code>true</code></td></tr>
+<tr id="cfg-terminal-scrollback_lines"><td><code>scrollback_lines</code></td><td><code>10000</code></td></tr>
+<tr id="cfg-terminal-ligatures"><td><code>ligatures</code></td><td><code>true</code></td></tr>
+<tr id="cfg-terminal-image_memory_mb"><td><code>image_memory_mb</code></td><td><code>64</code></td></tr>
+<tr id="cfg-terminal-image_files"><td><code>image_files</code></td><td><code>true</code></td></tr>
+<tr id="cfg-terminal-image_hover_preview"><td><code>image_hover_preview</code></td><td><code>true</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [terminal]</div><pre><code><span class="k">[terminal]</span>
+font_family = <span class="s">&quot;Geist Mono&quot;</span>
+font_size = <span class="k">13</span>
+line_height = <span class="k">1.2</span>
+<span class="c"># Weight of the text in terminals and code editors: thin, extralight,</span>
+<span class="c"># light, regular (the default), medium, semibold, bold, extrabold, black,</span>
+<span class="c"># or a number from 100 to 900. A face the font does not have falls back to</span>
+<span class="c"># its nearest one (the bundled Geist Mono has regular and bold only).</span>
+<span class="c"># font_weight = &quot;regular&quot;</span>
+<span class="c"># Weight of bold text (SGR 1, e.g. `ls --color`); unset, 300 heavier than</span>
+<span class="c"># font_weight, at least bold (700) and at most black (900).</span>
+<span class="c"># font_weight_bold = &quot;bold&quot;</span>
+<span class="c"># Used for characters the main font does not have (e.g. Nerd Font icons).</span>
+font_fallbacks = <span class="s">[&quot;Symbols Nerd Font Mono&quot;]</span>
+<span class="c"># The VT core of new terminals: &quot;flashex&quot;. Test builds also have a</span>
+<span class="c"># reference core; elsewhere flashex runs.</span>
+core = <span class="s">&quot;flashex&quot;</span>
+<span class="c"># Programs may put text on the clipboard (OSC 52, e.g. copying in vim or</span>
+<span class="c"># tmux over ssh). They can never read it.</span>
+clipboard_write = <span class="k">true</span>
+<span class="c"># Lines of history each terminal keeps (new terminals).</span>
+scrollback_lines = <span class="k">10000</span>
+<span class="c"># Ligatures of the font (=&gt; != -&gt;); false shows every character as typed.</span>
+ligatures = <span class="k">true</span>
+<span class="c"># Memory for inline images (kitty graphics, sixel, iTerm2) per terminal,</span>
+<span class="c"># in MB (new terminals); 0 turns them off.</span>
+image_memory_mb = <span class="k">64</span>
+<span class="c"># Kitty pictures may name a file to read (a path the program sends); off,</span>
+<span class="c"># only pictures sent inline show (new terminals).</span>
+image_files = <span class="k">true</span>
+<span class="c"># Resting the pointer on a picture's path (./shots/a.png) shows a preview.</span>
+image_hover_preview = <span class="k">true</span></code></pre></div>
+<h3 id="cfg-session"><code>[session]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-session-restore"><td><code>restore</code></td><td><code>true</code></td></tr>
+<tr id="cfg-session-offer_rerun"><td><code>offer_rerun</code></td><td><code>true</code></td></tr>
+<tr id="cfg-session-keeper"><td><code>keeper</code></td><td><code>true</code></td></tr>
+<tr id="cfg-session-keeper_grace_minutes"><td><code>keeper_grace_minutes</code></td><td><code>10</code></td></tr>
+<tr id="cfg-session-keeper_on_quit"><td><code>keeper_on_quit</code></td><td><code>&quot;ask&quot;</code></td></tr>
+<tr id="cfg-session-keeper_buffer_mb"><td><code>keeper_buffer_mb</code></td><td><code>4</code></td></tr>
+<tr id="cfg-session-keeper_relaunch"><td><code>keeper_relaunch</code></td><td><code>false</code></td></tr>
+<tr id="cfg-session-keeper_spawns"><td><code>keeper_spawns</code></td><td><code>true</code> <span class="chip">commented out</span></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [session]</div><pre><code><span class="k">[session]</span>
+<span class="c"># Reopen groups, projects, tabs and splits from the last run.</span>
+restore = <span class="k">true</span>
+<span class="c"># A restored terminal offers to run again the command that was running in</span>
+<span class="c"># it (never by itself). Command lines that look like they hold a secret</span>
+<span class="c"># (KEY=..., export, --password, token, Authorization...) are never kept.</span>
+offer_rerun = <span class="k">true</span>
+<span class="c"># Terminals survive a crash, &quot;Restart Flashex&quot; or a quit: a small helper</span>
+<span class="c"># keeps them until Flashex is back, at most keeper_grace_minutes; then it</span>
+<span class="c"># ends them. Takes effect at the next start.</span>
+keeper = <span class="k">true</span>
+keeper_grace_minutes = <span class="k">10</span>
+<span class="c"># What quitting does with the terminals: &quot;ask&quot; keeps them running and asks</span>
+<span class="c"># first when programs still run in them, &quot;keep&quot; keeps them without asking,</span>
+<span class="c"># &quot;end&quot; ends them. A quit asked for by macOS or another program (Quit &amp;</span>
+<span class="c"># Reopen after a permission was granted) keeps without asking; logging</span>
+<span class="c"># out, restarting or shutting down ends them.</span>
+keeper_on_quit = <span class="s">&quot;ask&quot;</span>
+<span class="c"># Output kept per terminal while Flashex is gone, MB (the oldest goes).</span>
+keeper_buffer_mb = <span class="k">4</span>
+<span class="c"># After a crash, start Flashex again by itself (once).</span>
+keeper_relaunch = <span class="k">false</span>
+<span class="c"># That helper starts the shells (and is then Flashex itself, a second</span>
+<span class="c"># flashex-app process), so the macOS permissions given to Flashex</span>
+<span class="c"># (Screen Recording, Accessibility, Files) stay with a terminal when</span>
+<span class="c"># Flashex restarts, is updated or crashes. On by default on macOS, off</span>
+<span class="c"># on Linux and Windows. With false, Flashex starts the shells itself and</span>
+<span class="c"># programs in a terminal that outlived Flashex lose those permissions.</span>
+<span class="c"># Takes effect at the next start.</span>
+<span class="c"># keeper_spawns = true</span></code></pre></div>
+<h3 id="cfg-api"><code>[api]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-api-enabled"><td><code>enabled</code></td><td><code>true</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [api]</div><pre><code><span class="k">[api]</span>
+<span class="c"># Lets the `flashex` command (and agent hooks) control this app over a</span>
+<span class="c"># private local socket.</span>
+enabled = <span class="k">true</span></code></pre></div>
+<h3 id="cfg-notifications"><code>[notifications]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-notifications-long_command_seconds"><td><code>long_command_seconds</code></td><td><code>10</code></td></tr>
+<tr id="cfg-notifications-system"><td><code>system</code></td><td><code>true</code></td></tr>
+<tr id="cfg-notifications-show_text"><td><code>show_text</code></td><td><code>true</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [notifications]</div><pre><code><span class="k">[notifications]</span>
+<span class="c"># A command that ran at least this many seconds and finished in a terminal</span>
+<span class="c"># you are not looking at notifies you (0 = never).</span>
+long_command_seconds = <span class="k">10</span>
+<span class="c"># Also tell macOS (a banner) when the terminal is out of sight. Off: only</span>
+<span class="c"># the bell, the sidebar and the Dock show it.</span>
+system = <span class="k">true</span>
+<span class="c"># Say what the agent said: the start of Claude's reply when it finished,</span>
+<span class="c"># the tool and its command or file when it asks for permission. Off: only</span>
+<span class="c"># &quot;Finished&quot; or &quot;needs your permission&quot;. (macOS may show notifications on</span>
+<span class="c"># the lock screen, as System Settings › Notifications says.)</span>
+show_text = <span class="k">true</span></code></pre></div>
+<h3 id="cfg-shell"><code>[shell]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-shell-integration"><td><code>integration</code></td><td><code>true</code></td></tr>
+<tr id="cfg-shell-prompt"><td><code>prompt</code></td><td><code>&quot;auto&quot;</code></td></tr>
+<tr id="cfg-shell-prompt_icon"><td><code>prompt_icon</code></td><td><code>false</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [shell]</div><pre><code><span class="k">[shell]</span>
+<span class="c"># Lets zsh mark prompts and commands, for command blocks. Applies to new</span>
+<span class="c"># terminals. Your own zsh config still loads as usual.</span>
+integration = <span class="k">true</span>
+<span class="c"># A short prompt from flashex (the folder, the branch and ❯; click the</span>
+<span class="c"># folder to go to another one): &quot;auto&quot; in place of the shell's stock</span>
+<span class="c"># prompt only (a custom one, oh-my-zsh, starship, stays), &quot;flashex&quot;</span>
+<span class="c"># always, &quot;native&quot; never. New terminals.</span>
+prompt = <span class="s">&quot;auto&quot;</span>
+<span class="c"># A folder icon before the prompt's folder (with a Nerd Font, else ›).</span>
+<span class="c"># New terminals.</span>
+prompt_icon = <span class="k">false</span></code></pre></div>
+<h3 id="cfg-blocks"><code>[blocks]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-blocks-tui"><td><code>tui</code></td><td><code>&quot;plain&quot;</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [blocks]</div><pre><code><span class="k">[blocks]</span>
+<span class="c"># While a coding agent (Claude Code, Codex, Gemini…) or another program</span>
+<span class="c"># that draws its own screen runs, its terminal looks as in any other</span>
+<span class="c"># terminal: no block line, bar, summary or tools over it. Once it ends it</span>
+<span class="c"># is a block again. &quot;blocks&quot; draws them as for every command.</span>
+tui = <span class="s">&quot;plain&quot;</span></code></pre></div>
+<h3 id="cfg-input"><code>[input]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-input-editor"><td><code>editor</code></td><td><code>true</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [input]</div><pre><code><span class="k">[input]</span>
+<span class="c"># Edit commands at the prompt in flashex's editor (colours, history</span>
+<span class="c"># suggestions, multi-line). Cmd+Shift+E toggles it for one terminal.</span>
+editor = <span class="k">true</span></code></pre></div>
+<h3 id="cfg-editor"><code>[editor]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-editor-wrap"><td><code>wrap</code></td><td><code>true</code></td></tr>
+<tr id="cfg-editor-minimap"><td><code>minimap</code></td><td><code>true</code></td></tr>
+<tr id="cfg-editor-enter_accepts_completion"><td><code>enter_accepts_completion</code></td><td><code>false</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-editor-hot_exit"><td><code>hot_exit</code></td><td><code>true</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [editor]</div><pre><code><span class="k">[editor]</span>
+<span class="c"># Wrap long lines in the code editor. Alt+Z toggles it for one editor.</span>
+wrap = <span class="k">true</span>
+<span class="c"># A minimap of the file on the right of the editor (click or drag it to</span>
+<span class="c"># scroll); it hides while the pane is too narrow for it and 100 columns.</span>
+minimap = <span class="k">true</span>
+<span class="c"># Enter accepts a completion also while you type a word (Tab always</span>
+<span class="c"># does). Unset, the key profile decides: true for &quot;sublime&quot; and &quot;vscode&quot;.</span>
+<span class="c"># enter_accepts_completion = false</span>
+<span class="c"># Untitled files and unsaved changes come back after quitting and starting</span>
+<span class="c"># again (as in Sublime Text); quitting then does not ask about them.</span>
+hot_exit = <span class="k">true</span></code></pre></div>
+<h3 id="cfg-layout"><code>[layout]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-layout-auto_stack_below"><td><code>auto_stack_below</code></td><td><code>0</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [layout]</div><pre><code><span class="k">[layout]</span>
+<span class="c"># A window narrower than this many pixels shows tabs of several panes as a</span>
+<span class="c"># list (one pane at a time, the layout kept); wider again, they go back.</span>
+<span class="c"># Tabs switched by hand (Cmd+Alt+L) are left alone. 0 = off.</span>
+auto_stack_below = <span class="k">0</span></code></pre></div>
+<h3 id="cfg-keys"><code>[keys]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-keys-profile"><td><code>profile</code></td><td><code>&quot;flashex&quot;</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [keys]</div><pre><code><span class="k">[keys]</span>
+<span class="c"># Shortcut conventions: &quot;flashex&quot;, &quot;sublime&quot; (Sublime Text) or &quot;vscode&quot;.</span>
+<span class="c"># keybindings.toml applies on top of the profile.</span>
+profile = <span class="s">&quot;flashex&quot;</span></code></pre></div>
+<h3 id="cfg-lsp"><code>[lsp]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-lsp-enabled"><td><code>enabled</code></td><td><code>true</code></td></tr>
+<tr id="cfg-lsp-trust"><td><code>trust</code></td><td><code>&quot;ask&quot;</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [lsp]</div><pre><code><span class="k">[lsp]</span>
+<span class="c"># Language servers installed on this system show errors and warnings in</span>
+<span class="c"># the code editor. A server starts with the first file of its language in</span>
+<span class="c"># a project and stops after 10 minutes without use.</span>
+enabled = <span class="k">true</span>
+<span class="c"># Servers that run a project's own code (rust, typescript, go, swift,</span>
+<span class="c"># kotlin) ask first in a folder that is not one of your projects: &quot;ask&quot;,</span>
+<span class="c"># or &quot;always&quot; to start them anywhere.</span>
+trust = <span class="s">&quot;ask&quot;</span>
+<span class="c"># A server that is not installed is not mentioned; the palette's</span>
+<span class="c"># &quot;Language Servers…&quot; lists them all and how to install each. One line</span>
+<span class="c"># turns a language's server off, e.g.:</span>
+<span class="c"># markdown = false</span>
+<span class="c"># Per language (rust, typescript, python, go, swift, kotlin, json, toml,</span>
+<span class="c"># yaml, bash, html, css, markdown, sql):</span>
+<span class="c"># [lsp.rust]</span>
+<span class="c"># command = [&quot;rust-analyzer&quot;]</span>
+<span class="c"># enabled = true</span></code></pre></div>
+<h4 id="cfg-lsp-language"><code>[lsp.&lt;language&gt;]</code></h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>What it does</th></tr></thead>
+<tbody>
+<tr id="cfg-lsp-language-command"><td><code>command</code></td><td>The language server to run, as a list: <code>command = ["rust-analyzer"]</code>. Languages: rust, typescript, python, go, swift, kotlin, json, toml, yaml, bash, html, css, markdown, sql.</td></tr>
+<tr id="cfg-lsp-language-enabled"><td><code>enabled</code></td><td><code>false</code> turns that language's server off. <code>[lsp] markdown = false</code> is the same in one line.</td></tr>
+<tr id="cfg-lsp-language-initialization_options"><td><code>initialization_options</code></td><td>A table sent to the server as its <code>initializationOptions</code>.</td></tr>
+</tbody></table></div>
+<h3 id="cfg-browser"><code>[browser]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-browser-local_urls_in_panel"><td><code>local_urls_in_panel</code></td><td><code>true</code></td></tr>
+<tr id="cfg-browser-search_url"><td><code>search_url</code></td><td><code>&quot;https://duckduckgo.com/?q=%s&quot;</code></td></tr>
+<tr id="cfg-browser-sleep_after_minutes"><td><code>sleep_after_minutes</code></td><td><code>10</code></td></tr>
+<tr id="cfg-browser-devtools"><td><code>devtools</code></td><td><code>true</code> <span class="chip">commented out</span></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [browser]</div><pre><code><span class="k">[browser]</span>
+<span class="c"># Cmd+click on a localhost or 127.0.0.1 link in a terminal opens it in a</span>
+<span class="c"># browser panel; other links open in the system browser.</span>
+local_urls_in_panel = <span class="k">true</span>
+<span class="c"># What the address bar searches with (%s is replaced); &quot;&quot; turns it off.</span>
+search_url = <span class="s">&quot;https://duckduckgo.com/?q=%s&quot;</span>
+<span class="c"># Browser tabs out of sight this long are unloaded (0 = never).</span>
+sleep_after_minutes = <span class="k">10</span>
+<span class="c"># Developer tools (Cmd+Alt+I) for pages; on in debug builds.</span>
+<span class="c"># devtools = true</span></code></pre></div>
+<h3 id="cfg-sidebar"><code>[sidebar]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-sidebar-show_terminals"><td><code>show_terminals</code></td><td><code>true</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [sidebar]</div><pre><code><span class="k">[sidebar]</span>
+<span class="c"># Each project lists its open terminals, editors and browsers under it,</span>
+<span class="c"># with its agent's state and unread notifications; the chevron on a</span>
+<span class="c"># project's row folds its list.</span>
+show_terminals = <span class="k">true</span></code></pre></div>
+<h3 id="cfg-agents"><code>[agents]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-agents-claude_update"><td><code>claude_update</code></td><td><code>true</code></td></tr>
+<tr id="cfg-agents-usage_api"><td><code>usage_api</code></td><td><code>false</code></td></tr>
+<tr id="cfg-agents-claude_status"><td><code>claude_status</code></td><td><code>false</code></td></tr>
+<tr id="cfg-agents-usage_meter"><td><code>usage_meter</code></td><td><code>false</code></td></tr>
+<tr id="cfg-agents-usage_notice"><td><code>usage_notice</code></td><td><code>false</code></td></tr>
+<tr id="cfg-agents-claude_accounts"><td><code>claude_accounts</code></td><td><code>[&quot;~/work/claude&quot;]</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-agents-claude_account"><td><code>claude_account</code></td><td><code>&quot;~/.claude-work&quot;</code> <span class="chip">commented out</span></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [agents]</div><pre><code><span class="k">[agents]</span>
+<span class="c"># A refresh icon by a terminal's tab when a newer Claude Code was</span>
+<span class="c"># installed while it runs there; a click restarts the session on the new</span>
+<span class="c"># version and the conversation continues.</span>
+claude_update = <span class="k">true</span>
+<span class="c"># The Usage dashboard reads Claude Code's rate limits from its status line.</span>
+<span class="c"># When no status line has reported them for a minute, it can ask Anthropic's</span>
+<span class="c"># usage API instead, with Claude Code's own login from the Keychain. Off:</span>
+<span class="c"># the login is never read.</span>
+usage_api = <span class="k">false</span>
+<span class="c"># The Usage dashboard's Claude status card (status.claude.com, public; only</span>
+<span class="c"># the request is sent).</span>
+claude_status = <span class="k">false</span>
+<span class="c"># &quot;5h 62%&quot; in the status bar while rate limits are known.</span>
+usage_meter = <span class="k">false</span>
+<span class="c"># A notice when a rate limit reaches 90 %.</span>
+usage_notice = <span class="k">false</span>
+<span class="c"># Claude Code keeps one account per folder: ~/.claude, or the folder an</span>
+<span class="c"># alias sets (alias claude-work='CLAUDE_CONFIG_DIR=~/.claude-work claude').</span>
+<span class="c"># Flashex finds ~/.claude, and ~/.claude-*, ~/.claude_* and ~/.config/claude*</span>
+<span class="c"># with transcripts or a login, by itself; list other folders here.</span>
+<span class="c">#claude_accounts = [&quot;~/work/claude&quot;]</span>
+<span class="c"># The account the Usage dashboard and Settings show (the dashboard's</span>
+<span class="c"># account chips write it). Unset: the default one.</span>
+<span class="c">#claude_account = &quot;~/.claude-work&quot;</span></code></pre></div>
+<h3 id="cfg-sessions"><code>[sessions]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-sessions-search_index"><td><code>search_index</code></td><td><code>true</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [sessions]</div><pre><code><span class="k">[sessions]</span>
+<span class="c"># Search Agent Sessions… (palette) searches your past Claude Code</span>
+<span class="c"># conversations. Its index stays on this Mac, in Flashex's data folder,</span>
+<span class="c"># and is updated when you search; Settings › AI agents clears it. false:</span>
+<span class="c"># no index is made and the search is off.</span>
+search_index = <span class="k">true</span></code></pre></div>
+<h3 id="cfg-dashboards"><code>[dashboards]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-dashboards-public_ip"><td><code>public_ip</code></td><td><code>false</code></td></tr>
+<tr id="cfg-dashboards-system_details"><td><code>system_details</code></td><td><code>false</code></td></tr>
+<tr id="cfg-dashboards-system_processes"><td><code>system_processes</code></td><td><code>&quot;cpu&quot;</code></td></tr>
+<tr id="cfg-dashboards-text_scale"><td><code>text_scale</code></td><td><code>1.0</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [dashboards]</div><pre><code><span class="k">[dashboards]</span>
+<span class="c"># The System dashboard's public address: one request to api.ipify.org every</span>
+<span class="c"># five minutes while the dashboard is on screen. Off: nothing is sent.</span>
+public_ip = <span class="k">false</span>
+<span class="c"># The System dashboard's machine strip opened to its details (its chevron).</span>
+system_details = <span class="k">false</span>
+<span class="c"># The table a narrow System processes card shows: &quot;cpu&quot; or &quot;memory&quot;.</span>
+system_processes = <span class="s">&quot;cpu&quot;</span>
+<span class="c"># The size of the dashboards' text, rows and charts: 1.0 as designed,</span>
+<span class="c"># 0.8 to 1.6. A dashboard pane's own zoom (Cmd+= / Cmd+- in it) goes</span>
+<span class="c"># from here in steps of 10 %.</span>
+text_scale = <span class="k">1.0</span></code></pre></div>
+<h3 id="cfg-privacy"><code>[privacy]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-privacy-hide_host"><td><code>hide_host</code></td><td><code>false</code></td></tr>
+<tr id="cfg-privacy-hide_emails"><td><code>hide_emails</code></td><td><code>false</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [privacy]</div><pre><code><span class="k">[privacy]</span>
+<span class="c"># For screenshots and screen sharing: the dashboards show &quot;this computer&quot;</span>
+<span class="c"># for the computer's name and &quot;hidden&quot; for its addresses (local, gateway,</span>
+<span class="c"># public, hardware ids). Process names stay as they are.</span>
+hide_host = <span class="k">false</span>
+<span class="c"># The same for account email addresses (the Usage dashboard, Settings).</span>
+hide_emails = <span class="k">false</span></code></pre></div>
+<h3 id="cfg-git"><code>[git]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-git-autofetch_minutes"><td><code>autofetch_minutes</code></td><td><code>0</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [git]</div><pre><code><span class="k">[git]</span>
+<span class="c"># Source Control fetches the window's project repositories in the</span>
+<span class="c"># background this often, quietly (0 = off, as in VS Code). A fetch never</span>
+<span class="c"># changes your branches or files; it only learns what the remote has.</span>
+autofetch_minutes = <span class="k">0</span></code></pre></div>
+<h3 id="cfg-updates"><code>[updates]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-updates-check"><td><code>check</code></td><td><code>true</code></td></tr>
+<tr id="cfg-updates-channel"><td><code>channel</code></td><td><code>&quot;stable&quot;</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [updates]</div><pre><code><span class="k">[updates]</span>
+<span class="c"># Look for a new Flashex release at start and once a day (GitHub). An</span>
+<span class="c"># update is offered, never installed without you choosing Update; your</span>
+<span class="c"># terminals keep running through it. Development builds never update.</span>
+check = <span class="k">true</span>
+<span class="c"># Only &quot;stable&quot; for now.</span>
+channel = <span class="s">&quot;stable&quot;</span></code></pre></div>
+<h3 id="cfg-vault"><code>[vault]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-vault-lock_after"><td><code>lock_after</code></td><td><code>&quot;5m&quot;</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [vault]</div><pre><code><span class="k">[vault]</span>
+<span class="c"># The Vault (palette: Vault…) locks itself after this long without use:</span>
+<span class="c"># &quot;90s&quot;, &quot;5m&quot;, &quot;1h&quot;, or 0 for only by hand. It always locks when the Mac</span>
+<span class="c"># sleeps or the screen locks, and when Flashex quits.</span>
+lock_after = <span class="s">&quot;5m&quot;</span></code></pre></div>
+<h3 id="cfg-ai"><code>[ai]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-ai-enabled"><td><code>enabled</code></td><td><code>true</code></td></tr>
+<tr id="cfg-ai-provider"><td><code>provider</code></td><td><code>&quot;openai-compatible&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-ai-command"><td><code>command</code></td><td><code>&quot;my-llm --quiet&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-ai-base_url"><td><code>base_url</code></td><td><code>&quot;http://localhost:11434/v1&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-ai-model"><td><code>model</code></td><td><code>&quot;qwen2.5-coder:7b&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-ai-timeout_seconds"><td><code>timeout_seconds</code></td><td><code>30</code></td></tr>
+<tr id="cfg-ai-ghost_text"><td><code>ghost_text</code></td><td><code>true</code></td></tr>
+<tr id="cfg-ai-send_last_command"><td><code>send_last_command</code></td><td><code>false</code></td></tr>
+<tr id="cfg-ai-output_lines"><td><code>output_lines</code></td><td><code>200</code></td></tr>
+<tr id="cfg-ai-output_kb"><td><code>output_kb</code></td><td><code>16</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [ai]</div><pre><code><span class="k">[ai]</span>
+<span class="c"># AI help: a line `# &lt;what you want&gt;` + Enter at an empty prompt asks</span>
+<span class="c"># for a command (put into the line, never run); Explain / Fix and &quot;Send to AI…&quot;</span>
+<span class="c"># on a command block. Nothing is sent without your action; false turns</span>
+<span class="c"># every AI path off.</span>
+enabled = <span class="k">true</span>
+<span class="c"># claude | codex | gemini (their CLIs, your own login) | command (your own</span>
+<span class="c"># command: the prompt on stdin, the answer on stdout) | openai-compatible</span>
+<span class="c"># (POST base_url/chat/completions: Ollama, LM Studio, llama.cpp, vLLM…).</span>
+<span class="c"># Unset: the first of claude, codex, gemini that is installed.</span>
+<span class="c"># provider = &quot;openai-compatible&quot;</span>
+<span class="c"># command = &quot;my-llm --quiet&quot;</span>
+<span class="c"># base_url = &quot;http://localhost:11434/v1&quot;</span>
+<span class="c"># model = &quot;qwen2.5-coder:7b&quot;</span>
+<span class="c"># The API key is not kept here: Settings › AI › API key stores it in the</span>
+<span class="c"># macOS Keychain (Linux: a file only you can read).</span>
+timeout_seconds = <span class="k">30</span>
+<span class="c"># Grey suggestions from your history after the cursor (no AI, offline);</span>
+<span class="c"># → or End takes it, ⌥→ one word.</span>
+ghost_text = <span class="k">true</span>
+<span class="c"># A `#` request also sends your last command and its exit code (off:</span>
+<span class="c"># only the request, your OS, shell and folder).</span>
+send_last_command = <span class="k">false</span>
+<span class="c"># Output sent with Explain / Fix / Send to: its first and last lines.</span>
+output_lines = <span class="k">200</span>
+output_kb = <span class="k">16</span></code></pre></div>
+<h3 id="cfg-remote"><code>[remote]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>What it does</th></tr></thead>
+<tbody>
+<tr id="cfg-remote-enabled"><td><code>enabled</code></td><td>not in the file · Experimental, off by default: <code>true</code> offers Open Remote Terminal… in the palette, a terminal on another machine reached over your own <code>ssh</code> that survives a dropped connection.</td></tr>
+<tr id="cfg-remote-grace"><td><code>grace</code></td><td>not in the file · How long a host keeps a remote terminal that no Flashex shows (the connection dropped, or Flashex quit): <code>"24h"</code> (the default), <code>"90m"</code>, or <code>"never"</code> to keep it as long as it runs.</td></tr>
+<tr id="cfg-remote-command"><td><code>command</code></td><td>not in the file · How Open Remote Terminal… reaches a host, as a list; <code>{host}</code> and <code>{version}</code> are filled in. The default runs <code>ssh -T -o BatchMode=yes {host}</code> with <code>~/.local/share/flashex/{version}/flashex-keeper --stdio</code> on the host.</td></tr>
+</tbody></table></div>
+<!-- /generated:config -->
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="editor.html"><span>Previous</span>Editor, Git and browser</a>
+<a class="next" href="shortcuts.html"><span>Next</span>Keyboard shortcuts</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

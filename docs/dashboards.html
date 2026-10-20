@@ -1,0 +1,103 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Dashboards · Flashex docs</title>
+<meta name="description" content="The Agents, Usage and System dashboards.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row active" aria-current="page" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Dashboards</span><span class="crumb">Flashex docs › Using Flashex</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Dashboards</h1>
+<p class="lede">Three dashboards open from the command palette as tabs of the current pane. They can be split, moved and closed like any pane, and come back after a restart.</p>
+<p>Open them with <kbd>⌘K</kbd> › <span class="ui">Agents Dashboard</span>, <span class="ui">Usage Dashboard</span> or <span class="ui">System Dashboard</span>. None has a default shortcut; bind <code>agents_dashboard</code>, <code>usage_dashboard</code> or <code>system_dashboard</code> in <a href="shortcuts.html#keys-no-default"><code>keybindings.toml</code></a>. Words with a dashed underline explain themselves when you point at them. <kbd>⌘=</kbd> and <kbd>⌘-</kbd> in a dashboard make its text, rows and charts bigger or smaller, 10 % at a time from 80 % to 160 % (<kbd>⌃⌘0</kbd> puts it back); the cards then fill fewer or more columns. Every dashboard starts from <a href="configuration.html#cfg-dashboards-text_scale"><code>[dashboards] text_scale</code></a> (Settings › Appearance › Dashboard text size).</p>
+
+<h2 id="agents">Agents</h2>
+<p>Every Claude Code session in the window: its project, folder and terminal, whether it is waiting for you, running, idle or ended, what it is doing right now ("Bash cargo test", "waiting: needs permission: Bash"), for how long, its model and how full its context is. Each session's subagents are listed under it with their task, tool, model and context.</p>
+<ul>
+<li><strong>Sessions</strong> lists them, those waiting for you first. Filter with the chips or just type; <kbd>↑</kbd> <kbd>↓</kbd> and Return (or a click) jump to a session's terminal, <kbd>Space</kbd> folds its subagents. The selected session offers <span class="ui">Reload</span>, <span class="ui">Interrupt</span> (sends Esc to its terminal after asking) and <span class="ui">Transcript</span> (the conversation, read-only). Ended sessions move to a folded <span class="ui">Recently ended</span> section.</li>
+<li><strong>Timeline</strong> shows what the sessions did over the last 15 minutes, hour or 4 hours: one lane per session, coloured stretches for thinking, running a tool, waiting for you and idle, and marks for prompts, tools, permission questions and failed tools. Point at a lane to read what happened at that moment; click it to go to that session's terminal.</li>
+</ul>
+<h3 id="timeline">The Timeline</h3>
+<figure>
+<img src="screenshots/agents-timeline.png" alt="The Agents dashboard's Timeline: one session waiting for permission, three working with their tool calls named under each lane, and a finished one folded below" width="2880" height="1800" loading="lazy">
+</figure>
+<ul>
+<li><strong>Groups.</strong> Lanes are grouped under <span class="ui">Waiting for you · 2</span> and <span class="ui">Working · 3</span> headers, waiting first. Idle and ended sessions fold into one "▸ N finished" row, and a session's subagents into "▸ N subagents" under it; a click unfolds them.</li>
+<li><strong>Lanes.</strong> Each lane shows its project or terminal and, on a second line, what it is doing or how long it has waited. With only a few sessions the lanes grow to fill the card; with many they keep a minimum height and scroll inside the card. The time axis stays in place while they scroll.</li>
+<li><strong>Tool labels.</strong> Under the bar each tool call is named in a word (<code>Bash</code>, <code>Edit</code>, <code>Read</code>), a failed one in red and a permission question in the accent colour, wherever there is room; when calls crowd together, the newest keep their names.</li>
+<li><strong>Details.</strong> Pointing at a lane shows what happened at that moment under that lane, so it never covers the lane you are reading.</li>
+<li><strong>Chips.</strong> <span class="chip">15m</span> <span class="chip on">1h</span> <span class="chip">4h</span> choose the window (or <kbd>Tab</kbd>), and <span class="chip">Compact</span> brings back denser lanes without tool names. Project chips filter the timeline to one project. The window, Compact, the project and the finished fold are remembered across restarts.</li>
+</ul>
+<p>It reads only Claude Code's hook events and, while it is on screen, the model and token counts from the session transcripts. If the hooks are not installed, it offers to install them (see <a href="agents.html#hooks">Claude Code hooks</a>).</p>
+
+<h2 id="usage">Usage</h2>
+<p>Your Claude Code usage across every session on this Mac.</p>
+<figure>
+<img src="screenshots/usage.png" alt="The Usage dashboard: 5-hour and weekly rate limits with pace and forecast, throughput charts over 12 hours, today's totals and a breakdown by model, project and open session" width="2880" height="1800" loading="lazy">
+</figure>
+<ul>
+<li><strong>Rate limits</strong>: the 5-hour and weekly limits, how much is used and when each resets, your pace against the one that would last until the reset, and a forecast ("On track", "Tight", or when it runs out). They come from Claude Code's status line; if they are unknown, <span class="ui">Set up in Settings…</span> takes you to <a href="agents.html#status-line">the status line row</a>.</li>
+<li><strong>Throughput</strong>: tokens per second, latency and output tokens as charts over 1 to 24 hours.</li>
+<li><strong>Today</strong>: requests, tokens and how much input came from the prompt cache.</li>
+<li><strong>Breakdown</strong>: output and speed per model and per project, and the open sessions with their prompt cache.</li>
+</ul>
+<p>Keys: <kbd>w</kbd> changes the window, <kbd>r</kbd> reads the transcripts again, <kbd>h</kbd> opens the Help card that explains every number. With several <a href="agents.html#accounts">Claude accounts</a>, chips at the top pick the one shown. Optional and off by default: <span class="ui">Show Claude status</span> (incidents from status.claude.com, <a href="configuration.html#cfg-agents-claude_status"><code>claude_status</code></a>) and the <a href="configuration.html#cfg-agents-usage_api">usage API</a> fallback (<kbd>u</kbd> asks it at once). The dashboard reads only while it is on screen and keeps a small summary so it opens fast; no message text is kept.</p>
+
+<h2 id="system">System</h2>
+<p>What this Mac is doing, without administrator rights:</p>
+<figure>
+<img src="screenshots/system.png" alt="The System dashboard: CPU, GPU, memory and temperatures with five minutes of charts, disk and network, with the computer's name and addresses hidden" width="2880" height="1800" loading="lazy">
+<figcaption>With <a href="configuration.html#cfg-privacy-hide_host"><code>[privacy] hide_host</code></a> on, the computer's name and addresses are hidden.</figcaption>
+</figure>
+<ul>
+<li>a strip with the chip, macOS, cores, load, uptime and battery; its chevron opens the details (<a href="configuration.html#cfg-dashboards-system_details"><code>system_details</code></a>);</li>
+<li><strong>CPU</strong> (total, user and system, every core by cluster), <strong>GPU</strong>, <strong>Memory</strong> (used, app, wired, compressed, cached, pressure, swap), <strong>Temperatures</strong> (CPU, GPU, SSD, battery), <strong>Disk</strong> (space, reads and writes, when it fills up), <strong>Network</strong> (addresses, download and upload, interfaces, the busiest processes) and <strong>Processes</strong> by CPU and by memory (<a href="configuration.html#cfg-dashboards-system_processes"><code>system_processes</code></a> picks the table of a narrow card).</li>
+</ul>
+<p>Charts show the last five minutes; point at one to read a value. <kbd>r</kbd> reads everything now and <kbd>h</kbd> explains every number and where it comes from. The cards fill one to eight columns as the pane allows. Charts keep sampling while the dashboard is open behind another tab, and for ten minutes after you close it. <span class="ui">Public IP</span> in the header (off by default, <a href="configuration.html#cfg-dashboards-public_ip"><code>public_ip</code></a>) shows the address the internet sees.</p>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="projects.html"><span>Previous</span>Projects and the sidebar</a>
+<a class="next" href="editor.html"><span>Next</span>Editor, Git and browser</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

@@ -1,0 +1,121 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Install · Flashex docs</title>
+<meta name="description" content="Install Flashex from the dmg or with Homebrew, open it the first time, and keep it up to date.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row active" aria-current="page" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Install</span><span class="crumb">Flashex docs › Get started</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Install</h1>
+<p class="lede">Flashex runs on Macs with Apple Silicon (M1 or later) and macOS 13 Ventura or later. Intel Macs are not supported.</p>
+
+<h2 id="homebrew">Homebrew (recommended)</h2>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> brew install --cask palo-kunovsky-flash/flashex/flashex</code></pre></div>
+<p>The cask installs <code>Flashex.app</code> into <code>/Applications</code>, links the <code>flashex</code> command, and removes the quarantine flag after Homebrew has checked the download's SHA-256, so the app opens normally the first time.</p>
+
+<h2 id="dmg">Download the dmg</h2>
+<ol>
+<li>Download <a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg"><code>Flashex-macOS-arm64.dmg</code></a>. It is always the latest version; each release also has a versioned <code>Flashex-&lt;version&gt;.dmg</code> with its <code>.sha256</code>.</li>
+<li>Optionally <a href="#check-a-download">check it</a>.</li>
+<li>Open it and drag <strong>Flashex</strong> to <strong>Applications</strong>.</li>
+<li><strong>The first time</strong>, see <a href="#first-open">the next section</a>.</li>
+</ol>
+
+<h2 id="first-open">Opening it the first time</h2>
+<p>Right-click (or Control-click) Flashex in Applications and choose <span class="ui">Open</span>, then <span class="ui">Open</span> again in the dialog. Or run:</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> xattr -dr com.apple.quarantine /Applications/Flashex.app</code></pre></div>
+<div class="notice"><div>
+<p><strong>Why this step?</strong> Flashex is free and made by one developer without a paid Apple Developer account. It is signed, but not with an Apple Developer ID, and it is not notarized by Apple. macOS Gatekeeper therefore refuses a downloaded copy until you confirm once that you want to run it. After that it opens like any other app, and updates installed by Flashex itself do not ask again. Homebrew does this step for you.</p>
+</div></div>
+
+<h3 id="cli">The <code>flashex</code> command</h3>
+<p>Inside a Flashex terminal the <a href="cli.html"><code>flashex</code> command</a> is always available. Homebrew links it for use everywhere; after a dmg install, link it into your <code>PATH</code> yourself:</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> ln -s /Applications/Flashex.app/Contents/MacOS/flashex /opt/homebrew/bin/flashex</code></pre></div>
+
+<h2 id="updates">Updates</h2>
+<p>Flashex checks for a new release at start and then once a day, by asking GitHub for the latest release. When one is available, a card offers <span class="ui">Release Notes</span>, <span class="ui">Update</span> and <span class="ui">Later</span>. Nothing is downloaded or installed until you choose <span class="ui">Update</span>, and the restart waits for <span class="ui">Restart Now</span>. Your terminals keep running through the update.</p>
+<p>To look right away, choose <span class="ui">Check for Updates…</span> in the <span class="ui">?</span> menu at the top right (also in the Flashex menu and the command palette). The same menu has the release notes and the version.</p>
+<figure>
+<img src="screenshots/help-menu.png" alt="The ? menu: Keyboard Shortcuts, Check for Updates…, Release Notes and About Flashex" width="2880" height="1800" loading="lazy">
+</figure>
+<p>Every update is verified before it replaces anything:</p>
+<ul>
+<li>The release manifest (<code>flashex-update.json</code>) is signed with the project's own ECDSA P-256 key. Its public half is built into the app. The signature covers the version, the size and the SHA-256 of the dmg.</li>
+<li>The download must have exactly that size and SHA-256.</li>
+<li>The new app's version and code signature are checked before it is swapped in. If the new version cannot be launched, or quits or crashes within a minute of starting, the previous one is put back.</li>
+</ul>
+<p>Turn the check off in Settings › Updates or with <a href="configuration.html#cfg-updates-check"><code>[updates] check = false</code></a>. If Flashex is in a folder it cannot write to, it offers the verified dmg in Finder instead. With Homebrew, <code>brew upgrade --cask flashex</code> works too; the cask is marked <code>auto_updates</code>, so Homebrew leaves updating to the app unless you pass <code>--greedy</code>.</p>
+
+<h3 id="check-a-download">Check a download yourself</h3>
+<p>Each release lists the dmg's SHA-256 and ships <code>Flashex-&lt;version&gt;.dmg.sha256</code> next to it:</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> shasum -a 256 -c Flashex-&lt;version&gt;.dmg.sha256
+<span class="c"># or compare by eye:</span>
+<span class="p">❯</span> shasum -a 256 Flashex-&lt;version&gt;.dmg</code></pre></div>
+
+<h2 id="linux">Linux (beta)</h2>
+<p>x86_64 or arm64 with glibc 2.35 or later (Ubuntu 22.04, Debian 12, Fedora 36 and newer), X11 or Wayland. The newest Linux build is <a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.2">0.1.2</a>; later versions are macOS only for now.</p>
+<ul>
+<li><strong>AppImage</strong> (updates itself): <code>chmod +x Flashex-&lt;version&gt;-linux-&lt;arch&gt;.AppImage</code>, then run it. It needs FUSE (<code>fuse3</code> / <code>fusermount3</code>); without it, run it with <code>--appimage-extract-and-run</code>.</li>
+<li><strong>Debian / Ubuntu:</strong> <code>sudo apt install ./flashex_&lt;version&gt;_&lt;arch&gt;.deb</code>. When a new version is out, Flashex downloads the verified package and shows the same command.</li>
+<li><strong>tar.gz:</strong> extract it anywhere and run <code>flashex-app</code>.</li>
+</ul>
+<p>Each file has a <code>.sha256</code> next to it, and updates are verified with the same signature as on macOS. Known gaps of the beta:</p>
+<ul>
+<li>There is no built-in browser panel; links open in your browser.</li>
+<li>There is no menu bar; every command is in the command palette (the Search button at the top right).</li>
+<li>Shortcut labels still show the macOS <code>⌘</code> symbols.</li>
+<li>On Wayland the window has no close or minimise buttons yet.</li>
+</ul>
+<p>Because the Linux build is still 0.1.2, features added since then (the dashboards, Keep Mac Awake, keeping terminals after a quit and others in the <a href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">changelog</a>) are not in it yet; these docs describe the current macOS version.</p>
+<p>Windows is planned.</p>
+
+<h2 id="uninstall">Uninstall</h2>
+<p>Quit Flashex and end the terminals it keeps (<code>flashex keeper stop</code>), then move <code>Flashex.app</code> to the Trash (or <code>brew uninstall --cask flashex</code>). Your settings are in <code>~/.config/flashex</code>, app data in <code>~/Library/Application Support/flashex</code>, caches in <code>~/Library/Caches/flashex</code> and logs in <code>~/Library/Logs/flashex</code>; delete them too if you want nothing left. If you installed the Claude Code hooks, remove Flashex's entries from Claude Code's <code>settings.json</code> (a backup from before the install is next to it as <code>settings.json.flashex-backup.orig</code>).</p>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="index.html"><span>Previous</span>Overview</a>
+<a class="next" href="quick-start.html"><span>Next</span>Quick start</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

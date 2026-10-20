@@ -1,0 +1,204 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>CLI reference · Flashex docs</title>
+<meta name="description" content="Every flashex command with its options and examples, and the socket API.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row active" aria-current="page" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">CLI reference</span><span class="crumb">Flashex docs › Reference</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>CLI reference</h1>
+<p class="lede"><code>flashex</code> controls the running app from a shell, a script or an agent's hook. Every command answers <code>--help</code> with its own usage.</p>
+
+<h2 id="which-app">Which app it talks to</h2>
+<ul>
+<li><strong>Inside a Flashex terminal</strong>, <code>FLASHEX_SOCKET</code> names that window's socket and <code>FLASHEX_PANE_ID</code> the terminal. Commands target that terminal unless you pass <code>--surface</code>. A command never falls back to another Flashex.</li>
+<li><strong>Outside Flashex</strong>, the default socket: <code>~/Library/Application Support/flashex/flashex.sock</code> on macOS; on Linux <code>$XDG_RUNTIME_DIR/flashex/flashex.sock</code>, else <code>~/.local/share/flashex/flashex.sock</code>.</li>
+<li>The socket is <code>0600</code> in a <code>0700</code> folder, so only you can connect. <a href="configuration.html#cfg-api-enabled"><code>[api] enabled = false</code></a> turns it off.</li>
+</ul>
+<p><strong>Ids.</strong> <a href="#flashex-list"><code>flashex list</code></a> shows projects, tabs, panes and terminals with their numeric ids. A terminal's id is called a <em>surface</em>. <code>--</code> ends the options, so text after it may start with <code>-</code>.</p>
+
+<h2 id="exit-codes">Exit codes</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><code>0</code></td><td>Done.</td></tr>
+<tr><td><code>1</code></td><td>An error: bad arguments, an unknown id, a refused request (the message says why).</td></tr>
+<tr><td><code>2</code></td><td>Flashex is not running (no socket, or this window has its API turned off); for <code>events</code>, also when the app closed the stream.</td></tr>
+</tbody></table></div>
+
+<h2 id="commands">Commands</h2>
+
+<h3 id="flashex-list"><code>flashex list [--json]</code></h3>
+<p>Lists projects, tabs, panes and their surfaces (terminals, editors, previews, browsers), each named as its pane tab shows it. <code>*</code> marks the active project and <code>&gt;</code> the focused surface; an agent's state is shown in brackets. <code>--json</code> prints the API's answer as is.</p>
+
+<h3 id="flashex-notify"><code>flashex notify [--surface N] [--title T] [BODY]</code></h3>
+<p>A notification for a terminal: a highlighted frame, a dot on its tab and a count in the sidebar, and a system notification when you cannot see that terminal. Only a terminal takes one; without <code>--surface</code> it goes to the terminal the command runs in, else the one you used last. <code>--from-claude-hook</code> is what Claude Code's hooks run (see <a href="#flashex-setup-claude"><code>setup claude</code></a>); a hook always exits 0, so Claude Code is never interrupted.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> make test; flashex notify --title Tests <span class="s">"finished with $?"</span></code></pre></div>
+
+<h3 id="flashex-agent"><code>flashex agent [--surface N] &lt;running|waiting|idle|error&gt;</code></h3>
+<p>Sets the agent state shown in the sidebar, for agents without Claude Code's hooks.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex agent waiting</code></pre></div>
+
+<h3 id="flashex-status"><code>flashex status [--surface N] [TEXT]</code></h3>
+<p>A status line for the terminal's project. Without text, the status is cleared.</p>
+
+<h3 id="flashex-focus"><code>flashex focus &lt;SURFACE&gt;</code></h3>
+<p>Shows a terminal: its project, tab and pane. The window comes to the front.</p>
+
+<h3 id="flashex-send"><code>flashex send [--surface N] TEXT</code></h3>
+<p>Types text into a terminal. <code>\n</code>, <code>\r</code>, <code>\t</code>, <code>\e</code> and <code>\\</code> are decoded, so <code>flashex send 'ls\n'</code> runs <code>ls</code>.</p>
+
+<h3 id="flashex-read"><code>flashex read [--surface N | --caller] [--last-block | --scrollback N]</code></h3>
+<p>Prints a terminal's text:</p>
+<ul>
+<li><strong>no option</strong>: the visible screen;</li>
+<li><strong><code>--last-block</code></strong>: the output of the last finished command (needs shell integration); exits 1 when there is none or its output left the history;</li>
+<li><strong><code>--scrollback N</code></strong>: the last N lines up to the cursor's line, history included (at most 100 000). A wrapped line counts once.</li>
+</ul>
+<p>Both read the shell's text also while a full-screen program shows its own. <code>--caller</code> reads the terminal the command runs in (it fails outside Flashex). Without <code>--surface</code> or <code>--caller</code>, it reads the terminal it runs in, or the focused one outside Flashex.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> cargo build; flashex read --last-block &gt; build.log
+<span class="p">❯</span> flashex read --surface 12 --scrollback 200 | grep -i error</code></pre></div>
+
+<h3 id="flashex-open"><code>flashex open [--project N | --surface N] PATH[:LINE[:COL]]</code></h3>
+<p>Opens a file in the editor, as <kbd>⌘</kbd>-click does. If it is already open, its tab is shown; otherwise it opens in the tab's editor pane, or in a new split to the right. A relative path is resolved against the folder you run the command in. <code>--project</code> opens it in that project; <code>--surface</code> beside that terminal. A missing file or a folder is refused (exit 1), and nothing in the window moves.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex open src/main.rs:120:8</code></pre></div>
+
+<h3 id="flashex-browse"><code>flashex browse [--project N | --surface N] URL|FILE</code></h3>
+<p>Opens a web page in a browser panel: a new tab of the tab's browser pane, or a split beside the terminal. Any <code>http://</code> or <code>https://</code> address works; one without a scheme gets <code>http://</code>. A local HTML, SVG or PDF file opens too: <code>./index.html</code>, <code>~/site/index.html</code>, an absolute path, a file name in the current folder or a <code>file://</code> address (a folder opens its <code>index.html</code>). Other schemes are refused. The new panel's id is printed. Without the browser panel (Linux), the page opens in the system browser.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex browse localhost:3000</code></pre></div>
+
+<h3 id="flashex-events"><code>flashex events [--type T[,T…]] [--surface N]</code></h3>
+<p>Prints the app's events, one JSON object per line, until Ctrl+C. When stdout closes (<code>| head -1</code>) it exits 0; when the app closes the stream it exits 2. <code>--type</code> keeps only the named types; <code>--surface</code> only one terminal's events. At most 16 streams may be open at once.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>type</th><th>Fields</th></tr></thead>
+<tbody>
+<tr><td><code>notification</code></td><td><code>surface</code>, <code>title</code>, <code>body</code>, <code>bell</code> (true for a BEL)</td></tr>
+<tr><td><code>agent</code></td><td><code>surface</code>, <code>state</code> (<code>running</code>, <code>waiting</code>, <code>idle</code>, <code>error</code>)</td></tr>
+<tr><td><code>command-started</code></td><td><code>surface</code>, <code>command</code>, <code>cwd</code> (needs shell integration)</td></tr>
+<tr><td><code>command-finished</code></td><td><code>surface</code>, <code>command</code>, <code>cwd</code>, <code>exit_code</code>, <code>duration_ms</code></td></tr>
+<tr><td><code>cwd</code></td><td><code>surface</code>, <code>cwd</code> (the shell's folder changed)</td></tr>
+<tr><td><code>focus</code></td><td><code>surface</code> (another terminal, editor or panel got the focus)</td></tr>
+<tr><td><code>lagged</code></td><td><code>dropped</code>: this many events were lost because the reader was too slow</td></tr>
+</tbody></table></div>
+<p>Events of one type and one terminal come in the order they happened; across types the order is only close, so compare by terminal and type.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex events --type command-finished | while read -r ev; do echo <span class="s">"$ev"</span> | jq .exit_code; done</code></pre></div>
+
+<h3 id="flashex-new-tab"><code>flashex new-tab [--cwd DIR]</code></h3>
+<p>Opens a tab in the caller's project (in <code>DIR</code> if given) and prints the new terminal's id.</p>
+
+<h3 id="flashex-split"><code>flashex split &lt;right|down|left|up&gt;</code></h3>
+<p>Splits the terminal and prints the new terminal's id.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> id=$(flashex split right) &amp;&amp; flashex send --surface <span class="s">"$id"</span> <span class="s">'npm run dev\n'</span></code></pre></div>
+
+<h3 id="flashex-size"><code>flashex size [--surface N] [cols|rows] &lt;N|N%&gt;</code></h3>
+<p>Pins the size of the terminal's pane, as dragging its divider does: <code>N</code> columns or rows (1–2000), or <code>N%</code> (1–99) of its split. The size applies in the innermost split around the pane; <code>cols</code> or <code>rows</code> picks the nearest split in that direction. The pane keeps the size when the window is resized, until a divider is dragged or the split is equalized. Prints nothing.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex size 60%          <span class="c"># the innermost split</span>
+<span class="p">❯</span> flashex size rows 12      <span class="c"># 12 rows high</span></code></pre></div>
+
+<h3 id="flashex-setup-claude"><code>flashex setup claude [--yes] [--print]</code></h3>
+<p>Adds Flashex's hooks to Claude Code's settings (<code>$CLAUDE_CONFIG_DIR/settings.json</code>, else <code>~/.claude/settings.json</code>), so Flashex shows when Claude Code is working, waiting or done. It shows the change (a line diff of the <code>hooks</code> part) and asks first; <code>--yes</code> skips the question and <code>--print</code> only shows the change. Running it again is safe: older Flashex hooks are updated in place, missing ones added, current ones left alone, and your other hooks, keys and formatting stay. The old file is kept as <code>settings.json.flashex-backup</code> and, the first time, <code>settings.json.flashex-backup.orig</code>. A symlinked <code>settings.json</code> keeps its link; a read-only one is left alone.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> CLAUDE_CONFIG_DIR=~/.claude-work flashex setup claude</code></pre></div>
+
+<h3 id="flashex-keeper-status"><code>flashex keeper status [--json]</code></h3>
+<p>Lists the restart keepers (the helper that keeps terminals running across a crash, Restart Flashex or a quit) and what each holds: its process id, the Flashex version that started it, whether it is attached to a running app or holding terminals for the next one (and why), how many terminals it keeps and how many still run, how much output it has buffered and how long until they are stopped. It asks the keepers directly, so it works without a running app. It only looks.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex keeper status
+<span class="o">Restart keepers in /Users/me/Library/Application Support/flashex/keeper:
+  keeper 4242 (Flashex 0.2.1): holding 3 terminals for the next app (Flashex was quit), 3 running, 1.2 KB buffered, stopped in 9 min 20 s unless Flashex is opened</span></code></pre></div>
+
+<h3 id="flashex-keeper-stop"><code>flashex keeper stop [--json]</code></h3>
+<p>Ends the terminals a keeper holds while Flashex is closed, and that keeper, without opening the app. A keeper that belongs to a running Flashex is left alone, and the command says so. The exit code is 1 when a keeper did not stop.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex keeper stop
+<span class="o">Ended 3 terminals kept by keeper 4242 (3 running).</span></code></pre></div>
+
+<h3 id="flashex-vault"><code>flashex vault list</code>, <code>get</code>, <code>run</code>, <code>env</code></h3>
+<p>Secrets from the Vault (command palette › <strong>Vault…</strong>). <code>flashex vault list [--json]</code> prints the entry names, never values. <code>flashex vault get [-n] [--print] NAME</code> prints an entry's main secret (an API key's value, a login's password, an SSH key's private key) into a pipe or a file; to a terminal only with <code>--print</code>. <code>flashex vault run VARS… -- COMMAND [ARGS…]</code> runs a command with values in its environment. <code>flashex vault env [--format dotenv] [--print] VARS…</code> prints <code>KEY=VALUE</code> lines into a pipe or a file (<code>&gt; .env.local</code>); to a terminal only with <code>--print</code>.</p>
+<p>VARS, any number and mixed: <code>--env VAR=ENTRY</code> puts the entry in <code>$VAR</code>; <code>--env ENTRY</code> or <code>--entry ENTRY</code> puts it under its own variable name (the <em>Variable</em> you set on an API key, such as <code>OPENAI_API_KEY</code>, else the entry's name); <code>--all-tagged TAG</code> puts in every entry with that tag that has a variable name.</p>
+<p>For <code>get</code>, <code>run</code> and <code>env</code> Flashex brings its window forward and asks: which entries and which variables they go into, which process (its name, pid and program, and its parent's, as the system reports them), and what the command says about itself (its terminal, the command it will run, and with <code>env --print</code> that it prints the values on the terminal: shown as claims). Nothing is sent until you press Allow. A locked vault is unlocked in the same card first; <code>list</code> waits only for that. The command waits up to 90 seconds; Deny, no answer, or too many requests waiting ends it with exit code 1.</p>
+<div class="notice warn"><div><p><strong>Careful with values on screen.</strong> A value printed in a terminal stays in its scrollback, which <code>flashex read</code> returns without asking and which survives a restart. Prefer <code>vault run</code>, a pipe (<code>flashex vault get GH_TOKEN | pbcopy</code>) or Copy in the Vault. Flashex checks only where <code>flashex</code> itself writes: <code>| tee</code>, <code>| cat</code> or <code>vault run -- printenv</code> still put values on the screen after you allow them. Values in a command's environment can be read by other programs running as your user while it runs.</p></div></div>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex vault run --env OPENAI_API_KEY -- python agent.py
+<span class="p">❯</span> flashex vault run --all-tagged ci -- make deploy
+<span class="p">❯</span> flashex vault env --entry openai --entry anthropic &gt; .env.local</code></pre></div>
+
+<h3 id="flashex-version"><code>flashex --version</code>, <code>flashex --help</code></h3>
+<p>Print the version, or the usage of every command.</p>
+
+<h2 id="socket-api">The socket API</h2>
+<p>Programs that can write to a Unix socket can use the same API directly: JSON-RPC 2.0, one message per line.</p>
+<div class="term"><div class="term-bar">request</div><pre><code>{<span class="s">"jsonrpc"</span>:<span class="s">"2.0"</span>,<span class="s">"id"</span>:1,<span class="s">"method"</span>:<span class="s">"read"</span>,<span class="s">"params"</span>:{<span class="s">"surface"</span>:3,<span class="s">"last_block"</span>:true}}</code></pre></div>
+<p>Every answer is one line too: <code>{"jsonrpc":"2.0","id":1,"result":{…}}</code> or an <code>error</code> with a <code>code</code> and <code>message</code>. A request without an <code>id</code> is carried out but not answered. A request may be at most 1 MiB; an idle connection closes after 120 s; at most 64 connections may be open. <code>surface</code> is optional wherever it appears; the default is the focused terminal.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Method</th><th>Params</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td><code>list</code></td><td>—</td><td><code>{projects: [{id, name, root, active, status, tabs: [{id, title, active, panes: [{id, surfaces: [{id, kind, title, focused, agent}]}]}]}]}</code></td></tr>
+<tr><td><code>notify</code></td><td><code>surface?</code>, <code>title?</code>, <code>body?</code></td><td><code>{}</code></td></tr>
+<tr><td><code>agent</code></td><td><code>surface?</code>, <code>state</code></td><td><code>{}</code></td></tr>
+<tr><td><code>status</code></td><td><code>project?</code> or <code>surface?</code>, <code>text?</code></td><td><code>{}</code></td></tr>
+<tr><td><code>focus</code></td><td><code>surface</code></td><td><code>{}</code></td></tr>
+<tr><td><code>select-tab</code></td><td><code>tab</code> or <code>surface</code></td><td><code>{}</code>; like <code>focus</code> without bringing the window to the front</td></tr>
+<tr><td><code>send</code></td><td><code>surface?</code>, <code>text</code></td><td><code>{}</code></td></tr>
+<tr><td><code>read</code></td><td><code>surface?</code>, <code>last_block?</code> or <code>scrollback?</code></td><td><code>{text}</code>; with <code>last_block</code> also <code>command</code>, <code>exit_code</code>, <code>duration_ms</code></td></tr>
+<tr><td><code>open</code></td><td><code>path</code> (absolute), <code>line?</code>, <code>column?</code>, <code>project?</code> or <code>surface?</code></td><td><code>{path}</code></td></tr>
+<tr><td><code>browse</code></td><td><code>url</code> (or <code>path</code>: an absolute HTML, SVG or PDF file), <code>project?</code> or <code>surface?</code></td><td><code>{surface, panel: true}</code> or <code>{panel: false}</code></td></tr>
+<tr><td><code>new-tab</code></td><td><code>cwd?</code>, <code>project?</code> or <code>surface?</code></td><td><code>{surface}</code></td></tr>
+<tr><td><code>split</code></td><td><code>direction</code>, <code>surface?</code></td><td><code>{surface}</code></td></tr>
+<tr><td><code>size</code></td><td><code>size</code> (<code>"60%"</code>, <code>"cols 80"</code>), <code>surface?</code></td><td><code>{}</code></td></tr>
+<tr><td><code>events</code></td><td><code>types?</code>, <code>surface?</code></td><td><code>{subscribed: true}</code>, then <code>{"method":"event","params":{"type":…}}</code> lines</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Error code</th><th>When</th></tr></thead>
+<tbody>
+<tr><td><code>-32700</code></td><td>The line is not JSON.</td></tr>
+<tr><td><code>-32600</code></td><td>Not a JSON-RPC 2.0 request, or longer than 1 MiB.</td></tr>
+<tr><td><code>-32601</code></td><td>Unknown method.</td></tr>
+<tr><td><code>-32602</code></td><td>A missing or wrong parameter.</td></tr>
+<tr><td><code>-32603</code></td><td>Too many connections or event streams, the app is shutting down or was busy too long, the pane cannot be split further.</td></tr>
+<tr><td><code>1001</code></td><td>No such project, surface or file; no finished command to read.</td></tr>
+</tbody></table></div>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="shortcuts.html"><span>Previous</span>Keyboard shortcuts</a>
+<a class="next" href="privacy.html"><span>Next</span>Privacy &amp; security</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

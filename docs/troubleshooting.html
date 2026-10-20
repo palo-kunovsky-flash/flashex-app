@@ -1,0 +1,119 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Troubleshooting &amp; FAQ · Flashex docs</title>
+<meta name="description" content="Answers to common problems and questions.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row active" aria-current="page" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Troubleshooting &amp; FAQ</span><span class="crumb">Flashex docs › Help</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Troubleshooting &amp; FAQ</h1>
+<p class="lede">Common problems and how to solve them. Anything else: <a href="https://github.com/palo-kunovsky-flash/flashex-app/issues">open an issue</a>.</p>
+
+<h2 id="gatekeeper">macOS says Flashex cannot be opened</h2>
+<p>A downloaded copy needs one confirmation, because Flashex is not notarized by Apple. Right-click Flashex in Applications and choose <span class="ui">Open</span>, then <span class="ui">Open</span> again, or run <code>xattr -dr com.apple.quarantine /Applications/Flashex.app</code>. Homebrew does this for you. See <a href="install.html#first-open">Opening it the first time</a>.</p>
+
+<h2 id="command-not-found"><code>flashex: command not found</code></h2>
+<p>Inside a Flashex terminal the command is always there. Outside it, Homebrew links it; after a dmg install, link it yourself: <code>ln -s /Applications/Flashex.app/Contents/MacOS/flashex /opt/homebrew/bin/flashex</code>.</p>
+
+<h2 id="exit-code-2">The <code>flashex</code> command exits with code 2</h2>
+<p>It could not reach Flashex: the app is not running, or the window's API is turned off (<a href="configuration.html#cfg-api-enabled"><code>[api] enabled</code></a>). Inside a Flashex terminal a command only ever talks to that window. See <a href="cli.html#exit-codes">Exit codes</a>.</p>
+
+<h2 id="no-agent-state">The sidebar shows no state for Claude Code</h2>
+<ul>
+<li>Install the hooks: <code>flashex setup claude</code>, or Settings › AI agents › Claude Code hooks. Sessions started before pick them up on their next start.</li>
+<li>Using an alias with its own <code>CLAUDE_CONFIG_DIR</code>? Pick that account in Settings › AI agents › <span class="ui">Claude account</span> and install the hooks there too (<a href="agents.html#accounts">Claude accounts</a>).</li>
+<li>If the hooks row says they are outdated or customised, <span class="ui">Update</span> brings them up to date.</li>
+</ul>
+
+<h2 id="no-rate-limits">The Usage dashboard does not show my rate limits</h2>
+<p>They come from Claude Code's status line. Press <span class="ui">Set up in Settings…</span> (or Settings › AI agents › Claude Code status line › <span class="ui">Apply</span>); the limits appear after a session's next answer. If the row names a project or managed settings file, that file sets its own status line there. Alternatively turn on <a href="configuration.html#cfg-agents-usage_api"><code>usage_api</code></a>.</p>
+
+<h2 id="terminals-ended">My terminals were not kept when I quit</h2>
+<p>Check Settings › Session › <span class="ui">Terminals when Flashex quits</span> (<a href="configuration.html#cfg-session-keeper_on_quit"><code>keeper_on_quit</code></a>), and that <a href="configuration.html#cfg-session-keeper"><code>keeper</code></a> and <a href="configuration.html#cfg-session-restore"><code>restore</code></a> are on. Kept terminals end after <a href="configuration.html#cfg-session-keeper_grace_minutes"><code>keeper_grace_minutes</code></a>, and logging out or restarting the Mac ends them. <code>flashex keeper status</code> shows what is kept right now.</p>
+
+<h2 id="end-kept-terminals">I want to end terminals kept in the background</h2>
+<p>Run <a href="cli.html#flashex-keeper-stop"><code>flashex keeper stop</code></a>: it ends the terminals held while Flashex is closed, without opening it. A running Flashex's terminals are left alone; quit Flashex with <span class="ui">Quit and End All</span> to end them.</p>
+
+<h2 id="permissions">A terminal lost Screen Recording or Accessibility</h2>
+<p>macOS gives these permissions to the process that started a terminal's shell. Since 0.2.1 that is Flashex's helper, so they survive restarts and updates; terminals started by an earlier version do not get them back (open a new terminal). After updating to 0.2.0 from an earlier version, grant the permissions once more in System Settings › Privacy &amp; Security; later updates keep them.</p>
+
+<h2 id="blank-icon">Notifications show a blank white icon</h2>
+<p>macOS is holding an old copy in its icon cache. Run <code>sudo rm -rf /Library/Caches/com.apple.iconservices.store</code> in Terminal and restart your Mac.</p>
+
+<h2 id="banners">Notification banners disappear too fast</h2>
+<p>How long they stay is set by macOS. Settings › Notifications › <span class="ui">Keep notifications on screen</span> › <span class="ui">Open</span>, then choose <span class="ui">Alerts</span>.</p>
+
+<h2 id="ctrl-space">Ctrl+Space does not open completions</h2>
+<p>With several input sources, macOS takes <kbd>⌃Space</kbd> to switch between them. Use <kbd>⌥Esc</kbd>, which asks for completions too.</p>
+
+<h2 id="shortcut-conflict">A shortcut does something else, or nothing</h2>
+<p><kbd>⌘?</kbd> lists every shortcut in effect. Shortcuts you change in <code>keybindings.toml</code> that cannot work (an unknown action, a key the shell needs) are reported with their line number and left out. See <a href="shortcuts.html#keybindings-toml">keybindings.toml</a>.</p>
+
+<h2 id="language-server">A language has no errors or completion</h2>
+<p>Flashex uses servers already installed on your system. The palette's <span class="ui">Language Servers…</span> shows which are found and how to install the missing ones. In a folder that is not one of your projects, servers that run code ask first.</p>
+
+<h2 id="config-errors">My <code>config.toml</code> change did nothing</h2>
+<p>Changes apply as soon as you save. An unknown setting, a wrong value or a file that is not valid TOML is reported in a notice, with its line where it is known. Some settings apply to new terminals or at the next start (each says so in <a href="configuration.html">the reference</a>).</p>
+
+<h2 id="logs">Where are the logs and data?</h2>
+<p>Settings: <code>~/.config/flashex</code>. App data (session, backups of unsaved editors, the restart keeper): <code>~/Library/Application Support/flashex</code>. Caches: <code>~/Library/Caches/flashex</code>. Logs: <code>~/Library/Logs/flashex</code>. Attach the log to a bug report if it helps (check it for anything private first).</p>
+
+<h2 id="linux-fuse">The AppImage does not start on Linux</h2>
+<p>It needs FUSE (<code>fuse3</code> / <code>fusermount3</code>). Without it, run it with <code>--appimage-extract-and-run</code>, or use the <code>.deb</code> or <code>.tar.gz</code>.</p>
+
+<h2 id="faq">FAQ</h2>
+<h3 id="faq-price">Is Flashex free?</h3>
+<p>Yes, for personal and commercial work. It is closed source: the public repository holds the README, these docs, the screenshots and the releases. The terms are in the <a href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/LICENSE">LICENSE</a>.</p>
+<h3 id="faq-api-key">Do I need an API key for the AI features?</h3>
+<p>No. Flashex uses Claude Code, Codex or Gemini CLI with their own login, your own command, or a local model server. An API key is only needed for a hosted OpenAI-compatible server you choose.</p>
+<h3 id="faq-other-agents">Does it work with agents other than Claude Code?</h3>
+<p>Yes. Any agent runs in a terminal and can notify (OSC 9, 777, 99, a bell, <code>flashex notify</code>) or report its state (<code>flashex agent</code>). The hooks, the dashboards, resume and reload are for Claude Code.</p>
+<h3 id="faq-intel">Does it run on Intel Macs or Windows?</h3>
+<p>No Intel Macs. Linux is in beta; Windows is planned.</p>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="privacy.html"><span>Previous</span>Privacy &amp; security</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->

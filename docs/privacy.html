@@ -1,0 +1,111 @@
+<!doctype html>
+<!-- generated:head -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Privacy &amp; security · Flashex docs</title>
+<meta name="description" content="What Flashex sends where (almost nothing), and how updates are verified.">
+<link rel="icon" href="screenshots/icon.png">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+<header class="titlebar">
+<button class="btn nav-toggle" type="button" aria-label="Show the pages" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="2"/><path d="M6 2.5v11"/></svg></button>
+<a class="brand" href="index.html"><img src="screenshots/icon.png" alt="">Flashex <span class="sub">Docs</span></a>
+<span class="spacer"></span>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">Changelog</a>
+<a class="btn wide" href="https://github.com/palo-kunovsky-flash/flashex-app/issues">Issues</a>
+<a class="btn primary" href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg">Download</a>
+</header>
+<nav class="sidebar" aria-label="Pages">
+<div class="group">Get started</div>
+<a class="row" href="index.html"><span class="badge c-orange">F</span>Overview</a>
+<a class="row" href="install.html"><span class="badge c-blue">In</span>Install</a>
+<a class="row" href="quick-start.html"><span class="badge c-green">Qs</span>Quick start</a>
+<div class="group">Using Flashex</div>
+<a class="row" href="agents.html"><span class="badge c-amber">Ag</span>Working with agents</a>
+<a class="row" href="panes.html"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</a>
+<a class="row" href="projects.html"><span class="badge c-teal">Pr</span>Projects and the sidebar</a>
+<a class="row" href="dashboards.html"><span class="badge c-purple">Da</span>Dashboards</a>
+<a class="row" href="editor.html"><span class="badge c-cyan">Ed</span>Editor, Git and browser</a>
+<div class="group">Reference</div>
+<a class="row" href="configuration.html"><span class="badge c-slate">Co</span>Configuration</a>
+<a class="row" href="shortcuts.html"><span class="badge c-lime">Ks</span>Keyboard shortcuts</a>
+<a class="row" href="cli.html"><span class="badge c-brown">Cl</span>CLI reference</a>
+<div class="group">Help</div>
+<a class="row active" aria-current="page" href="privacy.html"><span class="badge c-pink">Ps</span>Privacy &amp; security</a>
+<a class="row" href="troubleshooting.html"><span class="badge c-red">?</span>Troubleshooting &amp; FAQ</a>
+<div class="foot">Free to use · <a href="https://github.com/palo-kunovsky-flash/flashex-app">flashex-app on GitHub</a></div>
+</nav>
+<main class="pane">
+<div class="pane-tabs"><span class="pane-tab">Privacy &amp; security</span><span class="crumb">Flashex docs › Help</span></div>
+<article class="content">
+<!-- /generated:head -->
+<h1>Privacy &amp; security</h1>
+<p class="lede">Flashex has no telemetry, no analytics, no accounts and no crash reporting. It sends nothing about you or your work anywhere.</p>
+
+<h2 id="network">Every network connection</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>What</th><th>When</th><th>Turn off</th></tr></thead>
+<tbody>
+<tr><td><strong>Update check</strong>: <code>api.github.com</code> for the latest release, then the manifest and, only if you choose Update, the dmg. Through <code>/usr/bin/curl</code>, HTTPS only.</td><td>At start and at most once a day. Development builds never check.</td><td><a href="configuration.html#cfg-updates-check"><code>[updates] check = false</code></a></td></tr>
+<tr><td><strong>Browser panel</strong>: the pages you open. Address-bar text that is not an address goes to DuckDuckGo.</td><td>When you open a page.</td><td><a href="configuration.html#cfg-browser-search_url"><code>search_url = ""</code></a> for the search</td></tr>
+<tr><td><strong>Git</strong>: fetch, pull and push with your own git and credentials.</td><td>Only when you start them.</td><td>Background fetch is off unless <a href="configuration.html#cfg-git-autofetch_minutes"><code>autofetch_minutes</code></a> is set</td></tr>
+<tr><td><strong>Language servers</strong>: programs already on your system, started as local processes. Flashex downloads none. What a server does itself (rust-analyzer running <code>cargo</code>) is up to it.</td><td>When you open a file of that language.</td><td><a href="configuration.html#cfg-lsp-enabled"><code>[lsp] enabled = false</code></a></td></tr>
+<tr><td><strong>AI help</strong>: see <a href="#ai">below</a>.</td><td>Only when you press Return on a <code>#</code> line or click.</td><td><a href="configuration.html#cfg-ai-enabled"><code>[ai] enabled = false</code></a></td></tr>
+<tr><td><strong>Claude status</strong>: a <code>GET</code> of <code>status.claude.com/api/v2/summary.json</code>.</td><td>Once a minute while the Usage dashboard is open. Off by default.</td><td><a href="configuration.html#cfg-agents-claude_status"><code>claude_status</code></a></td></tr>
+<tr><td><strong>Anthropic usage API</strong>: a <code>GET</code> of <code>api.anthropic.com/api/oauth/usage</code> with Claude Code's own login.</td><td>At most once a minute while the Usage dashboard is open and no status line has reported the limits. Off by default; with it off, the login is never read.</td><td><a href="configuration.html#cfg-agents-usage_api"><code>usage_api</code></a></td></tr>
+<tr><td><strong>Public IP</strong>: a <code>GET</code> of <code>api.ipify.org</code>.</td><td>Every five minutes while the System dashboard is on screen. Off by default.</td><td><a href="configuration.html#cfg-dashboards-public_ip"><code>public_ip</code></a></td></tr>
+</tbody></table></div>
+<p>The optional requests send nothing but the request itself (your IP address and a <code>Flashex/&lt;version&gt;</code> user agent; the usage API also Claude Code's token, given to curl on its standard input, never on the command line).</p>
+
+<h2 id="ai">AI help</h2>
+<p>Nothing is sent until you press Return on a <code># …</code> line at a prompt, or click Explain, Fix, Send to AI… or Test connection.</p>
+<ul>
+<li><strong><code>#</code> → command</strong> sends what you typed after <code>#</code>, your operating system, your shell's name and the current folder (as <code>~/…</code>). Your last command and its exit code only if you turn on <a href="configuration.html#cfg-ai-send_last_command"><code>send_last_command</code></a>, and never when it looks like it contains a secret.</li>
+<li><strong>Explain, Fix and Send to AI…</strong> send that block's command, folder, exit code and output, trimmed to its first and last lines (<a href="configuration.html#cfg-ai-output_lines"><code>output_lines</code></a>, <a href="configuration.html#cfg-ai-output_kb"><code>output_kb</code></a>), with passwords, tokens and keys replaced by <code>***</code>.</li>
+<li><strong>Where it goes</strong> is your <a href="configuration.html#cfg-ai-provider"><code>provider</code></a>: the <code>claude</code>, <code>codex</code> or <code>gemini</code> program on your computer (under your own login and their terms, run in an empty temporary folder with no tools it could act with); your own <code>command</code> on its standard input; or an OpenAI-compatible server at <code>base_url</code>, which with a local model never leaves your computer. HTTPS is required except for <code>localhost</code>, <code>127.0.0.1</code> and <code>::1</code>.</li>
+<li><strong>Send to Claude / Codex / Gemini</strong> with an agent running in a terminal only types the text there; it is sent when you press Return.</li>
+<li>The API key is kept in the macOS Keychain (Linux: a file only you can read), never in <code>config.toml</code>, and is sent only to your server.</li>
+<li>Suggestions from your history are computed on your computer and never sent.</li>
+</ul>
+
+<h2 id="local">What Flashex reads on your Mac</h2>
+<ul>
+<li><strong>The Usage dashboard</strong> reads Claude Code's transcripts (<code>~/.claude/projects</code> or the account's folder) while it is on screen: only timestamps, model names, token counts, the length of visible text, the session id and the last name of the working folder. No message text is kept or logged. To label accounts it reads the e-mail and organisation name from each folder's <code>.claude.json</code>, never a token.</li>
+<li><strong>The status line script</strong> Flashex installs when you press Apply keeps only the rate limits out of what Claude Code hands it, writes them to a file in <code>~/Library/Caches/flashex</code> and sends nothing anywhere.</li>
+<li><strong>Claude Code's <code>settings.json</code></strong> is changed only when you install hooks or apply the status line (a backup is kept next to it), and when Flashex updates hooks it installed earlier.</li>
+<li><strong>The System dashboard</strong> reads this Mac's counters in-process, without root, and runs <code>ps</code> and <code>nettop</code> only while it is on screen. Nothing is stored; chart history lives in memory.</li>
+</ul>
+
+<h2 id="vault">The Vault</h2>
+<p>The Vault (command palette › <strong>Vault…</strong>) keeps secrets in one encrypted file in Flashex's own folder on your Mac, <code>~/Library/Application Support/flashex/vault/vault.fxv</code>, never in the cloud and never in the macOS Keychain. Without your vault password the file is unreadable: the content is encrypted with XChaCha20-Poly1305 and the password is stretched with Argon2id. The last three versions of the file are kept next to it as backups; changing the password removes them, but copies elsewhere (Time Machine, other backups) still open with the old password, with the content they had then.</p>
+<p><strong>Touch ID</strong> is optional. Turning it on stores a key in your login keychain that opens the vault without the vault password; Flashex asks for your fingerprint before it reads that key, but the check happens inside Flashex. With Touch ID on, the vault is as strong as your macOS login password and keychain: a program you allowed to read Flashex's keychain item ("Always Allow"), for example <code>security find-generic-password</code>, could read the key. Adding or removing a fingerprint turns Touch ID off for the vault.</p>
+<figure>
+<img src="screenshots/vault.png" alt="The Vault: API keys with their URL, variable and tags, a pinned favorite, one entry marked as expired and one expiring in 14 days; no secret is shown" width="2880" height="1800" loading="lazy">
+<figcaption>The Vault's list: names, URLs, variables and tags, never the secrets.</figcaption>
+</figure>
+<p>The Vault does not protect against a program running as you while the vault is open, a keylogger, or a program you allow to read a value: it gets the value and can keep it.</p>
+<p>Everything in an entry is inside that encrypted file: its secret fields, and also its name, note, tags, URL, username and dates. Search never looks at secret values. To point out a secret stored in two entries, Flashex compares keyed hashes of the values (with a random key made at each unlock) in memory while the vault is open; no hash is written anywhere. Generated passwords and tokens come from the operating system's random number generator. <strong>Import .env…</strong> reads the file you name (never through a symbolic link), adds its values as entries, and then offers to delete it, checking first that it is still the file it read; when the vault does not hold every value of it, deleting needs a second confirmation. Copies of it elsewhere (backups, version control history) are not touched. <strong>Export…</strong> writes only an encrypted copy of the vault, opened with the vault password and not with Touch ID; Flashex has no plain-text export. When you Copy a value or allow a request, the entry's "last used" time is noted in the vault.</p>
+
+<h2 id="security">Security</h2>
+<ul>
+<li>The <code>flashex</code> command talks to the app over a Unix socket that only your user can open (<code>0600</code>, in a <code>0700</code> folder). <a href="configuration.html#cfg-api-enabled"><code>[api] enabled = false</code></a> turns it off.</li>
+<li>Programs in a terminal may write to the clipboard (OSC 52, <a href="configuration.html#cfg-terminal-clipboard_write"><code>clipboard_write</code></a>) but can never read it.</li>
+<li>Shell integration marks are signed, so programs cannot fake command blocks.</li>
+<li>Command lines that look like they contain a secret are never saved in the session, offered to run again or suggested from history.</li>
+<li>Updates are verified with Flashex's own signature, the exact size and SHA-256, and the new app's code signature before they replace anything (<a href="install.html#updates">Updates</a>).</li>
+</ul>
+<!-- generated:foot -->
+<nav class="pager" aria-label="Previous and next page">
+<a class="prev" href="cli.html"><span>Previous</span>CLI reference</a>
+<a class="next" href="troubleshooting.html"><span>Next</span>Troubleshooting &amp; FAQ</a>
+</nav>
+</article>
+</main>
+<script src="assets/docs.js"></script>
+</body>
+</html>
+<!-- /generated:foot -->
