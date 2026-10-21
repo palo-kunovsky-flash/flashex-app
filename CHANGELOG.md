@@ -8,6 +8,65 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.6] - 2026-10-21
+
+### Added
+- **More accent colours:** purple, pink, red, cyan and lime join orange, green, blue, indigo, teal and amber (Settings › Appearance › Accent).
+- **Settings › Terminal › Remote terminals and projects over ssh** turns them on or off.
+- **A remote terminal's tab shows its link.** A server icon in the pane's tab: green while connected, orange while it reconnects.
+- **A host that cannot be reached again says why.** When a remote terminal's connection comes back failing (a login it needs, a host that is down), the terminal says why, once per reason, while Flashex keeps trying; when it needs a login, Log In to Remote Host… brings it back by itself.
+- **Remote terminals left behind are cleaned up, and a gone one says why.** A remote terminal remembers which Flashex opened it: a while after the start, Flashex closes its own terminals on a host it no longer knows (left by a crash before the session was saved), never another Flashex's. A remote terminal that is gone says whether the host stopped it because no Flashex showed it within its grace period, or the host (or its server) restarted.
+- **An icon for a project in the sidebar.** A project's menu › **Icon…** (or **Set Project Icon** in the command palette) shows it with an icon instead of its initials: code, docs, notes, images, design, web, data, AI, tools, cloud, music, games and more, so projects are easy to tell apart. Initials stay the default; a remote project always shows a server.
+- **Keep Mac Awake can turn the display off.** Tick **Then: Turn the display off** in its chooser, or pick **Turn Display Off** from the cup's menu in the status bar: after a 5-second count in the status bar (a click on the cup stops it) the display goes to sleep while the Mac and its jobs keep running. While the display sleeps Flashex no longer wakes it up to keep the screen lock away; wake it as usual.
+- **A remote terminal another Flashex shows says so.** When a second Flashex (another Mac, or another profile) shows a remote terminal, the first one tells you it is shown elsewhere; press Enter there to show it there again, from what it had not seen yet.
+- **Remote terminals move to the new version after an update.** The server on a host that still holds terminals from an earlier version hands them over to this version's in place: their programs keep running, what they printed stays, and the remote terminals connect again by themselves; language servers and everything new then work there too. (From servers of this version on; one of 0.2.5 or earlier still waits until its terminals are closed.)
+- **Text sizes in one place: Settings › Text.** The interface's text size (sidebar, tabs, bars, menus and dialogs, 80 % to 130 %, `[appearance] ui_scale`), the file tree's text size in points (its rows grow with it, `[appearance] tree_font_size`), and the terminals' and editors' font, size, weight and line height and the dashboards' text size, moved there from Terminal and Appearance.
+
+### Changed
+- **Remote terminals and remote projects are on by default** (no longer experimental): Open Remote Terminal…, New Remote Project… and Log In to Remote Host… are in the palette; nothing connects until you type a host. `[remote] enabled = false` turns them off.
+- **Log In to Remote Host… and Set Up Claude Code use the options of your `[remote] command`** (a known-hosts file, a port, a jump host…), not plain `ssh`.
+- **`Cmd+Ctrl+Option+=` / `-` change the font size of every terminal and editor for good**: they write Settings › Text › Font size to `config.toml` (before, only until Flashex quit); `Cmd+Ctrl+Option+0` puts it back to 13 pt. A pane's own size (`Cmd+=` / `Cmd+-`) still goes from it.
+
+### Fixed
+- **The terminal Log In to Remote Host… opens stays a local terminal after a restart**, also in a remote project (before, it came back as a terminal on the host).
+- **A remote terminal is shown again after a restart even when Flashex did not quit cleanly**: its id on the host is saved as soon as it opens (before, only when Flashex quit, so a crash opened a new one and the old output was gone).
+- **A remote terminal that could not be reached (no login yet, no network) is not lost**: Enter after logging in shows the same terminal again; before, the failed start closed it on the host once it was reachable.
+- **A cancelled or timed-out AI request, and a git command that took too long, end everything they started**: a process they were starting at that very moment could survive (seen on a busy machine); the group is now ended once more after it.
+- **Terminals that ran through an update keep Flashex's privacy permissions** (from the next update on): the helper that keeps them running becomes the updated Flashex in place, so programs in them (screen capture, accessibility, files in Documents) are again allowed what Flashex is allowed, instead of losing it until they end.
+- **Remote projects:** a folder's repository is asked of the server once and then known for a minute (asked again in the background), so a slow link holds up the window less; a path git prints in full on the server is shown as the project's here; the Source Control panel's "fetched … ago" works for a remote project.
+
+
+## [0.2.5] - 2026-10-20
+
+### Added
+- **Choose the app icon.** Settings › Appearance › App icon shows every icon to click: the Flashex mark in other colours (Orchid in pink #CE36A8 and blue #590ACA, Ocean, Sunset, Grape, Mono, a light one), in slimmer and smaller shapes, and the mark as fruit: a pineapple, a kiwi, an orange, a lime and a lemon. Flashex uses it in the Dock and the app switcher while it runs (`[appearance] app_icon`).
+- **The vault finds `.env` files to import.** Import .env… lists the `.env` files in the terminal's project (`.env`, `.env.local`, `prod.env`…, not templates like `.env.example`, nor `node_modules` and the like); a click or ↑/↓ picks one and shows what it would add, so its path need not be typed.
+- **Zoom in Markdown previews and the browser panel.** `Cmd+=` / `Cmd+-` / `Cmd+Ctrl+0` now zoom a Markdown preview's text (with its column) and a page in the browser panel, in a browser's steps (50 % to 300 %), for that pane only and kept across restarts; a notice says the new size ("This pane: 125%").
+- **Remote terminals over ssh, ready to use (still experimental, off by default).** With `enabled = true` under `[remote]` in `config.toml`:
+  - **Nothing to install on the server.** Flashex carries the small Linux helper it runs there (x86_64 and arm64, static, about 1 MB) and copies it over your own `ssh` before the first terminal, checking its SHA-256 on the server; a server that has it already is left alone. Linux servers only for now.
+  - **New Remote Project…** in the command palette takes `user@host:/folder` (or `~/folder`): the project's terminals, its splits and new tabs open on that server in that folder.
+  - **Remote terminals come back after Flashex restarts** (or is updated): each one is shown again from the server, with what it printed, instead of a note. A split beside a remote terminal opens on the same server.
+  - **Log In to Remote Host…** opens a terminal on your Mac where ssh asks for a password or a two-factor code; the remote terminals to that server then use this login for 12 hours. A terminal that could not log in says to use it.
+  - A split beside a remote terminal opens in the folder its program is in on the server (Linux servers).
+  - The sidebar shows how each remote terminal's connection is: its icon is green when connected, orange while it connects again, red when it is not; its tooltip says so, and a remote project's row names its server and folder.
+  - A remote terminal shown again after a restart, or after output was lost while disconnected, is made to draw itself again, so full-screen programs (vim, htop, Claude Code) come back whole.
+  - Older versions of the helper on a server are removed when a new one is copied there; the newest older one stays.
+  - A Mac with Apple Silicon can be a remote host too.
+  - **Agents on the server show in Flashex.** Choose **Set Up Claude Code on Remote Host…** once: Claude Code's hooks on that server then tell Flashex, through the same connection, when a session there works, waits or finishes, so the sidebar, the Agents dashboard and the notifications show it as for a terminal on your Mac. Flashex copies its small `flashex` command there for this (`~/.local/bin/flashex`). An agent on the server can only report its state; it cannot drive Flashex or reach your Mac. The hooks there run the server's own `flashex` by its full path (nothing to add to PATH).
+  - **A remote project's files in the tree and the editor.** The file tree lists the project's folder on the server, a file opens in the editor from there and saves back to it (the server writes it safely, keeping its permissions), and the editor picks up a change made on the server. New files and folders, renaming and **Move to Trash** (the server's own Trash, `~/.local/share/Trash`, so it can be put back) work from the tree; **Open in Terminal** opens a terminal on the server in that folder and **Copy Path** copies the path there. **Go to File** (Cmd+P) lists the project's files on the server.
+  - **Git in remote projects.** The tree's change marks, the status bar's branch and the whole Source Control panel (stage, discard, commit, branches, publish) work on the server's repository: Flashex runs `git` there, and nothing else, through the same connection. Language servers for remote projects come later.
+  - **Language servers on the server.** A remote project's file gets its language server: it runs on the server (found on your login PATH there, e.g. `pylsp`, `rust-analyzer`, `gopls`), and the paths in its messages are put the server's way and back.
+  - After an update, the server's part of an earlier version is replaced by this version's as soon as it holds no terminals.
+  - A remote terminal that could not be opened (no login yet) opens on its server again when you press Enter, never as a shell on your Mac.
+  - **A remote project looks like one.** Its icon in the sidebar is a server, with a dot that says how the connection is (green connected, orange connecting, red lost, grey nothing open there), and an **SSH** label next to its name. Opening a folder of it in the file tree no longer waits for the network: its entries come in as soon as the server answers.
+
+### Changed
+- **The tab bar's "+" sits right after the last tab**, as in a pane's tabs (on a wide screen it was far off at the right end); the toggle for a tab's stack of windows stays at the right.
+
+### Fixed
+- **Reload Claude Session resumes the conversation that runs.** After Flashex restarted with Claude Code still running in a terminal, a claude started inside it (a plugin's `claude -p`) could become that terminal's session, and Reload then opened another conversation; a reload also no longer falls back to an older run's session.
+- **A picture fitted to its pane is whole again.** A tall picture opened from the file tree took the pane's width and its bottom was cut off; it is now scaled to fit both ways and centred.
+
 ## [0.2.4] - 2026-10-20
 
 ### Added
@@ -388,7 +447,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.4...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.5...HEAD
+[0.2.5]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.5
 [0.2.4]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.4
 [0.2.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.3
 [0.2.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.2

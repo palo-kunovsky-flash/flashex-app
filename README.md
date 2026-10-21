@@ -168,7 +168,7 @@ From the keyboard, `Ctrl+Option+Tab` and `Ctrl+Option+Shift+Tab` go to the next 
 
 ### Light and dark
 
-Flashex follows the macOS appearance by default. Settings › Terminal colors offers Flashex's own colour schemes (Graphite, Harbor, Ember), each with a dark and a light variant; `theme` takes `dark`, `light`, `system`, a scheme such as `graphite-dark`, or the name of a theme file in `~/.config/flashex/themes` (`"light:<name>,dark:<name>"` picks one for each appearance), and the accent colour can be orange, green, blue, indigo, teal or amber. The grid and the Markdown preview above are in the light theme. `font_weight` (thin to black) sets how heavy the terminal and editor text is; `Cmd+Option+=` and `Cmd+Option+-` step through the weights.
+Flashex follows the macOS appearance by default. Settings › Terminal colors offers Flashex's own colour schemes (Graphite, Harbor, Ember), each with a dark and a light variant; `theme` takes `dark`, `light`, `system`, a scheme such as `graphite-dark`, or the name of a theme file in `~/.config/flashex/themes` (`"light:<name>,dark:<name>"` picks one for each appearance), and the accent colour can be orange, green, blue, indigo, teal, amber, purple, pink, red, cyan or lime. The grid and the Markdown preview above are in the light theme. `font_weight` (thin to black) sets how heavy the terminal and editor text is; `Cmd+Option+=` and `Cmd+Option+-` step through the weights.
 
 ### Restart keeper
 
@@ -376,7 +376,7 @@ Flashex reads `~/.config/flashex/config.toml` and applies changes as soon as you
 ```toml
 [appearance]
 theme = "system"          # dark | light | system | graphite-dark | …
-accent = "orange"         # green, blue, indigo, teal, amber
+accent = "orange"         # green, blue, indigo, teal, amber, purple, pink, red, cyan, lime
 animations = true
 
 [terminal]
@@ -416,7 +416,7 @@ enabled = true
 ghost_text = true                          # suggestions from your history
 ```
 
-Every option is described in the [configuration reference](https://palo-kunovsky-flash.github.io/flashex-app/configuration.html). **Remote terminals over ssh** are an experimental option, off by default: with `enabled = true` under `[remote]`, **Open Remote Terminal…** in the palette opens a terminal on another machine through your own `ssh`, which keeps running there when the connection drops. For now the host needs `flashex-keeper` of the same version in `~/.local/share/flashex/<version>/` and a login without a password prompt.
+Every option is described in the [configuration reference](https://palo-kunovsky-flash.github.io/flashex-app/configuration.html). **Remote terminals and projects over ssh:** **Open Remote Terminal…** in the palette opens a terminal on another machine (Linux; a Mac with Apple silicon too, so far less tested) through your own `ssh`; it keeps running there when the connection drops or Flashex quits, and comes back when you reconnect. **New Remote Project…** opens a folder there with its files, Git and language servers. Flashex puts its small `flashex-keeper` on the host by itself; a host that asks for a password or a second factor is logged in with **Log In to Remote Host…**. Settings › Terminal › Remote terminals (`[remote] enabled = false`) turns it all off.
 
 Other files: `keybindings.toml`, `layouts.toml` (layout templates) and `workflows.toml` (saved commands) in the same folder, and `<project>/.flashex/workflows.toml` for a project's own workflows. App data (session, backups of unsaved editors, the Vault, Command History favorites, the session search index) is in `~/Library/Application Support/flashex`, logs in `~/Library/Logs/flashex`.
 
@@ -443,7 +443,7 @@ The network connections it makes are:
 - **The System dashboard** reads this Mac's own counters, in-process and without root (Mach and `sysctl` for CPU and memory, libproc for your processes, IOKit for the GPU, disks, battery and temperature sensors, the interface counters and SystemConfiguration for the network). While a System dashboard is open, also behind another tab, and for ten minutes after you close it, the counters its charts need are read every 2 seconds so the charts keep their history; the rest only while it is on screen. Two commands run on their own, and only while it is on screen: `ps` every 16 seconds for processes of other users (the window server, root's daemons), which an app cannot read itself, and `nettop` every 10 seconds for the busiest processes on the network. Nothing is stored; the charts' history lives in memory and goes an hour after the dashboard closes. One network request exists, off unless you turn it on:
   - **Public IP** (a button in the dashboard's header, `[dashboards] public_ip`): a `GET` of `https://api.ipify.org` every five minutes while the dashboard is on screen, to show the address the internet sees. Nothing is sent but the request itself (your IP address and a `Flashex/<version>` user agent). Off, the address is never asked for.
 
-- **Remote terminals** (experimental, off unless `[remote] enabled = true`) connect only to the hosts you type, through your own `ssh`, keys and `~/.ssh/config`, which Flashex never reads.
+- **Remote terminals** connect only to the hosts you type, through your own `ssh`, keys and `~/.ssh/config`, which Flashex never reads.
 
 **The Vault** is one file in Flashex's folder, encrypted with XChaCha20-Poly1305 under a key derived from your password with Argon2id; names, notes and URLs are encrypted too, and nothing about it leaves your Mac. With Touch ID turned on, a key in your login keychain opens it, so it is then as strong as your Mac login. Programs get a value only after you allow it in Flashex, and a value is never printed into a terminal's scrollback unless you pass `--print`. A forgotten vault password cannot be recovered.
 
