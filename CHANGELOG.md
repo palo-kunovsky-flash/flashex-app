@@ -8,6 +8,15 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.7] - 2026-10-21
+
+### Added
+- **Flashex on your phone (Phone Access…).** Your agents, projects and terminals on your phone through Tailscale: read and type in a terminal with a key bar, start a terminal or an agent in a project, resume an ended one, read the project's files with the editor's colours and its changes as diffs, type straight into the terminal (word jumps, start and end of the line, a pad to move the cursor), all in your Flashex theme and icons, and get a notification when an agent waits for you or is done. Pairing is a QR code, a code both screens show and Touch ID on the Mac; each phone gets View only, Type in open terminals or Full access, and the Mac can remove it at any time. Off until you turn it on; nothing is open to the internet. Made for Chrome on Android.
+- **Search in Settings.** Type (or press `Cmd+F`) to show only the settings whose name, description, `config.toml` key or section matches; ↑/↓ go through them, Esc clears the search.
+
+### Fixed
+- **The Vault's Import .env… offers the `.env` files of all your projects**, the one of the focused terminal first: before, it looked only in that project, and a home folder full of caches (`~/.cargo`, `~/.npm`…) used up the search before the projects were reached. It says while it looks.
+
 ## [0.2.6] - 2026-10-21
 
 ### Added
