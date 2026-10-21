@@ -8,6 +8,14 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.8] - 2026-10-21
+
+### Added
+- **Claude Code as a chat on your phone.** An agent opens as its conversation, read from Claude Code's transcript and laid out for the phone: your prompts, its replies (headings, lists, code and tables), the tools it used as one line each. A box at the bottom sends a prompt (Esc, Shift+Tab, `/` and the arrows are a tap away). When Claude asks (a permission, a question), what it asks is shown without its box with buttons for 1, 2, 3, the arrows, Enter and Esc. **Terminal** and **Chat** switch between the two; the Mac's terminal stays as it is.
+
+### Changed
+- **Flashex on your phone:** projects are in the sidebar's order (groups first, then the projects in none), with their tabs; tapping a project opens what the Mac shows of it; an agent says its group and terminal; the phone's level is a button that says what it may do. A terminal's lines wrap at the phone's width at the phone's own text size (A− / A+), and what scrolled off is there to scroll back to; the Mac's terminal keeps its size. A full-screen program (Claude Code, vim) is scaled to fit instead.
+
 ## [0.2.7] - 2026-10-21
 
 ### Added
