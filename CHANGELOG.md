@@ -8,6 +8,33 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.10] - 2026-10-22
+
+### Added
+- **Codex and pi in Flashex.** Settings › AI agents › **Codex hooks** and **pi extension** connect them (asked first, the old file backed up; Codex wants `/hooks` once to trust them), and Flashex suggests it when one of them runs in a terminal. Then their state is in the sidebar and the status bar ("Codex: waiting"), their permission requests and finished turns are notifications, the Agents dashboard and the phone show them, the phone's chat reads their conversations, and Resume brings them back (`codex resume <id>`, `pi --session <id>`).
+- **Your Mac's System view on the phone** (the **Mac** tab): CPU with its cores, memory and its pressure, disk, network, battery, temperature and the busiest processes, refreshed every two seconds while you look.
+- **History in the phone's chat:** what you asked before, newest first; tap one to ask it again.
+- **Files | Changes on the phone:** a project's files and what changed in them (git) side by side; a Markdown file reads as a page fitted to the phone (its source a tap away), other text wraps at the phone's width.
+- **Install from the pairing:** once paired in the browser, Flashex offers to install itself on the home screen (on an iPhone it says where Add to Home Screen is).
+- **Claude is offered again after it ends.** When Claude Code ends in a terminal, its Resume offer comes back for that very session.
+
+### Changed
+- **Phone Access walks you through it in two steps:** 1. Tailscale (install it, or Set Up its Serve, then a ✓ with the phone's address), 2. pair a phone. Show QR Code waits for step 1: a code for an address the phone cannot reach is never shown. Get Tailscale opens its download page, and the card notices by itself when Tailscale comes up.
+- **Phone notifications say what the agent said, as on the Mac** (the new default; Phone Access shows the three choices side by side: also what it said, only that it waits or is done, off). They are encrypted end to end; "only that it waits or is done" keeps the text off the lock screen.
+- **The phone's chat keeps its room for the conversation:** the agent's state is one line; what it runs, its subagents and Claude Code's own line (its mode) open with a tap.
+- **Projects on the phone are calmer:** under a project only **+ Terminal**; its files, changes and a new agent are in a terminal's **⋯** menu.
+- **When the phone cannot reach the Mac it says so** (Tailscale off on the phone or the Mac), and that notifications still come: they go through the phone's push service, not the tailnet.
+- **Unfolding in the sidebar is smooth:** a project's terminals and a group's projects grow into their place instead of appearing at once.
+
+### Fixed
+- **Claude asking you a question with options, or a plan to approve, now counts as waiting for you**: the sidebar's dot and the status bar change, and you get a notification with the question. Claude Code sends no notification of its own for these.
+- **A waiting agent never looks like a working one:** with a green accent, waiting is shown in the warning colour.
+- **The phone comes back after a network change.** On mobile data, or after Tailscale was turned off and on, the web app could keep loading or never connect again: it no longer waits on a request that never ends (its page comes from the cache after 4 s), gives up a connection that does not open within 8 s or has said nothing for 40 s and opens a new one, connects again as soon as it is on screen or the network is back, and the Mac lets it in at once instead of turning it away while its old connections from the other network were still counted.
+- **A terminal that ran one agent after another shows its newest in the phone's chat** (pi after Codex, a new Claude after an ended one).
+- **The Agents dashboard's timeline no longer jumps** as the agents' lines change: the names' column keeps its width.
+- **The phone's chat could fail with "Cannot read properties of undefined (reading 'map')"** when the terminal's screen came in parts.
+- **A new Claude Code started instead of the offered Resume is the one resumed later**, also when its hooks speak before Flashex sees it start or it is killed without ending.
+
 ## [0.2.9] - 2026-10-22
 
 ### Added
