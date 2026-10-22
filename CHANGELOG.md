@@ -8,6 +8,35 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.9] - 2026-10-22
+
+### Added
+- **A tool's output in the phone's chat.** Tap a tool's line to see what it printed (a failed one is red).
+- **Images in the phone's chat:** a screenshot you pasted and an image Claude read show as previews; tap one to see it whole, double-tap to zoom.
+- **Restart Claude from your phone (⟳).** The Mac's Reload Claude Session: Claude Code starts again on the same conversation, when it has finished what it does; the button is marked when a newer Claude Code is installed.
+- **Resume Claude from your phone.** When Claude Code ended in a terminal (you left it, it crashed, Flashex restarted), the chat and the terminal offer **Resume**: the Mac's Resume Last Claude Session, by its session id.
+- **What the agent does, at a glance, in the chat:** thinking and writing, which tool it runs (a command, a file it edits, a search) and its subagents, waiting for you, done (your turn) or ended, with Claude Code's own line under it (its mode, such as auto mode, and its status line). **Mode ⇧Tab** switches the mode.
+- **Claude usage on your phone:** the 5-hour and weekly limits and when they start over, and today, as in the Usage dashboard.
+- **A project's files, changes (git), new terminals and agents from any terminal or chat**, in its **⋯** menu; on Projects these buttons are always there and say when the phone's level does not allow them.
+- **Pairing a phone's home screen app with the code's link.** On an iPhone the home screen app keeps its own storage, apart from Safari: hold the QR code in the camera, choose Copy Link and paste it on the app's pairing screen.
+
+### Changed
+- **A cleaner header on the phone:** the project's name with the terminal's under it, a **Chat | Terminal** switch and a **⋯** menu (text size, close); Back returns to where you came from, also after switching. Tapping a project with Claude Code opens its chat.
+- **Only what the phone shows can be selected:** the terminal's text, the conversation and code copy as before; the app's buttons and titles no longer highlight when tapped.
+- **Claude's replies read better:** headings, italics, links, quotes, rules, numbered lists and code blocks with their language.
+- **A terminal the Mac has not shown yet starts when the phone opens it** (it showed nothing before).
+- **Phone Access on the Mac shows the levels side by side**, the chosen one in the accent colour, with what it allows under it.
+- **The sidebar comes alive:** an agent's dot pulses while it works and breathes while it waits for you; unfolding a project's terminals or a group slides its rows in one after the other, and folding it lets them go, the last one first.
+- **Phone access follows Tailscale:** turned on while Tailscale was not running, it takes the tailnet address by itself once Tailscale is up.
+- **The web app on your phone updates itself.** When Flashex on the Mac is updated, the phone's web app reloads the new one as soon as it connects, on the screen it was on.
+- **An agent's chat survives a restart of Flashex.** A Claude Code session that kept running in its terminal is in the phone's Agents with its chat right away, before Claude Code says anything again.
+
+### Fixed
+- **After an update, an idle remote server of the older version is replaced every time.** It could end so fast that Flashex took its end for a refusal and stayed with the old one.
+
+### Security
+- **Strangers cannot lock your phones out.** Failed connections and pairings are counted per paired phone and apart for everything else: someone in your tailnet trying ids or codes makes only themselves wait, never a phone you paired.
+
 ## [0.2.8] - 2026-10-21
 
 ### Added
