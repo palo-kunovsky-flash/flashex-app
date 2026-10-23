@@ -8,6 +8,35 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.11] - 2026-10-23
+
+### Added
+- **Claude usage on the phone, as the Mac's Usage dashboard shows it.** Agents' usage card opens Details: both limits with when they start over, the pace and the sustainable pace, when the 5-hour limit runs out at this pace (or that it is on track), the week's budget per day, the output chart, today's numbers and the models and projects. The Mac reads them while the phone shows them; the card says what the pace says too.
+- **Phone notifications only when you are away from the Mac:** when it is locked, its display sleeps or nothing was touched for 2 minutes; no more buzzing next to you while you work. The phone's Settings › **Also while I use the Mac** sends them every time. They come with the phone locked or Flashex closed on it (through the phone's push service, not the connection).
+- **Keep Mac Awake's cup is always in the status bar:** grey while it is off (a click turns it on), the time left while it is on.
+- **Settings in the phone app** (the ⚙ in its header): notifications on or off for this phone, which ones (an agent waits for you, an agent is done), whether they show what the agent said (off for the lock screen), and a test notification; the terminal's text size, details in the chat, the phone's access and Install.
+- **The phone app takes the app icon picked in Settings › App icon**: in its notifications at once and, as the phone allows, on its home screen (Android refreshes it by itself; on an iPhone, add it to the Home Screen again).
+- **Keep Mac Awake can lock the Mac:** "Lock the Mac (5 s)" next to "Turn the display off", and **Lock the Mac** in the status bar's menu while it is on. The Mac locks and stays awake behind the lock: what runs goes on.
+
+### Changed
+- **The phone's Projects are calmer:** a quiet **+** by each project for a new terminal, an agent's terminal shown by its robot (it opens as its chat) and its state's dot in a place of its own, as in the Mac's sidebar.
+- **The phone's tab bar has icons**, and the computer's tab is **System** (its name in the title), whatever it runs on.
+- **Phone Access, Settings, Shortcuts, Workflows and the Vault have a ✕** in their corner (Esc still closes them).
+- **Restart Claude is in the ⋯ menu** (a dot on ⋯ says when a newer Claude Code is installed).
+
+### Fixed
+- **The phone app opens at once.** It opens from its own copy on the phone instead of first waiting for the Mac (up to 4 seconds on a slow network), and while the Mac is away too; a newer Flashex is still picked up as soon as it connects.
+- **The phone's System and usage read as on the Mac:** percentages as "62%", a reset time without a day when it is today (and the day in English like the rest), and a line such as the disk's read and write never broken inside a value.
+- **In the phone's chat only your own words are your bubbles.** What Claude Code adds to your messages (its reminders, the file open in the editor, the summary after a compaction, background task notices) no longer shows as if you wrote it; an interruption is a quiet line, a `!` command shows as yours with its output on a tap.
+- **The phone's Usage page shows sooner** the first time it is opened.
+- **The phone's usage card no longer breaks its numbers over lines** (a lone "%" on the next line under Today).
+- **The phone opens no chat for a terminal where Claude Code does not run yet.** After a restart a terminal not opened on the Mac still had its last conversation saved, and the phone took it for a running one: it showed that old conversation as the chat and hid Resume. Now it shows the terminal with Resume, as the Mac does.
+- **Folding and unfolding a project or a group in the sidebar no longer jumps at the end** (the room between the rows went away all at once).
+- **Phone notifications say what the agent said.** They had only "An agent is done · project": the agent's words, read a moment later on the Mac, never reached the phone.
+- **A message sent from the phone's chat is sent.** Its Enter came together with the text and Claude Code took both for a paste: a new line in its input instead of a send. Enter now follows the text a moment later, as a hand presses it.
+- **An agent whose subagents still work after its turn shows as working** (the sidebar, the status bar, the phone's chat: "A subagent works"), not as done.
+- **Phone notifications show Flashex's icon in the status bar** (a white square before).
+
 ## [0.2.10] - 2026-10-22
 
 ### Added
@@ -520,7 +549,13 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.5...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.11...HEAD
+[0.2.11]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.11
+[0.2.10]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.10
+[0.2.9]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.9
+[0.2.8]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.8
+[0.2.7]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.7
+[0.2.6]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.6
 [0.2.5]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.5
 [0.2.4]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.4
 [0.2.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.3
