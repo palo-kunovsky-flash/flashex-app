@@ -8,6 +8,41 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.12] - 2026-10-23
+
+### Added
+- **An agent's question as a card on the phone:** a permission, a plan or a choice shows its question and each choice in its own words as a button (the screen above shows what it is about). A tap answers only what the Mac still asks; if it changed meanwhile, the card shows the new question instead.
+- **The phone chat's tools:** a file's path in a reply opens the file (in code or written out, with its line); **/** lists Claude Code's commands and your project's and your own commands and skills, with their descriptions; a **picture** from the phone's photos or camera goes to the Mac (made smaller) and its path into your message for the agent to read; the **mic** dictates into the message (to read over before sending); a reply can be **read aloud**; **Search in this chat** (in ⋯) marks every match and steps through them.
+- **Your dev servers on the phone:** Phone Access › **Dev server preview** (off unless turned on) brings a dev server running here (`localhost:5173` and the like) to paired phones with Full access: a terminal's **⋯** on the phone offers **Preview localhost:<port>** for what listens in its project, and opens the page whole (its own paths, its live reload). Tailscale Serve brings `https://<your Mac>:8444` to it; nothing passes without the phone's one-time link and the session it starts (12 hours, that port only, the cookie never reaching the dev server).
+- **A notification on the phone goes once you looked at its terminal on the Mac** (back at the Mac: a terminal left on screen while you are away does not count). An open phone app closes it at once; on Android a quiet push closes it too. On an iPhone it goes when the app opens (Safari stops notifications for a site whose pushes show nothing).
+- **Voice mode in the phone's chat (Voice):** hands free: what the agent said is read aloud when its turn ends; a question it asks is read with its choices and answered by voice ("yes", "no", a number); otherwise what you say becomes your message, sent after a moment unless you tap it to change it; "stop" interrupts the agent, "voice off" ends it.
+- **The phone's chat loads earlier messages as you read up**, a page at a time to the start of the conversation, without moving what you read.
+- **Keep Mac Awake from the phone:** the System tab's card says whether it is on and until when; a tap on a mode turns it on (or changes it), Stop turns it off, as the Mac's cup does.
+- **The Phone Access dashboard** (in the palette): Tailscale and what it brings to this Mac (the phone's app, the dev server preview), the paired phones (access, connected or last seen, notifications), the previews open now and what the phones did, newest first (never what was typed).
+- **Allow and Deny on the phone's notification** of an agent waiting (where the phone shows them, as on Android): the app opens on the agent's card and answers only when it shows the same question (Allow its "Yes", Deny its "No"); another question is left for you to choose.
+- **A new agent in a worktree from the phone:** the **+** by a project asks for a branch, makes a worktree on it beside the repository (`<repo>-worktrees/<branch>`) and starts Claude Code there; its terminal shows each step.
+- **A message sent while the agent works shows as yours**, marked queued until Claude takes it, and what you sent from the chat stays there after Terminal and back.
+- **Write a file from the phone:** the **+** by a project (and in a folder of Files) makes a new file, a note on the go; a text file has **Edit**. It is never written over a change made on the Mac meanwhile (the phone keeps your text and says so), only inside the project, never a file that may hold a secret.
+- **The phone's + by a project** offers a new terminal, a new agent (Claude) or a new file.
+- **Groups and projects fold on the phone** as in the Mac's sidebar (a tap on a group's name or a project's arrow, kept on the phone), and **Files is by group** too.
+- **The chat's details on the phone** say the model, how much of its context the session holds (with a bar) and its git branch.
+- **The phone app moves:** pages come in softly, sheets slide up, a waiting agent's card glows, what you tap gives way a little (none of it with Reduce Motion).
+
+### Changed
+- **The phone's System is the Mac's System dashboard:** CPU, GPU, Memory, Temperatures, Disk, Network and Processes in its order, each in its colour, with the machine on top.
+
+### Fixed
+- **Terminals kept through an update keep the app's privacy permissions after the next update too** (Screen Recording, Accessibility, files…). A keeper that stayed for terminals of an earlier version followed the first update but not the second: it ran older code than the app on disk, and macOS stopped trusting it with the terminals' permissions until they ended. It now becomes the new version by itself whenever the app is updated, its terminals untouched.
+- **Reading above in the phone's chat while the agent works, the text stays still.** It slid away as new messages came (older ones left the top); now what you read stays where it is, the phone keeps the earlier messages, and **↓ New** takes you down to what came. At the end it follows again.
+- **The active tab's mark sits in the middle of its tab** (it was 6 points too high).
+- **The cup in the status bar opens its menu by the cup** also while Keep Mac Awake is off (it opened in the middle of the window).
+- **A project's chevron in the sidebar stays where it is when its list opens** (open, it sat higher, on the name's line).
+- **Not connected, the phone app says so plainly:** a loader over the page (blurred, nothing on it to tap: it may be old), then why when the Mac stays away (this phone offline; the Mac not reached, Tailscale off on the phone or the Mac asleep; Flashex not running on the Mac) with **Try again**. It connects again sooner while it is on screen.
+- **A notification tapped opens its chat without "Your Mac cannot be reached".** A phone just woken takes a few seconds to reach its tailnet: what the app asks waits for it instead of failing, and the message comes only when the Mac stays away (10 s).
+- **A new terminal on the phone shows its prompt at the top** instead of scrolling to the Mac's empty rows below it.
+- **A terminal is no longer called "you@your-mac:~/path"** when the Mac's name changed since its shell started (on another network): it is named by its folder again, on the Mac and on the phone.
+- **The phone's ⋯ sits level with Chat | Terminal.**
+
 ## [0.2.11] - 2026-10-23
 
 ### Added
@@ -549,7 +584,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.11...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.12...HEAD
+[0.2.12]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.12
 [0.2.11]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.11
 [0.2.10]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.10
 [0.2.9]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.9

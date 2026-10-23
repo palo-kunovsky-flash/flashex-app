@@ -577,7 +577,8 @@ output_kb = <span class="k">16</span></code></pre></div>
 <thead><tr><th>Key</th><th>What it does</th></tr></thead>
 <tbody>
 <tr id="cfg-remote_access-enabled"><td><code>enabled</code></td><td>not in the file · Phone access: <code>true</code> serves Flashex's web app for your phone on this Mac's loopback (Tailscale Serve brings it to the phone). Off by default; Phone Access… in the palette turns it on with Touch ID and pairs a phone.</td></tr>
-<tr id="cfg-remote_access-push"><td><code>push</code></td><td>not in the file · What a notification on the phone says: <code>"minimal"</code> (the default: that an agent waits for you or is done, and in which project), <code>"text"</code> (what the Mac's notification says, also the start of the agent's reply) or <code>"off"</code>.</td></tr>
+<tr id="cfg-remote_access-push"><td><code>push</code></td><td>not in the file · What a notification on the phone says: <code>"text"</code> (the default: what the Mac's notification says, also the start of the agent's reply), <code>"minimal"</code> (that an agent waits for you or is done, and in which project) or <code>"off"</code>.</td></tr>
+<tr id="cfg-remote_access-preview"><td><code>preview</code></td><td>not in the file · Dev server preview: <code>true</code> brings a dev server running on this Mac (<code>localhost:5173</code> and the like) to paired phones with Full access, from a terminal's ⋯ on the phone. A proxy on the port after <code>port</code>; Tailscale Serve brings <code>https://&lt;this Mac&gt;:8444</code> to it. Off by default; Phone Access turns it on.</td></tr>
 <tr id="cfg-remote_access-port"><td><code>port</code></td><td>not in the file · The loopback port of phone access (<code>47321</code>); Tailscale Serve brings <code>https://&lt;this Mac&gt;:8443</code> to it.</td></tr>
 </tbody></table></div>
 <!-- /generated:config -->
