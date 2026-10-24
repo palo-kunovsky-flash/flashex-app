@@ -8,6 +8,21 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.15] - 2026-10-24
+
+### Added
+- **Print from the Mac:** File › Print… (also in the palette; a shortcut of your own in keybindings) prints the focused editor's text as it is, saved or not ("unsaved changes" in its title then), coloured as code in light colours for paper, or the picture a tab shows, fitted to the page. macOS's print panel opens over the window: its preview, the printers, Save as PDF.
+- **Colours shown where they are written:** a colour in a terminal or an editor (`#4DA3FF`, `rgb(242, 85, 90)`, `hsl(…)`) gets a small square of it beside it, and with the mouse over it a tip with its value in hex and rgb. In the phone's chat the same square stands beside it (`#123`, an issue number, stays text).
+- **A queued message goes now with a tap:** in the phone's chat, a message waiting for Claude's turn to end asks whether to send it now (Claude stops what it does, Esc, and reads it).
+
+### Changed
+- **An agent's subagents or background work in blue:** when its turn is over but its subagents or its commands in the background still work, its dot pulses an electric blue (with a cyan glow on the phone) (green is the agent at work itself), on the Mac and on the phone; the phone lists it under Working and says what works ("2 subagents working").
+- **The phone's Agents list pulses too:** an agent at work pulses there as in the chat.
+- **Keep Mac Awake on the phone, tidy:** its choices in an even grid (1 hour, 2 hours, 4 hours, Until off, While agents run, Custom…), the display as one control of three parts, and while it is on Display off, Lock Mac and +1 hour over Stop.
+
+### Fixed
+- **Dictation and voice mode on the phone say it once:** Chrome on Android gives each result the whole phrase so far and repeats some; joined as they came, what you said went into the message up to three times.
+
 ## [0.2.14] - 2026-10-24
 
 ### Changed
@@ -639,7 +654,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.14...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.15...HEAD
+[0.2.15]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.15
 [0.2.14]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.14
 [0.2.13]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.13
 [0.2.12]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.12
