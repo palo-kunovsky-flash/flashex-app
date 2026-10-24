@@ -8,6 +8,49 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.13] - 2026-10-24
+
+### Changed
+- **The Mac by its name:** System shows "MacBook Air (13-inch, M4, 2025)" and the like (on the phone too), its model identifier ("Mac16,12") beside it in the details.
+- **Quitting asks with the program's name too:** a terminal whose shell has no Flashex integration is named with the program in its foreground ("api — npm"), not only by its tab.
+
+### Added
+- **Search every conversation from the phone:** the magnifier on Agents finds what you or an agent said in any conversation on the Mac; one that runs now opens its chat, an older one goes on in a new terminal in its folder.
+- **Copy on the phone:** a reply has a copy button beside its speaker, and a block of code its own Copy.
+- **The next agent waiting, one tap away:** a chat says when another agent waits for you, and takes you there.
+- **A short buzz on the phone** when an agent starts waiting for you while the app is open (where the phone can vibrate).
+- **Messages wait for the Mac:** in a chat you can go on writing while the Mac is away; what you send is kept on the phone ("Waiting for your Mac…") and sent once it is back. A strip at the top says it connects, the chat stays usable.
+- **The Mac's sidebar shows a command in the background** as the agent at work, as the phone does.
+- **Keep Mac Awake on the phone does what the Mac's does:** a duration of your own (Custom…: 90, 1h30, until 18:30), the display and screen lock while it is on (display on and no lock, screen saver as usual, or the display may sleep), and while it is on Turn display off, Lock the Mac and +1 hour.
+- **An agent with a command running in the background stays at work** on the phone ("A command runs in the background", green), until Claude Code tells the command finished; before, it showed "Done · your turn" while it went on.
+- **Shortcuts on the phone app's icon** (a long press): **Agents**, **New agent** (it asks in which project) and **Last chat**.
+- **Claude Code's suggestion in the phone's chat:** the next message Claude Code offers in its prompt (taken with → on the Mac) shows over the message box; a tap puts it there to send or change.
+- **The chat's details on the phone list the subagents:** those working (what each does, its tool now, for how long, whether it waits for you) and the last ones done (how long they took).
+- **Gemini CLI connected:** Settings › AI agents › **Gemini CLI hooks** › Install puts Flashex's hooks in `~/.gemini/settings.json`; Gemini's state, its permission questions and finished turns then reach the sidebar, the Agents dashboard, notifications and the phone, as Codex's do.
+- **Remove a worktree:** Git › Remove Worktree… (and **+ › Remove a worktree…** on the phone) lists the project's worktrees, such as a worktree agent's, and removes one after a question. Its branch goes too when it is merged, else it stays. A worktree with changes, or one a terminal is in, is never removed.
+- **Told before the 5-hour limit runs out:** with Settings › Usage › notify on, Flashex also says when the limit runs out at this pace within 45 minutes and before it resets ("At this pace Claude's 5-hour limit runs out at 15:40 (in 25m), 1h 05m before it resets"), once a window. It reaches the phone too (as a finished turn's notification does: when you are away from the Mac).
+- **A new branch from another one:** in Switch Branch, a typed new name offers **Create branch “…” from…**, then the branch it starts from (local or remote); the question before switching names it.
+- **A picture pasted into the input editor** (Cmd+V with a screenshot on the clipboard) is kept as a file and its path goes in, for the command to take (`claude "look at <path>"`); pasted pictures go after a week. In a terminal where Claude Code runs, Cmd+V still gives it the picture itself.
+- **A pane tab has a menu** (right click): Rename, Reload Claude Session, Split Right, Split Down and Close, as its row in the sidebar has (which offers the splits too).
+
+### Fixed
+- **A message sent while the Mac was away is no longer lost:** it was dropped while the chat said "Sent".
+- **Claude Code's own steps read on the phone:** its plan shows as a document (approved or not), its question with your answer, its to-do list, and a slash command you ran with what it said; before, they were bare tool names or left out.
+- **An old pairing code no longer unpairs a phone:** opening a used pairing link on a phone paired already connects it as before instead of failing.
+- **Code in a numbered list on the phone** is no longer indented by the list.
+- **Back closes a picture on the phone:** the back gesture (or button) closes an opened picture and leaves you where you were, as ✕ does; before, it went back behind it and the picture stayed.
+- **Gemini CLI's sessions are Gemini's** on the Agents dashboard and the phone (they were taken for Claude Code's).
+- **Tables on the phone read well:** a wide one (four columns or more) is a card a row, its cells under their column's name; a narrow one keeps its words whole and scrolls sideways when it must; two tables one after another stay two.
+- **No tags in the phone's chat:** a background task's notice that reached Claude Code queued or in the middle of a turn showed as your message in raw `<task-notification>` tags; it is left out now.
+- **A picture sent from the phone no longer hangs as "Sending":** Claude Code writes it as the picture, not its path; the message is matched by its place now.
+- **No stray line in the phone's message box:** it was 2 px short and showed a scrollbar.
+- **CPU cores on the phone in their level's colour** (green to red), on a track, as on the Mac.
+- **Replies on the phone show as written:** `<br>`, `<details>` and `<https://…>` no longer show as tags; bold with code or a link inside, ~~struck~~ text, ``double-tick code``, plain links, `\|` in a table, `\*` escapes and `- [ ]` tasks are drawn as meant.
+- **The phone's terminal keeps its history whole:** output that scrolls off while you watch it is there when you scroll up (before, only what was there when it opened).
+- **"Since when" on the phone is right:** an agent's state showed "now" whatever its age.
+- **Voice mode on the phone is clearer and steadier:** a panel above the keys shows what it does: listening, what it heard (sent after 5 seconds, with **Send**, **Edit** and **Cancel**, or say "send" or "cancel"), paused. When it hears nothing it listens again, and after a few tries it pauses and says so instead of stopping silently; recognition errors (no internet, the microphone busy) are said. Words ending in an accent, such as "zruš" or "prestaň", are understood as commands.
+- **The phone's chat no longer jumps:** pulling it up while the agent writes keeps it under your finger, and typing a long message does not move it.
+
 ## [0.2.12] - 2026-10-23
 
 ### Added
@@ -584,7 +627,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.12...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.13...HEAD
+[0.2.13]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.13
 [0.2.12]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.12
 [0.2.11]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.11
 [0.2.10]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.10
