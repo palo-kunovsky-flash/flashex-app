@@ -8,6 +8,16 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.16] - 2026-10-24
+
+### Added
+- **Reading aloud and dictation in the phone's Settings:** the reading speed, a voice for Slovak, Czech and English replies (each tried with a tap; the phone's own by default), and the language dictation and voice mode hear (else the phone's).
+- **Claude Code and other full-screen programs scroll on the phone:** a swipe past the screen's edge goes to the program as its mouse wheel (Up and Down to one that does not read the mouse), as on the Mac, so you read above in Claude Code, vim or less.
+
+### Fixed
+- **Dictation says each word once:** a result that starts with the words the one before ended with, or differs from it only in case or punctuation ("Ahoj." then "ahoj ako sa máš"), no longer repeats them; words are compared, not letters.
+- **A terminal on the phone scrolls up while its program keeps drawing:** a spinner or other output took you back to the end with each frame before your finger got far enough up, so you could not read above. Up by your finger leaves the end at once, and nothing moves the text while your finger is on it.
+
 ## [0.2.15] - 2026-10-24
 
 ### Added
@@ -654,7 +664,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.15...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.16...HEAD
+[0.2.16]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.16
 [0.2.15]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.15
 [0.2.14]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.14
 [0.2.13]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.13
