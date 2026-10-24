@@ -8,6 +8,18 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.14] - 2026-10-24
+
+### Changed
+- **Connecting to the Mac looks as it did:** the card in the middle over the blurred page, in a chat too (0.2.13 had a strip at the top there). What you sent as the connection went still goes once the Mac is back.
+
+### Fixed
+- **The phone connects when Flashex was opened from the Dock or after an update:** Flashex asked Tailscale's app for this Mac's tailnet address in a way it answers only in a terminal, so it never learned it, turned the phone away and showed no QR code ("Tailscale is off" on the phone, though it was on).
+- **The phone connects once Tailscale is up:** when Flashex started before Tailscale and phone access was set again meanwhile (its preview turned on or off, say), it never learned this Mac's tailnet address and turned the phone away ("Tailscale is off" on the phone). It now keeps asking, and follows a new address too.
+- **A notification opens its agent's chat** on the phone (its terminal when it has none), and Back goes to the agents, not to what was open before.
+- **Phone access after an update:** it waits a moment for its port while the app before still holds it, instead of not starting.
+- **An update no longer starts a second Flashex:** a keeper staying for terminals from before an earlier update became the new program as the app instead of as a keeper, so a second Flashex started with its own terminals and resumed the same Claude Code sessions again (0.2.12 and 0.2.13). It stays a keeper now, and a test of the app's own binary guards this before every release.
+
 ## [0.2.13] - 2026-10-24
 
 ### Changed
@@ -627,7 +639,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.13...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.14...HEAD
+[0.2.14]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.14
 [0.2.13]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.13
 [0.2.12]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.12
 [0.2.11]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.11
