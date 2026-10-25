@@ -8,6 +8,18 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.17] - 2026-10-25
+
+### Added
+- **A new line in a phone chat:** ↵ above the keyboard puts one where the cursor is, and Settings › Display › **Enter in a chat** makes the keyboard's Enter a new line (Send sends).
+- **Background work in a chat's details on the phone:** a subagent working in the background and a command running in the background are listed there in blue, pulsing, and the chip says so ("1 agent · 1 in background").
+
+### Fixed
+- **A subagent's report is not shown as your message** on the phone: Claude Code hands it back to the session as the user's, and the chat showed it in your bubble with its frame; now it is its own folded card, "Subagent's report".
+- **A notification opens its agent's chat** after Flashex restarted on the Mac: its terminal could have another number by then, and the tap opened another agent's chat.
+- **A force-quit no longer ends the programs in your terminals.** macOS ended every process Flashex had started, the keeper and all Claude Code sessions in every terminal, when a Dock tile was force-quit: Flashex's own, or one left in the Dock by a program started in a Flashex terminal (a development build, say) after it had quit. The keeper and each terminal's shell now run apart from the app and from each other (macOS starts each, and still lets them use Flashex's permissions), and the keeper and the process that holds a shell keep running through what a force-quit sends. A program started in a terminal can at most take that one terminal's programs with it.
+- **A signal meant for an ended program never reaches another.** An AI request's leftover processes, and on remote hosts a timed-out git command's, were killed by a number that could already be another program's (a terminal's Claude Code, say); now only while it is still theirs.
+
 ## [0.2.16] - 2026-10-24
 
 ### Added
@@ -664,7 +676,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.16...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.17...HEAD
+[0.2.17]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.17
 [0.2.16]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.16
 [0.2.15]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.15
 [0.2.14]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.14
