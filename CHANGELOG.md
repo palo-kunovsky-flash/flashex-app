@@ -8,6 +8,27 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.18] - 2026-10-25
+
+### Added
+- **Send a message later**, on the Mac (Send a Message Later… in the palette) and on the phone (Later in a chat): at a time (18:30, 45 minutes, 1h30, or a quick one), kept and sent by the Mac to the terminal its Claude Code session runs in then, though the phone is locked or Flashex restarted. The ones waiting are listed (sent now or cancelled), shown in their chat, and a chip ("⏱ 2 later") says a chat has some.
+- **The plugins' skills in the phone's Skills** (the "/" button, now named so), with a search over all of them.
+- **A test of dictation** in the phone's Settings: what you say is shown there, sent nowhere.
+- **Icons on the System cards**, on the Mac and the phone (CPU, GPU, memory, temperatures, disk, network, processes).
+
+### Changed
+- **A start, restart or Resume of Claude Code** shows its card in the middle of the terminal over a veil that also keeps clicks out of it, no longer a small box in its corner.
+- **The phone's chat:** the keyboard's Enter is a new line and Send sends (Cmd/Ctrl+Enter with a keyboard); Send is as tall as the mic; Voice is named Hands-free (replies read aloud, answered by voice; the mic only dictates).
+- **The phone's voice:** one Voice setting (the phone's own for each reply's language, or one voice for all, Russian too) and the Settings' controls lined up.
+- **Keep Mac Awake on the phone** folds to one line with its cup; open, Now (Display off, Lock Mac) comes last and works while it is off too, its buttons across the whole width.
+- **The phone's header dot** says the chat's agent (working, in the background, waiting) and in Claude's usage the limit nearest its end; the phone's access level is in Settings only.
+- **The sidebar's chevron** of an open project always shows; + Project and + Group share the sidebar's width.
+- **A terminal's dot on the phone's Projects** is in the column of the project's +.
+
+### Fixed
+- **Subagents a turn did not start** (a workflow's, waiting on a review) were shown as done when the turn ended: four at work showed as one. They are background work now (blue) until they stop.
+- **A command Claude Code moved to the background** when it ran past its time showed "Done" on the phone while it ran: it is background work now until its task notice.
+
 ## [0.2.17] - 2026-10-25
 
 ### Added
@@ -676,7 +697,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.17...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.18...HEAD
+[0.2.18]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.18
 [0.2.17]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.17
 [0.2.16]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.16
 [0.2.15]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.15
