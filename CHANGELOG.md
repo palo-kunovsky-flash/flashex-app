@@ -8,6 +8,27 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.19] - 2026-10-26
+
+### Added
+- **Linux packages again** (beta, x86_64 and arm64): AppImage, .deb and tar.gz of this version; the last ones were 0.1.2.
+- **A message sent later can be changed:** its time and its text, on the Mac (Change in Send a Message Later…'s list: Save keeps it, When left empty keeps its time) and on the phone (tap it: Change the time…, Change the message…).
+
+### Fixed
+- **A subagent's report showed on the phone as if you had written it** when it came while the agent worked (through Claude Code's queue, or after a reminder): it is now shown as the subagent's report, as when it comes otherwise.
+- **A long message sent from the phone while the agent worked showed twice** (once as waiting, in a broken frame, once as sent): a pasted message is now shown once, as it was written.
+- **The phone said nothing when the Mac's screen was locked:** Keep Mac Awake on the phone now says the screen is locked (on its card, and when a mode is picked): the Mac stays awake and what runs goes on, but it can be unlocked only at the Mac. Lock Mac says it is locked already.
+- **Flashex took a lot of CPU while agents worked:** each working agent's pulsing dot asked for frames of its own, so three of them drew the whole window 60 times a second, and every frame asked macOS whether you were at the Mac (half of a frame's work). All the dots now beat on one clock (30 frames a second with the window in front, fewer for waiting agents or a window behind another app's, none while it cannot be seen), the answer about you is kept a second, and a frame in which only the dots beat draws only the dots: the rest of the window is not built, laid out or painted again; and a terminal's rows are searched for colours only when one may hold one (any row with an r or an h was, letter by letter). About half the CPU of before with agents at work.
+- **The Vault's and Workflows' keys hint stays in the card:** it was cut and pushed the close button out of the card; now a narrow card shortens the hint, never the title or the close button.
+- **Subagents that ended long ago left the phone's list:** one whose stop never came ends after half an hour without a sign of life (it comes back if it says something), and those done are listed only for a quarter of an hour.
+
+### Changed
+- **A picture sent from the phone no longer flickers:** a ring round the clip fills as it goes (turning while the picture is made smaller), instead of a new toast for each part; one toast says where it is at the end.
+- **The sidebar's ports are found without running `ps` and `lsof` every five seconds:** Flashex asks macOS directly, and only about the processes started from its terminals (not every process of the Mac), so a look costs about a millisecond instead of two programs started.
+- **The phone's dots pulse smoothly:** a dot drawn again (the Mac's state comes every few seconds) goes on in step instead of starting its beat over (a jerk); the blue one's glow is softer.
+- **Keep Mac Awake's menu shows what is on:** the cup's menu and the palette's open on the mode on now, marked ✓.
+- **No dot in the phone's header in Settings and Claude's usage** (they are about no agent); on the tabs it says the connection and an agent waiting, in a chat its agent's state.
+
 ## [0.2.18] - 2026-10-25
 
 ### Added
@@ -697,7 +718,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.18...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.2.19...HEAD
+[0.2.19]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.19
 [0.2.18]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.18
 [0.2.17]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.17
 [0.2.16]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.16

@@ -18,7 +18,7 @@ Its own VT core, an editor with language servers, Source Control and agent-aware
 | | Download |
 |---|---|
 | **macOS** (Apple Silicon, 13+) | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
-| **Linux** (beta, x86_64 / arm64) | [AppImage, .deb or .tar.gz (0.1.2)](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.2) · see [Linux (beta)](#linux-beta) |
+| **Linux** (beta, x86_64 / arm64) | [AppImage, .deb or .tar.gz (0.2.19)](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.19) · see [Linux (beta)](#linux-beta) |
 | **Windows** | planned |
 
 [Install](#install) · [Features](#features) · [Docs](https://palo-kunovsky-flash.github.io/flashex-app/) · [Performance](#performance-and-memory) · [Shortcuts](#keyboard-shortcuts) · [Privacy](#privacy) · [Changelog](CHANGELOG.md) · [All releases](https://github.com/palo-kunovsky-flash/flashex-app/releases)
@@ -299,7 +299,7 @@ ln -s /Applications/Flashex.app/Contents/MacOS/flashex /opt/homebrew/bin/flashex
 
 ### Linux (beta)
 
-Download from the [0.1.2 release](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.2) for your architecture (the newest Linux build; later versions are macOS only for now) (`x86_64` or `aarch64`):
+Download from the [0.2.19 release](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.19) for your architecture (`x86_64` or `aarch64`):
 
 - **AppImage** (updates itself):
 
