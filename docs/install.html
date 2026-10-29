@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <title>Install · Flashex docs</title>
-<meta name="description" content="Install Flashex from the dmg or with Homebrew, open it the first time, and keep it up to date.">
+<meta name="description" content="Install Flashex on macOS (dmg or Homebrew), Windows (setup) or Linux, open it the first time, and keep it up to date.">
 <link rel="icon" href="screenshots/icon.png">
 <link rel="stylesheet" href="assets/docs.css">
 </head>
@@ -44,7 +44,7 @@
 <article class="content">
 <!-- /generated:head -->
 <h1>Install</h1>
-<p class="lede">Flashex runs on Macs with Apple Silicon (M1 or later) and macOS 13 Ventura or later. Intel Macs are not supported.</p>
+<p class="lede">Flashex runs on Macs with Apple Silicon (M1 or later) and macOS 13 Ventura or later, on Windows 10 (version 1809) and 11 (x86_64 and ARM64), and on Linux (beta). Intel Macs are not supported.</p>
 
 <h2 id="homebrew">Homebrew (recommended)</h2>
 <div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> brew install --cask palo-kunovsky-flash/flashex/flashex</code></pre></div>
@@ -89,22 +89,22 @@
 <span class="c"># or compare by eye:</span>
 <span class="p">❯</span> shasum -a 256 Flashex-&lt;version&gt;.dmg</code></pre></div>
 
+<h2 id="windows">Windows</h2>
+<ol>
+<li>Download <code>Flashex-&lt;version&gt;-windows-&lt;arch&gt;-setup.exe</code> from the <a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest">latest release</a>: <code>x86_64</code> for most PCs, <code>aarch64</code> for ARM laptops (Snapdragon).</li>
+<li>Run it. It installs for you only, without an administrator, into <code>%LOCALAPPDATA%\Programs\Flashex</code>; adds Flashex to the Start menu and <span class="ui">New Flashex Tab Here</span> / <span class="ui">Open in Flashex</span> to Explorer's menu on folders; and lists it in Installed apps with its uninstaller.</li>
+<li><strong>The first time</strong>, Windows SmartScreen may say "Windows protected your PC": choose <span class="ui">More info</span>, then <span class="ui">Run anyway</span>. The setup is not signed with a paid certificate yet; updates do not ask again.</li>
+</ol>
+<p>Terminals run PowerShell 7 when it is installed, else Windows PowerShell; Git Bash and cmd work too. The browser panel uses WebView2, which comes with Windows 11 and every updated Windows 10. Shortcuts use Ctrl where the Mac uses Cmd, and Ctrl+Shift with a letter for Flashex's own (new tab Ctrl+Shift+T, the palette Ctrl+Shift+P), so Ctrl with a letter stays the shell's. Updates download the verified setup, install it quietly and start Flashex again; your terminals keep running through it. To uninstall, use Installed apps (Settings › Apps).</p>
+
 <h2 id="linux">Linux (beta)</h2>
-<p>x86_64 or arm64 with glibc 2.35 or later (Ubuntu 22.04, Debian 12, Fedora 36 and newer), X11 or Wayland. The newest Linux build is <a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.1.2">0.1.2</a>; later versions are macOS only for now.</p>
+<p>x86_64 or arm64 with glibc 2.35 or later (Ubuntu 22.04, Debian 12, Fedora 36 and newer), X11 or Wayland. Download from the <a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest">latest release</a>:</p>
 <ul>
 <li><strong>AppImage</strong> (updates itself): <code>chmod +x Flashex-&lt;version&gt;-linux-&lt;arch&gt;.AppImage</code>, then run it. It needs FUSE (<code>fuse3</code> / <code>fusermount3</code>); without it, run it with <code>--appimage-extract-and-run</code>.</li>
 <li><strong>Debian / Ubuntu:</strong> <code>sudo apt install ./flashex_&lt;version&gt;_&lt;arch&gt;.deb</code>. When a new version is out, Flashex downloads the verified package and shows the same command.</li>
 <li><strong>tar.gz:</strong> extract it anywhere and run <code>flashex-app</code>.</li>
 </ul>
-<p>Each file has a <code>.sha256</code> next to it, and updates are verified with the same signature as on macOS. Known gaps of the beta:</p>
-<ul>
-<li>There is no built-in browser panel; links open in your browser.</li>
-<li>There is no menu bar; every command is in the command palette (the Search button at the top right).</li>
-<li>Shortcut labels still show the macOS <code>⌘</code> symbols.</li>
-<li>On Wayland the window has no close or minimise buttons yet.</li>
-</ul>
-<p>Because the Linux build is still 0.1.2, features added since then (the dashboards, Keep Mac Awake, keeping terminals after a quit and others in the <a href="https://github.com/palo-kunovsky-flash/flashex-app/blob/main/CHANGELOG.md">changelog</a>) are not in it yet; these docs describe the current macOS version.</p>
-<p>Windows is planned.</p>
+<p>Each file has a <code>.sha256</code> next to it, and updates are verified with the same signature as on macOS. Shortcuts are as on Windows (Ctrl for Cmd). Known gaps of the beta: there is no built-in browser panel yet (links open in your browser), and no menu bar: every command is in the command palette (the Search button at the top right).</p>
 
 <h2 id="uninstall">Uninstall</h2>
 <p>Quit Flashex and end the terminals it keeps (<code>flashex keeper stop</code>), then move <code>Flashex.app</code> to the Trash (or <code>brew uninstall --cask flashex</code>). Your settings are in <code>~/.config/flashex</code>, app data in <code>~/Library/Application Support/flashex</code>, caches in <code>~/Library/Caches/flashex</code> and logs in <code>~/Library/Logs/flashex</code>; delete them too if you want nothing left. If you installed the Claude Code hooks, remove Flashex's entries from Claude Code's <code>settings.json</code> (a backup from before the install is next to it as <code>settings.json.flashex-backup.orig</code>).</p>

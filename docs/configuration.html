@@ -84,10 +84,10 @@ keeper_on_quit = <span class="s">"ask"</span>     <span class="c"># keep termina
 <tr id="cfg-general-keep_awake_mode"><td><code>keep_awake_mode</code></td><td><code>&quot;1h&quot;</code></td></tr>
 <tr id="cfg-general-keep_awake_display"><td><code>keep_awake_display</code></td><td><code>&quot;keep-on&quot;</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-general-keep_awake_lock"><td><code>keep_awake_lock</code></td><td><code>&quot;prevent&quot;</code> <span class="chip">commented out</span></td></tr>
-<tr id="cfg-general-keep_awake_custom"><td><code>keep_awake_custom</code></td><td>not in the file · The custom duration typed last in the Keep Mac Awake chooser (such as <code>"1h30"</code> or <code>"until 18:30"</code>). The chooser writes it; <code>keep_awake_mode = "custom"</code> starts it.</td></tr>
+<tr id="cfg-general-keep_awake_custom"><td><code>keep_awake_custom</code></td><td>not in the file · The custom duration typed last in the Keep System Awake chooser (such as <code>"1h30"</code> or <code>"until 18:30"</code>). The chooser writes it; <code>keep_awake_mode = "custom"</code> starts it.</td></tr>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [general]</div><pre><code><span class="k">[general]</span>
-<span class="c"># Keep Mac Awake (Cmd+K): the mode preselected in its chooser and the one</span>
+<span class="c"># Keep System Awake (Cmd+K): the mode preselected in its chooser and the one</span>
 <span class="c"># toggle_keep_mac_awake turns on (the chooser writes the one picked last):</span>
 <span class="c"># &quot;1h&quot;, &quot;2h&quot;, &quot;4h&quot;, &quot;on&quot; (until turned off), &quot;agents&quot; (while Claude Code</span>
 <span class="c"># runs or waits, off 3 minutes after) or &quot;custom&quot; (the duration typed last</span>
@@ -397,12 +397,17 @@ sleep_after_minutes = <span class="k">10</span>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
 <tbody>
 <tr id="cfg-sidebar-show_terminals"><td><code>show_terminals</code></td><td><code>true</code></td></tr>
+<tr id="cfg-sidebar-row_spacing"><td><code>row_spacing</code></td><td><code>0</code> <span class="chip">commented out</span></td></tr>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [sidebar]</div><pre><code><span class="k">[sidebar]</span>
 <span class="c"># Each project lists its open terminals, editors and browsers under it,</span>
 <span class="c"># with its agent's state and unread notifications; the chevron on a</span>
 <span class="c"># project's row folds its list.</span>
-show_terminals = <span class="k">true</span></code></pre></div>
+show_terminals = <span class="k">true</span>
+<span class="c"># Extra space between the rows of that list (tab names, terminals,</span>
+<span class="c"># editors, browsers; not the projects' rows), in pixels: 0 (as by</span>
+<span class="c"># default) to 10.</span>
+<span class="c"># row_spacing = 0</span></code></pre></div>
 <h3 id="cfg-agents"><code>[agents]</code></h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>

@@ -45,6 +45,7 @@
 <!-- /generated:head -->
 <h1>Quick start</h1>
 <p class="lede">From an empty window to an agent at work in a few minutes.</p>
+<p><strong>On Windows and Linux</strong> the keys below use Ctrl where they say <kbd>⌘</kbd> and Alt where they say <kbd>⌥</kbd>; Flashex's own shortcuts that a shell would want take Shift too (<kbd>Ctrl+Shift+T</kbd> a new tab, <kbd>Ctrl+Shift+P</kbd> the palette). <span class="ui">?</span> › Keyboard Shortcuts lists them as your computer writes them. The first start shows a welcome card with these first steps; <span class="ui">Welcome to Flashex</span> in the palette shows it again.</p>
 
 <h2 id="the-window">The window</h2>
 <ul>
@@ -82,6 +83,16 @@
 <li>the Agents dashboard (<kbd>⌘K</kbd> › Agents Dashboard) shows every session at once.</li>
 </ul>
 <p>Everything about agents is in <a href="agents.html">Working with agents</a>.</p>
+
+<h2 id="phone">Your phone</h2>
+<p>Follow and answer your agents from your phone: <span class="ui">Phone Access…</span> in the palette turns it on and shows a QR code. Your computer reaches the phone through <a href="https://tailscale.com">Tailscale</a> (install it on both and sign in to the same account), so nothing is open to the internet; Flashex sets up Tailscale Serve for you and says what it waits for. Scan the code with the phone's camera, check that the phone and the computer show the same code, and allow it. Then add Flashex to the phone's home screen: the app says the steps for the browser it is open in (Chrome on Android; Safari, Chrome, Edge or Firefox on an iPhone).</p>
+<div class="phone-shots" style="display:flex;gap:12px;flex-wrap:wrap;margin:12px 0">
+<img src="screenshots/phone-agents.png" width="180" alt="The phone's Agents tab: one agent waiting for permission, one at work, one idle" loading="lazy">
+<img src="screenshots/phone-chat-ask.png" width="180" alt="Claude Code as a chat on the phone, asking to deploy, its choices as buttons" loading="lazy">
+<img src="screenshots/phone-chat-done.png" width="180" alt="A finished conversation on the phone with a box for the next prompt" loading="lazy">
+<img src="screenshots/phone-system.png" width="180" alt="The System dashboard on the phone" loading="lazy">
+</div>
+<p>On the phone: every agent as a chat you can answer (and its questions as buttons), terminals you type into, notifications when an agent waits for you or is done, the project's files and changes, and the System dashboard.</p>
 
 <h2 id="palette">The command palette</h2>
 <p><kbd>⌘K</kbd> finds any action, project or tab: type a few letters and press Return. Actions show their shortcut, so the palette is also the quickest way to learn them. Some things live only there, such as the dashboards, layouts, Keep Mac Awake, Reload Claude Session and Restart Flashex. <kbd>⌘P</kbd> opens a file of the project, and <kbd>⌘?</kbd> lists every shortcut in effect.</p>

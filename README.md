@@ -4,22 +4,23 @@
 
 # Flashex
 
-**A fast macOS terminal built for AI coding agents.**<br>
+**A fast terminal built for AI coding agents, on macOS, Windows and Linux.**<br>
 Its own VT core, an editor with language servers, Source Control and agent-aware panes, in one native app.
 
 [![Latest release](https://img.shields.io/github/v/release/palo-kunovsky-flash/flashex-app?label=release&color=f28c28)](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest)
 [![Changelog](https://img.shields.io/badge/changelog-latest-f28c28)](CHANGELOG.md)
 [![macOS 13+ Apple Silicon](https://img.shields.io/badge/macOS-13%2B%20%C2%B7%20Apple%20Silicon-black?logo=apple)](#requirements)
 [![Linux beta](https://img.shields.io/badge/Linux-beta%20%C2%B7%20x86__64%20%C2%B7%20arm64-f2a33a?logo=linux&logoColor=white)](#linux-beta)
-[![Windows](https://img.shields.io/badge/Windows-planned-lightgrey)](#requirements)
+[![Windows 10 1809+](https://img.shields.io/badge/Windows-10%201809%2B%20%C2%B7%20x86__64%20%C2%B7%20ARM64-0078d4?logo=windows&logoColor=white)](#windows)
 [![Free to use](https://img.shields.io/badge/price-free-3fb950)](#licence)
 [![Downloads](https://img.shields.io/github/downloads/palo-kunovsky-flash/flashex-app/total?color=555)](https://github.com/palo-kunovsky-flash/flashex-app/releases)
 
 | | Download |
 |---|---|
 | **macOS** (Apple Silicon, 13+) | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
-| **Linux** (beta, x86_64 / arm64) | [AppImage, .deb or .tar.gz (0.2.19)](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.19) · see [Linux (beta)](#linux-beta) |
-| **Windows** | planned |
+| **Windows** (10 1809+ / 11, x86_64 / ARM64) | [Setup for Windows](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) (`Flashex-<version>-windows-<arch>-setup.exe`) · see [Windows](#windows) |
+| **Linux** (beta, x86_64 / arm64) | [AppImage, .deb or .tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) · see [Linux (beta)](#linux-beta) |
+| **Phone** (Android, iPhone) | the web app your computer serves: [Flashex on your phone](#flashex-on-your-phone) |
 
 [Install](#install) · [Features](#features) · [Docs](https://palo-kunovsky-flash.github.io/flashex-app/) · [Performance](#performance-and-memory) · [Shortcuts](#keyboard-shortcuts) · [Privacy](#privacy) · [Changelog](CHANGELOG.md) · [All releases](https://github.com/palo-kunovsky-flash/flashex-app/releases)
 
@@ -29,8 +30,9 @@ Its own VT core, an editor with language servers, Source Control and agent-aware
 
 - **Its own fast terminal core.** `flashex-vt` is written for Flashex in Rust. It prints SGR-heavy output in about half the CPU instructions per byte that libghostty-vt needs, passes 450 esctest2 tests where Ghostty's core passes 272, and has run hours of fuzzing without a failure. [Numbers below.](#performance-and-memory)
 - **Built for AI agents.** Claude Code hooks (`flashex setup claude`) tell Flashex when an agent is running, waiting for you or done. The sidebar shows every agent's state as a dot, notifications say what the agent answered and point at the exact terminal, a timeline shows what every session did, and past conversations can be searched and resumed under the account they ran in.
+- **Your agents on your phone.** Pair a phone once (Tailscale, nothing open to the internet) and follow every agent from anywhere: Claude Code as a chat you answer, terminals you type into, notifications when an agent waits for you or is done, your files, diffs and the System dashboard. No app store: the web app comes from your computer and updates with it.
 - **Dashboards.** Agents (sessions and a timeline), Usage (rate limits, throughput, tokens per model and project) and System (CPU, GPU, memory, temperatures, disk, network) open as panes.
-- **Secrets and commands at hand.** An encrypted Vault for API keys, logins and SSH keys that asks before any program gets a value, and a Command History with scopes, favorites and labels.
+- **Secrets and commands at hand.** An encrypted Vault for API keys, logins and SSH keys, global or per project, that asks before any program gets a value and never hands one to a coding agent itself; and a Command History with scopes, favorites and labels.
 - **Warp-style command blocks.** Every command is a block with its folder, duration and exit code. Jump between blocks, select or fold one, copy its command or output, rerun it, send it to Claude or save it as a workflow.
 - **A real editor with LSP.** Tree-sitter highlighting, multi-cursor editing in the style of Sublime Text and VS Code, go to definition, references, hover, completion, rename and diagnostics from the language servers you already have installed.
 - **Source Control.** Stage, unstage, discard, commit, pull, push and switch branches, with side-by-side diffs against HEAD.
@@ -38,7 +40,7 @@ Its own VT core, an editor with language servers, Source Control and agent-aware
 - **Premium animations.** Splits, zoom, tabs, the sidebar and popups move at the display's frame rate. Each motion can be interrupted and they all turn off with macOS Reduce motion.
 - **A restart keeper.** A tiny helper process holds your terminals while Flashex is quit, restarts for an update or after a crash. Shells, agents and running jobs carry on and reconnect when the app comes back.
 
-Flashex is free to use. It runs on Apple Silicon Macs with macOS 13 or later. [Install it.](#install) The [documentation](https://palo-kunovsky-flash.github.io/flashex-app/) covers every feature, setting, shortcut and `flashex` command.
+Flashex is free to use. It runs on Apple Silicon Macs with macOS 13 or later, on Windows 10 (1809) and 11, and on Linux (beta). [Install it.](#install) The [documentation](https://palo-kunovsky-flash.github.io/flashex-app/) covers every feature, setting, shortcut and `flashex` command.
 
 ---
 
@@ -60,13 +62,27 @@ Flashex is free to use. It runs on Apple Silicon Macs with macOS 13 or later. [I
 
 ### Agents
 
-Run Claude Code (or any agent) in as many terminals as you like and see them all at a glance. The sidebar lists each project's terminals, editors and browser panels, with a robot icon for a terminal running Claude Code and a dot for its state: orange when it waits for you, green while it runs, red on an error. A pane with an unread notification gets an orange frame. `Cmd+Shift+U` jumps to the oldest unread notification, and the bell opens the notification history.
+Run Claude Code (or any agent) in as many terminals as you like and see them all at a glance. The sidebar lists each project's terminals, editors and browser panels, with the agent's own mark for a terminal running a coding agent (Claude Code, Codex, Grok, Gemini, Copilot, OpenCode, pi, Antigravity, Cursor; a robot for any other) and a dot for its state: orange when it waits for you, green while it runs, red on an error. A pane with an unread notification gets an orange frame. `Cmd+Shift+U` jumps to the oldest unread notification, and the bell opens the notification history.
 
 ![The notification center over a project's panes: Claude Code asking to run a command and reporting what it did, each entry naming its project and terminal](screenshots/notifications.png)
 
 - `flashex setup claude` installs the hooks in `~/.claude/settings.json` (it shows the change and asks first, and keeps a backup). Settings › AI agents does the same for each Claude account.
 - **Notifications say what the agent said:** the start of its reply ("Fixed the failing test and updated the snapshot…"), or what it asks permission for ("Bash: npm run build", "Edit: src/main.rs"). Settings › Notifications › **Show what the agent said in notifications** (`[notifications] show_text = false`) brings back the short generic text.
-- **Codex and pi too.** Settings › AI agents › **Codex hooks** writes Flashex's hooks to `~/.codex/hooks.json` (run `/hooks` once in Codex to trust them) and **pi extension** adds `~/.pi/agent/extensions/flashex.js`; Flashex says so the first time one of them runs in a terminal without it. Their state, notifications, the Agents dashboard and the phone's chat then work as for Claude Code, and the phone resumes them with `codex resume <id>` or `pi --session <id>`.
+- **Other coding agents too.** Settings › AI agents has a row for each one: it writes Flashex's hooks (or plugin) into the agent's own folder, shows the change and asks first, and leaves your own hooks as they are. Flashex says so the first time one runs in a terminal without them. What each agent tells Flashex:
+
+| Agent | Connect it (Settings › AI agents) | State, notifications | Waits for permission | Phone chat | Usage | Limits | Phone resumes with |
+|---|---|---|---|---|---|---|---|
+| Claude Code | **Claude Code hooks** (`~/.claude/settings.json`) | yes | yes | yes | yes | 5-hour and weekly | `claude --resume <id>` |
+| Codex | **Codex hooks** (`~/.codex/hooks.json`; run `/hooks` once in Codex to trust them) | yes | yes | yes | yes | 5-hour and weekly | `codex resume <id>` |
+| Gemini CLI | **Gemini CLI hooks** (`~/.gemini/settings.json`) | yes | yes | yes | yes | – | `gemini --resume <id>` |
+| Grok Build | **Grok hooks** (`~/.grok/hooks/flashex.json`; Grok also runs Claude Code's hooks) | yes | yes | yes | yes | – | `grok --resume <id>` |
+| Copilot CLI | **Copilot CLI hooks** (`~/.copilot/hooks/flashex.json`) | yes | yes | yes | output tokens only | – | `copilot --resume=<id>` |
+| OpenCode | **OpenCode plugin** (`~/.config/opencode/plugins/flashex.js`) | yes | yes | sessions run in Flashex | sessions run in Flashex | – | `opencode --session <id>` |
+| pi | **pi extension** (`~/.pi/agent/extensions/flashex.js`) | yes | – | yes | yes | – | `pi --session <id>` |
+| Antigravity CLI | **Antigravity hooks** (`~/.gemini/config/hooks.json`) | yes | – | – (terminal only) | – | – | `agy --conversation <id>` |
+| Cursor CLI | **Cursor CLI hooks** (`~/.cursor/hooks.json`) | tools and the end of a turn | – | – | – | – | `cursor-agent --resume <id>` |
+
+  Flashex never answers an agent's permission question for you: hooks that would decide one (Antigravity's and Cursor's `PreToolUse`, Cursor's `before…`) are not used. OpenCode keeps its conversations in a database, so Flashex's plugin saves each session run in Flashex, cut down (no file contents), in Flashex's data folder after every turn, for the phone's chat and Usage; files older than 8 days are deleted.
 - **More than one Claude account** (a personal and a work login through `CLAUDE_CONFIG_DIR` or an alias such as `claude-personal`): Flashex finds them, names the account in the Agents dashboard and resumes each session under the account and with the alias it was started with.
 - **Resume:** when Claude Code ends, its block offers **Resume Claude** (`claude --resume <id>` in the folder it ran in). After a restart, every terminal whose last Claude Code session is known offers to resume that session. Nothing runs until you click. **Reload Claude Session** (also found by "restart" in the palette) restarts Claude Code and continues the same conversation.
 - **Search Agent Sessions…** in the palette searches every past Claude Code conversation of every account as you type, grouped by session with the matching lines highlighted (accents do not matter). Chips narrow it to this project, an account, a time span, your prompts, the replies or tool calls; `Return` opens the conversation and `⌘Return` resumes it in a new terminal. Its small word index stays in Flashex's data folder (`[sessions] search_index = false` turns it off).
@@ -78,15 +94,24 @@ Run Claude Code (or any agent) in as many terminals as you like and see them all
 
 ### Flashex on your phone
 
-**Phone Access…** (command palette, or Settings › General) shows your agents, projects and terminals on your phone, in Flashex's look and made for a phone: one terminal at a time that you type into directly (the phone's keyboard, with a key bar for Esc, Tab, Ctrl, Alt, arrows, word jumps, start and end of the line, and a pad you drag to move the cursor), Claude Code as a chat (its conversation laid out for the phone, a box to send it a prompt, and buttons for what it asks), the project's files and its changes (git diffs) to read, this Mac's CPU, memory, disk, network and battery (the System dashboard), and a notification when an agent waits for you or is done, even with the web app closed. Your Mac reaches the phone through [Tailscale](https://tailscale.com) (on the Mac and the phone), so nothing is open to the internet: turn phone access on (Touch ID), let Flashex set up Tailscale Serve, show the QR code and scan it with the phone's camera; the phone shows a code, the Mac the same one, and you allow it with Touch ID. Add Flashex to the phone's home screen from the browser's menu (on an iPhone, the home screen app pairs on its own: copy the code's link from the camera and paste it there). The web app comes from your Mac and updates itself when Flashex does. Each phone gets a level: **View only**, **Type in open terminals**, or **Full access** (also new terminals and agents, and the files). Remote terminals and projects over ssh work there too, and a file opens with the editor's colours. It uses your Flashex theme, accent, fonts and project icons. Made for Chrome on Android (tested in Chrome's phone mode); iPhone (Safari, home screen) should work but is not tested yet. What a notification says is set in Phone Access (`[remote_access] push`: only that an agent waits or is done, also what it said, or off).
+**Phone Access…** (command palette, or Settings › General) shows your agents, projects and terminals on your phone (from a Mac, Windows or Linux computer), in Flashex's look and made for a phone: one terminal at a time that you type into directly (the phone's keyboard, with a key bar for Esc, Tab, Ctrl, Alt, arrows, word jumps, start and end of the line, and a pad you drag to move the cursor), Claude Code as a chat (its conversation laid out for the phone, a box to send it a prompt, and buttons for what it asks), the project's files and its changes (git diffs) to read, this Mac's CPU, memory, disk, network and battery (the System dashboard), and a notification when an agent waits for you or is done, even with the web app closed. Your computer reaches the phone through [Tailscale](https://tailscale.com) (on the Mac and the phone), so nothing is open to the internet: turn phone access on (Touch ID), let Flashex set up Tailscale Serve, show the QR code and scan it with the phone's camera; the phone shows a code, the Mac the same one, and you allow it with Touch ID. Add Flashex to the phone's home screen from the browser's menu (on an iPhone, the home screen app pairs on its own: copy the code's link from the camera and paste it there). The web app comes from your Mac and updates itself when Flashex does. Each phone gets a level: **View only**, **Type in open terminals**, or **Full access** (also new terminals and agents, and the files). Remote terminals and projects over ssh work there too, and a file opens with the editor's colours. It uses your Flashex theme, accent, fonts and project icons. Made for Android (Chrome) and iPhone (Safari, Chrome, Edge or Firefox from iOS 16.4: the app says the steps for the browser it is open in). What a notification says is set in Phone Access (`[remote_access] push`: only that an agent waits or is done, also what it said, or off).
+
+<table>
+<tr>
+<td align="center" width="25%"><img src="screenshots/phone-agents.png" width="200" alt="The phone's Agents tab: one agent waiting for permission, one at work, one idle, each with its project"><br><sub>Every agent at a glance</sub></td>
+<td align="center" width="25%"><img src="screenshots/phone-chat-ask.png" width="200" alt="Claude Code as a chat on the phone, asking to deploy to staging, with Yes, Yes and don't ask again, and No as buttons"><br><sub>Answer an agent's question</sub></td>
+<td align="center" width="25%"><img src="screenshots/phone-chat-done.png" width="200" alt="A finished Claude Code conversation on the phone, with a box to send the next prompt"><br><sub>Read and send prompts</sub></td>
+<td align="center" width="25%"><img src="screenshots/phone-system.png" width="200" alt="The System dashboard on the phone: CPU, GPU, memory and temperatures of the computer"><br><sub>Your computer's System</sub></td>
+</tr>
+</table>
 
 ### Dashboards
 
 Three dashboards open from the command palette (**Agents Dashboard**, **Usage Dashboard**, **System Dashboard**) as panes you can split, move and keep across restarts.
 
 - **Agents** lists every Claude Code session with its project, account, state, current tool, model and context, those waiting for you first. Its **Timeline** shows the last 15 minutes, hour or 4 hours as one lane per session: thinking, tools (each named under the bar, failed ones in red), permission questions and the time it waited for you. Click a lane to go to its terminal.
-- **Usage** reads Claude Code's transcripts on your Mac: the 5-hour and weekly limits with your pace and a forecast, speed, latency and output over 1 to 24 hours, today's totals, and a breakdown by model, project and open session. With several accounts, chips pick the one shown. The limits come from Claude Code's status line, which Settings › AI agents › **Claude Code status line** sets up with one click (your own status line keeps showing).
-- **System** shows this Mac's CPU, GPU, memory, temperatures, disk, network and the busiest processes, with five minutes of charts.
+- **Usage** reads Claude Code's transcripts on your computer (and, with the **Agent** chips, the usage files of Codex, Grok Build, Gemini CLI, Copilot CLI, OpenCode and pi used in the last 7 days): the 5-hour and weekly limits with your pace and a forecast, speed, latency and output over 1 to 24 hours, today's totals, and a breakdown by model, project and open session. With several accounts, chips pick the one shown. The limits come from Claude Code's status line, which Settings › AI agents › **Claude Code status line** sets up with one click (your own status line keeps showing).
+- **System** shows this computer's CPU, GPU, memory, temperatures, disk, network and the busiest processes, with five minutes of charts.
 
 `Cmd+=` and `Cmd+-` in a dashboard make its text, rows and charts larger or smaller (80 % to 160 %; `[dashboards] text_scale` sets where they start).
 
@@ -127,7 +152,7 @@ Also in the terminal: `Cmd+F` search across the whole history (regex, whole word
 
 ### Vault
 
-**Vault…** in the command palette keeps your secrets in one encrypted file on your Mac (not the Keychain): API keys with the variable they belong in, logins, secure notes, SSH keys and custom entries, each with a note, tags, an optional expiry date and a rotation reminder. Values stay hidden until you press Show; Copy clears the clipboard again after 30 seconds. **Import .env…** turns a `.env` file into entries and then offers to delete it. Touch ID can unlock it once you turn it on with the password, and it locks after 5 minutes without use (`[vault] lock_after`), when the Mac sleeps and when Flashex quits.
+**Vault…** in the command palette keeps your secrets in one encrypted file on your computer (not the system's keychain): API keys with the variable they belong in, logins, secure notes, SSH keys and custom entries, each with a note, tags, an optional expiry date and a rotation reminder. Values stay hidden until you press Show; Copy clears the clipboard again after 30 seconds. **Import .env…** turns a `.env` file into entries and then offers to delete it. Touch ID can unlock it once you turn it on with the password, and it locks after 5 minutes without use (`[vault] lock_after`), when the Mac sleeps and when Flashex quits.
 
 In a terminal, `flashex vault run --env TOKEN=GITHUB_TOKEN -- deploy` runs a command with secrets in its environment, `flashex vault env` writes `KEY=VALUE` lines and `flashex vault get NAME` prints one value into a pipe. Each time Flashex asks you first and shows which program asks, so an agent never reads a secret without your yes.
 
@@ -297,9 +322,17 @@ ln -s /Applications/Flashex.app/Contents/MacOS/flashex /opt/homebrew/bin/flashex
 
 (Inside a Flashex terminal the command is always available.)
 
+### Windows
+
+1. Download `Flashex-<version>-windows-<arch>-setup.exe` from the [latest release](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) (`x86_64` for most PCs, `aarch64` for ARM laptops such as Snapdragon ones).
+2. Run it. It installs for you only (no administrator) into `%LOCALAPPDATA%\Programs\Flashex`, adds Flashex to the Start menu and **New Flashex Tab Here** / **Open in Flashex** to Explorer's menu on folders, and lists it in Installed apps with its uninstaller.
+3. **The first time**, Windows SmartScreen may say "Windows protected your PC": choose **More info**, then **Run anyway**. The setup is not signed with a paid certificate yet; updates do not ask again.
+
+Terminals run PowerShell 7 when it is installed (else Windows PowerShell); Git Bash and cmd work too. The browser panel uses WebView2, which comes with Windows 11 and every updated Windows 10. Flashex updates itself: it downloads the verified setup, installs it quietly and starts again, and the restart keeper keeps your terminals running through it. Shortcuts use Ctrl where the Mac uses Cmd (Ctrl+Shift with a letter for Flashex's own, so Ctrl with a letter stays the shell's).
+
 ### Linux (beta)
 
-Download from the [0.2.19 release](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.19) for your architecture (`x86_64` or `aarch64`):
+Download from the [latest release](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) for your architecture (`x86_64` or `aarch64`):
 
 - **AppImage** (updates itself):
 
@@ -318,8 +351,6 @@ The Linux build is new, so expect rough edges. Known gaps:
 
 - There is no built-in browser panel; links open in your browser.
 - There is no menu bar; every command is in the command palette (the Search button at the top right).
-- Shortcut labels still show the macOS `⌘` symbols.
-- On Wayland the window has no close or minimise buttons yet.
 
 [Bug reports](https://github.com/palo-kunovsky-flash/flashex-app/issues) are very welcome.
 
@@ -354,9 +385,11 @@ If you installed with Homebrew, `brew upgrade --cask flashex` also works. The ca
 - A Mac with **Apple Silicon** (M1 or later). Intel Macs are not supported.
 - **macOS 13 Ventura or later.**
 - **Linux (beta):** x86_64 or arm64 with glibc 2.35 or later (Ubuntu 22.04, Debian 12, Fedora 36 and newer), X11 or Wayland.
-- Windows: later.
+- **Windows:** Windows 10 version 1809 or later, or Windows 11, on x86_64 or ARM64.
 
 ## Keyboard shortcuts
+
+On Windows and Linux, Ctrl takes the place of Cmd and Alt of Option; Flashex's own shortcuts that would clash with the shell use Ctrl+Shift (new tab Ctrl+Shift+T, palette Ctrl+Shift+P). Every shortcut is listed in the app (`?` › Keyboard Shortcuts) as your computer writes it.
 
 A summary of the defaults. `Cmd+?` in the app shows every shortcut in effect.
 

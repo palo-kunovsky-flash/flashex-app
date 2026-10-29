@@ -54,11 +54,28 @@
 
 <h2 id="states">What you see</h2>
 <ul>
-<li><strong>The sidebar</strong> lists each project's terminals with a robot icon for one running Claude Code and a dot for its state: <span class="dot waiting"></span> orange when it waits for you, <span class="dot running"></span> green while it runs, <span class="dot error"></span> red on an error. An agent's row is called by the name you gave the terminal, else by the agent ("Claude Code", "Claude Code · 2").</li>
+<li><strong>The sidebar</strong> lists each project's terminals with the agent's own mark for one running a coding agent (Claude Code, Codex, Grok, Gemini, Copilot, OpenCode, pi, Antigravity, Cursor; a robot for any other) and a dot for its state: <span class="dot waiting"></span> orange when it waits for you, <span class="dot running"></span> green while it runs, <span class="dot error"></span> red on an error. An agent's row is called by the name you gave the terminal, else by the agent ("Claude Code", "Claude Code · 2").</li>
 <li><strong>The pane</strong> of a terminal that wants your attention (an agent finished or waits, a long command ended while you looked elsewhere) gets a highlighted frame, and its tab a dot.</li>
 <li><strong>The Agents dashboard</strong> (<kbd>⌘K</kbd> › Agents Dashboard) shows every session, what it is doing and for how long: see <a href="dashboards.html#agents">Dashboards</a>.</li>
 </ul>
-<p>Other agents work without hooks: Flashex recognises Claude Code, Codex, Gemini CLI, Aider and others running in a terminal (for <span class="ui">Send to…</span> on a block), and any program can report its state with <a href="cli.html#flashex-agent"><code>flashex agent waiting</code></a> or post a notification.</p>
+<h2 id="other-agents">Other coding agents</h2>
+<p>Settings › AI agents has a row for each agent below. Its <span class="ui">Install</span> writes Flashex's hooks (or plugin) into the agent's own folder: it shows the change and asks first, and your own hooks stay as they are. Flashex says so the first time one of them runs in a terminal without them. What each agent tells Flashex:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Agent</th><th>Connect it (Settings › AI agents)</th><th>State, notifications</th><th>Waits for permission</th><th>Phone chat</th><th>Usage</th><th>Limits</th><th>The phone resumes with</th></tr></thead>
+<tbody>
+<tr><td>Claude Code</td><td><span class="ui">Claude Code hooks</span> (<code>~/.claude/settings.json</code>)</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td>5-hour and weekly</td><td><code>claude --resume &lt;id&gt;</code></td></tr>
+<tr><td>Codex</td><td><span class="ui">Codex hooks</span> (<code>~/.codex/hooks.json</code>; run <code>/hooks</code> once in Codex to trust them)</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td>5-hour and weekly</td><td><code>codex resume &lt;id&gt;</code></td></tr>
+<tr><td>Gemini CLI</td><td><span class="ui">Gemini CLI hooks</span> (<code>~/.gemini/settings.json</code>)</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td>–</td><td><code>gemini --resume &lt;id&gt;</code></td></tr>
+<tr><td>Grok Build</td><td><span class="ui">Grok hooks</span> (<code>~/.grok/hooks/flashex.json</code>; Grok also runs Claude Code's hooks)</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td>–</td><td><code>grok --resume &lt;id&gt;</code></td></tr>
+<tr><td>Copilot CLI</td><td><span class="ui">Copilot CLI hooks</span> (<code>~/.copilot/hooks/flashex.json</code>)</td><td>yes</td><td>yes</td><td>yes</td><td>output tokens only</td><td>–</td><td><code>copilot --resume=&lt;id&gt;</code></td></tr>
+<tr><td>OpenCode</td><td><span class="ui">OpenCode plugin</span> (<code>~/.config/opencode/plugins/flashex.js</code>)</td><td>yes</td><td>yes</td><td>sessions run in Flashex</td><td>sessions run in Flashex</td><td>–</td><td><code>opencode --session &lt;id&gt;</code></td></tr>
+<tr><td>pi</td><td><span class="ui">pi extension</span> (<code>~/.pi/agent/extensions/flashex.js</code>)</td><td>yes</td><td>–</td><td>yes</td><td>yes</td><td>–</td><td><code>pi --session &lt;id&gt;</code></td></tr>
+<tr><td>Antigravity CLI</td><td><span class="ui">Antigravity hooks</span> (<code>~/.gemini/config/hooks.json</code>)</td><td>yes</td><td>–</td><td>– (terminal only)</td><td>–</td><td>–</td><td><code>agy --conversation &lt;id&gt;</code></td></tr>
+<tr><td>Cursor CLI</td><td><span class="ui">Cursor CLI hooks</span> (<code>~/.cursor/hooks.json</code>)</td><td>tools and the end of a turn</td><td>–</td><td>–</td><td>–</td><td>–</td><td><code>cursor-agent --resume &lt;id&gt;</code></td></tr>
+</tbody></table></div>
+<p>Flashex never answers an agent's permission question for you: the hooks that would decide one (Antigravity's and Cursor's <code>PreToolUse</code>, Cursor's <code>before…</code>) are not used. OpenCode keeps its conversations in a database, so Flashex's plugin saves each session run in Flashex, cut down (no file contents), in Flashex's data folder after every turn, for the phone's chat and Usage; files older than 8 days are deleted.</p>
+
+<p>Other agents work without hooks too: Flashex recognises Claude Code, Codex, Gemini CLI, Aider and others running in a terminal (for <span class="ui">Send to…</span> on a block), and any program can report its state with <a href="cli.html#flashex-agent"><code>flashex agent waiting</code></a> or post a notification.</p>
 
 <h2 id="notifications">Notifications</h2>
 <p>A terminal gets a notification when Claude Code finishes or needs you, when a program asks for one (OSC 9, 777 and 99, a bell, or <a href="cli.html#flashex-notify"><code>flashex notify</code></a>), and when a command that took 10 seconds or more finishes in a terminal you are not looking at (<a href="configuration.html#cfg-notifications-long_command_seconds"><code>long_command_seconds</code></a>).</p>
