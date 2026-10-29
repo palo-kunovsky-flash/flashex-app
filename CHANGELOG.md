@@ -8,6 +8,13 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-29
+
+### Fixed
+- **Flashex for Windows did not start on most PCs** ([#2](https://github.com/palo-kunovsky-flash/flashex-app/issues/2)): it stopped at once with "Error creating DirectWriteTextSystem … The system cannot find the path specified". It looked for its graphics shaders at a path of the computer that built it; they are now part of the app.
+- **A console window opened beside Flashex on Windows** when it was started from the Start menu or Explorer; neither Flashex nor the programs it runs in the background open one now.
+- **The phone's Install Flashex did nothing on an iPhone:** the card and Settings › Install Flashex › How now show the steps for Safari and Chrome (Share › Add to Home Screen, where iOS 26 and later keep it), with Open in Safari.
+
 ## [0.3.0] - 2026-10-29
 
 ### Added
@@ -772,7 +779,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.3.1
 [0.3.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.3.0
 [0.2.19]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.19
 [0.2.18]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.18
