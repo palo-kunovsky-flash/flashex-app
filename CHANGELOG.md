@@ -8,6 +8,14 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-10-30
+
+### Changed
+- **Agents are shown with the robot again** in the sidebar, the Agents dashboard and the phone, as before 0.3.0; each one's row says which agent it is.
+- **Windows: the window's buttons are Windows 11's** ([#3](https://github.com/palo-kunovsky-flash/flashex-app/issues/3)): minimize, maximize and close at the top right (Snap Layouts on maximize), no longer traffic lights at the left; a gear next to `?` opens Settings (About is in the `?` menu).
+- **Send a Message Later: the message is a box of four lines** that wraps long lines, so all of what you write shows; Enter starts a new line, Cmd+Enter (Ctrl+Enter) schedules, Enter in When schedules too.
+- **A close button (×) at the top right of every card:** Send a Message Later, New Folder, Search Agent Sessions, Command History and the quit question, as Settings and the others have.
+
 ## [0.3.1] - 2026-10-29
 
 ### Fixed
@@ -779,7 +787,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.3.2
 [0.3.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.3.1
 [0.3.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.3.0
 [0.2.19]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.2.19

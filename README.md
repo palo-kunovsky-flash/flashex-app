@@ -62,7 +62,7 @@ Flashex is free to use. It runs on Apple Silicon Macs with macOS 13 or later, on
 
 ### Agents
 
-Run Claude Code (or any agent) in as many terminals as you like and see them all at a glance. The sidebar lists each project's terminals, editors and browser panels, with the agent's own mark for a terminal running a coding agent (Claude Code, Codex, Grok, Gemini, Copilot, OpenCode, pi, Antigravity, Cursor; a robot for any other) and a dot for its state: orange when it waits for you, green while it runs, red on an error. A pane with an unread notification gets an orange frame. `Cmd+Shift+U` jumps to the oldest unread notification, and the bell opens the notification history.
+Run Claude Code (or any agent) in as many terminals as you like and see them all at a glance. The sidebar lists each project's terminals, editors and browser panels, with a robot icon for a terminal running a coding agent (its row named by the agent: Claude Code, Codex, Grok Build, …) and a dot for its state: orange when it waits for you, green while it runs, red on an error. A pane with an unread notification gets an orange frame. `Cmd+Shift+U` jumps to the oldest unread notification, and the bell opens the notification history.
 
 ![The notification center over a project's panes: Claude Code asking to run a command and reporting what it did, each entry naming its project and terminal](screenshots/notifications.png)
 
@@ -328,7 +328,7 @@ ln -s /Applications/Flashex.app/Contents/MacOS/flashex /opt/homebrew/bin/flashex
 2. Run it. It installs for you only (no administrator) into `%LOCALAPPDATA%\Programs\Flashex`, adds Flashex to the Start menu and **New Flashex Tab Here** / **Open in Flashex** to Explorer's menu on folders, and lists it in Installed apps with its uninstaller.
 3. **The first time**, Windows SmartScreen may say "Windows protected your PC": choose **More info**, then **Run anyway**. The setup is not signed with a paid certificate yet; updates do not ask again.
 
-Terminals run PowerShell 7 when it is installed (else Windows PowerShell); Git Bash and cmd work too. The browser panel uses WebView2, which comes with Windows 11 and every updated Windows 10. Flashex updates itself: it downloads the verified setup, installs it quietly and starts again, and the restart keeper keeps your terminals running through it. Shortcuts use Ctrl where the Mac uses Cmd (Ctrl+Shift with a letter for Flashex's own, so Ctrl with a letter stays the shell's).
+Terminals run PowerShell 7 when it is installed (else Windows PowerShell); Git Bash and cmd work too. The browser panel uses WebView2, which comes with Windows 11 and every updated Windows 10. Flashex updates itself: it downloads the verified setup, installs it quietly and starts again, and the restart keeper keeps your terminals running through it. Shortcuts use Ctrl where the Mac uses Cmd (Ctrl+Shift with a letter for Flashex's own, so Ctrl with a letter stays the shell's). The window's minimize, maximize and close are at the top right, as in Windows 11 (Snap Layouts on maximize); the gear next to `?` opens Settings, and `?` › About Flashex shows the version.
 
 ### Linux (beta)
 
