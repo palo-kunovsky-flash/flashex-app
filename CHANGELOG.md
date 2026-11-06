@@ -8,6 +8,39 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-06
+
+### Added
+- **Chat over an agent's terminal** on the Mac and PC, as on the phone: Chat | Terminal in its pane's tab strip (Cmd+Shift+J), the conversation with its pictures and videos, a question as a card, a status band (state, model, context, branch, session, subagents and commands), slash autocomplete of the agent's own commands and skills, text you can select and copy as in a browser. A remote project's agent has its chat too.
+- **Agents in the sidebar**, under the projects: waiting for you, working and idle, each named as its work (your name, else the conversation's topic), with its group and project; Dashboard and + Agent at their foot. In the narrow sidebar, the agents' icon opens the Agents dashboard (orange while one waits).
+- **Claude Accounts** (Settings › AI agents › Switch between Claude accounts, off by default): every Claude Code `/login` is kept in this computer's keychain (Credential Manager on Windows), the Claude Accounts dashboard lists them with their 5-hour and weekly limits and when they start over, and Switch makes another one the login, running sessions included, without signing in again. When the account in use passes 90 % of its 5 hours and another has room, Flashex offers to switch (never on its own). The phone's Usage page lists them and switches too (Full access).
+- **Compact dashboards:** System, Usage and Agents each have Compact | Full in their header: a card per subject, a line per reading (its name, a small chart, its value that never wraps), 1 to 3 columns as the pane is wide, so a narrow pane works as a widget column. System's cards are reordered by their handle and hidden by their ×.
+- **Show me around** ([#5](https://github.com/palo-kunovsky-flash/flashex-app/issues/5)): a five-tip tour of the window after the first start, each tip beside what it is about; again from the welcome or the palette.
+- **A notification schedule:** every day, weekdays or each day's own hours; quiet time holds back banners and the phone's pushes (the bell keeps them), one summary when it ends; a pause for an hour, until tomorrow or Monday.
+- **What's New** after an update: what the versions since the one you had brought (also in the `?` menu).
+- **Vault sets:** `flashex vault import --set stage` keeps a `.env` file as a project's set; `--set` for `run` and `env`.
+- **Terminals by name in the CLI:** `flashex send --to bubbles` (your name for the terminal, the program's, Claude Code's session name), `flashex list --agents`.
+- **Windows: Phone Access with Windows Hello** ([#14](https://github.com/palo-kunovsky-flash/flashex-app/issues/14)): turning it on asks for your PIN, fingerprint or face; without Hello set up it says where to add a PIN.
+- **Windows: temperatures** ([#8](https://github.com/palo-kunovsky-flash/flashex-app/issues/8), [#13](https://github.com/palo-kunovsky-flash/flashex-app/issues/13)): besides the ACPI thermal zones, each GPU's and each drive's (NVMe, most SSDs), as Task Manager reads them, no administrator needed.
+
+### Changed
+- **Settings in a new look:** the categories as a column on the left when the window has room, each section a card.
+- **Send a Message Later** goes to several terminals at once, and its clock is always in the status bar (grey while nothing waits).
+- **Lighter** ([#12](https://github.com/palo-kunovsky-flash/flashex-app/issues/12)): agents' dots pulse at 12 frames a second instead of redrawing the window 30 times a second, and stand still with animations off or Reduce motion; chat pictures are small previews until opened.
+- **Windows: Ctrl+C copies a selection, else stops the program** ([#9](https://github.com/palo-kunovsky-flash/flashex-app/issues/9)); Ctrl+V pastes; copying says how much ([#11](https://github.com/palo-kunovsky-flash/flashex-app/issues/11)).
+- **Windows: the window's buttons act on a click and the empty title bar drags the window**, double-click maximizes ([#7](https://github.com/palo-kunovsky-flash/flashex-app/issues/7)).
+- **Windows: the update's signature is checked by Windows itself** (CNG), no `openssl` needed ([#6](https://github.com/palo-kunovsky-flash/flashex-app/issues/6)).
+- **Ultra plans without a 5-hour limit** show the week only, in the dashboard, the status bar and on the phone.
+
+### Fixed
+- **After Flashex crashed, its terminals came back blank:** their programs ran on, now their screens come back too.
+- **Windows: Ctrl+C did not stop a program in a terminal** (`ping -t`, a dev server): kept terminals had Ctrl+C turned off.
+- **Windows: the first key typed after Flashex was opened again was lost** in a terminal it had kept.
+- **Selecting past a terminal's top or bottom edge** now scrolls it and the selection keeps growing, so more than a screen can be selected with a touchpad ([#10](https://github.com/palo-kunovsky-flash/flashex-app/issues/10)).
+- **A message sent from the phone sometimes became a new line** in Claude Code instead of being sent.
+- **Messages scheduled for the same time in one terminal** were joined into one prompt, or cancelled together.
+- **The phone chat:** long replies are whole, Claude Code's "Type something" choice no longer hides the others, a renamed terminal keeps its name.
+
 ## [0.3.2] - 2026-10-30
 
 ### Changed

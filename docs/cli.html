@@ -65,8 +65,11 @@
 
 <h2 id="commands">Commands</h2>
 
-<h3 id="flashex-list"><code>flashex list [--json]</code></h3>
-<p>Lists projects, tabs, panes and their surfaces (terminals, editors, previews, browsers), each named as its pane tab shows it. <code>*</code> marks the active project and <code>&gt;</code> the focused surface; an agent's state is shown in brackets. <code>--json</code> prints the API's answer as is.</p>
+<h3 id="flashex-list"><code>flashex list [--json|--agents]</code></h3>
+<p>Lists projects, tabs, panes and their surfaces (terminals, editors, previews, browsers), each named as its pane tab shows it. <code>*</code> marks the active project and <code>&gt;</code> the focused surface; an agent's state is shown in brackets, with its session: what Claude Code calls it (<code>brain-8d</code>, or the name <code>/rename</code> gave it) and its id. <code>--agents</code> lists only the terminals with an agent, one line each with the names <code>--to</code> takes. <code>--json</code> prints the API's answer as is.</p>
+
+<h3 id="naming-a-terminal">Naming a terminal: <code>--surface</code> or <code>--to</code></h3>
+<p>Every <code>--surface</code> (and <code>focus</code>) takes a terminal's number (<code>7</code> or <code>#7</code>) or its name, which is what you tell an agent: <code>flashex send --to bubbles 'run the tests\n'</code>. A name is the terminal's own (yours after Rename, on the Mac or the phone), the program's title, or what Claude Code calls the session running in it, in any case. Where two terminals share a name, <code>project/name</code> picks one (<code>flashex/release</code>), and the error lists them with their numbers. The start of a Claude Code session's id (at least 4 characters) works too.</p>
 
 <h3 id="flashex-notify"><code>flashex notify [--surface N] [--title T] [BODY]</code></h3>
 <p>A notification for a terminal: a highlighted frame, a dot on its tab and a count in the sidebar, and a system notification when you cannot see that terminal. Only a terminal takes one; without <code>--surface</code> it goes to the terminal the command runs in, else the one you used last. <code>--from-claude-hook</code> is what Claude Code's hooks run (see <a href="#flashex-setup-claude"><code>setup claude</code></a>); a hook always exits 0, so Claude Code is never interrupted.</p>
@@ -162,11 +165,12 @@
 <h2 id="socket-api">The socket API</h2>
 <p>Programs that can write to a Unix socket can use the same API directly: JSON-RPC 2.0, one message per line.</p>
 <div class="term"><div class="term-bar">request</div><pre><code>{<span class="s">"jsonrpc"</span>:<span class="s">"2.0"</span>,<span class="s">"id"</span>:1,<span class="s">"method"</span>:<span class="s">"read"</span>,<span class="s">"params"</span>:{<span class="s">"surface"</span>:3,<span class="s">"last_block"</span>:true}}</code></pre></div>
-<p>Every answer is one line too: <code>{"jsonrpc":"2.0","id":1,"result":{…}}</code> or an <code>error</code> with a <code>code</code> and <code>message</code>. A request without an <code>id</code> is carried out but not answered. A request may be at most 1 MiB; an idle connection closes after 120 s; at most 64 connections may be open. <code>surface</code> is optional wherever it appears; the default is the focused terminal.</p>
+<p>Every answer is one line too: <code>{"jsonrpc":"2.0","id":1,"result":{…}}</code> or an <code>error</code> with a <code>code</code> and <code>message</code>. A request without an <code>id</code> is carried out but not answered. A request may be at most 1 MiB; an idle connection closes after 120 s; at most 64 connections may be open. <code>surface</code> is optional wherever it appears; the default is the focused terminal. <code>to</code> (a terminal's name) may stand in its place.</p>
 <div class="table-wrap"><table>
 <thead><tr><th>Method</th><th>Params</th><th>Result</th></tr></thead>
 <tbody>
-<tr><td><code>list</code></td><td>—</td><td><code>{projects: [{id, name, root, active, status, tabs: [{id, title, active, panes: [{id, surfaces: [{id, kind, title, focused, agent}]}]}]}]}</code></td></tr>
+<tr><td><code>list</code></td><td>—</td><td><code>{projects: [{id, name, root, active, status, tabs: [{id, title, active, panes: [{id, surfaces: [{id, kind, title, focused, agent, session, session_name}]}]}]}]}</code></td></tr>
+<tr><td><code>resolve</code></td><td><code>to</code></td><td><code>{surface}</code>: the terminal a number or a name means</td></tr>
 <tr><td><code>notify</code></td><td><code>surface?</code>, <code>title?</code>, <code>body?</code></td><td><code>{}</code></td></tr>
 <tr><td><code>agent</code></td><td><code>surface?</code>, <code>state</code></td><td><code>{}</code></td></tr>
 <tr><td><code>status</code></td><td><code>project?</code> or <code>surface?</code>, <code>text?</code></td><td><code>{}</code></td></tr>

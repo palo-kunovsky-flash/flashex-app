@@ -84,6 +84,7 @@ keeper_on_quit = <span class="s">"ask"</span>     <span class="c"># keep termina
 <tr id="cfg-general-keep_awake_mode"><td><code>keep_awake_mode</code></td><td><code>&quot;1h&quot;</code></td></tr>
 <tr id="cfg-general-keep_awake_display"><td><code>keep_awake_display</code></td><td><code>&quot;keep-on&quot;</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-general-keep_awake_lock"><td><code>keep_awake_lock</code></td><td><code>&quot;prevent&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-general-tips"><td><code>tips</code></td><td><code>true</code></td></tr>
 <tr id="cfg-general-keep_awake_custom"><td><code>keep_awake_custom</code></td><td>not in the file · The custom duration typed last in the Keep System Awake chooser (such as <code>"1h30"</code> or <code>"until 18:30"</code>). The chooser writes it; <code>keep_awake_mode = "custom"</code> starts it.</td></tr>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [general]</div><pre><code><span class="k">[general]</span>
@@ -100,7 +101,12 @@ keep_awake_mode = <span class="s">&quot;1h&quot;</span>
 <span class="c"># with the display on: &quot;prevent&quot; (the default) or &quot;allow&quot; (as your macOS</span>
 <span class="c"># settings say).</span>
 <span class="c"># keep_awake_display = &quot;keep-on&quot;</span>
-<span class="c"># keep_awake_lock = &quot;prevent&quot;</span></code></pre></div>
+<span class="c"># keep_awake_lock = &quot;prevent&quot;</span>
+<span class="c"># A short tour of the window after the first start's welcome (its tips by</span>
+<span class="c"># the projects, the agents' dots, Search, the bell and the phone), once;</span>
+<span class="c"># &quot;Show me around&quot; (the welcome, the palette) shows it again. false: it</span>
+<span class="c"># only shows when asked for.</span>
+tips = <span class="k">true</span></code></pre></div>
 <h3 id="cfg-appearance"><code>[appearance]</code></h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
@@ -243,6 +249,11 @@ enabled = <span class="k">true</span></code></pre></div>
 <tr id="cfg-notifications-long_command_seconds"><td><code>long_command_seconds</code></td><td><code>10</code></td></tr>
 <tr id="cfg-notifications-system"><td><code>system</code></td><td><code>true</code></td></tr>
 <tr id="cfg-notifications-show_text"><td><code>show_text</code></td><td><code>true</code></td></tr>
+<tr id="cfg-notifications-schedule"><td><code>schedule</code></td><td><code>&quot;always&quot;</code></td></tr>
+<tr id="cfg-notifications-hours"><td><code>hours</code></td><td><code>&quot;09:00-22:00&quot;</code></td></tr>
+<tr id="cfg-notifications-days"><td><code>days</code></td><td><code>&quot;mon-fri 08:00-22:00, sat 10:00-18:00, sun off&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-notifications-urgent"><td><code>urgent</code></td><td><code>false</code></td></tr>
+<tr id="cfg-notifications-summary"><td><code>summary</code></td><td><code>true</code></td></tr>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [notifications]</div><pre><code><span class="k">[notifications]</span>
 <span class="c"># A command that ran at least this many seconds and finished in a terminal</span>
@@ -255,7 +266,17 @@ system = <span class="k">true</span>
 <span class="c"># the tool and its command or file when it asks for permission. Off: only</span>
 <span class="c"># &quot;Finished&quot; or &quot;needs your permission&quot;. (macOS may show notifications on</span>
 <span class="c"># the lock screen, as System Settings › Notifications says.)</span>
-show_text = <span class="k">true</span></code></pre></div>
+show_text = <span class="k">true</span>
+<span class="c"># When notifications may come: &quot;always&quot;, &quot;every_day&quot; or &quot;weekdays&quot; (within</span>
+<span class="c"># `hours`), or &quot;custom&quot; (each day of `days`, &quot;off&quot; for none). Outside it</span>
+<span class="c"># nothing pops up on this Mac or a phone; the bell keeps everything.</span>
+schedule = <span class="s">&quot;always&quot;</span>
+hours = <span class="s">&quot;09:00-22:00&quot;</span>
+<span class="c"># days = &quot;mon-fri 08:00-22:00, sat 10:00-18:00, sun off&quot;</span>
+<span class="c"># An agent asking for permission notifies even outside the schedule.</span>
+urgent = <span class="k">false</span>
+<span class="c"># When quiet time ends, one notification of what came meanwhile.</span>
+summary = <span class="k">true</span></code></pre></div>
 <h3 id="cfg-shell"><code>[shell]</code></h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
@@ -397,6 +418,7 @@ sleep_after_minutes = <span class="k">10</span>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
 <tbody>
 <tr id="cfg-sidebar-show_terminals"><td><code>show_terminals</code></td><td><code>true</code></td></tr>
+<tr id="cfg-sidebar-show_agents"><td><code>show_agents</code></td><td><code>true</code></td></tr>
 <tr id="cfg-sidebar-row_spacing"><td><code>row_spacing</code></td><td><code>0</code> <span class="chip">commented out</span></td></tr>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [sidebar]</div><pre><code><span class="k">[sidebar]</span>
@@ -404,6 +426,10 @@ sleep_after_minutes = <span class="k">10</span>
 <span class="c"># with its agent's state and unread notifications; the chevron on a</span>
 <span class="c"># project's row folds its list.</span>
 show_terminals = <span class="k">true</span>
+<span class="c"># Under the projects, the agents of every project: waiting for you,</span>
+<span class="c"># working, idle (a click shows its terminal); the line between the two</span>
+<span class="c"># parts is dragged, each header folds its part.</span>
+show_agents = <span class="k">true</span>
 <span class="c"># Extra space between the rows of that list (tab names, terminals,</span>
 <span class="c"># editors, browsers; not the projects' rows), in pixels: 0 (as by</span>
 <span class="c"># default) to 10.</span>
@@ -413,7 +439,10 @@ show_terminals = <span class="k">true</span>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
 <tbody>
 <tr id="cfg-agents-claude_update"><td><code>claude_update</code></td><td><code>true</code></td></tr>
+<tr id="cfg-agents-open_as_chat"><td><code>open_as_chat</code></td><td><code>false</code></td></tr>
+<tr id="cfg-agents-chat_voice"><td><code>chat_voice</code></td><td><code>&quot;reply&quot;</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-agents-usage_api"><td><code>usage_api</code></td><td><code>false</code></td></tr>
+<tr id="cfg-agents-claude_switcher"><td><code>claude_switcher</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-claude_status"><td><code>claude_status</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-usage_meter"><td><code>usage_meter</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-usage_notice"><td><code>usage_notice</code></td><td><code>false</code></td></tr>
@@ -425,11 +454,24 @@ show_terminals = <span class="k">true</span>
 <span class="c"># installed while it runs there; a click restarts the session on the new</span>
 <span class="c"># version and the conversation continues.</span>
 claude_update = <span class="k">true</span>
+<span class="c"># An agent's terminal shows as its chat (the conversation, its pictures</span>
+<span class="c"># at once, its questions as cards); Chat | Terminal in the pane's tab</span>
+<span class="c"># strip (Cmd+Shift+J) switches either way. Off: they start as terminals.</span>
+open_as_chat = <span class="k">false</span>
+<span class="c"># The chat's speaker reads a reply in its own language (&quot;reply&quot;), or always</span>
+<span class="c"># in one: &quot;sk-SK&quot;, &quot;cs-CZ&quot;, &quot;en-US&quot;, &quot;en-GB&quot;, &quot;de-DE&quot;, &quot;ru-RU&quot;.</span>
+<span class="c"># chat_voice = &quot;reply&quot;</span>
 <span class="c"># The Usage dashboard reads Claude Code's rate limits from its status line.</span>
 <span class="c"># When no status line has reported them for a minute, it can ask Anthropic's</span>
 <span class="c"># usage API instead, with Claude Code's own login from the Keychain. Off:</span>
 <span class="c"># the login is never read.</span>
 usage_api = <span class="k">false</span>
+<span class="c"># Claude account switcher: each Claude Code login (/login) is kept, and the</span>
+<span class="c"># Usage dashboard lists them with their limits; one click makes another</span>
+<span class="c"># Claude Code's login, running sessions included, without signing in</span>
+<span class="c"># again. Their logins are kept in the system's keychain; their limits are</span>
+<span class="c"># read with Anthropic's usage API.</span>
+claude_switcher = <span class="k">false</span>
 <span class="c"># The Usage dashboard's Claude status card (status.claude.com, public; only</span>
 <span class="c"># the request is sent).</span>
 claude_status = <span class="k">false</span>
@@ -464,6 +506,10 @@ search_index = <span class="k">true</span></code></pre></div>
 <tr id="cfg-dashboards-public_ip"><td><code>public_ip</code></td><td><code>false</code></td></tr>
 <tr id="cfg-dashboards-system_details"><td><code>system_details</code></td><td><code>false</code></td></tr>
 <tr id="cfg-dashboards-system_processes"><td><code>system_processes</code></td><td><code>&quot;cpu&quot;</code></td></tr>
+<tr id="cfg-dashboards-system_compact"><td><code>system_compact</code></td><td><code>false</code></td></tr>
+<tr id="cfg-dashboards-system_cards"><td><code>system_cards</code></td><td><code>&quot;cpu, memory, gpu, temperature, network, disk&quot;</code></td></tr>
+<tr id="cfg-dashboards-usage_compact"><td><code>usage_compact</code></td><td><code>false</code></td></tr>
+<tr id="cfg-dashboards-agents_compact"><td><code>agents_compact</code></td><td><code>false</code></td></tr>
 <tr id="cfg-dashboards-text_scale"><td><code>text_scale</code></td><td><code>1.0</code></td></tr>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [dashboards]</div><pre><code><span class="k">[dashboards]</span>
@@ -474,6 +520,16 @@ public_ip = <span class="k">false</span>
 system_details = <span class="k">false</span>
 <span class="c"># The table a narrow System processes card shows: &quot;cpu&quot; or &quot;memory&quot;.</span>
 system_processes = <span class="s">&quot;cpu&quot;</span>
+<span class="c"># The System dashboard compact: a line per reading (its name, a small</span>
+<span class="c"># chart, its value), its cards in this order; one left out is hidden (the</span>
+<span class="c"># dashboard's Compact button and its cards' handles write them).</span>
+system_compact = <span class="k">false</span>
+system_cards = <span class="s">&quot;cpu, memory, gpu, temperature, network, disk&quot;</span>
+<span class="c"># The Usage and Agents dashboards compact (their Compact buttons write</span>
+<span class="c"># them): Usage as Limits, Today and Models; Agents as Waiting, Working and</span>
+<span class="c"># Idle, a line each.</span>
+usage_compact = <span class="k">false</span>
+agents_compact = <span class="k">false</span>
 <span class="c"># The size of the dashboards' text, rows and charts: 1.0 as designed,</span>
 <span class="c"># 0.8 to 1.6. A dashboard pane's own zoom (Cmd+= / Cmd+- in it) goes</span>
 <span class="c"># from here in steps of 10 %.</span>
