@@ -8,6 +8,17 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-11-07
+
+macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
+
+### Fixed
+- **macOS asked for your login password again and again after an update.** Flashex has no paid Apple developer ID, so macOS ties each keychain item Flashex writes to the build that wrote it, and the account switcher read every kept account each minute. The kept Claude logins are now kept the way Claude Code keeps its own, which macOS does not ask about after an update; they move over once (one last question per account, never while the screen is locked). A question you cancel is not asked again until Flashex starts again.
+- **The vault after Touch ID** says why macOS asks for your login password once after an update: enter it and choose Always Allow.
+- **Switching a Claude account from the phone never reached the computer** ("unknown message").
+- **Flashex showed twice in the Dock after an update:** the update moved the app's folder aside, and the Dock's kept icon went with it. An update now changes only what is inside the app, so the Dock keeps knowing it (remove the old icon once by hand: Options › Remove from Dock).
+- **Keychain items have readable names** (Flashex – Vault (Touch ID), Flashex – Claude account, Flashex – AI key), shown in Keychain Access and in macOS's questions instead of their ids.
+
 ## [0.4.1] - 2026-11-07
 
 macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
@@ -845,7 +856,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.2
 [0.4.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.1
 [0.4.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0
 [0.3.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.3.2
