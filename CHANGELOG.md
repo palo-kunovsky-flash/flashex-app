@@ -8,6 +8,21 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.4] - 2026-11-07
+
+macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
+
+### Added
+- **Claude Accounts: Bring Them Over.** Accounts an earlier Flashex kept come over in one go (macOS asks your password once for each; choose Always Allow); until then they say "moves over once", their limits are not read and the automatic switch does not pick them.
+
+### Fixed
+- **Switching a Claude account signed you out of MCP servers** (Slack, Atlassian…): Claude Code keeps their logins in the same keychain item as the account's, and a switch put back the whole item as it was when the other account was kept. Only the account's own login changes now; the MCP servers' logins stay as they are.
+- **After a restart (an update), Claude Code's panel had gaps:** the screen kept for the restart went only down to the cursor, so what Claude Code shows under its box (its agents, its status lines) was lost, and its later updates, only what changed, landed in blank rows. The rows under the cursor are kept too, and the cursor goes back to its place.
+
+### Changed
+- **Claude Accounts sort spent accounts** by when they can be used again, the soonest first, after every account with room.
+- **An account's name** comes from its Claude profile when the login kept does not say it (it showed the e-mail).
+
 ## [0.4.3] - 2026-11-07
 
 macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
@@ -869,7 +884,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.3...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.4...HEAD
+[0.4.4]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.4
 [0.4.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.3
 [0.4.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.2
 [0.4.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.1
