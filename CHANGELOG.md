@@ -8,6 +8,19 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.3] - 2026-11-07
+
+macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
+
+### Added
+- **Pick a colour from the screen:** a project's or a group's custom colour has Pick from Screen (macOS's magnifier: click any colour, Esc cancels).
+
+### Fixed
+- **macOS still asked for your login password at every start** for each Claude account an earlier Flashex had kept: the account switcher read them in the background. It never does now. The account in use moves over by itself, without a question; another one moves over when you choose Switch for it (macOS asks your password that one time, choose Always Allow). The automatic switch never reads one.
+- **The chat on the Mac showed less than the terminal:** each step an agent takes (a command, a file read) now shows the first lines of what it gave, as the terminal does, and how many more; a click shows it all.
+- **The sidebar's Projects and Agents headers** without their icons (the bolder headers alone); room between the agents' groups (waiting, working, idle).
+- **Claude Accounts in a narrow pane:** the header's buttons show their icons alone and a limit's reset time ends in an ellipsis, never past the card.
+
 ## [0.4.2] - 2026-11-07
 
 macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
@@ -856,7 +869,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.2...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.3...HEAD
+[0.4.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.3
 [0.4.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.2
 [0.4.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.1
 [0.4.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0
