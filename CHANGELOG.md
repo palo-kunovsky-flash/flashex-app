@@ -8,6 +8,30 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-11-07
+
+macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
+
+### Added
+- **Claude Accounts:** each account's name, e-mail, organisation and plan in columns, the best one to use first (the most left of its 5 hours and its week), a spent one marked until it starts over, when the limits were last read, and Refresh. **Switch automatically** (off by default): at 90 % of the 5 hours, 98 % of the week, or 15 minutes before it would run out at the pace it is used, the account with the most left takes over, so agents are not stopped by a limit. The phone's Claude accounts page shows the same.
+- **Up and Down bring back this window's own history:** in a chat, its earlier messages; in a terminal, its own commands (Settings `[shell] own_history`, on: zsh's shared history is off there, every command is still saved at once).
+- **Top tabs have a menu** (right click): Rename, Automatic Name (the tab follows its focused pane again), Close Tab.
+- **Usage dashboard:** a Refresh button (as `r`).
+- **Project icons:** 40 more to choose from.
+- **Chat: pasted or dropped pictures** (Cmd+V, drag and drop) go in as `[Image #N]` and are sent as their path, as in Claude Code. On the phone too: a pasted or picked picture goes in as `[Image #N]` at once and you write on.
+- **Phone:** quiet time's pauses in an even grid with Custom… (90, 1h30, until 18:30); a picture a reply names outside its project (a screenshot in a temporary folder) shows under it.
+
+### Changed
+- **The status bar in groups:** what the focused pane runs, then the agents (the focused one, those waiting, the limit, messages for later), then the computer (Keep Awake, problems), then the phone, a hairline between them.
+- **The sidebar's Projects and Agents headers** have their icons and read as headers, not as a group's label.
+- **Compact Usage:** the limits' meters in the full dashboard's colours, their names and values in columns.
+- **Chat:** the column grows up to 1100 px in a wide pane.
+
+### Fixed
+- **Usage showed another account's weekly limit:** every Claude Code session writes the one status-line file, and sessions running as different accounts took turns; a reading whose window resets at another time is now left out, and the account switcher's own reading of the account in use is taken.
+- **Chat:** a long list of subagents and commands ran under the window; it scrolls in its card.
+- **Phone:** a reached limit in a chat showed the terminal's screen with its status lines (now one line, with Claude accounts and Stop waiting); the picture viewer showed the previous picture until the next one came (it seemed to jump while an agent wrote); a project's files kept the Files tab lit; the Usage page said "no answer" after one missed reply; Agents and Projects redraw only what changed.
+
 ## [0.4.0] - 2026-11-06
 
 ### Added
@@ -820,7 +844,9 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.1
+[0.4.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0
 [0.3.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.3.2
 [0.3.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.3.1
 [0.3.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.3.0

@@ -282,6 +282,7 @@ summary = <span class="k">true</span></code></pre></div>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
 <tbody>
 <tr id="cfg-shell-integration"><td><code>integration</code></td><td><code>true</code></td></tr>
+<tr id="cfg-shell-own_history"><td><code>own_history</code></td><td><code>true</code></td></tr>
 <tr id="cfg-shell-prompt"><td><code>prompt</code></td><td><code>&quot;auto&quot;</code></td></tr>
 <tr id="cfg-shell-prompt_icon"><td><code>prompt_icon</code></td><td><code>false</code></td></tr>
 </tbody></table></div>
@@ -289,6 +290,11 @@ summary = <span class="k">true</span></code></pre></div>
 <span class="c"># Lets zsh mark prompts and commands, for command blocks. Applies to new</span>
 <span class="c"># terminals. Your own zsh config still loads as usual.</span>
 integration = <span class="k">true</span>
+<span class="c"># Up in a terminal brings back its own commands, not every terminal's</span>
+<span class="c"># (zsh's share_history off there; each command is still saved to the</span>
+<span class="c"># history file at once, and a new terminal starts with all of them).</span>
+<span class="c"># With the integration; new terminals.</span>
+own_history = <span class="k">true</span>
 <span class="c"># A short prompt from flashex (the folder, the branch and ❯; click the</span>
 <span class="c"># folder to go to another one): &quot;auto&quot; in place of the shell's stock</span>
 <span class="c"># prompt only (a custom one, oh-my-zsh, starship, stays), &quot;flashex&quot;</span>
@@ -443,6 +449,7 @@ show_agents = <span class="k">true</span>
 <tr id="cfg-agents-chat_voice"><td><code>chat_voice</code></td><td><code>&quot;reply&quot;</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-agents-usage_api"><td><code>usage_api</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-claude_switcher"><td><code>claude_switcher</code></td><td><code>false</code></td></tr>
+<tr id="cfg-agents-claude_auto_switch"><td><code>claude_auto_switch</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-claude_status"><td><code>claude_status</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-usage_meter"><td><code>usage_meter</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-usage_notice"><td><code>usage_notice</code></td><td><code>false</code></td></tr>
@@ -472,6 +479,9 @@ usage_api = <span class="k">false</span>
 <span class="c"># again. Their logins are kept in the system's keychain; their limits are</span>
 <span class="c"># read with Anthropic's usage API.</span>
 claude_switcher = <span class="k">false</span>
+<span class="c"># The switcher switches by itself to the account with the most left when</span>
+<span class="c"># the one in use is nearly spent (off: it offers the switch, a notice).</span>
+claude_auto_switch = <span class="k">false</span>
 <span class="c"># The Usage dashboard's Claude status card (status.claude.com, public; only</span>
 <span class="c"># the request is sent).</span>
 claude_status = <span class="k">false</span>
