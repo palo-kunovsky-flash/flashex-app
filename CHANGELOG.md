@@ -28,9 +28,10 @@ macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flas
 - **Chat:** the column grows up to 1100 px in a wide pane.
 
 ### Fixed
+- **Claude Accounts: Switch failed** with a list of "security: unknown command" lines: a login longer than `security` reads in one line (as most are) is now written the way Claude Code writes its own.
 - **Usage showed another account's weekly limit:** every Claude Code session writes the one status-line file, and sessions running as different accounts took turns; a reading whose window resets at another time is now left out, and the account switcher's own reading of the account in use is taken.
 - **Chat:** a long list of subagents and commands ran under the window; it scrolls in its card.
-- **Phone:** a reached limit in a chat showed the terminal's screen with its status lines (now one line, with Claude accounts and Stop waiting); the picture viewer showed the previous picture until the next one came (it seemed to jump while an agent wrote); a project's files kept the Files tab lit; the Usage page said "no answer" after one missed reply; Agents and Projects redraw only what changed.
+- **Phone:** a reached limit in a chat showed the terminal's screen with its status lines and two empty choices (now one line, with Claude accounts and Stop waiting); the Claude accounts card was missing until a limit was known; a spent account offered Switch; Settings showed a pause only when opened again; the picture viewer showed the previous picture until the next one came (it seemed to jump while an agent wrote); a project's files kept the Files tab lit; the Usage page said "no answer" after one missed reply; Agents and Projects redraw only what changed.
 
 ## [0.4.0] - 2026-11-06
 
