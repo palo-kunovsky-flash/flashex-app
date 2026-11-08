@@ -8,6 +8,18 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.5] - 2026-11-08
+
+macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
+
+### Fixed
+- **Claude Accounts sorted spent accounts as unknown** when their last read had failed (the usage API's 429, which was common): they rank by the limits last read now, those with room first, then the spent ones by when they can be used again, then those never read.
+- **Fewer 429s from the usage API:** accounts are read two a minute, each about every five minutes; a 429 holds back only that account (2, 4, 8 minutes, at most 10, or when the API says); an account's profile is asked once per run; the account in use is read from Claude Code's status line, not asked again. An account whose window started over counts as having room without asking, so the automatic switch is never held back by a 429.
+- **The Claude Code update icons were missing after a restart** until a session worked again (and Restart Idle Claude found none): sessions running on are looked at right after the start.
+
+### Added
+- **Claude Accounts: a refresh button on each account** (not while the usage API asks to wait).
+
 ## [0.4.4] - 2026-11-07
 
 macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
@@ -884,7 +896,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.4...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.5...HEAD
+[0.4.5]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.5
 [0.4.4]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.4
 [0.4.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.3
 [0.4.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.2
