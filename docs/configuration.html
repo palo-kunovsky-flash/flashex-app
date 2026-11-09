@@ -249,6 +249,8 @@ enabled = <span class="k">true</span></code></pre></div>
 <tr id="cfg-notifications-long_command_seconds"><td><code>long_command_seconds</code></td><td><code>10</code></td></tr>
 <tr id="cfg-notifications-system"><td><code>system</code></td><td><code>true</code></td></tr>
 <tr id="cfg-notifications-show_text"><td><code>show_text</code></td><td><code>true</code></td></tr>
+<tr id="cfg-notifications-agents"><td><code>agents</code></td><td><code>&quot;your_turns&quot;</code></td></tr>
+<tr id="cfg-notifications-agent_turn_seconds"><td><code>agent_turn_seconds</code></td><td><code>30</code></td></tr>
 <tr id="cfg-notifications-schedule"><td><code>schedule</code></td><td><code>&quot;always&quot;</code></td></tr>
 <tr id="cfg-notifications-hours"><td><code>hours</code></td><td><code>&quot;09:00-22:00&quot;</code></td></tr>
 <tr id="cfg-notifications-days"><td><code>days</code></td><td><code>&quot;mon-fri 08:00-22:00, sat 10:00-18:00, sun off&quot;</code> <span class="chip">commented out</span></td></tr>
@@ -267,6 +269,14 @@ system = <span class="k">true</span>
 <span class="c"># &quot;Finished&quot; or &quot;needs your permission&quot;. (macOS may show notifications on</span>
 <span class="c"># the lock screen, as System Settings › Notifications says.)</span>
 show_text = <span class="k">true</span>
+<span class="c"># Which agents' notifications pop up (the rest stay in the bell and the</span>
+<span class="c"># sidebar): &quot;everything&quot; (every turn's end), &quot;your_turns&quot; (the end of a</span>
+<span class="c"># turn you started that ran `agent_turn_seconds` or more, not one the</span>
+<span class="c"># agent started itself when its background work woke it; and whatever</span>
+<span class="c"># waits for you), &quot;needs_you&quot; (only a question, a permission, a plan) or</span>
+<span class="c"># &quot;off&quot;.</span>
+agents = <span class="s">&quot;your_turns&quot;</span>
+agent_turn_seconds = <span class="k">30</span>
 <span class="c"># When notifications may come: &quot;always&quot;, &quot;every_day&quot; or &quot;weekdays&quot; (within</span>
 <span class="c"># `hours`), or &quot;custom&quot; (each day of `days`, &quot;off&quot; for none). Outside it</span>
 <span class="c"># nothing pops up on this Mac or a phone; the bell keeps everything.</span>

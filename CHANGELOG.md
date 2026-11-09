@@ -8,6 +8,42 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- **Windows: the temperature chart said "collecting…" for ever** (#8): Windows gives an app no CPU temperature (Task Manager has none either), so the chart now draws the hottest sensor there is, titled Hottest °C; with a CPU sensor it stays CPU °C.
+
+## [0.5.0] - 2026-11-09
+
+macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
+
+### Added
+- **Ceilings for a Claude account:** keep part of an account for yourself. The ⚙ in its row in Claude Accounts sets a 5-hour and a weekly ceiling (none, 95 % down to 50 %); a tick on its bars and "≤ 80" beside its share show them. At its ceiling the account counts as spent: the automatic switch leaves it there (and by the pace towards it), never switches to it, and Switch asks to be confirmed (the phone asks too).
+- **Choose which agents' notifications pop up** (Settings › Notifications › Notifications from agents): Everything, Your turns (new default), When it needs you, or Off; the rest stay in the bell and the sidebar. Your turns: the end of a turn you started that ran 30 seconds or more (Shortest turn that notifies), not one the agent started itself (its background work woke it, a background subagent reported back, another session wrote to it), and whatever waits for you (a question, a permission, a plan). A scheduled task's or /loop's turn counts as yours (Claude Code tells it no other way). An agent working on its own no longer sends a notification at every step.
+- **Mute a project's or a terminal's notifications:** right-click it in the sidebar (on the phone: a terminal's ⋯ menu) › Mute Notifications. Nothing comes on the Mac's notifications nor the phone from it; the bell and the sidebar keep everything, and a crossed-out bell says it is muted. Kept across restarts.
+- **Phone: the Claude usage card says whose limits they are** (the account's name, or its e-mail).
+- **Phone: Refresh in Claude accounts** reads every account now (one the usage API asks to wait for stays as last read).
+- **Disable a Claude account** without forgetting it: the ⊘ in its row in Claude Accounts. It is kept and its limits are still read, but it is never switched to (not by the automatic switch, an offer, Switch nor the phone) and it is listed last (disabled ones ranked among themselves as the others are). The same ⊘ enables it again.
+
+### Changed
+- **System dashboard: cards are dragged in the full view too** (only the compact one had it): drag CPU, Memory, GPU, Temperatures or Disk onto another to take its place. Both views share one order; a card hidden in compact still shows in the full view, after the others. Network and the processes stay below them (they span columns).
+- **What's New shows everything since your version:** after an update that skipped versions, the card lists each of them (it showed at most six) and says from which version to which. In the update offer, Release notes shows, in Flashex, what every version from yours up to the new one brings (read from the changelog then; its web page when that cannot be read).
+- **Claude Accounts: the plan has a column of its own** (in a narrow window it stays next to the e-mail), and it says what kind of account it is and its level: Personal · Ultra, Personal · Max 20x, Team · Standard, Enterprise. It is read again with each account's limits, so a changed plan shows.
+- **The automatic switch keeps clear of accounts with little left:** it takes another account only when that one has at least half left (a quarter once the one in use is spent) and clearly more than the one in use, as read in the last 20 minutes; it waits when the limit in use starts over within 10 minutes, and never back to the nearly spent one it left.
+
+### Fixed
+- **The chat's picture viewer ignored ← and →** while the message field had the focus (after a click on a picture in the chat).
+- **Phone: Claude usage showed the page before it for a moment,** then the numbers changed: a page waits with a spinner until its own answer arrives.
+- **The automatic Claude account switch came too late or not at all:** the account in use was read every five minutes (longer after the usage API's 429), so an agent went from 80 to 100 % between two reads; and the Usage dashboard's older numbers could stand for a newer read. Now the account in use is read every minute once it has 30 % or less left; an agent that stops at the usage limit switches the account at once (its hook says so, whatever the last read said), to one read up to an hour ago when needed; a failed automatic switch is tried again a few times, a minute apart.
+- **The same phone notification came again and again** (an agent stopped at a usage limit and woken by its background work): a terminal's same notification is not sent again until you have seen it, on the Mac or the phone (at most for an hour); a limit notice goes to the phones once in 30 minutes.
+- **The agents' dots shone through a picture opened in the chat** (and the welcome card, What's New and tips).
+- **A small picture opened in the chat was blown up** to fill the window, blurred: it shows at most at its own size now (a bigger one still shrinks to fit).
+- **A locked Mac's screen lit up again and again** while Keep System Awake kept the display on: it declared user activity every 50 seconds, which wakes a dimmed screen. While the screen is locked, only the computer is kept awake (your jobs run on), the display sleeps as macOS says; unlocked, it is kept on again.
+- **An MCP server (Atlassian, Slack…) could ask you to sign in again after a Claude account switch:** when Claude Code's login could not be read at that moment, the switch wrote the other account's login as it was kept, with MCP logins of back then whose tokens the server had replaced since. A switch now changes only the account's own login, onto Claude Code's newest one (read again if Claude Code renewed a token meanwhile); when it cannot be read, nothing is written. Accounts are kept without MCP logins.
+- **One phone notification when a usage limit stops your agents**, not one from each of them (the same stop again after half an hour).
+- **Phone: the whole Claude accounts card shrank when Switch was pressed**; now only the button says "Switching…".
+- **Phone: groups had no colour** in Projects; their name has the colour chosen on the Mac.
+- **Phone: a group's chevron sat further right** than its projects'; they line up now.
+- **Phone: an agent stopped by its usage limit offered keys that did nothing** (1, 2, 3, Enter at an empty prompt): the chat says the limit and when it starts over, with Claude accounts and Continue (the work goes on once you have switched); Claude Code's own limit menu is answered as any question, with Claude accounts beside it.
+
 ## [0.4.5] - 2026-11-08
 
 macOS only; Windows stays on [0.4.0](https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.0).
