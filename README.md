@@ -332,7 +332,7 @@ ln -s /Applications/Flashex.app/Contents/MacOS/flashex /opt/homebrew/bin/flashex
 
 ### Windows
 
-1. Download `Flashex-<version>-windows-<arch>-setup.exe` from the [latest release](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) (`x86_64` for most PCs, `aarch64` for ARM laptops such as Snapdragon ones).
+1. Download the setup for your PC from the [download table](#-download) (`x64` for most PCs, `ARM64` for ARM laptops such as Snapdragon ones).
 2. Run it. It installs for you only (no administrator) into `%LOCALAPPDATA%\Programs\Flashex`, adds Flashex to the Start menu and **New Flashex Tab Here** / **Open in Flashex** to Explorer's menu on folders, and lists it in Installed apps with its uninstaller.
 3. **The first time**, Windows SmartScreen may say "Windows protected your PC": choose **More info**, then **Run anyway**. The setup is not signed with a paid certificate yet; updates do not ask again.
 
@@ -340,7 +340,7 @@ Terminals run PowerShell 7 when it is installed (else Windows PowerShell); Git B
 
 ### Linux (beta)
 
-Download from the [latest release](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) for your architecture (`x86_64` or `aarch64`):
+Download from the [download table](#-download) for your architecture (`x86_64` or `arm64`):
 
 - **AppImage** (updates itself):
 
