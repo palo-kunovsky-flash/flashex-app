@@ -8,19 +8,27 @@
 Its own VT core, an editor with language servers, Source Control and agent-aware panes, in one native app.
 
 [![Latest release](https://img.shields.io/github/v/release/palo-kunovsky-flash/flashex-app?label=release&color=f28c28)](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest)
-[![Changelog](https://img.shields.io/badge/changelog-latest-f28c28)](CHANGELOG.md)
+[![What's new](https://img.shields.io/badge/what's%20new-changelog-f28c28)](CHANGELOG.md)
 [![macOS 13+ Apple Silicon](https://img.shields.io/badge/macOS-13%2B%20%C2%B7%20Apple%20Silicon-black?logo=apple)](#requirements)
 [![Linux beta](https://img.shields.io/badge/Linux-beta%20%C2%B7%20x86__64%20%C2%B7%20arm64-f2a33a?logo=linux&logoColor=white)](#linux-beta)
 [![Windows 10 1809+](https://img.shields.io/badge/Windows-10%201809%2B%20%C2%B7%20x86__64%20%C2%B7%20ARM64-0078d4?logo=windows&logoColor=white)](#windows)
 [![Free to use](https://img.shields.io/badge/price-free-3fb950)](#licence)
 [![Downloads](https://img.shields.io/github/downloads/palo-kunovsky-flash/flashex-app/total?color=555)](https://github.com/palo-kunovsky-flash/flashex-app/releases)
 
-| | Download |
-|---|---|
-| **macOS** (Apple Silicon, 13+) | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
-| **Windows** (10 1809+ / 11, x86_64 / ARM64) | [Setup for Windows](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) (`Flashex-<version>-windows-<arch>-setup.exe`) · see [Windows](#windows) |
-| **Linux** (beta, x86_64 / arm64) | [AppImage, .deb or .tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest) · see [Linux (beta)](#linux-beta) |
-| **Phone** (Android, iPhone) | the web app your computer serves: [Flashex on your phone](#flashex-on-your-phone) |
+### ⬇ Download
+
+<!-- downloads:start -->
+| System | Version | Download |
+|---|---|---|
+| **macOS** · Apple Silicon · 13+ | 0.5.0 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
+| **Windows** 10 1809+ / 11 · x64 | 0.4.0 | [**Flashex-0.4.0-windows-x86_64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.4.0/Flashex-0.4.0-windows-x86_64-setup.exe) |
+| **Windows** 11 · ARM64 | 0.4.0 | [**Flashex-0.4.0-windows-aarch64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.4.0/Flashex-0.4.0-windows-aarch64-setup.exe) |
+| **Linux** (beta) · x86_64 | 0.3.2 | [AppImage](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/Flashex-0.3.2-linux-x86_64.AppImage) · [.deb](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex_0.3.2_amd64.deb) · [.tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex-0.3.2-linux-x86_64.tar.gz) |
+| **Linux** (beta) · arm64 | 0.3.2 | [AppImage](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/Flashex-0.3.2-linux-aarch64.AppImage) · [.deb](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex_0.3.2_arm64.deb) · [.tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex-0.3.2-linux-aarch64.tar.gz) |
+| **Phone** (Android, iPhone) | – | the web app your computer serves: [Flashex on your phone](#flashex-on-your-phone) |
+<!-- downloads:end -->
+
+A click downloads the file. Installed copies update themselves. What each version brought: [What's new](CHANGELOG.md).
 
 [Install](#install) · [Features](#features) · [Docs](https://palo-kunovsky-flash.github.io/flashex-app/) · [Performance](#performance-and-memory) · [Shortcuts](#keyboard-shortcuts) · [Privacy](#privacy) · [Changelog](CHANGELOG.md) · [All releases](https://github.com/palo-kunovsky-flash/flashex-app/releases)
 
