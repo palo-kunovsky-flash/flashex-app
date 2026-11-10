@@ -20,7 +20,7 @@ Its own VT core, an editor with language servers, Source Control and agent-aware
 <!-- downloads:start -->
 | System | Version | Download |
 |---|---|---|
-| **macOS** · Apple Silicon · 13+ | 0.5.1 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
+| **macOS** · Apple Silicon · 13+ | 0.5.2 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
 | **Windows** 10 1809+ / 11 · x64 | 0.4.0 | [**Flashex-0.4.0-windows-x86_64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.4.0/Flashex-0.4.0-windows-x86_64-setup.exe) |
 | **Windows** 11 · ARM64 | 0.4.0 | [**Flashex-0.4.0-windows-aarch64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.4.0/Flashex-0.4.0-windows-aarch64-setup.exe) |
 | **Linux** (beta) · x86_64 | 0.3.2 | [AppImage](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/Flashex-0.3.2-linux-x86_64.AppImage) · [.deb](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex_0.3.2_amd64.deb) · [.tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex-0.3.2-linux-x86_64.tar.gz) |

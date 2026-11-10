@@ -8,6 +8,15 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-11-10
+
+### Changed
+- **A spent Claude account is worked to the end:** when the account in use is spent and no other has a quarter left, the automatic switch takes the one with the most left, down to its last few percent, rather than waiting. An account with more left is always taken first.
+
+### Fixed
+- **A Claude account could lose its kept login** ("no token": it could not be switched to again) when Flashex kept Claude Code's login at a moment it had no token (signed out, or only the MCP logins in its item). Such a moment never replaces a kept login now.
+- **The automatic Claude account switch kept trying an account it could not take:** one whose kept login has no token (it needs signing in again) was chosen for having the most room, failed, and was chosen again, while another with room left was never taken. Such an account is passed over now, and one a switch failed to take waits an hour while the next best is taken.
+
 ## [0.5.1] - 2026-11-10
 
 ### Added
@@ -954,7 +963,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.5.1...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.5.2...HEAD
+[0.5.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.5.2
 [0.5.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.5.1
 [0.5.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.5.0
 [0.4.5]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.5
