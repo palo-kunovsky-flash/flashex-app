@@ -460,6 +460,7 @@ show_agents = <span class="k">true</span>
 <tr id="cfg-agents-usage_api"><td><code>usage_api</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-claude_switcher"><td><code>claude_switcher</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-claude_auto_switch"><td><code>claude_auto_switch</code></td><td><code>false</code></td></tr>
+<tr id="cfg-agents-artifacts"><td><code>artifacts</code></td><td><code>&quot;claude.ai&quot;</code></td></tr>
 <tr id="cfg-agents-claude_status"><td><code>claude_status</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-usage_meter"><td><code>usage_meter</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-usage_notice"><td><code>usage_notice</code></td><td><code>false</code></td></tr>
@@ -492,6 +493,11 @@ claude_switcher = <span class="k">false</span>
 <span class="c"># The switcher switches by itself to the account with the most left when</span>
 <span class="c"># the one in use is nearly spent (off: it offers the switch, a notice).</span>
 claude_auto_switch = <span class="k">false</span>
+<span class="c"># Claude's artifacts: &quot;claude.ai&quot; publishes them there as Claude does</span>
+<span class="c"># (Flashex keeps a local copy of each too); &quot;local&quot; keeps them on this</span>
+<span class="c"># computer only (Flashex stops the publishing and tells Claude where the</span>
+<span class="c"># page is: `flashex artifacts`).</span>
+artifacts = <span class="s">&quot;claude.ai&quot;</span>
 <span class="c"># The Usage dashboard's Claude status card (status.claude.com, public; only</span>
 <span class="c"># the request is sent).</span>
 claude_status = <span class="k">false</span>

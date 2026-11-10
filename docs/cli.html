@@ -68,6 +68,10 @@
 <h3 id="flashex-list"><code>flashex list [--json|--agents]</code></h3>
 <p>Lists projects, tabs, panes and their surfaces (terminals, editors, previews, browsers), each named as its pane tab shows it. <code>*</code> marks the active project and <code>&gt;</code> the focused surface; an agent's state is shown in brackets, with its session: what Claude Code calls it (<code>brain-8d</code>, or the name <code>/rename</code> gave it) and its id. <code>--agents</code> lists only the terminals with an agent, one line each with the names <code>--to</code> takes. <code>--json</code> prints the API's answer as is.</p>
 
+<h3 id="flashex-artifacts"><code>flashex artifacts [--json]</code></h3>
+<p>The pages Claude published as artifacts, newest first: each one's title, its claude.ai link, the Claude account it belongs to (a page is readable and updatable only from its own account) and the local copy Flashex kept of it, readable whichever account is in use. An agent reads the local copy after an account switch instead of failing on the link. <code>--json</code> prints the API's answer as is.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex artifacts</code></pre></div>
+
 <h3 id="naming-a-terminal">Naming a terminal: <code>--surface</code> or <code>--to</code></h3>
 <p>Every <code>--surface</code> (and <code>focus</code>) takes a terminal's number (<code>7</code> or <code>#7</code>) or its name, which is what you tell an agent: <code>flashex send --to bubbles 'run the tests\n'</code>. A name is the terminal's own (yours after Rename, on the Mac or the phone), the program's title, or what Claude Code calls the session running in it, in any case. Where two terminals share a name, <code>project/name</code> picks one (<code>flashex/release</code>), and the error lists them with their numbers. The start of a Claude Code session's id (at least 4 characters) works too.</p>
 

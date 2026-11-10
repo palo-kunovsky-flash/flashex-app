@@ -8,7 +8,29 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-11-10
+
+### Added
+- **Claude's artifacts kept and listed, whichever account made them:** every page Claude publishes is copied as it goes out (kept even when publishing fails, "local only" until it is out) and noted with the Claude account it belongs to, so it stays readable after a switch. Claude Accounts lists them (Open on claude.ai, or the Local copy in a browser pane); `flashex artifacts` lists them for agents (link, account, local copy). Copies are stored once per content and kept within limits: each artifact's latest version, five older ones of the last 90 days, 500 MB in all. To keep them on this computer only, Settings › AI › Claude's artifacts › Local only (`[agents] artifacts = "local"`): Flashex stops the publishing and tells Claude where the page is kept.
+
+### Changed
+- **Claude account ceilings drawn as a reserve:** the share kept past a ceiling is a hatched stretch of the bar (the use shown going into it), and "max 80 %" has its own place at the end of the line under it; the bars keep one length and the share and its time their place, with a ceiling or without.
+- **Claude Accounts in a narrow pane:** each account is its name, its Switch and ⋯; under it one line of who it is (e-mail, plan, organisation) and the limits one under the other; ⋯ shows Refresh, Ceilings, Disable and Forget as labelled buttons (no icons squeezed together, nothing cut under them).
+- **System dashboard: a grip (⠿) on the cards that can be dragged**, as in the compact view.
+
 ### Fixed
+- **Phone (iPhone): a darker strip under the status bar:** Safari colours it from the page's background (no longer from theme-color), which was darker than the top bar; they are one colour now.
+- **Phone (Android): the message box and Send sat under the gesture bar,** cut and out of reach: Chrome draws the app under the bar without saying so, and the page now keeps room for it.
+- **Claude Accounts cut e-mails short** to make room for "(as last seen)": it is a small clock beside the name now (its words in a tooltip), and a narrow pane's line of who an account is wraps instead of ending in "…".
+- **Phone chat: a message that never reached Claude Code vanished as if sent** when another was sent right after it (it was taken for the next one that arrived). A sent message now waits for its own words in the conversation or Claude Code's queue; one still nowhere after 20 seconds says "Not delivered · hold it to send again" (Claude Code can clear its input as a turn starts, losing a message typed into it just then).
+- **Phone: a session sometimes did not open ("no answer"):** a request asked as the connection died (the phone changed networks or woke) was lost and waited 15 seconds for an answer that could not come. Reads (a chat, files, usage) are now asked again on the new connection; an action is not done twice and says at once that the connection dropped. A computer too busy to answer in 20 seconds is said in words, and a chat keeps trying.
+- **Phone chat: a `!` command sent while Claude worked showed twice** (Claude Code queues it without its `!`), and stayed "Queued" after it ran. It is one message now, no longer queued once run.
+- **Phone terminal: typing after Esc printed `[200~`:** letters typed straight into a terminal went as a paste, which an Esc before it turned into text in the shell. They go as keys now, as the computer's keyboard types them; a line sent with Enter stays a paste, as Claude Code needs.
+- **Phone (Android): Claude Code's ⏺ and ⏸ were coloured emoji** in the terminal (Android's fonts have them only so); they are drawn as plain marks (● ‖ ■).
+- **Phone: Switch said "Claude Code now uses …" before the switch was done,** even when it then failed on the computer; it answers once it is done, or says why it failed.
+- **Phone Settings: the voice and dictation choices were cut mid-word** on a narrow screen ("The phone's (by langua"); they read "By language" and "Phone (en-US)".
+- **Phone: the Claude accounts card on the Agents page was taller than its one line.**
+- **Phone (Android): the tab bar's icons and names were cut by the gesture bar** in the app installed on the home screen; the tab bar keeps clear of it.
 - **Windows: the temperature chart said "collecting…" for ever** (#8): Windows gives an app no CPU temperature (Task Manager has none either), so the chart now draws the hottest sensor there is, titled Hottest °C; with a CPU sensor it stays CPU °C.
 
 ## [0.5.0] - 2026-11-09
@@ -932,7 +954,9 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.4.5...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.5.1
+[0.5.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.5.0
 [0.4.5]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.5
 [0.4.4]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.4
 [0.4.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.4.3
