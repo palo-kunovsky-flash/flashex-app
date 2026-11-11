@@ -44,12 +44,12 @@
 <article class="content">
 <!-- /generated:head -->
 <h1>CLI reference</h1>
-<p class="lede"><code>flashex</code> controls the running app from a shell, a script or an agent's hook. Every command answers <code>--help</code> with its own usage.</p>
+<p class="lede"><code>flashex</code> controls the running app from a shell, a script or an agent's hook. Every command answers <code>--help</code> with its own usage, and a wrong argument shows that command's help. Agents that take tools rather than commands use <a href="#flashex-mcp"><code>flashex mcp</code></a>.</p>
 
 <h2 id="which-app">Which app it talks to</h2>
 <ul>
 <li><strong>Inside a Flashex terminal</strong>, <code>FLASHEX_SOCKET</code> names that window's socket and <code>FLASHEX_PANE_ID</code> the terminal. Commands target that terminal unless you pass <code>--surface</code>. A command never falls back to another Flashex.</li>
-<li><strong>Outside Flashex</strong>, the default socket: <code>~/Library/Application Support/flashex/flashex.sock</code> on macOS; on Linux <code>$XDG_RUNTIME_DIR/flashex/flashex.sock</code>, else <code>~/.local/share/flashex/flashex.sock</code>.</li>
+<li><strong>Outside Flashex</strong>, the default socket: <code>~/Library/Application Support/flashex/flashex.sock</code> on macOS; on Windows <code>%LOCALAPPDATA%\flashex\flashex.sock</code>; on Linux <code>$XDG_RUNTIME_DIR/flashex/flashex.sock</code>, else <code>~/.local/share/flashex/flashex.sock</code>.</li>
 <li>The socket is <code>0600</code> in a <code>0700</code> folder, so only you can connect. <a href="configuration.html#cfg-api-enabled"><code>[api] enabled = false</code></a> turns it off.</li>
 </ul>
 <p><strong>Ids.</strong> <a href="#flashex-list"><code>flashex list</code></a> shows projects, tabs, panes and terminals with their numeric ids. A terminal's id is called a <em>surface</em>. <code>--</code> ends the options, so text after it may start with <code>-</code>.</p>
@@ -68,8 +68,32 @@
 <h3 id="flashex-list"><code>flashex list [--json|--agents]</code></h3>
 <p>Lists projects, tabs, panes and their surfaces (terminals, editors, previews, browsers), each named as its pane tab shows it. <code>*</code> marks the active project and <code>&gt;</code> the focused surface; an agent's state is shown in brackets, with its session: what Claude Code calls it (<code>brain-8d</code>, or the name <code>/rename</code> gave it) and its id. <code>--agents</code> lists only the terminals with an agent, one line each with the names <code>--to</code> takes. <code>--json</code> prints the API's answer as is.</p>
 
+<h3 id="flashex-message"><code>flashex message --to NAME [--wait] TEXT</code></h3>
+<p>A message to the agent in terminal NAME (its name, its number, or its Claude Code session's name). It waits in that agent's box while the agent works and is typed at its prompt, never into the middle of its turn. When the turn the message started ends, the agent's reply comes back to the terminal that sent it, the same way, by itself: the sender need not ask again. <code>--wait</code> waits for the reply and prints it here, so an agent can hand out a task and go on with its result in one step. At most 20 messages an hour go from one terminal to another, so two agents cannot answer each other for ever.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex message --to ui "Build the settings form; tell me the file"
+Waiting in its box (message 3, 1 there): it goes in at its prompt.</code></pre></div>
+<h3 id="flashex-team-status"><code>flashex team status [--json]</code></h3>
+<p>Every terminal with an agent: its number, its name, its state (running, waiting, idle), whether it works on a message, and how many messages wait in its box. A lead agent reads this instead of each helper's whole terminal.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex team status
+#12   lead                     running
+#14   ui                       running    on a message
+#15   tests                    idle        · 1 waiting</code></pre></div>
+<h3 id="flashex-team-list"><code>flashex team list [--json]</code></h3>
+<p>The project's teams and chains (files in <code>.flashex/teams</code>, looked for from the folder you are in up) and the templates a new one starts from.</p>
+<h3 id="flashex-team-start"><code>flashex team start NAME</code></h3>
+<p>Opens a team's agents in a new tab, one terminal each in one pane, the lead in front (the others are its pane's tabs). Each terminal is named after its member, runs in that member's worktree when it has one (made beside the project, on branch <code>team/&lt;team&gt;/&lt;member&gt;</code>), and its agent is told who it is, who the others are and how to message them: Claude Code through its SessionStart hook (again after a compaction), other agents as their first message. The team's rules go in <code>.flashex/teams/NAME/rules.md</code>, a role's in <code>.flashex/teams/NAME/&lt;role&gt;.md</code>.</p>
+<h3 id="flashex-mcp"><code>flashex mcp</code></h3>
+<p>Flashex as an MCP server over stdio, for agents that take MCP tools rather than run commands: <code>team_message</code> (a message to a team's agent, its answer back by itself or awaited), <code>team_status</code>, <code>chain_next</code>, <code>list_agents</code> and <code>artifacts</code>. The terminal it runs in is the sender. Add it to Claude Code with <code>claude mcp add flashex -- flashex mcp</code>.</p>
+<h3 id="flashex-chain-next"><code>flashex chain next [--block NAME] [TEXT]</code></h3>
+<p>In a started chain, hands the answer of the block it runs in (its newest one, or TEXT) on to the next block, or to block NAME (back to an earlier one with notes, say). The next block gets it at its prompt, headed with where it comes from and its own task, and is shown. Run it yourself when a block's result is ready, or tell the agent to (it calls the same command).</p>
+<h3 id="flashex-team-new"><code>flashex team new TEMPLATE [NAME]</code></h3>
+<p>Writes a team file from a template into <code>.flashex/teams</code> (<code>flashex team list</code> names them): change its members, their agents and tasks there, then start it.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex team new lead-builder-reviewer feature-x
+/Users/you/code/app/.flashex/teams/feature-x.toml
+<span class="p">❯</span> flashex team start feature-x
+Started feature-x: 3 terminals, the lead in front.</code></pre></div>
 <h3 id="flashex-artifacts"><code>flashex artifacts [--json]</code></h3>
-<p>The pages Claude published as artifacts, newest first: each one's title, its claude.ai link, the Claude account it belongs to (a page is readable and updatable only from its own account) and the local copy Flashex kept of it, readable whichever account is in use. An agent reads the local copy after an account switch instead of failing on the link. <code>--json</code> prints the API's answer as is.</p>
+<p>The pages Claude published as artifacts, newest first: each one's title, its claude.ai link, the Claude account it belongs to (a page is readable and updatable only from its own account), the Claude Code folder it was published from (when that is not the main one) and the local copy Flashex kept of it, readable whichever account is in use. An agent reads the local copy after an account switch instead of failing on the link. <code>--json</code> prints the API's answer as is.</p>
 <div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex artifacts</code></pre></div>
 
 <h3 id="naming-a-terminal">Naming a terminal: <code>--surface</code> or <code>--to</code></h3>
@@ -154,14 +178,56 @@
 <div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex keeper stop
 <span class="o">Ended 3 terminals kept by keeper 4242 (3 running).</span></code></pre></div>
 
-<h3 id="flashex-vault"><code>flashex vault list</code>, <code>get</code>, <code>run</code>, <code>env</code></h3>
-<p>Secrets from the Vault (command palette › <strong>Vault…</strong>). <code>flashex vault list [--json]</code> prints the entry names, never values. <code>flashex vault get [-n] [--print] NAME</code> prints an entry's main secret (an API key's value, a login's password, an SSH key's private key) into a pipe or a file; to a terminal only with <code>--print</code>. <code>flashex vault run VARS… -- COMMAND [ARGS…]</code> runs a command with values in its environment. <code>flashex vault env [--format dotenv] [--print] VARS…</code> prints <code>KEY=VALUE</code> lines into a pipe or a file (<code>&gt; .env.local</code>); to a terminal only with <code>--print</code>.</p>
-<p>VARS, any number and mixed: <code>--env VAR=ENTRY</code> puts the entry in <code>$VAR</code>; <code>--env ENTRY</code> or <code>--entry ENTRY</code> puts it under its own variable name (the <em>Variable</em> you set on an API key, such as <code>OPENAI_API_KEY</code>, else the entry's name); <code>--all-tagged TAG</code> puts in every entry with that tag that has a variable name.</p>
+<h3 id="flashex-todo-list"><code>flashex todo list [--list NAME] [--json]</code></h3>
+<p>Prints a todo list: its categories and, under each, the items with their ids. Without <code>--list</code> it is the list of the project whose terminal the command runs in, else <strong>Inbox</strong>. The lists are Markdown files in <code>todos</code> in Flashex's data folder (<code>~/Library/Application Support/flashex/todos/Inbox.md</code> on macOS), which the command reads and writes itself: it works while Flashex is closed, and an open <a href="dashboards.html#todos">Todos window</a> shows the change within seconds. <code>--json</code> prints the list, its file and the categories (the last one has <code>"done": true</code>).</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex todo list
+<span class="o">flashex
+To do (2)
+  k3x9q2bd  Write the release notes
+  p7m2w4zd  Try the Linux build
+Done (1)
+  h5t8c2nq  Fix the build</span></code></pre></div>
+
+<h3 id="flashex-todo-add"><code>flashex todo add [--list NAME] [--to CATEGORY] TEXT</code></h3>
+<p>Adds an item at the end of the first category, or of the one named with <code>--to</code> (letter case does not matter). Prints the new item's id. A list that has no file yet is made with the categories from <a href="configuration.html#cfg-todos-categories"><code>[todos] categories</code></a>.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex todo add --list Inbox Renew the certificate
+<span class="o">w4k8n2xs  added to Inbox · To do</span></code></pre></div>
+
+<h3 id="flashex-todo-move"><code>flashex todo move ID CATEGORY [--before ID]</code></h3>
+<p>Moves an item to the end of a category, or with <code>--before ID</code> before that item of the category: this is how items are put in order from a terminal (the category may be the one the item is in already). The first letters of an id are enough while only one item's id starts with them. The item is looked for in this terminal's list, then in the others; <code>--list NAME</code> looks only there. A category of several words needs no quotes. The lines under an item (notes, sub-points) move with it.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex todo move k3x9 In progress
+<span class="o">k3x9q2bd  moved to flashex · In progress</span>
+<span class="p">❯</span> flashex todo move k3x9 In progress --before p7m2
+<span class="o">k3x9q2bd  moved to flashex · In progress, before p7m2w4zd</span></code></pre></div>
+<p>Flashex and the command take turns at a list's file (a lock on <code>.&lt;list&gt;.lock</code> beside it), so a change made in the window and one made here at the same moment are both kept.</p>
+
+<h3 id="flashex-todo-done"><code>flashex todo done ID</code></h3>
+<p>Moves an item to the list's last category, the one for what is finished.</p>
+
+<h3 id="flashex-todo-rm"><code>flashex todo rm ID</code></h3>
+<p>Deletes an item.</p>
+
+<h3 id="flashex-sync-status"><code>flashex sync status [--json]</code></h3>
+<p>How <a href="dashboards.html#sync">Sync</a> stands on this computer: its name, whether it is the main one or which one it syncs with, whether todo lists sync, and when each side last synced. It reads what Flashex last wrote, so it answers while Flashex is closed. <code>--json</code> prints the same as an object (<code>name</code>, <code>role</code>: <code>main</code>, <code>client</code> or <code>alone</code>, <code>todos</code>, <code>hub</code> with <code>state</code>: <code>ok</code>, <code>offline</code>, <code>error</code> or <code>never</code>, and <code>devices</code>).</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex sync status
+MacBook Pro: syncs with Mac mini
+Todos: sync
+Mac mini (https://mini.tailnet.ts.net:8443): in sync, synced 2 min ago</code></pre></div>
+
+<h3 id="flashex-sync-now"><code>flashex sync now</code></h3>
+<p>Asks the running Flashex to sync with the main Mac at once and waits for how it went (exit code 1 when the main Mac is offline or refuses). On the main Mac there is nothing to do: the others sync with it.</p>
+
+<h3 id="flashex-vault"><code>flashex vault list</code>, <code>get</code>, <code>run</code>, <code>env</code>, <code>import</code></h3>
+<p>Secrets from the Vault (command palette › <strong>Vault…</strong>). <code>flashex vault list [--json]</code> prints the entry names, never values. <code>flashex vault get [-n] [--print] NAME</code> prints an entry's main secret (an API key's value, a login's password, an SSH key's private key) into a pipe or a file; to a terminal only with <code>--print</code>. <code>flashex vault run VARS… -- COMMAND [ARGS…]</code> runs a command with values in its environment. <code>flashex vault env [--format dotenv] [--print] [--out FILE [--force]] VARS…</code> prints <code>KEY=VALUE</code> lines into a pipe or a file (<code>&gt; .env.local</code>); to a terminal only with <code>--print</code>; <code>--out FILE</code> writes a file only you can read. <code>flashex vault import --set NAME [--replace] [FILE|-]</code> saves a <code>.env</code> file (or standard input) as the set NAME (<code>dev</code>, <code>stage</code>, <code>prod</code>) of the terminal's project: entries <code>NAME/VAR</code> tagged NAME; <code>--replace</code> changes values that are there already.</p>
+<p>In a Flashex terminal a name is looked up among its project's entries first, then among the global ones; another project's entries are never reached. <code>--project</code> looks only among the project's, <code>--global</code> only among the global ones.</p>
+<p>VARS, any number and mixed: <code>--env VAR=ENTRY</code> puts the entry in <code>$VAR</code>; <code>--env ENTRY</code> or <code>--entry ENTRY</code> puts it under its own variable name (the <em>Variable</em> you set on an API key, such as <code>OPENAI_API_KEY</code>, else the entry's name); <code>--all-tagged TAG</code> puts in every entry with that tag that has a variable name; <code>--set NAME</code> puts in a set saved with <code>vault import</code>.</p>
 <p>For <code>get</code>, <code>run</code> and <code>env</code> Flashex brings its window forward and asks: which entries and which variables they go into, which process (its name, pid and program, and its parent's, as the system reports them), and what the command says about itself (its terminal, the command it will run, and with <code>env --print</code> that it prints the values on the terminal: shown as claims). Nothing is sent until you press Allow. A locked vault is unlocked in the same card first; <code>list</code> waits only for that. The command waits up to 90 seconds; Deny, no answer, or too many requests waiting ends it with exit code 1.</p>
 <div class="notice warn"><div><p><strong>Careful with values on screen.</strong> A value printed in a terminal stays in its scrollback, which <code>flashex read</code> returns without asking and which survives a restart. Prefer <code>vault run</code>, a pipe (<code>flashex vault get GH_TOKEN | pbcopy</code>) or Copy in the Vault. Flashex checks only where <code>flashex</code> itself writes: <code>| tee</code>, <code>| cat</code> or <code>vault run -- printenv</code> still put values on the screen after you allow them. Values in a command's environment can be read by other programs running as your user while it runs.</p></div></div>
 <div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex vault run --env OPENAI_API_KEY -- python agent.py
 <span class="p">❯</span> flashex vault run --all-tagged ci -- make deploy
-<span class="p">❯</span> flashex vault env --entry openai --entry anthropic &gt; .env.local</code></pre></div>
+<span class="p">❯</span> flashex vault env --entry openai --entry anthropic &gt; .env.local
+<span class="p">❯</span> flashex vault import --set stage .env.stage
+<span class="p">❯</span> flashex vault run --set stage -- npm run deploy</code></pre></div>
 
 <h3 id="flashex-version"><code>flashex --version</code>, <code>flashex --help</code></h3>
 <p>Print the version, or the usage of every command.</p>

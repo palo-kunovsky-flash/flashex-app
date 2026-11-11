@@ -44,7 +44,7 @@
 <article class="content">
 <!-- /generated:head -->
 <h1>Configuration</h1>
-<p class="lede">Flashex reads <code>~/.config/flashex/config.toml</code> and applies changes as soon as you save.</p>
+<p class="lede">Flashex reads <code>~/.config/flashex/config.toml</code> (on Windows <code>%APPDATA%\flashex\config.toml</code>) and applies changes as soon as you save.</p>
 
 <h2 id="the-file">The file</h2>
 <p>The file is created at the first start with a comment for every option. Settings (<kbd>⌘,</kbd>) edits the same file and keeps your comments, so you can use either. Settings that only apply to new terminals or at the next start say so in their comment. An unknown setting or a wrong value is reported in a notice with its line.</p>
@@ -67,12 +67,14 @@ keeper_on_quit = <span class="s">"ask"</span>     <span class="c"># keep termina
 <tr><td><code>~/.config/flashex/layouts.toml</code></td><td>Layout templates: <a href="panes.html#layouts">Layouts and templates</a>.</td></tr>
 <tr><td><code>~/.config/flashex/workflows.toml</code>, <code>&lt;project&gt;/.flashex/workflows.toml</code></td><td>Saved commands: <a href="projects.html#workflows">Workflows</a>.</td></tr>
 <tr><td><code>~/.config/flashex/themes/</code></td><td>Terminal colour themes (<code>key = value</code> lines such as <code>background = #1e1e2e</code> and <code>palette = 1=#f38ba8</code>). Settings › Appearance › <span class="ui">Import a terminal color theme</span> copies one here; <code>theme</code> names it.</td></tr>
-<tr><td><code>~/Library/Application Support/flashex</code></td><td>App data: the session, backups of unsaved editors, the restart keeper's folder.</td></tr>
+<tr><td><code>&lt;project&gt;/.flashex/teams/</code></td><td>The project's agent teams and chains (<code>NAME.toml</code>) and their rules: <a href="agents.html#teams">Agent teams and chains</a>.</td></tr>
+<tr><td><code>~/Library/Application Support/flashex</code></td><td>App data: the session, backups of unsaved editors, the restart keeper's folder, the todo lists (<code>todos/</code>: <a href="dashboards.html#todos">Todos</a>), the Vault (<code>vault/</code>), Command History favorites, the session search index, kept artifacts and paired phones.</td></tr>
 <tr><td><code>~/Library/Caches/flashex</code>, <code>~/Library/Logs/flashex</code></td><td>Caches (the Usage dashboard's summary, status-line data) and logs.</td></tr>
+<tr><td>Windows and Linux</td><td>Windows keeps the settings, the app data and the log in <code>%APPDATA%\flashex</code> and the caches in <code>%LOCALAPPDATA%\flashex</code>. Linux uses <code>~/.config/flashex</code>, <code>~/.local/share/flashex</code>, <code>~/.cache/flashex</code> and <code>~/.local/state/flashex</code> (or where the <code>XDG_…</code> variables point).</td></tr>
 </tbody></table></div>
 
 <h2 id="themes">Themes and colours</h2>
-<p><code>theme</code> takes <code>dark</code>, <code>light</code>, <code>system</code> (follows macOS, the default), one of Flashex's colour schemes (<code>graphite-dark</code>, <code>graphite-light</code>, <code>harbor-dark</code>, <code>harbor-light</code>, <code>ember-dark</code>, <code>ember-light</code>), or the name of a theme file in <code>~/.config/flashex/themes</code>. <code>"light:&lt;name&gt;,dark:&lt;name&gt;"</code> picks one for each macOS appearance. The <code>accent</code> can be orange, green, blue, indigo, teal or amber.</p>
+<p><code>theme</code> takes <code>dark</code>, <code>light</code>, <code>system</code> (follows macOS, the default), one of Flashex's colour schemes (<code>graphite-dark</code>, <code>graphite-light</code>, <code>harbor-dark</code>, <code>harbor-light</code>, <code>ember-dark</code>, <code>ember-light</code>), or the name of a theme file in <code>~/.config/flashex/themes</code>. <code>"light:&lt;name&gt;,dark:&lt;name&gt;"</code> picks one for each macOS appearance. The <code>accent</code> can be orange, green, blue, indigo, teal, amber, purple, pink, red, cyan or lime.</p>
 
 <h2 id="reference">Reference</h2>
 <p>Every section and key, generated from the defaults Flashex writes. Each table lists the keys with the value the new file has (or the commented-out example); the pane under it is the section exactly as the file has it, with what each option does.</p>
@@ -513,6 +515,34 @@ usage_notice = <span class="k">false</span>
 <span class="c"># The account the Usage dashboard and Settings show (the dashboard's</span>
 <span class="c"># account chips write it). Unset: the default one.</span>
 <span class="c">#claude_account = &quot;~/.claude-work&quot;</span></code></pre></div>
+<h3 id="cfg-statusline"><code>[statusline]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-statusline-draw"><td><code>draw</code></td><td><code>&quot;own&quot;</code></td></tr>
+<tr id="cfg-statusline-model"><td><code>model</code></td><td><code>true</code></td></tr>
+<tr id="cfg-statusline-project"><td><code>project</code></td><td><code>false</code></td></tr>
+<tr id="cfg-statusline-branch"><td><code>branch</code></td><td><code>true</code></td></tr>
+<tr id="cfg-statusline-context"><td><code>context</code></td><td><code>true</code></td></tr>
+<tr id="cfg-statusline-five_hour"><td><code>five_hour</code></td><td><code>false</code></td></tr>
+<tr id="cfg-statusline-week"><td><code>week</code></td><td><code>false</code></td></tr>
+<tr id="cfg-statusline-style"><td><code>style</code></td><td><code>false</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [statusline]</div><pre><code><span class="k">[statusline]</span>
+<span class="c"># Claude Code's status line in Flashex's terminals: &quot;own&quot; shows yours (as</span>
+<span class="c"># Claude Code is set up), &quot;flashex&quot; draws Flashex's with the items below.</span>
+<span class="c"># Outside Flashex (another terminal) yours stays either way.</span>
+draw = <span class="s">&quot;own&quot;</span>
+model = <span class="k">true</span>
+project = <span class="k">false</span>
+branch = <span class="k">true</span>
+context = <span class="k">true</span>
+<span class="c"># The rate limits as Claude Code last handed them over (they wait for its</span>
+<span class="c"># next request, so they can be a while old).</span>
+five_hour = <span class="k">false</span>
+week = <span class="k">false</span>
+<span class="c"># The output style, when it is not the default.</span>
+style = <span class="k">false</span></code></pre></div>
 <h3 id="cfg-sessions"><code>[sessions]</code></h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
@@ -574,6 +604,46 @@ text_scale = <span class="k">1.0</span></code></pre></div>
 hide_host = <span class="k">false</span>
 <span class="c"># The same for account email addresses (the Usage dashboard, Settings).</span>
 hide_emails = <span class="k">false</span></code></pre></div>
+<h3 id="cfg-todos"><code>[todos]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-todos-categories"><td><code>categories</code></td><td><code>[&quot;To do&quot;, &quot;Done&quot;]</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [todos]</div><pre><code><span class="k">[todos]</span>
+<span class="c"># The categories of a new todo list (palette: Open Todos), in order; the</span>
+<span class="c"># last one is for what is done. A list that exists keeps the categories</span>
+<span class="c"># its file names (the lines that start with ##).</span>
+categories = <span class="s">[&quot;To do&quot;, &quot;Done&quot;]</span></code></pre></div>
+<h3 id="cfg-sync"><code>[sync]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-sync-name"><td><code>name</code></td><td><code>&quot;&quot;</code></td></tr>
+<tr id="cfg-sync-todos"><td><code>todos</code></td><td><code>true</code></td></tr>
+<tr id="cfg-sync-dedupe"><td><code>dedupe</code></td><td><code>&quot;off&quot;</code></td></tr>
+<tr id="cfg-sync-tunnel"><td><code>tunnel</code></td><td><code>[&quot;openssl&quot;, &quot;s_client&quot;, &quot;-quiet&quot;, &quot;-verify_return_error&quot;, &quot;-servername&quot;, &quot;{host}&quot;, &quot;-connect&quot;, &quot;{host}:{port}&quot;]</code> <span class="chip">commented out</span></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [sync]</div><pre><code><span class="k">[sync]</span>
+<span class="c"># Device sync (palette: Sync…): the same todo lists on every computer of</span>
+<span class="c"># yours. One computer is the main one (Phone Access on; its Sync window</span>
+<span class="c"># shows a pairing code), the others type that code and from then on sync</span>
+<span class="c"># with it by themselves. Pairing and removing are done in the Sync window.</span>
+<span class="c"># This computer's name for the others (empty: its host name).</span>
+name = <span class="s">&quot;&quot;</span>
+<span class="c"># The todo lists sync.</span>
+todos = <span class="k">true</span>
+<span class="c"># After a sync brought new items, a command may look for ones that are the</span>
+<span class="c"># same task in different words; the Todos window then offers to merge them</span>
+<span class="c"># (nothing is merged by itself). &quot;off&quot;, &quot;claude&quot; (claude -p --model opus),</span>
+<span class="c"># or your own command line: the question comes on its standard input and</span>
+<span class="c"># it prints JSON like {&quot;pairs&quot;:[[&quot;id1&quot;,&quot;id2&quot;]]}.</span>
+dedupe = <span class="s">&quot;off&quot;</span>
+<span class="c"># How the main computer's https address is reached (Flashex has no TLS of</span>
+<span class="c"># its own): a program that checks the certificate and passes bytes between</span>
+<span class="c"># its standard input and output and the connection. Empty: openssl on</span>
+<span class="c"># macOS and Linux; on Windows, Windows' own TLS (no program is needed).</span>
+<span class="c"># tunnel = [&quot;openssl&quot;, &quot;s_client&quot;, &quot;-quiet&quot;, &quot;-verify_return_error&quot;, &quot;-servername&quot;, &quot;{host}&quot;, &quot;-connect&quot;, &quot;{host}:{port}&quot;]</span></code></pre></div>
 <h3 id="cfg-git"><code>[git]</code></h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>

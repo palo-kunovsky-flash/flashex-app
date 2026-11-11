@@ -49,6 +49,9 @@
 <h2 id="gatekeeper">macOS says Flashex cannot be opened</h2>
 <p>A downloaded copy needs one confirmation, because Flashex is not notarized by Apple. Right-click Flashex in Applications and choose <span class="ui">Open</span>, then <span class="ui">Open</span> again, or run <code>xattr -dr com.apple.quarantine /Applications/Flashex.app</code>. Homebrew does this for you. See <a href="install.html#first-open">Opening it the first time</a>.</p>
 
+<h2 id="smartscreen">Windows says "Windows protected your PC"</h2>
+<p>The setup is not signed with a paid certificate yet, so SmartScreen asks once: choose <span class="ui">More info</span>, then <span class="ui">Run anyway</span>. Updates installed by Flashex do not ask again. See <a href="install.html#windows">Windows</a>.</p>
+
 <h2 id="command-not-found"><code>flashex: command not found</code></h2>
 <p>Inside a Flashex terminal the command is always there. Outside it, Homebrew links it; after a dmg install, link it yourself: <code>ln -s /Applications/Flashex.app/Contents/MacOS/flashex /opt/homebrew/bin/flashex</code>.</p>
 
@@ -60,10 +63,17 @@
 <li>Install the hooks: <code>flashex setup claude</code>, or Settings › AI agents › Claude Code hooks. Sessions started before pick them up on their next start.</li>
 <li>Using an alias with its own <code>CLAUDE_CONFIG_DIR</code>? Pick that account in Settings › AI agents › <span class="ui">Claude account</span> and install the hooks there too (<a href="agents.html#accounts">Claude accounts</a>).</li>
 <li>If the hooks row says they are outdated or customised, <span class="ui">Update</span> brings them up to date.</li>
+<li>Another agent (Codex, Gemini CLI, pi…)? It has its own row in Settings › AI agents: <a href="agents.html#other-agents">Other coding agents</a>.</li>
 </ul>
 
 <h2 id="no-rate-limits">The Usage dashboard does not show my rate limits</h2>
 <p>They come from Claude Code's status line. Press <span class="ui">Set up in Settings…</span> (or Settings › AI agents › Claude Code status line › <span class="ui">Apply</span>); the limits appear after a session's next answer. If the row names a project or managed settings file, that file sets its own status line there. Alternatively turn on <a href="configuration.html#cfg-agents-usage_api"><code>usage_api</code></a>.</p>
+
+<h2 id="too-many-notifications">An agent notifies too often, or not at all</h2>
+<p>Settings › Notifications › <span class="ui">Notifications from agents</span> chooses which ones pop up (<span class="ui">Your turns</span> by default: turns you started that ran 30 seconds or more, and whatever waits for you); the bell keeps all of them. A crossed-out bell on a project or terminal means it is muted (right-click › <span class="ui">Mute Notifications</span>), and a <span class="ui">Notification schedule</span> or a pause holds banners and the phone's pushes back. See <a href="agents.html#notify-levels">Which ones pop up</a>.</p>
+
+<h2 id="account-switch">A Claude account cannot be switched to</h2>
+<p>An account whose kept login has no token any more needs signing in again: run <code>/login</code> in Claude Code once for it, and Flashex keeps the new login. A disabled account, or one past the ceiling you set for it, is never switched to automatically (<span class="ui">Switch</span> asks to be confirmed). Accounts kept by an earlier Flashex say "moves over once": <span class="ui">Bring Them Over</span> moves them (macOS asks your password once for each; choose Always Allow). See <a href="agents.html#switcher">Switching Claude accounts</a>.</p>
 
 <h2 id="terminals-ended">My terminals were not kept when I quit</h2>
 <p>Check Settings › Session › <span class="ui">Terminals when Flashex quits</span> (<a href="configuration.html#cfg-session-keeper_on_quit"><code>keeper_on_quit</code></a>), and that <a href="configuration.html#cfg-session-keeper"><code>keeper</code></a> and <a href="configuration.html#cfg-session-restore"><code>restore</code></a> are on. Kept terminals end after <a href="configuration.html#cfg-session-keeper_grace_minutes"><code>keeper_grace_minutes</code></a>, and logging out or restarting the Mac ends them. <code>flashex keeper status</code> shows what is kept right now.</p>
@@ -83,6 +93,9 @@
 <h2 id="ctrl-space">Ctrl+Space does not open completions</h2>
 <p>With several input sources, macOS takes <kbd>⌃Space</kbd> to switch between them. Use <kbd>⌥Esc</kbd>, which asks for completions too.</p>
 
+<h2 id="ctrl-c-windows">Ctrl+C on Windows</h2>
+<p>With text selected, <kbd>Ctrl+C</kbd> copies it and drops the selection; with nothing selected it goes to the program (it stops it, and at the prompt drops what is typed). So a second <kbd>Ctrl+C</kbd> always reaches the program. <kbd>Ctrl+Shift+C</kbd> copies and leaves the selection as it is.</p>
+
 <h2 id="shortcut-conflict">A shortcut does something else, or nothing</h2>
 <p><kbd>⌘?</kbd> lists every shortcut in effect. Shortcuts you change in <code>keybindings.toml</code> that cannot work (an unknown action, a key the shell needs) are reported with their line number and left out. See <a href="shortcuts.html#keybindings-toml">keybindings.toml</a>.</p>
 
@@ -93,7 +106,7 @@
 <p>Changes apply as soon as you save. An unknown setting, a wrong value or a file that is not valid TOML is reported in a notice, with its line where it is known. Some settings apply to new terminals or at the next start (each says so in <a href="configuration.html">the reference</a>).</p>
 
 <h2 id="logs">Where are the logs and data?</h2>
-<p>Settings: <code>~/.config/flashex</code>. App data (session, backups of unsaved editors, the restart keeper): <code>~/Library/Application Support/flashex</code>. Caches: <code>~/Library/Caches/flashex</code>. Logs: <code>~/Library/Logs/flashex</code>. Attach the log to a bug report if it helps (check it for anything private first).</p>
+<p>On macOS: settings in <code>~/.config/flashex</code>; app data (session, backups of unsaved editors, the restart keeper, todos, the Vault) in <code>~/Library/Application Support/flashex</code>; caches in <code>~/Library/Caches/flashex</code>; the log in <code>~/Library/Logs/flashex/flashex.log</code>. On Windows: settings, app data and the log in <code>%APPDATA%\flashex</code>, caches in <code>%LOCALAPPDATA%\flashex</code>. On Linux: <code>~/.config/flashex</code>, <code>~/.local/share/flashex</code>, <code>~/.cache/flashex</code> and the log in <code>~/.local/state/flashex</code> (or where the <code>XDG_…</code> variables point). Attach the log to a bug report if it helps (check it for anything private first).</p>
 
 <h2 id="linux-fuse">The AppImage does not start on Linux</h2>
 <p>It needs FUSE (<code>fuse3</code> / <code>fusermount3</code>). Without it, run it with <code>--appimage-extract-and-run</code>, or use the <code>.deb</code> or <code>.tar.gz</code>.</p>
@@ -104,9 +117,11 @@
 <h3 id="faq-api-key">Do I need an API key for the AI features?</h3>
 <p>No. Flashex uses Claude Code, Codex or Gemini CLI with their own login, your own command, or a local model server. An API key is only needed for a hosted OpenAI-compatible server you choose.</p>
 <h3 id="faq-other-agents">Does it work with agents other than Claude Code?</h3>
-<p>Yes. Any agent runs in a terminal and can notify (OSC 9, 777, 99, a bell, <code>flashex notify</code>) or report its state (<code>flashex agent</code>). The hooks, the dashboards, resume and reload are for Claude Code.</p>
+<p>Yes. Codex, Gemini CLI, Grok Build, Copilot CLI, OpenCode, pi, Antigravity CLI and Cursor CLI each have a row in Settings › AI agents that connects them; <a href="agents.html#other-agents">the table</a> says what each one tells Flashex (state, permission questions, the chat, usage). Any other program in a terminal can notify (OSC 9, 777, 99, a bell, <code>flashex notify</code>) or report its state (<code>flashex agent</code>). Reload, session search, the account switcher and artifacts are for Claude Code.</p>
 <h3 id="faq-intel">Does it run on Intel Macs or Windows?</h3>
 <p>No Intel Macs. Windows 10 (1809) and 11 are supported on x86_64 and ARM64; Linux is in beta.</p>
+<h3 id="faq-phone">Do I need an app on my phone?</h3>
+<p>No. The phone opens a web app that your own computer serves, reached through Tailscale, and you add it to the home screen from the browser. See <a href="agents.html#phone">Your agents on your phone</a>.</p>
 <!-- generated:foot -->
 <nav class="pager" aria-label="Previous and next page">
 <a class="prev" href="privacy.html"><span>Previous</span>Privacy &amp; security</a>

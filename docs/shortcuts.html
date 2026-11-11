@@ -46,6 +46,25 @@
 <h1>Keyboard shortcuts</h1>
 <p class="lede">The default shortcuts, the key profiles, and how to change any of them. In the app, <kbd>⌘?</kbd> lists every shortcut in effect and filters them as you type.</p>
 
+<h2 id="pc">On Windows and Linux</h2>
+<p>The tables below show the Mac's keys. Windows and Linux have no Cmd, Ctrl with a letter belongs to the program in the terminal, and Ctrl+Alt is AltGr on many layouts. So, as Windows Terminal and VS Code do, Flashex's own keys over a terminal take Ctrl+Shift (or Alt+Shift), tabs take Alt with a number and panes Alt with an arrow; in the code editor the usual plain Ctrl keys work (<kbd>Ctrl+S</kbd>, <kbd>Ctrl+F</kbd>, <kbd>Ctrl+P</kbd>). <span class="ui">?</span> › Keyboard Shortcuts (<kbd>F1</kbd>) lists every shortcut as your computer has it, and <code>keybindings.toml</code> changes them the same way. The main ones:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>To</th><th>Press</th></tr></thead>
+<tbody>
+<tr><td>Command palette / go to file / Settings / all shortcuts</td><td class="keys"><kbd>Ctrl+Shift+P</kbd> <kbd>Ctrl+Shift+O</kbd> <kbd>Ctrl+,</kbd> <kbd>F1</kbd></td></tr>
+<tr><td>New tab / close the pane tab / close the tab / reopen closed</td><td class="keys"><kbd>Ctrl+Shift+T</kbd> <kbd>Ctrl+Shift+W</kbd> <kbd>Alt+Shift+W</kbd> <kbd>Alt+Shift+T</kbd></td></tr>
+<tr><td>Go to a tab / the next and previous tab</td><td class="keys"><kbd>Alt+1</kbd>…<kbd>Alt+9</kbd> <kbd>Ctrl+PageDown</kbd> <kbd>Ctrl+PageUp</kbd></td></tr>
+<tr><td>Split right / down, zoom the pane</td><td class="keys"><kbd>Ctrl+Shift+D</kbd> <kbd>Alt+Shift+D</kbd> <kbd>Ctrl+Shift+Enter</kbd></td></tr>
+<tr><td>Focus the pane in a direction / the next pane</td><td class="keys"><kbd>Alt+←</kbd> <kbd>Alt+→</kbd> <kbd>Alt+↑</kbd> <kbd>Alt+↓</kbd> <kbd>F6</kbd></td></tr>
+<tr><td>Copy / paste / select all in a terminal</td><td class="keys"><kbd>Ctrl+Shift+C</kbd> <kbd>Ctrl+Shift+V</kbd> <kbd>Ctrl+Shift+A</kbd></td></tr>
+<tr><td>Find / previous and next command</td><td class="keys"><kbd>Ctrl+Shift+F</kbd> <kbd>Ctrl+Shift+↑</kbd> <kbd>Ctrl+Shift+↓</kbd></td></tr>
+<tr><td>New project / sidebar / file tree</td><td class="keys"><kbd>Ctrl+Shift+N</kbd> <kbd>Ctrl+Shift+M</kbd> <kbd>Ctrl+Shift+B</kbd></td></tr>
+<tr><td>Command history / oldest unread notification</td><td class="keys"><kbd>Alt+Shift+R</kbd> <kbd>Alt+Shift+U</kbd></td></tr>
+<tr><td>Chat | Terminal over an agent / a browser panel</td><td class="keys"><kbd>Alt+Shift+J</kbd> <kbd>Ctrl+Shift+U</kbd></td></tr>
+<tr><td>This pane's text bigger / smaller / reset</td><td class="keys"><kbd>Ctrl+=</kbd> <kbd>Ctrl+-</kbd> <kbd>Ctrl+0</kbd></td></tr>
+</tbody></table></div>
+<p>On Windows, <kbd>Ctrl+C</kbd> also copies when text is selected (else it stops the program) and <kbd>Ctrl+V</kbd> pastes.</p>
+
 <h2 id="profiles">Key profiles</h2>
 <p><a href="configuration.html#cfg-keys-profile"><code>[keys] profile</code></a> picks a set of conventions: <code>"flashex"</code> (the default), <code>"sublime"</code> or <code>"vscode"</code>. The defaults already follow Sublime Text and VS Code for most editing keys; a profile changes only <a href="#profile-sublime">the few</a> <a href="#profile-vscode">that differ</a>. <code>keybindings.toml</code> applies on top of the profile.</p>
 
@@ -233,6 +252,7 @@
 <tr><td>System Dashboard</td><td><code>system_dashboard</code></td></tr>
 <tr><td>Phone Access Dashboard</td><td><code>phone_dashboard</code></td></tr>
 <tr><td>Claude Accounts</td><td><code>accounts_dashboard</code></td></tr>
+<tr><td>Artifacts</td><td><code>artifacts_dashboard</code></td></tr>
 <tr><td>Keep System Awake…</td><td><code>keep_mac_awake</code></td></tr>
 <tr><td>Stop Keeping the System Awake</td><td><code>stop_keeping_mac_awake</code></td></tr>
 <tr><td>Toggle Keep System Awake</td><td><code>toggle_keep_mac_awake</code></td></tr>
@@ -348,6 +368,7 @@
 <tr id="action-system_dashboard"><td><code>system_dashboard</code></td><td>System Dashboard</td><td class="keys"><span class="chip">none</span></td></tr>
 <tr id="action-phone_dashboard"><td><code>phone_dashboard</code></td><td>Phone Access Dashboard</td><td class="keys"><span class="chip">none</span></td></tr>
 <tr id="action-accounts_dashboard"><td><code>accounts_dashboard</code></td><td>Claude Accounts</td><td class="keys"><span class="chip">none</span></td></tr>
+<tr id="action-artifacts_dashboard"><td><code>artifacts_dashboard</code></td><td>Artifacts</td><td class="keys"><span class="chip">none</span></td></tr>
 <tr id="action-keep_mac_awake"><td><code>keep_mac_awake</code></td><td>Keep System Awake…</td><td class="keys"><span class="chip">none</span></td></tr>
 <tr id="action-stop_keeping_mac_awake"><td><code>stop_keeping_mac_awake</code></td><td>Stop Keeping the System Awake</td><td class="keys"><span class="chip">none</span></td></tr>
 <tr id="action-toggle_keep_mac_awake"><td><code>toggle_keep_mac_awake</code></td><td>Toggle Keep System Awake</td><td class="keys"><span class="chip">none</span></td></tr>

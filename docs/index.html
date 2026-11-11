@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <title>Overview · Flashex docs</title>
-<meta name="description" content="Flashex is a fast terminal built for AI coding agents, on macOS, Windows and Linux.">
+<meta name="description" content="Flashex is a fast, light terminal built for AI coding agents, on macOS and Windows (Linux in beta).">
 <link rel="icon" href="screenshots/icon.png">
 <link rel="stylesheet" href="assets/docs.css">
 </head>
@@ -44,37 +44,44 @@
 <article class="content">
 <!-- /generated:head -->
 <h1>Flashex</h1>
-<p class="lede">A fast terminal built for AI coding agents, on macOS, Windows and Linux: its own terminal core, an editor with language servers, Source Control and agent-aware panes, in one native app.</p>
+<p class="lede">A fast, light terminal built for AI coding agents, on macOS and Windows (Linux in beta): every agent's state at a glance, a chat over its terminal, your phone as a remote, an editor, Source Control and a browser panel, in one native app.</p>
 
 <figure>
-<img src="screenshots/hero-dark.png" alt="Flashex with a TypeScript editor, Claude Code asking for permission to run a command, a terminal with a failed test run, and the sidebar showing each project's agents and branch" width="2880" height="1800">
-<figcaption>A project with an editor, an agent waiting for you and command blocks; the sidebar shows every project's agents and branch.</figcaption>
+<img src="screenshots/hero-dark.png" alt="Flashex with Claude Code asking for permission to run a command, a terminal with a failed test run, a TypeScript editor, and the sidebar showing each project's branch and every agent by state" width="2820" height="1800">
+<figcaption>A project with an agent waiting for you, command blocks and an editor; the sidebar shows every project's branch and, below, every agent by state.</figcaption>
 </figure>
 
 <h2 id="what-it-is">What Flashex is</h2>
 <ul>
-<li><strong>A terminal built for agents.</strong> Run Claude Code (or any agent) in as many terminals as you like. Claude Code's hooks tell Flashex when an agent is running, waiting for you or done; the sidebar shows each agent's state as a dot, and notifications point at the exact terminal.</li>
+<li><strong>A terminal built for agents.</strong> Run Claude Code, Codex, Gemini CLI, pi and <a href="agents.html#other-agents">other agents</a> in as many terminals as you like. Their hooks tell Flashex when an agent is running, waiting for you or done; the sidebar shows each agent's state as a dot, and <a href="agents.html#notifications">notifications</a> say what it said and point at the exact terminal.</li>
+<li><strong>A chat over an agent's terminal.</strong> <a href="agents.html#chat">Chat | Terminal</a> in a pane's tab strip shows the conversation as a chat, with its pictures and videos and its questions as cards; <a href="agents.html#later">Send a Message Later</a> schedules a prompt.</li>
+<li><strong>Your agents on your phone.</strong> <a href="agents.html#phone">Phone Access</a> pairs a phone over Tailscale: follow and answer every agent, get notified, switch Claude accounts, read files and diffs.</li>
+<li><strong>Claude accounts that switch before a limit.</strong> <a href="agents.html#switcher">Claude Accounts</a> keeps each login with its 5-hour and weekly limits and makes another one the login in a click, or by itself when the one in use is nearly spent.</li>
+<li><strong>Agent teams and chains.</strong> A lead and its helpers, each in a terminal of its own, messaging each other through Flashex: <a href="agents.html#teams">Agent teams and chains</a>.</li>
+<li><strong>Todos, Sync and Artifacts.</strong> A <a href="dashboards.html#todos">todo list</a> per project that you and your agents edit, <a href="dashboards.html#sync">the same on every computer</a>, and <a href="dashboards.html#artifacts">every page Claude published</a> with a local copy.</li>
 <li><strong>Terminals that outlive the app.</strong> A small helper keeps your shells, agents and jobs running while Flashex restarts for an update, after a crash, and by default after you quit. They come back with what they showed.</li>
 <li><strong>Command blocks.</strong> Every command is a block with its folder, duration and exit code: jump between them, fold, copy, rerun, send to an agent or save as a workflow.</li>
 <li><strong>A real editor.</strong> Tree-sitter highlighting, multiple cursors, and go to definition, references, hover, completion, rename and diagnostics from the language servers you already have.</li>
-<li><strong>Source Control, a browser panel and dashboards.</strong> Stage, commit, pull and push; open local pages next to your code; see your agents, your Claude Code usage and your Mac at a glance.</li>
+<li><strong>Source Control, a browser panel and dashboards.</strong> <a href="editor.html#git">Stage, commit, pull and push</a>; open <a href="editor.html#browser">local pages</a> next to your code; see your agents, your usage and limits and your computer <a href="dashboards.html">at a glance</a>.</li>
+<li><strong>A Vault and a <code>flashex</code> command.</strong> Secrets in an <a href="privacy.html#vault">encrypted file</a> that programs get only after you allow it, and a <a href="cli.html">command</a> (and MCP server) with which scripts and agents drive the app.</li>
 <li><strong>Its own terminal core.</strong> <code>flashex-vt</code> is written in Rust for Flashex, with inline images (kitty graphics, sixel, iTerm2) and the kitty keyboard protocol.</li>
 </ul>
-<p>Flashex is free to use, for personal and commercial work. It runs on Apple Silicon Macs with macOS 13 or later; a <a href="install.html#linux">Linux build</a> is in beta.</p>
+<p>Flashex is free to use, for personal and commercial work. It runs on Apple Silicon Macs with macOS 13 or later and on <a href="install.html#windows">Windows</a> 10 (1809) and 11, x86_64 and ARM64; a <a href="install.html#linux">Linux build</a> is in beta. It has no telemetry and no accounts: <a href="privacy.html">what stays on your computer</a>.</p>
 
 <h2 id="start-here">Start here</h2>
 <div class="cards">
-<a class="card" href="install.html"><div class="title"><span class="badge c-blue">In</span>Install</div><p>The dmg or Homebrew, the first open, updates.</p></a>
+<a class="card" href="install.html"><div class="title"><span class="badge c-blue">In</span>Install</div><p>macOS (dmg or Homebrew), Windows, Linux; the first open, updates.</p></a>
 <a class="card" href="quick-start.html"><div class="title"><span class="badge c-green">Qs</span>Quick start</div><p>A project, terminals, splits and Claude Code in a few minutes.</p></a>
-<a class="card" href="agents.html"><div class="title"><span class="badge c-amber">Ag</span>Working with agents</div><p>Hooks, accounts, notifications, resuming sessions.</p></a>
+<a class="card" href="agents.html"><div class="title"><span class="badge c-amber">Ag</span>Working with agents</div><p>Hooks, the chat, the phone, Claude accounts, teams, notifications.</p></a>
 <a class="card" href="panes.html"><div class="title"><span class="badge c-indigo">Pa</span>Panes, tabs and layouts</div><p>Splits, pane tabs, dragging, sizes and templates.</p></a>
+<a class="card" href="dashboards.html"><div class="title"><span class="badge c-purple">Da</span>Dashboards</div><p>Agents, Usage, System, Todos, Sync and Artifacts.</p></a>
 <a class="card" href="configuration.html"><div class="title"><span class="badge c-slate">Co</span>Configuration</div><p>Every setting in <code>config.toml</code>.</p></a>
 <a class="card" href="cli.html"><div class="title"><span class="badge c-brown">Cl</span>CLI reference</div><p>The <code>flashex</code> command for scripts and agents.</p></a>
 </div>
 
 <h2 id="a-tour">A short tour</h2>
 <figure>
-<img src="screenshots/notifications.png" alt="The notification center over a project's panes: Claude Code asking to run a command and reporting what it did, each entry naming its project and terminal" width="2880" height="1800" loading="lazy">
+<img src="screenshots/notifications.png" alt="The notification center over a project's panes: Claude Code asking to run a command and reporting what it did, each entry naming its project and terminal" width="2820" height="1800" loading="lazy">
 <figcaption>The notification center: each entry says what the agent said and points at its terminal.</figcaption>
 </figure>
 <figure>
@@ -82,12 +89,12 @@
 <figcaption>Command blocks and an inline image.</figcaption>
 </figure>
 <figure>
-<img src="screenshots/palette.png" alt="The command palette searching for split over a TypeScript editor, a terminal and an agent terminal" width="2880" height="1800" loading="lazy">
+<img src="screenshots/palette.png" alt="The command palette searching for claude: Claude Accounts, Reload Claude Session and other actions, then the tabs running Claude Code" width="2820" height="1800" loading="lazy">
 <figcaption>The command palette (<kbd>⌘K</kbd>) finds any action, project or tab.</figcaption>
 </figure>
 <figure>
-<img src="screenshots/hero-light.png" alt="A 2×2 grid of terminals in the light theme: an agent at work, a dev server whose port shows on its terminal's row in the sidebar, a failed test run and a blog repository" width="2880" height="1800" loading="lazy">
-<figcaption>The light theme. Flashex follows the macOS appearance by default.</figcaption>
+<img src="screenshots/hero-light.png" alt="The same project in the light theme: an agent asking for permission, a failed test run and an editor" width="2820" height="1800" loading="lazy">
+<figcaption>The light theme. Flashex follows the system's appearance by default.</figcaption>
 </figure>
 
 <h2 id="getting-help">Getting help</h2>

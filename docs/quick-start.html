@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <title>Quick start · Flashex docs</title>
-<meta name="description" content="Your first project, terminals, splits, Claude Code and the command palette.">
+<meta name="description" content="Your first project, terminals, splits, Claude Code, the command palette and your phone.">
 <link rel="icon" href="screenshots/icon.png">
 <link rel="stylesheet" href="assets/docs.css">
 </head>
@@ -45,14 +45,19 @@
 <!-- /generated:head -->
 <h1>Quick start</h1>
 <p class="lede">From an empty window to an agent at work in a few minutes.</p>
-<p><strong>On Windows and Linux</strong> the keys below use Ctrl where they say <kbd>⌘</kbd> and Alt where they say <kbd>⌥</kbd>; Flashex's own shortcuts that a shell would want take Shift too (<kbd>Ctrl+Shift+T</kbd> a new tab, <kbd>Ctrl+Shift+P</kbd> the palette). <span class="ui">?</span> › Keyboard Shortcuts lists them as your computer writes them. The first start shows a welcome card with these first steps; <span class="ui">Welcome to Flashex</span> in the palette shows it again.</p>
+<p><strong>On Windows and Linux</strong> the keys are other ones than the Mac's written below: Flashex's own shortcuts over a terminal take Ctrl+Shift (<kbd>Ctrl+Shift+T</kbd> a new tab, <kbd>Ctrl+Shift+P</kbd> the palette, <kbd>Ctrl+Shift+D</kbd> a split), Alt with an arrow goes between panes and Alt with a number to a tab. <a href="shortcuts.html#pc">The keys on Windows and Linux</a> has the main ones, and <span class="ui">?</span> › Keyboard Shortcuts (<kbd>F1</kbd>) lists them all as your computer writes them.</p>
+<p><strong>The first start</strong> shows a welcome card with the first steps (open a folder, connect your agents, pair your phone); <span class="ui">Welcome to Flashex</span> in the palette shows it again. After it, <span class="ui">Show me around</span> is a tour of five tips, each beside the thing it is about (the projects, the agents' dots, Search, the bell, the phone); <kbd>Esc</kbd> skips it, the palette's <span class="ui">Show me around</span> starts it again, and <a href="configuration.html#cfg-general-tips"><code>[general] tips = false</code></a> keeps it from showing by itself. After an update, <span class="ui">What's New</span> lists what the versions since yours brought (also in the <span class="ui">?</span> menu).</p>
+<figure>
+<img src="screenshots/welcome.png" alt="The welcome card on the first start: open a folder, connect your agents, pair your phone, and what else Search opens" width="2820" height="1800" loading="lazy">
+<figcaption>The welcome card; Esc closes it.</figcaption>
+</figure>
 
 <h2 id="the-window">The window</h2>
 <ul>
-<li><strong>The sidebar</strong> on the left lists your projects, optionally in groups. Under each project are its terminals, editors and browser panels, with an agent's state as a dot. <kbd>⌘\</kbd> shows or hides it.</li>
+<li><strong>The sidebar</strong> on the left lists your projects, optionally in groups. Under each project are its terminals, editors and browser panels, with an agent's state as a dot. Under the projects, <span class="ui">Agents</span> lists every agent of the window: those waiting for you, those working and the idle ones, with <span class="ui">Dashboard</span> and <span class="ui">+ Agent</span> at its foot. <kbd>⌘\</kbd> shows or hides the sidebar.</li>
 <li><strong>The top row</strong> holds the active project's tabs. Each tab has its own layout of panes.</li>
 <li><strong>Panes</strong> fill the rest. A pane can hold several tabs of its own (terminals, editors, a browser, a dashboard), shown in its tab strip.</li>
-<li><strong>The status bar</strong> at the bottom shows the focused terminal's folder and the project's branch, or the focused editor's language, indentation and line endings (click them to change them).</li>
+<li><strong>The status bar</strong> at the bottom shows the focused terminal's folder and the project's branch, or the focused editor's language, indentation and line endings (click them to change them); then the agents (the focused one, those waiting, the limits' meter when it is on, the clock of <a href="agents.html#later">messages to send later</a>), the computer (Keep System Awake, problems) and the phone.</li>
 </ul>
 
 <h2 id="first-project">Your first project</h2>
@@ -80,8 +85,10 @@
 <ul>
 <li>the sidebar shows a dot for each agent: <span class="dot waiting"></span> orange when it waits for you, <span class="dot running"></span> green while it runs, <span class="dot error"></span> red on an error;</li>
 <li>when an agent finishes or needs you while you look elsewhere, its terminal is marked unread and you get a notification; <kbd>⇧⌘U</kbd> jumps to the oldest unread one;</li>
-<li>the Agents dashboard (<kbd>⌘K</kbd> › Agents Dashboard) shows every session at once.</li>
+<li>the Agents dashboard (<kbd>⌘K</kbd> › Agents Dashboard) shows every session at once;</li>
+<li><span class="ui">Chat | Terminal</span> in the agent's pane tab strip (<kbd>⇧⌘J</kbd>) shows its conversation as a <a href="agents.html#chat">chat</a>, with a box to write to it.</li>
 </ul>
+<p>Codex, Gemini CLI, Grok Build, Copilot CLI, OpenCode, pi and others are connected the same way, each with its row in Settings › AI agents: <a href="agents.html#other-agents">Other coding agents</a>.</p>
 <p>Everything about agents is in <a href="agents.html">Working with agents</a>.</p>
 
 <h2 id="phone">Your phone</h2>
@@ -92,10 +99,10 @@
 <img src="screenshots/phone-chat-done.png" width="180" alt="A finished conversation on the phone with a box for the next prompt" loading="lazy">
 <img src="screenshots/phone-system.png" width="180" alt="The System dashboard on the phone" loading="lazy">
 </div>
-<p>On the phone: every agent as a chat you can answer (and its questions as buttons), terminals you type into, notifications when an agent waits for you or is done, the project's files and changes, and the System dashboard.</p>
+<p>On the phone: every agent as a chat you can answer (and its questions as buttons), terminals you type into, notifications when an agent waits for you or is done, the project's files and changes, your Claude accounts and usage, and the System dashboard. More in <a href="agents.html#phone">Your agents on your phone</a>.</p>
 
 <h2 id="palette">The command palette</h2>
-<p><kbd>⌘K</kbd> finds any action, project or tab: type a few letters and press Return. Actions show their shortcut, so the palette is also the quickest way to learn them. Some things live only there, such as the dashboards, layouts, Keep Mac Awake, Reload Claude Session and Restart Flashex. <kbd>⌘P</kbd> opens a file of the project, and <kbd>⌘?</kbd> lists every shortcut in effect.</p>
+<p><kbd>⌘K</kbd> finds any action, project or tab: type a few letters and press Return. Actions show their shortcut, so the palette is also the quickest way to learn them. Some things live only there, such as the dashboards (Agents, Usage, System, Claude Accounts), <span class="ui">Open Todos</span>, <span class="ui">Artifacts</span>, <span class="ui">Sync…</span>, <span class="ui">Agent Teams…</span>, <span class="ui">Send a Message Later…</span>, <span class="ui">Vault…</span>, layouts, Keep System Awake, Reload Claude Session and Restart Flashex. <kbd>⌘P</kbd> opens a file of the project, and <kbd>⌘?</kbd> lists every shortcut in effect.</p>
 <figure>
 <img src="screenshots/shortcuts.png" alt="The keyboard shortcuts overlay over a terminal" width="2880" height="1800" loading="lazy">
 <figcaption>Keyboard Shortcuts (<kbd>⌘?</kbd>), filtered as you type.</figcaption>
@@ -104,7 +111,7 @@
 <h2 id="terminal">More in the terminal</h2>
 <h3 id="blocks">Command blocks</h3>
 <p>Shell integration for zsh, bash and fish (set up automatically) turns every command into a block with its folder, duration and exit code. <kbd>⌘↑</kbd> and <kbd>⌘↓</kbd> jump between commands, <kbd>⇧⌘↑</kbd> and <kbd>⇧⌘↓</kbd> select whole ones, and <kbd>⌥⌘[</kbd> folds a finished command's output (<kbd>⌥⌘]</kbd> unfolds it). Point at a block for its tools: copy the command or its output, rerun it, fold it, send it to an agent, or save it as a workflow with parameters. While Claude Code or another full-screen program runs, its terminal looks as in any other terminal; it becomes a block again when it ends.</p>
-<p>The compact prompt shows the folder and the git branch; click the folder to go to another one. <kbd>⇧⌘E</kbd> turns the prompt's editor (syntax colours, multi-line editing) off and on for one terminal.</p>
+<p>The compact prompt shows the folder and the git branch; click the folder to go to another one. <kbd>⇧⌘E</kbd> turns the prompt's editor (syntax colours, multi-line editing) off and on for one terminal. <kbd>↑</kbd> at a prompt brings back that terminal's own commands, not every terminal's (<a href="configuration.html#cfg-shell-own_history"><code>[shell] own_history</code></a>; each command is still saved to the shell's history file at once).</p>
 <h3 id="ai-help">AI help (optional)</h3>
 <p>At an empty prompt, type <code># find files bigger than 100 MB</code> and press Return: a command for your system, shell and folder is put into the line for you to check. It never runs by itself, and the <code>#</code> line never reaches your shell or its history. A failed command's block offers <span class="ui">Explain</span> and <span class="ui">Fix</span>. Flashex uses the AI you already have: Claude Code, Codex or Gemini CLI with their own login, your own command, or any OpenAI-compatible server, local models included. It never needs an API key of its own, and nothing is sent until you press Return or click. Grey suggestions from your history appear as you type (no AI, offline); <kbd>→</kbd> takes one, <kbd>⌥→</kbd> one word. Settings › AI chooses the provider; <a href="configuration.html#cfg-ai"><code>[ai]</code></a> has the details.</p>
 <h3 id="command-history">Command history</h3>
@@ -127,7 +134,7 @@
 </ul>
 
 <h2 id="settings">Settings</h2>
-<p><kbd>⌘,</kbd> opens Settings, grouped as Appearance, Terminal, Editor, AI, Browser and General. It edits <code>~/.config/flashex/config.toml</code> and keeps your comments; you can also edit the file yourself, and changes apply as soon as you save. Every setting is in the <a href="configuration.html">Configuration</a> reference.</p>
+<p><kbd>⌘,</kbd> opens Settings, grouped as Appearance, Terminal, Editor, AI, Browser and General (a column on the left when the window has room, each section a card). It edits <code>~/.config/flashex/config.toml</code> and keeps your comments; you can also edit the file yourself, and changes apply as soon as you save. Every setting is in the <a href="configuration.html">Configuration</a> reference.</p>
 <!-- generated:foot -->
 <nav class="pager" aria-label="Previous and next page">
 <a class="prev" href="install.html"><span>Previous</span>Install</a>

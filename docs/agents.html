@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <title>Working with agents · Flashex docs</title>
-<meta name="description" content="Claude Code hooks, accounts, the status line, notifications, resuming sessions and terminals that survive a quit.">
+<meta name="description" content="Agent hooks, the chat over a terminal, the phone, Claude accounts and their switch, teams, notifications and resuming sessions.">
 <link rel="icon" href="screenshots/icon.png">
 <link rel="stylesheet" href="assets/docs.css">
 </head>
@@ -44,7 +44,7 @@
 <article class="content">
 <!-- /generated:head -->
 <h1>Working with agents</h1>
-<p class="lede">Run Claude Code, Codex, Gemini CLI or any other agent in as many terminals as you like, and let Flashex tell you which one needs you.</p>
+<p class="lede">Run Claude Code, Codex, Gemini CLI or any other agent in as many terminals as you like, and let Flashex tell you which one needs you, on the computer and on your phone.</p>
 
 <h2 id="hooks">Claude Code hooks</h2>
 <p>Claude Code's hooks are how Flashex learns that a session is running, waiting for you, done or failed, which tool it is using and which conversation it is. Install them once:</p>
@@ -55,6 +55,7 @@
 <h2 id="states">What you see</h2>
 <ul>
 <li><strong>The sidebar</strong> lists each project's terminals with a robot icon for one running a coding agent (its row named by the agent: Claude Code, Codex, Grok Build, …) and a dot for its state: <span class="dot waiting"></span> orange when it waits for you, <span class="dot running"></span> green while it runs, <span class="dot error"></span> red on an error. An agent's row is called by the name you gave the terminal, else by the agent ("Claude Code", "Claude Code · 2").</li>
+<li><strong>Agents</strong>, under the projects in the sidebar, lists every agent of the window in three groups: <span class="ui">Waiting for you</span>, <span class="ui">Working</span> and <span class="ui">Idle</span>, each named as its work (the name you gave it, else the conversation's topic) with its group and project. A click goes to its terminal; <span class="ui">Dashboard</span> and <span class="ui">+ Agent</span> (Claude Code in a new tab of the project shown) are at its foot. In the narrow sidebar the agents' icon opens the Agents dashboard, orange while one waits.</li>
 <li><strong>The pane</strong> of a terminal that wants your attention (an agent finished or waits, a long command ended while you looked elsewhere) gets a highlighted frame, and its tab a dot.</li>
 <li><strong>The Agents dashboard</strong> (<kbd>⌘K</kbd> › Agents Dashboard) shows every session, what it is doing and for how long: see <a href="dashboards.html#agents">Dashboards</a>.</li>
 </ul>
@@ -77,6 +78,25 @@
 
 <p>Other agents work without hooks too: Flashex recognises Claude Code, Codex, Gemini CLI, Aider and others running in a terminal (for <span class="ui">Send to…</span> on a block), and any program can report its state with <a href="cli.html#flashex-agent"><code>flashex agent waiting</code></a> or post a notification.</p>
 
+<h2 id="chat">The chat over an agent's terminal</h2>
+<p>An agent's pane has <span class="ui">Chat | Terminal</span> in its tab strip (<kbd>⇧⌘J</kbd>; <kbd>Alt+Shift+J</kbd> on Windows and Linux). <span class="ui">Chat</span> shows the same session as a conversation, read from the agent's own transcript; the terminal keeps running under it and <span class="ui">Terminal</span> shows it again at any moment. It works for the agents with "Phone chat" in <a href="#other-agents">the table above</a>, and for an agent of a remote project.</p>
+<figure>
+<img src="screenshots/chat.png" alt="An agent's terminal shown as a chat: the steps it took, its reply with a chart it names, and its permission question as a card with three choices" width="2820" height="1800" loading="lazy">
+<figcaption>Chat | Terminal over an agent: the conversation, a picture the reply names, and the question as a card.</figcaption>
+</figure>
+<ul>
+<li><strong>The conversation:</strong> your prompts, the replies, and each step the agent takes (a command, a file read) as one quiet line with the first lines of what it gave; a click shows it all. Text can be selected and copied as in a browser.</li>
+<li><strong>Pictures and videos</strong> a reply names by their path show in the chat as small previews. A click opens one over the window; <kbd>←</kbd> and <kbd>→</kbd> go through the chat's other pictures and videos, <kbd>Esc</kbd> closes.</li>
+<li><strong>Questions as cards:</strong> a permission, a choice or a plan to approve is a card with its answers as buttons.</li>
+<li><strong>A status band</strong> says what the agent does (waiting for you, thinking, subagents at work, a command in the background), its model, context, branch and session, and lists its subagents and commands.</li>
+<li><strong>The message box:</strong> <kbd>Return</kbd> sends, <kbd>⇧Return</kbd> makes a new line, <kbd>/</kbd> completes the agent's own commands and skills, <kbd>↑</kbd> brings back this chat's earlier messages. A picture pasted (<kbd>⌘V</kbd>) or dropped goes in as <code>[Image #N]</code>, as in Claude Code. A message sent while the agent works is queued and says so. A sent message's menu has <span class="ui">Send Again</span>, <span class="ui">Edit and Send…</span> and <span class="ui">Send Later…</span>.</li>
+<li><strong>Read aloud and dictate:</strong> a reply's speaker button reads it aloud, and the mic dictates into the box with the system's dictation (<a href="configuration.html#cfg-agents-chat_voice"><code>chat_voice</code></a> picks the voice's language).</li>
+</ul>
+<p>Settings › AI agents › <span class="ui">Open agents as a chat</span> (<a href="configuration.html#cfg-agents-open_as_chat"><code>[agents] open_as_chat</code></a>) makes an agent's terminal start as its chat.</p>
+
+<h2 id="later">Send a Message Later</h2>
+<p><kbd>⌘K</kbd> › <span class="ui">Send a Message Later…</span> (or the clock in the status bar, grey while nothing waits) schedules text for one or several terminals: write the message, pick the terminals under <span class="ui">To</span>, and say when: <span class="ui">In 15 min</span>, <span class="ui">In 30 min</span>, <span class="ui">In 1 hour</span>, <span class="ui">In 2 hours</span>, <span class="ui">Tomorrow 9:00</span>, or a time you type (<code>18:30</code>, <code>45</code> for minutes, <code>1h30</code>). At that time it is typed into each terminal and Return is pressed after it, so an agent gets its next prompt while you are away. The card lists what waits, each with <span class="ui">Send now</span>, <span class="ui">Change</span> and <span class="ui">Cancel</span>. If a terminal is gone by then, a notice says the message could not go. The phone's chat schedules messages too.</p>
+
 <h2 id="notifications">Notifications</h2>
 <p>A terminal gets a notification when Claude Code finishes or needs you, when a program asks for one (OSC 9, 777 and 99, a bell, or <a href="cli.html#flashex-notify"><code>flashex notify</code></a>), and when a command that took 10 seconds or more finishes in a terminal you are not looking at (<a href="configuration.html#cfg-notifications-long_command_seconds"><code>long_command_seconds</code></a>).</p>
 <ul>
@@ -93,6 +113,18 @@
 </ul>
 <p>The same text appears in Flashex's notification center. The reply comes from Claude Code 2.1.47 or later; with an older version Flashex reads it from the end of the session's conversation file, which can delay the notification by up to a second. If nothing readable is found, the notification uses the short generic text. Settings › Notifications › <span class="ui">Show what the agent said in notifications</span>, or <a href="configuration.html#cfg-notifications-show_text"><code>[notifications] show_text = false</code></a>, always uses the generic text.</p>
 
+<h3 id="notify-levels">Which ones pop up</h3>
+<p>Settings › Notifications › <span class="ui">Notifications from agents</span> (<a href="configuration.html#cfg-notifications-agents"><code>[notifications] agents</code></a>) chooses which of an agent's notifications pop up as a banner (and go to the phone); the rest stay in the bell and the sidebar:</p>
+<ul>
+<li><span class="ui">Everything</span>: the end of every turn.</li>
+<li><span class="ui">Your turns</span> (the default): the end of a turn you started that ran 30 seconds or more (<a href="configuration.html#cfg-notifications-agent_turn_seconds"><code>agent_turn_seconds</code></a>), not one the agent started itself (its background work woke it, a subagent reported back), and whatever waits for you: a question, a permission, a plan.</li>
+<li><span class="ui">When it needs you</span>: only a question, a permission or a plan.</li>
+<li><span class="ui">Off</span>.</li>
+</ul>
+<p><strong>Mute</strong> one project or one terminal: right-click it in the sidebar › <span class="ui">Mute Notifications</span>. Nothing pops up from it on the computer or the phone; the bell and the sidebar keep everything, and a crossed-out bell marks it. It is kept across restarts.</p>
+<h3 id="notify-schedule">A schedule and quiet time</h3>
+<p>Settings › Notifications › <span class="ui">Notification schedule</span> says when notifications may come: <span class="ui">Always</span>, <span class="ui">Every day</span> or <span class="ui">Weekdays</span> between the hours you set, or each day's own hours (<a href="configuration.html#cfg-notifications-schedule"><code>schedule</code></a>, <a href="configuration.html#cfg-notifications-hours"><code>hours</code></a>, <a href="configuration.html#cfg-notifications-days"><code>days</code></a>). Outside it nothing pops up on the computer or a phone, and the bell keeps everything. <span class="ui">Still notify when an agent asks you something</span> (<a href="configuration.html#cfg-notifications-urgent"><code>urgent</code></a>) lets questions through, <span class="ui">One summary when quiet time ends</span> (<a href="configuration.html#cfg-notifications-summary"><code>summary</code></a>) says what came meanwhile, and <span class="ui">Pause notifications</span> holds them back for an hour.</p>
+
 <h2 id="accounts">Claude accounts and aliases</h2>
 <p>Claude Code keeps one account per folder: <code>~/.claude</code>, or the folder an alias sets, for example a personal and a work login:</p>
 <div class="term"><div class="term-bar">~/.zshrc</div><pre><code>alias claude-work=<span class="s">'CLAUDE_CONFIG_DIR=~/.claude-work claude'</span></code></pre></div>
@@ -103,8 +135,30 @@
 <li>With more than one account, the Usage dashboard shows account chips, and resume offers and the Agents dashboard name the account.</li>
 </ul>
 
+<h3 id="switcher">Switching Claude accounts</h3>
+<p>With several Claude subscriptions, Flashex can keep each login and switch between them without signing in again. Turn on Settings › AI agents › <span class="ui">Switch between Claude accounts</span> (<a href="configuration.html#cfg-agents-claude_switcher"><code>[agents] claude_switcher</code></a>, off by default). From then on every <code>/login</code> you make in Claude Code is kept in the system's own secret store (the macOS keychain, Windows' Credential Manager; on Linux a file only you can read), and <kbd>⌘K</kbd> › <span class="ui">Claude Accounts</span> lists the accounts:</p>
+<figure>
+<img src="screenshots/claude-accounts.png" alt="Claude Accounts: four accounts with their plans and their 5-hour and weekly limits as bars; one is in use, one is spent, one has a weekly ceiling of 80 %" width="2820" height="1800" loading="lazy">
+<figcaption>Claude Accounts: every kept login with its limits, the one in use, a spent one and a ceiling.</figcaption>
+</figure>
+<ul>
+<li><strong>Each account</strong> with its name, e-mail, organisation and plan, how much of its 5-hour and weekly limits is used and when each starts over, the best one to use first. A spent one is marked until it starts over. The limits are read with Anthropic's usage API, a couple of accounts a minute; <span class="ui">Refresh</span> reads them now.</li>
+<li><strong><span class="ui">Switch</span></strong> makes that account Claude Code's login; running sessions take it at their next request, as after a <code>/login</code>. Only the account's own login changes, so MCP servers stay signed in.</li>
+<li><strong><span class="ui">Switch automatically</span></strong> (<a href="configuration.html#cfg-agents-claude_auto_switch"><code>claude_auto_switch</code></a>, off by default): when the account in use is nearly spent (90 % of its 5 hours, 98 % of its week, or about to run out at the pace it is used) and another clearly has more left, that one takes over, so agents are not stopped by a limit; an agent that does stop at its limit switches the account at once. Off, a notice offers the switch instead.</li>
+<li><strong>Ceilings</strong> keep part of an account for yourself: <span class="ui">⋯</span> › <span class="ui">Ceilings</span> sets a 5-hour and a weekly ceiling. At its ceiling the account counts as spent: the automatic switch leaves it there and never switches to it, and <span class="ui">Switch</span> asks to be confirmed.</li>
+<li><strong><span class="ui">Disable</span></strong> keeps an account listed, with its limits still read, but never switched to; <span class="ui">Forget</span> removes it (sign in again with <code>/login</code> to keep it again).</li>
+<li><strong>Several Claude Code folders</strong> (aliases, as above): the folder is picked at the top, each folder switches between the accounts chosen for it (<span class="ui">Add</span>), and a switch changes only that folder's login, so its plugins and MCP servers stay as they are.</li>
+</ul>
+<p id="switcher-reasoning"><strong>What a switch leaves behind.</strong> A running session keeps its conversation, files and tool results after a switch. With Claude Fable 5.2, Mythos 5.2, Sonnet 5.5 and Haiku 5.5 its earlier reasoning (the model's thinking in the turns so far) stays with the organisation that produced it: after a switch to an account of another organisation Anthropic's API leaves that reasoning out without an error, and the model answers from the conversation alone. Accounts of the same organisation, or of organisations linked at Anthropic, keep it, and Claude Opus 5.5 is not affected. When a session on one of those models is running and the new account is in another organisation (or the organisation is not known), the switch's notice says so in one line and names the models; Claude Accounts shows a line about it while the kept accounts are in more than one organisation. A switch between turns loses the least: in the middle of a turn the model would finish its tool round without the reasoning it started with.</p>
+<p>The phone's Claude accounts page shows the same and switches too (Full access). <a href="dashboards.html#artifacts">Artifacts</a> keeps a local copy of every page Claude published, so they stay readable after a switch.</p>
+
 <h2 id="status-line">The status line and rate limits</h2>
 <p>The <a href="dashboards.html#usage">Usage dashboard</a> reads your 5-hour and weekly rate limits from Claude Code's status line. Settings › AI agents › <span class="ui">Claude Code status line</span> sets that up: <span class="ui">Apply</span> points the account's status line at a small script in Flashex's folder that saves only the limits, on your Mac. A status line you already have keeps running and showing exactly as before; <span class="ui">Remove</span> puts it back. Both ask first and back <code>settings.json</code> up. If a project or managed settings file sets its own status line, the row names that file (Flashex does not edit those).</p>
+<figure>
+<img src="screenshots/statusline.png" alt="Claude Code's status line drawn by Flashex: the model, the branch, the context and the 5-hour and weekly limits as coloured meters with their reset times" width="1560" height="290" loading="lazy">
+<figcaption>Flashex's status line for Claude Code: model, branch, context and both limits.</figcaption>
+</figure>
+<p>Flashex can also draw the status line itself: Settings › AI agents › <span class="ui">Status line drawn by</span> › <span class="ui">Flashex</span> shows the items you tick (model, project, git branch, context, the 5-hour and weekly limits, the output style; by default the model, the branch and the context) in the app's colours, in Flashex's terminals. Your own stays outside Flashex and when you pick <span class="ui">Own</span>.</p>
 <p>Optional, off by default: <a href="configuration.html#cfg-agents-usage_api"><code>usage_api</code></a> asks Anthropic's usage API when no status line has reported the limits, <a href="configuration.html#cfg-agents-usage_meter"><code>usage_meter</code></a> shows "5h 62%" in the status bar, and <a href="configuration.html#cfg-agents-usage_notice"><code>usage_notice</code></a> posts a notice at 90 %.</p>
 
 <h2 id="resume">Resume and reload</h2>
@@ -144,8 +198,39 @@
 <h2 id="send-to">Sending work to an agent</h2>
 <p>A command block's <span class="ui">Send to Claude / Codex / Gemini…</span> types the command, its folder, exit code and output (only the start and end of a long one, secrets replaced by <code>***</code>) into the agent running in your project; you press Return there. With several agents you pick one. <span class="ui">Explain</span> and <span class="ui">Fix</span> on a failed block do the same with a question. Agents and scripts can drive Flashex in return with the <a href="cli.html"><code>flashex</code> command</a>: <code>flashex read --last-block</code>, <code>flashex open src/main.rs:10</code>, <code>flashex events</code> and more.</p>
 
-<h2 id="keep-awake">Keep Mac Awake</h2>
-<p><kbd>⌘K</kbd> › Keep Mac Awake… keeps your Mac (and by default the display) awake for 1, 2 or 4 hours, a duration you type (<code>1h30</code>, <code>until 18:30</code>), until you turn it off, or <strong>while agents run</strong>: on while any Claude Code session is running or waiting for you, off three minutes after the last one goes idle. A cup in the status bar shows the time left; click it to extend, change or stop. It never turns on by itself, and it ends when Flashex quits. macOS only.</p>
+<h2 id="teams">Agent teams and chains</h2>
+<p>A team is a lead and its helpers, each an agent in a terminal of its own (Claude Code, Codex, Gemini CLI, Grok, pi, OpenCode or Copilot, the same one several times if you like). You talk to the lead; it hands out tasks with <code>flashex message --to builder "…"</code>, and each helper's answer comes back to it by itself. A message waits in its agent's box while that agent works and is typed at its prompt, never into the middle of a turn.</p>
+<figure>
+<img src="screenshots/agent-teams.png" alt="The Agent Teams editor: a lead on the left, a builder in a worktree and a reviewer that only reads on the right, and the chosen block with its agent, role and task" width="2820" height="1800" loading="lazy">
+<figcaption>A team from the lead-builder-reviewer template in the editor.</figcaption>
+</figure>
+<ul>
+<li><b>Palette › Agent Teams…</b> lists the project's teams (start one with a click) and templates: lead + builder + reviewer, lead + two builders + tester, lead + researcher, and a write → correct → finalize chain. The editor shows the blocks; a click on one sets its agent, role, task, a worktree of its own, whether its tasks wait for your <span class="ui">Approve</span>, and, for Claude Code, which MCP servers it may use (all that are set up, or some: Jira for the lead only, say). Every Claude Code member also gets Flashex's own MCP server with the team's tools.</li>
+<li><b>A started team is one pane:</b> the lead in front, a switcher at the strip's right listing the others with what each does and what waits in its box. On the phone a team is one group in Agents.</li>
+<li><b>Every agent knows its team:</b> who it is, who the others are and how to reach them, told at its start and again after a compaction (Claude Code through its SessionStart hook, others as their first message). Rules for the team go in <code>.flashex/teams/NAME/rules.md</code>, a role's in <code>ROLE.md</code>.</li>
+<li><b>Safeguards:</b> two members editing the same file are both told to agree through the lead; at most 20 messages an hour go from one agent to another.</li>
+<li><b>A chain</b> goes on when you say so: <code>flashex chain next</code> hands a block's answer to the next one. A block set to <span class="ui">Hand on by itself when done</span> does it as its turn ends; one set to approve takes it only after you press Approve.</li>
+</ul>
+<p>The same as files and commands: <code>.flashex/teams/NAME.toml</code>, <a href="cli.html#flashex-team-start"><code>flashex team</code></a>, and as MCP tools with <a href="cli.html#flashex-mcp"><code>flashex mcp</code></a>.</p>
+
+<h2 id="phone">Your agents on your phone</h2>
+<p><span class="ui">Phone Access…</span> in the palette (or the <span class="ui">Phone</span> chip in the status bar) brings Flashex to your phone as a web app your own computer serves: no app store, and it updates when Flashex does. The computer and the phone reach each other through <a href="https://tailscale.com">Tailscale</a>, so nothing is open to the internet. <a href="quick-start.html#phone">Quick start</a> has the pairing steps; turning it on and pairing ask for Touch ID (Windows Hello on Windows).</p>
+<ul>
+<li><strong>Agents:</strong> every agent with its state, those waiting for you first; a started <a href="#teams">team</a> is one group, its lead first. A tap opens the agent as a chat: its conversation with pictures, its questions as buttons, a box to answer or send the next prompt (a picture too), and <span class="ui">Send later</span>.</li>
+<li><strong>Terminals</strong> you type into, with a key bar for Esc, Tab, Ctrl, Alt and the arrows; the project's <strong>files</strong> and its changes (git diffs) to read.</li>
+<li><strong>Notifications</strong> when an agent waits for you or is done, also with the web app closed. Phone Access chooses what they say (<a href="configuration.html#cfg-remote_access-push"><code>[remote_access] push</code></a>: also what the agent said, which is the default; only that an agent waits or is done; or off). On the phone, <span class="ui">Quiet time</span> pauses them for a while (a duration or <code>until 18:30</code>), and a terminal's menu mutes that terminal. The computer's <a href="#notify-schedule">notification schedule</a> holds them back too.</li>
+<li><strong>Claude accounts and Usage:</strong> the accounts with their limits, <span class="ui">Switch</span> and <span class="ui">Refresh</span> (see <a href="#switcher">Switching Claude accounts</a>), and the usage card of the account in use. When a limit stops an agent, its chat says so and offers the accounts.</li>
+<li><strong>Voice:</strong> replies read aloud by the phone's voices and dictation into the message box, set in the phone's Settings.</li>
+<li><strong>System:</strong> the computer's CPU, memory, disk, network and battery.</li>
+</ul>
+<p>Each phone gets a level when it is paired: <span class="ui">View only</span>, <span class="ui">Type in open terminals</span> (also answers agents) or <span class="ui">Full access</span> (also new terminals and agents, files, and switching accounts). <span class="ui">Remove</span> in Phone Access forgets a phone at once. The Vault and Flashex's API socket are never reachable from a phone. Made for Chrome on Android and for Safari, Chrome, Edge or Firefox on an iPhone (iOS 16.4 or later).</p>
+<div class="phone-shots" style="display:flex;gap:12px;flex-wrap:wrap;margin:12px 0">
+<img src="screenshots/phone-agents.png" width="180" alt="The phone's Agents tab: one agent waiting for permission, one at work, one idle" loading="lazy">
+<img src="screenshots/phone-chat-ask.png" width="180" alt="Claude Code as a chat on the phone, asking to deploy, its choices as buttons" loading="lazy">
+</div>
+
+<h2 id="keep-awake">Keep System Awake</h2>
+<p><kbd>⌘K</kbd> › Keep System Awake… keeps your computer (and by default the display) awake for 1, 2 or 4 hours, a duration you type (<code>1h30</code>, <code>until 18:30</code>), until you turn it off, or <strong>while agents run</strong>: on while any Claude Code session is running or waiting for you, off three minutes after the last one goes idle. A cup in the status bar shows the time left; click it to extend, change or stop. It never turns on by itself, and it ends when Flashex quits. On a Mac with its screen locked only the computer is kept awake; the display sleeps as macOS says. On macOS and Windows.</p>
 <!-- generated:foot -->
 <nav class="pager" aria-label="Previous and next page">
 <a class="prev" href="quick-start.html"><span>Previous</span>Quick start</a>
