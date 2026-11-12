@@ -20,13 +20,13 @@ and answer from your desk or from your phone. One native app for macOS and Windo
 <!-- download-buttons:start -->
 <p align="center">
 <a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-macos-light.svg"><img src="assets/readme/download-macos-dark.svg" height="62" alt="Download for macOS: Apple Silicon, macOS 13 or later"></picture></a>
-<a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.4.0/Flashex-0.4.0-windows-x86_64-setup.exe"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-windows-x64-light.svg"><img src="assets/readme/download-windows-x64-dark.svg" height="62" alt="Download for Windows: x64, Windows 10 and 11"></picture></a>
-<a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.4.0/Flashex-0.4.0-windows-aarch64-setup.exe"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-windows-arm64-light.svg"><img src="assets/readme/download-windows-arm64-dark.svg" height="62" alt="Download for Windows: ARM64, Windows 11"></picture></a>
+<a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-Windows-x64-setup.exe"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-windows-x64-light.svg"><img src="assets/readme/download-windows-x64-dark.svg" height="62" alt="Download for Windows: x64, Windows 10 and 11"></picture></a>
+<a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-Windows-arm64-setup.exe"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-windows-arm64-light.svg"><img src="assets/readme/download-windows-arm64-dark.svg" height="62" alt="Download for Windows: ARM64, Windows 11"></picture></a>
 <br>
 <a href="#macos"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/homebrew-light.svg"><img src="assets/readme/homebrew-dark.svg" height="62" alt="Install with Homebrew: one command on macOS"></picture></a>
 <a href="https://palo-kunovsky-flash.github.io/flashex-app/"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/docs-light.svg"><img src="assets/readme/docs-dark.svg" height="62" alt="Documentation: guides, shortcuts, the CLI"></picture></a>
 </p>
-<p align="center"><sub>Version 0.6.0 · free to use · updates itself · <a href="#all-downloads">Linux (beta) and every file</a></sub></p>
+<p align="center"><sub>Version 0.6.1 · free to use · updates itself · <a href="#all-downloads">Linux (beta) and every file</a></sub></p>
 <!-- download-buttons:end -->
 
 <p>
@@ -146,7 +146,7 @@ Any other program can notify too: OSC 9, 777 and 99, a bell, or `flashex notify`
 
 ### Flashex on your phone
 
-**Phone Access…** pairs a phone once and puts your agents in your pocket. Your computer serves a web app over [Tailscale](https://tailscale.com), so only devices in your own tailnet reach it and nothing is open to the internet. Add it to the home screen; it updates with Flashex.
+**Remote Access…** pairs a phone once and puts your agents in your pocket. Your computer serves a web app over [Tailscale](https://tailscale.com), so only devices in your own tailnet reach it and nothing is open to the internet. Pair by scanning the code on the computer (an eye that follows your pointer) with the phone's camera, or from the app on the home screen with its own scanner or a code you type on the computer; it updates with Flashex.
 
 <table>
 <tr>
@@ -162,7 +162,7 @@ Any other program can notify too: OSC 9, 777 and 99, a bell, or `flashex notify`
 - **The rest of your desk**: terminals you type into with a key bar, Claude accounts with Switch, Usage, teams as groups, the project's files and diffs, your dev servers, the System dashboard, Keep System Awake.
 - **Safe by design**: pairing needs Touch ID (Windows Hello on Windows) and a code both screens show; each phone gets **View only**, **Type in open terminals** or **Full access**; the Vault is never reachable from a phone.
 
-Android (Chrome) and iPhone (Safari and others, from iOS 16.4).
+Android (Chrome) and iPhone (Safari and others, from iOS 16.4), with [Tailscale](https://tailscale.com) on the phone and the computer.
 
 ### Claude accounts and limits
 
@@ -190,7 +190,7 @@ Have more than one Claude login? Turn on Settings › AI agents › **Switch bet
 
 ### Todos and Sync
 
-**Open Todos** gives every project a todo list (and an Inbox). A list is a Markdown file that you, the window and your agents all edit: `flashex todo add "…"`, `flashex todo done ID`. **Sync…** keeps the lists the same on every computer of yours, over Tailscale, merged item by item, so what you finish anywhere is finished everywhere. An optional cleanup lets an agent spot the same task written twice and offers to merge.
+**Open Todos** gives every project a todo list (and an Inbox). A list is a Markdown file that you, the window and your agents all edit: `flashex todo add "…"`, `flashex todo done ID`. **Sync** keeps the lists the same on every computer of yours (Mac and PC alike), over Tailscale, merged item by item, so what you finish anywhere is finished everywhere. Computers pair once in **Remote Access › Computers**, where you also choose which one is the main one. An optional cleanup lets an agent spot the same task written twice and offers to merge.
 
 ![The Todos pane: a project's list in the categories To do, In progress and Done, with a note and sub-points under items](assets/readme/shots/todos.png)
 
@@ -209,7 +209,7 @@ Measured on the release build of 0.6.0, on an Apple M4 with macOS 27.0 (see [how
 | Download | **30 MB** dmg · 17 MB (x64) and 15 MB (ARM64) Windows setup |
 | The app on disk | 53 MB for the app's one binary (terminal core, editor, dashboards, fonts and the phone's web app included); the CLI is 1.2 MB and the keeper 1.5 MB |
 | Memory, idle with one terminal | **76–78 MB** physical footprint (`vmmap`), 8 MB more for the keeper |
-| Start to the first shell prompt | **about 0.15 s** on a quiet machine; 0.5–0.8 s on the day of this release with the machine under heavy load |
+| Start to the first shell prompt | **about 0.15 s** on a quiet machine |
 | CPU when idle | about 0.2 s of CPU time in 30 s (under 1 % of one core) |
 | An extra terminal with 10,000 lines of history | about 1.5 MB |
 
@@ -279,7 +279,7 @@ A button at the top downloads the newest version for your system, and installed 
 
 ### macOS
 
-Apple Silicon (M1 or later), macOS 13 or later.
+Apple Silicon (M1 or later), macOS 13 Ventura or later. Intel Macs are not supported.
 
 ```sh
 brew install --cask palo-kunovsky-flash/flashex/flashex
@@ -301,11 +301,11 @@ Windows 10 (1809 or later) or Windows 11, x64 or ARM64.
 2. Run it. It installs for you only (no administrator), adds Flashex to the Start menu and **Open in Flashex** to Explorer's menu on folders.
 3. **The first time**, SmartScreen may say "Windows protected your PC": choose **More info**, then **Run anyway**. The setup is not signed with a paid certificate yet; updates do not ask again.
 
-Terminals run PowerShell 7 when it is installed (else Windows PowerShell); Git Bash and cmd work too. Shortcuts use Ctrl where the Mac uses Cmd, and Ctrl+Shift with a letter for Flashex's own (`Ctrl+Shift+P` palette, `Ctrl+Shift+T` new tab), so Ctrl with a letter stays the shell's. `Ctrl+C` copies a selection, else stops the program.
+The browser pane uses WebView2, which comes with Windows 11 and every updated Windows 10. Terminals run PowerShell 7 when it is installed (else Windows PowerShell); Git Bash and cmd work too. Shortcuts use Ctrl where the Mac uses Cmd, and Ctrl+Shift with a letter for Flashex's own (`Ctrl+Shift+P` palette, `Ctrl+Shift+T` new tab), so Ctrl with a letter stays the shell's. `Ctrl+C` copies a selection, else stops the program.
 
 ### Linux (beta)
 
-x86_64 or arm64, glibc 2.35 or later, X11 or Wayland. Take the AppImage (updates itself), the `.deb` or the `.tar.gz` from [All downloads](#all-downloads). The Linux build is at an older version than macOS and Windows and has no browser pane yet.
+x86_64 or arm64, glibc 2.35 or later (Ubuntu 22.04, Debian 12, Fedora 36 and newer), X11 or Wayland. Take the AppImage (updates itself), the `.deb` or the `.tar.gz` from [All downloads](#all-downloads). The Linux build is at an older version than macOS and Windows and has no browser pane yet.
 
 ### All downloads
 
@@ -314,9 +314,9 @@ Every file of every system, with the newest version each has:
 <!-- downloads:start -->
 | System | Version | Download |
 |---|---|---|
-| **macOS** · Apple Silicon · 13+ | 0.6.0 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
-| **Windows** 10 1809+ / 11 · x64 | 0.4.0 | [**Flashex-0.4.0-windows-x86_64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.4.0/Flashex-0.4.0-windows-x86_64-setup.exe) |
-| **Windows** 11 · ARM64 | 0.4.0 | [**Flashex-0.4.0-windows-aarch64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.4.0/Flashex-0.4.0-windows-aarch64-setup.exe) |
+| **macOS** · Apple Silicon · 13+ | 0.6.1 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
+| **Windows** 10 1809+ / 11 · x64 | 0.6.1 | [**Flashex-0.6.1-windows-x86_64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-x86_64-setup.exe) |
+| **Windows** 11 · ARM64 | 0.6.1 | [**Flashex-0.6.1-windows-aarch64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-aarch64-setup.exe) |
 | **Linux** (beta) · x86_64 | 0.3.2 | [AppImage](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/Flashex-0.3.2-linux-x86_64.AppImage) · [.deb](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex_0.3.2_amd64.deb) · [.tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex-0.3.2-linux-x86_64.tar.gz) |
 | **Linux** (beta) · arm64 | 0.3.2 | [AppImage](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/Flashex-0.3.2-linux-aarch64.AppImage) · [.deb](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex_0.3.2_arm64.deb) · [.tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex-0.3.2-linux-aarch64.tar.gz) |
 | **Phone** (Android, iPhone) | – | the web app your computer serves: [Flashex on your phone](#flashex-on-your-phone) |
@@ -332,21 +332,14 @@ Each release also ships a `.sha256` next to every file, to check a download your
 shasum -a 256 -c Flashex-<version>.dmg.sha256
 ```
 
-### Requirements
-
-- **macOS:** Apple Silicon (M1 or later), macOS 13 Ventura or later. Intel Macs are not supported.
-- **Windows:** Windows 10 version 1809 or later, or Windows 11, on x64 or ARM64. The browser pane uses WebView2, which comes with Windows 11 and every updated Windows 10.
-- **Linux (beta):** x86_64 or arm64 with glibc 2.35 or later (Ubuntu 22.04, Debian 12, Fedora 36 and newer).
-- **Phone:** Android with Chrome, or an iPhone from iOS 16.4; [Tailscale](https://tailscale.com) on the computer and the phone.
-
 ## Quick start
 
 1. **Open a folder as a project**: `⌘O` (or **Open Folder…** on the welcome card). Its terminals, files and agents stay together and come back after a restart.
 2. **Connect your agent**: Settings › AI agents › **Claude Code hooks** (or `flashex setup claude` in a terminal). It shows the change and asks first. Codex, Gemini CLI and the others have a row of their own.
 3. **Run it**: type `claude` in a terminal. Its dot appears in the sidebar; when it waits for you, you will know.
 4. **Try the chat**: `⌘⇧J` over the agent's terminal (`Alt+Shift+J` on Windows and Linux).
-5. **Find anything**: `⌘K` opens the command palette (`Ctrl+Shift+P` on Windows and Linux). Type "todos", "claude accounts", "agent teams", "artifacts", "phone".
-6. **Take it with you**: **Phone Access…** pairs your phone with a QR code.
+5. **Find anything**: `⌘K` opens the command palette (`Ctrl+Shift+P` on Windows and Linux). Type "todos", "claude accounts", "agent teams", "artifacts", "remote access".
+6. **Take it with you**: **Remote Access…** pairs your phone with a QR code.
 
 The welcome card and a five-tip tour show the same on the first start; both close with Esc. `⌘?` lists every shortcut as your computer writes it.
 
@@ -368,7 +361,7 @@ Flashex has **no telemetry, no analytics, no account and no crash reporting**. Y
 | Claude status card | only if you turn it on (`[agents] claude_status`) | `status.claude.com`, Anthropic's public status page |
 | Public IP in System | only if you turn it on (`[dashboards] public_ip`) | `api.ipify.org` |
 | AI help | only when you press Enter on a `#` line or click Explain, Fix or Send to AI… | the agent CLI or server you chose, which may be a local model |
-| Phone access and Sync | only when you turn them on | your own devices, through Tailscale; phone notifications go through Google's or Apple's push service, encrypted end to end |
+| Remote Access (phones, and Sync between your computers) | only when you turn them on, each on its own | your own devices, through Tailscale; phone notifications go through Google's or Apple's push service, encrypted end to end |
 | Remote terminals | hosts you type | through your own `ssh` |
 
 Agents, language servers and other programs you run in Flashex make their own connections, as in any terminal. The hooks Flashex installs for an agent only tell the app on your computer what the agent does; they send nothing anywhere.

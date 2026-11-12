@@ -114,6 +114,7 @@ tips = <span class="k">true</span></code></pre></div>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
 <tbody>
 <tr id="cfg-appearance-accent"><td><code>accent</code></td><td><code>&quot;orange&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_speed"><td><code>accent_speed</code></td><td><code>&quot;medium&quot;</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-appearance-app_icon"><td><code>app_icon</code></td><td><code>&quot;flashex&quot;</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-appearance-ui_scale"><td><code>ui_scale</code></td><td><code>1.0</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-appearance-tree_font_size"><td><code>tree_font_size</code></td><td><code>12.5</code> <span class="chip">commented out</span></td></tr>
@@ -122,7 +123,11 @@ tips = <span class="k">true</span></code></pre></div>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [appearance]</div><pre><code><span class="k">[appearance]</span>
 <span class="c"># orange (the default) | green | blue | indigo | teal | amber | purple | pink | red | cyan | lime</span>
+<span class="c"># or shifting: the accent goes slowly round all of them, one into the next.</span>
 <span class="c"># accent = &quot;orange&quot;</span>
+<span class="c"># How long the shifting accent takes once round: slow (twelve hours),</span>
+<span class="c"># medium (three hours, the default) or day.</span>
+<span class="c"># accent_speed = &quot;medium&quot;</span>
 <span class="c"># The icon in the Dock while Flashex runs (Settings › App icon):</span>
 <span class="c"># flashex (the default), its slim, small and light forms, orchid (and</span>
 <span class="c"># orchid_slim, orchid_small, orchid_night), ocean, sunset, grape, mono,</span>
@@ -626,7 +631,8 @@ categories = <span class="s">[&quot;To do&quot;, &quot;Done&quot;]</span></code>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [sync]</div><pre><code><span class="k">[sync]</span>
 <span class="c"># Device sync (palette: Sync…): the same todo lists on every computer of</span>
-<span class="c"># yours. One computer is the main one (Phone Access on; its Sync window</span>
+<span class="c"># yours (Remote Access: Computers on, on each of them; Phones may be off).</span>
+<span class="c"># One computer is the main one (its Sync window</span>
 <span class="c"># shows a pairing code), the others type that code and from then on sync</span>
 <span class="c"># with it by themselves. Pairing and removing are done in the Sync window.</span>
 <span class="c"># This computer's name for the others (empty: its host name).</span>
@@ -733,10 +739,11 @@ output_kb = <span class="k">16</span></code></pre></div>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>What it does</th></tr></thead>
 <tbody>
-<tr id="cfg-remote_access-enabled"><td><code>enabled</code></td><td>not in the file · Phone access: <code>true</code> serves Flashex's web app for your phone on this Mac's loopback (Tailscale Serve brings it to the phone). Off by default; Phone Access… in the palette turns it on with Touch ID and pairs a phone.</td></tr>
+<tr id="cfg-remote_access-enabled"><td><code>enabled</code></td><td>not in the file · Remote Access › Phones: <code>true</code> serves Flashex's web app for your phone on this Mac's loopback (Tailscale Serve brings it to the phone). Off by default; Remote Access… in the palette turns it on with Touch ID and pairs a phone.</td></tr>
+<tr id="cfg-remote_access-computers"><td><code>computers</code></td><td>not in the file · Remote Access › Computers: <code>true</code> lets your other computers pair with this one and keep its todo lists in sync (Sync…), and lets this one sync with its main computer; <code>false</code>: no computer pairs or syncs. Each switch works on its own: the server runs while either is on (a computer that only syncs with its main one listens for nobody). Not in the file (a config from before 0.6.1): on exactly while a computer is paired, as it was before; turning the switch in Remote Access… writes it.</td></tr>
 <tr id="cfg-remote_access-push"><td><code>push</code></td><td>not in the file · What a notification on the phone says: <code>"text"</code> (the default: what the Mac's notification says, also the start of the agent's reply), <code>"minimal"</code> (that an agent waits for you or is done, and in which project) or <code>"off"</code>.</td></tr>
-<tr id="cfg-remote_access-preview"><td><code>preview</code></td><td>not in the file · Dev server preview: <code>true</code> brings a dev server running on this Mac (<code>localhost:5173</code> and the like) to paired phones with Full access, from a terminal's ⋯ on the phone. A proxy on the port after <code>port</code>; Tailscale Serve brings <code>https://&lt;this Mac&gt;:8444</code> to it. Off by default; Phone Access turns it on.</td></tr>
-<tr id="cfg-remote_access-port"><td><code>port</code></td><td>not in the file · The loopback port of phone access (<code>47321</code>); Tailscale Serve brings <code>https://&lt;this Mac&gt;:8443</code> to it.</td></tr>
+<tr id="cfg-remote_access-preview"><td><code>preview</code></td><td>not in the file · Dev server preview: <code>true</code> brings a dev server running on this Mac (<code>localhost:5173</code> and the like) to paired phones with Full access, from a terminal's ⋯ on the phone. A proxy on the port after <code>port</code>; Tailscale Serve brings <code>https://&lt;this Mac&gt;:8444</code> to it. Off by default; Remote Access turns it on.</td></tr>
+<tr id="cfg-remote_access-port"><td><code>port</code></td><td>not in the file · The loopback port of Remote Access (<code>47321</code>); Tailscale Serve brings <code>https://&lt;this Mac&gt;:8443</code> to it.</td></tr>
 </tbody></table></div>
 <!-- /generated:config -->
 <!-- generated:foot -->
