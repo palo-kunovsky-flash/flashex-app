@@ -74,7 +74,33 @@ keeper_on_quit = <span class="s">"ask"</span>     <span class="c"># keep termina
 </tbody></table></div>
 
 <h2 id="themes">Themes and colours</h2>
-<p><code>theme</code> takes <code>dark</code>, <code>light</code>, <code>system</code> (follows macOS, the default), one of Flashex's colour schemes (<code>graphite-dark</code>, <code>graphite-light</code>, <code>harbor-dark</code>, <code>harbor-light</code>, <code>ember-dark</code>, <code>ember-light</code>), or the name of a theme file in <code>~/.config/flashex/themes</code>. <code>"light:&lt;name&gt;,dark:&lt;name&gt;"</code> picks one for each macOS appearance. The <code>accent</code> can be orange, green, blue, indigo, teal, amber, purple, pink, red, cyan or lime.</p>
+<p><code>theme</code> takes <code>dark</code>, <code>light</code>, <code>system</code> (follows macOS, the default), one of Flashex's colour schemes (<code>graphite-dark</code>, <code>graphite-light</code>, <code>harbor-dark</code>, <code>harbor-light</code>, <code>ember-dark</code>, <code>ember-light</code>), or the name of a theme file in <code>~/.config/flashex/themes</code>. <code>"light:&lt;name&gt;,dark:&lt;name&gt;"</code> picks one for each macOS appearance. The <code>accent</code> can be orange, green, blue, indigo, teal, amber, purple, pink, red, cyan or lime, or a colour of your own as <code>"#RRGGBB"</code> (shown a little lighter or darker where a theme needs it to read, 3:1 on the background).</p>
+
+<h2 id="accent-modes">The accent and how it moves</h2>
+<p>Settings › Appearance › <span class="ui">Accent</span> chooses how the accent moves, side by side: <strong>Static</strong> (one colour, the default), <strong>Shifting</strong> (the whole window goes slowly through a palette, one colour into the next), <strong>Breathe</strong> (the accent's brightness goes gently from 100 % to 70 % and back, towards the background, never to black or white) and <strong>Wave</strong> (the palette is spread across the window and flows from left to right: the tabs, the sidebar's rows, the panes' frames and the status bar each have the colour of their place). The rows under it are the ones the mode uses: <span class="ui">Accent colour</span> (Static's and Breathe's colour, with its swatches and <span class="ui">Custom…</span>), <span class="ui">Palette</span> (Rainbow, Ocean, Sunset, Forest, Aurora, Ember, Berry, or 2 to 12 colours of your own: click a swatch to move or remove it, drag it to another place, <kbd>⌥←</kbd> <kbd>⌥→</kbd> and <kbd>⌫</kbd> on the chosen one, <span class="ui">+</span> adds an accent or a colour of your own), <span class="ui">Speed</span> (a slider from calm to lively), a <span class="ui">Preview</span> of the motion (quicker than the window) and the pauses.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Mode</th><th>Speed is</th><th>Default</th><th>Range</th></tr></thead>
+<tbody>
+<tr><td>Shifting</td><td>the time on one colour (<code>accent_speed</code>)</td><td>2 min (Rainbow once round in 22 min)</td><td>8 s to 24 h</td></tr>
+<tr><td>Breathe</td><td>one breath in and out (<code>accent_breathe</code>)</td><td>24 s</td><td>12 s to 2 min</td></tr>
+<tr><td>Wave</td><td>a colour crossing the window (<code>accent_wave</code>)</td><td>90 s</td><td>20 s to 1 h</td></tr>
+</tbody></table></div>
+<p>Colours are mixed in OKLab, so a red into a green keeps its brightness instead of passing through brown, and each colour rests a moment before it goes on. The window is drawn only when the colour has moved by a step too small to see, at most four times a second, so even the fastest speeds never flicker and the defaults cost next to nothing. The colour follows the clock (local time), so every window shows the same one. Signals keep calm: a waiting agent's dot, "Claude: waiting" and a pane's attention frame never breathe, and in Wave they take the colour of the window's middle. Claude Code's status line and paired phones follow the accent colour by colour.</p>
+<p>The motion stands still while Flashex is not in front (<code>accent_pause_inactive</code>; back in front it catches up in a moment) and on battery (<code>accent_pause_battery</code>: Shifting then steps colour by colour, Breathe and Wave stand still). macOS Low Power Mode stops it always. With Reduce Motion (or <code>animations = false</code>) colours change in whole steps, at most once a minute, and Breathe stands still.</p>
+<p>A config from 0.6.1 keeps working: <code>accent = "shifting"</code> is Shifting through Rainbow, and <code>accent_speed = "slow"</code>, <code>"medium"</code> or <code>"day"</code> is still the time of a whole round (12 h, 3 h, a day). Without <code>accent_speed</code> a colour lasts 2 min. Settings writes <code>accent_mode</code> and a duration such as <code>accent_speed = "2m"</code>.</p>
+
+<h2 id="idle-critters">Idle critters</h2>
+<p>While agents work you often just wait and watch the window. Turn on Settings › Appearance › <span class="ui">Idle critters</span> (macOS, off by default) and after a while with nothing done in Flashex (<span class="ui">After</span>: 3, 5 or 10 minutes, or 1 to 120 in config.toml) a house fly lands on the window, as if it sat on the glass of the screen. More come the longer you are away, one every minute or two, up to <span class="ui">Max flies</span> (7 by default, 1 to 12); they run, turn, clean their legs and wings and hop about. A trail of black garden ants crosses the window now and then, and one of them carries a crumb. <span class="ui">Try now</span> (or <span class="ui">Show Idle Critters Now</span> in the palette) lets them come at once.</p>
+<p>The <span class="ui">Spider</span> is off by default (some people really don't like spiders). On, it comes down on its thread now and then, builds a web in an inside corner of a pane, waits in it head down and, with <span class="ui">Spider hunts flies</span>, stalks a fly: it creeps, freezes, crouches and pounces. Most flies get away; a caught one is wrapped in silk and hung in the web, nothing gory.</p>
+<p>Only actions count: a key, a click, a scroll or a gesture anywhere in Flashex. Moving the mouse does nothing, except that a fly the pointer passes over takes off (that one only). A key, a click or a scroll and they all leave, one after another, within about three seconds; the key or click still does what it does. They come back only after another full stretch of idleness, and after half an hour with nobody there they leave by themselves. They never take a click (it goes to what is under them), and never cover an agent that waits for you: what is over its pane is gone at once, and the others keep off it while it waits.</p>
+<p>They are drawn by the system's compositor in a layer over the window, so the window itself is not drawn again for them: with seven flies, the ants and the spider about 1 % of a core, nothing while they all sit still, and nothing at all while the setting is off. They pause on battery (unless <span class="ui">Also on battery</span>), with Reduce Motion or <code>animations = false</code>, and while Flashex is not in front.</p>
+<div class="term"><div class="term-bar">~/.config/flashex/config.toml</div><pre><code><span class="k">[appearance]</span>
+idle_critters = <span class="k">true</span>
+idle_critters_after = <span class="s">"5m"</span>          <span class="c"># 1m to 120m</span>
+idle_critters_kinds = <span class="s">"fly,ants,spider"</span>
+idle_critters_max_flies = <span class="k">7</span>          <span class="c"># 1 to 12</span>
+idle_critters_spider_hunts = <span class="k">true</span>
+idle_critters_on_battery = <span class="k">false</span></code></pre></div>
 
 <h2 id="reference">Reference</h2>
 <p>Every section and key, generated from the defaults Flashex writes. Each table lists the keys with the value the new file has (or the commented-out example); the pane under it is the section exactly as the file has it, with what each option does.</p>
@@ -114,20 +140,107 @@ tips = <span class="k">true</span></code></pre></div>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
 <tbody>
 <tr id="cfg-appearance-accent"><td><code>accent</code></td><td><code>&quot;orange&quot;</code> <span class="chip">commented out</span></td></tr>
-<tr id="cfg-appearance-accent_speed"><td><code>accent_speed</code></td><td><code>&quot;medium&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_mode"><td><code>accent_mode</code></td><td><code>&quot;static&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_palette"><td><code>accent_palette</code></td><td><code>&quot;rainbow&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_speed"><td><code>accent_speed</code></td><td><code>&quot;2m&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_breathe"><td><code>accent_breathe</code></td><td><code>&quot;24s&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_breathe_palette"><td><code>accent_breathe_palette</code></td><td><code>false</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_wave"><td><code>accent_wave</code></td><td><code>&quot;90s&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_pause_inactive"><td><code>accent_pause_inactive</code></td><td><code>true</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_pause_battery"><td><code>accent_pause_battery</code></td><td><code>true</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_surfaces"><td><code>accent_surfaces</code></td><td><code>&quot;auto&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_tab_tint"><td><code>accent_tab_tint</code></td><td><code>1</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_bar_line"><td><code>accent_bar_line</code></td><td><code>0</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_window_edge"><td><code>accent_window_edge</code></td><td><code>0</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_pane_frame"><td><code>accent_pane_frame</code></td><td><code>1</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_sidebar"><td><code>accent_sidebar</code></td><td><code>1</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_status_bar"><td><code>accent_status_bar</code></td><td><code>0</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_status_line"><td><code>accent_status_line</code></td><td><code>0</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_titlebar"><td><code>accent_titlebar</code></td><td><code>1</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_sidebar_headings"><td><code>accent_sidebar_headings</code></td><td><code>false</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-accent_wave_lines"><td><code>accent_wave_lines</code></td><td><code>true</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-appearance-app_icon"><td><code>app_icon</code></td><td><code>&quot;flashex&quot;</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-appearance-ui_scale"><td><code>ui_scale</code></td><td><code>1.0</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-appearance-tree_font_size"><td><code>tree_font_size</code></td><td><code>12.5</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-appearance-theme"><td><code>theme</code></td><td><code>&quot;system&quot;</code></td></tr>
 <tr id="cfg-appearance-animations"><td><code>animations</code></td><td><code>true</code></td></tr>
+<tr id="cfg-appearance-idle_critters"><td><code>idle_critters</code></td><td><code>false</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-idle_critters_scene"><td><code>idle_critters_scene</code></td><td><code>&quot;insects&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-idle_critters_after"><td><code>idle_critters_after</code></td><td><code>&quot;5m&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-idle_critters_kinds"><td><code>idle_critters_kinds</code></td><td><code>&quot;fly,ants&quot;</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-idle_critters_max_flies"><td><code>idle_critters_max_flies</code></td><td><code>7</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-idle_critters_spider_hunts"><td><code>idle_critters_spider_hunts</code></td><td><code>true</code> <span class="chip">commented out</span></td></tr>
+<tr id="cfg-appearance-idle_critters_on_battery"><td><code>idle_critters_on_battery</code></td><td><code>false</code> <span class="chip">commented out</span></td></tr>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [appearance]</div><pre><code><span class="k">[appearance]</span>
 <span class="c"># orange (the default) | green | blue | indigo | teal | amber | purple | pink | red | cyan | lime</span>
-<span class="c"># or shifting: the accent goes slowly round all of them, one into the next.</span>
+<span class="c"># or a colour of your own as &quot;#RRGGBB&quot;: the accent of Static and Breathe.</span>
 <span class="c"># accent = &quot;orange&quot;</span>
-<span class="c"># How long the shifting accent takes once round: slow (twelve hours),</span>
-<span class="c"># medium (three hours, the default) or day.</span>
-<span class="c"># accent_speed = &quot;medium&quot;</span>
+<span class="c"># How the accent moves (Settings › Accent): static (the default), shifting</span>
+<span class="c"># (the window goes slowly through the palette, one colour into the next),</span>
+<span class="c"># breathe (the accent's brightness gently 100 % to 70 % and back) or wave</span>
+<span class="c"># (the palette across the window, flowing left to right).</span>
+<span class="c"># accent_mode = &quot;static&quot;</span>
+<span class="c"># The colours it goes through, in order: rainbow (the default), ocean,</span>
+<span class="c"># sunset, forest, aurora, ember, berry, or 2 to 12 of your own, accents</span>
+<span class="c"># or &quot;#RRGGBB&quot;: [&quot;teal&quot;, &quot;cyan&quot;, &quot;#2D6CDF&quot;, &quot;indigo&quot;].</span>
+<span class="c"># accent_palette = &quot;rainbow&quot;</span>
+<span class="c"># Shifting: a colour's time, &quot;8s&quot; to &quot;24h&quot; (2 minutes by default).</span>
+<span class="c"># accent_speed = &quot;2m&quot;</span>
+<span class="c"># Breathe: one breath, &quot;12s&quot; to &quot;2m&quot;; true goes to the palette's next</span>
+<span class="c"># colour at each breath.</span>
+<span class="c"># accent_breathe = &quot;24s&quot;</span>
+<span class="c"># accent_breathe_palette = false</span>
+<span class="c"># Wave: a colour crosses the window in &quot;20s&quot; to &quot;1h&quot;.</span>
+<span class="c"># accent_wave = &quot;90s&quot;</span>
+<span class="c"># The motion pauses while Flashex is not in front, and on battery</span>
+<span class="c"># (Shifting steps colour by colour then; Breathe and Wave stand still).</span>
+<span class="c"># accent_pause_inactive = true</span>
+<span class="c"># accent_pause_battery = true</span>
+<span class="c"># Where the accent shows (Settings › Accent surfaces): subtle (the marks</span>
+<span class="c"># on the active tabs, the focused pane's frame, the cursor), visible</span>
+<span class="c"># (also the active tabs faintly tinted, the pane frame a little stronger,</span>
+<span class="c"># the sidebar's selected row softly tinted with its icon in the accent, a</span>
+<span class="c"># very faint gradient in the titlebar that shows the wave in Wave), or</span>
+<span class="c"># bold (a little stronger, still calm, and the status bar's branch and</span>
+<span class="c"># shell in the accent). No look draws a line across the window, an edge</span>
+<span class="c"># round it, a glow, or colours the sidebar's headings, groups or</span>
+<span class="c"># projects. auto (the default) is subtle while the accent stands still</span>
+<span class="c"># and visible while it moves. A waiting agent's dot and a pane wanting</span>
+<span class="c"># attention stay as they are.</span>
+<span class="c"># accent_surfaces = &quot;auto&quot;</span>
+<span class="c"># Each place on its own, over that: 0 (off) to 4 (the status bar 0 to</span>
+<span class="c"># 2), as Visible and Bold set them. The active tabs' tint, 6 / 10 / 14 /</span>
+<span class="c"># 20 % (Visible 1, Bold 2).</span>
+<span class="c"># accent_tab_tint = 1</span>
+<span class="c"># A line under the top bar, 1 px at 40 % / 1 px 70 % / 2 px 70 % /</span>
+<span class="c"># 2 px 100 % (no look draws it: only set here).</span>
+<span class="c"># accent_bar_line = 0</span>
+<span class="c"># The window's edge, 1 px at 35 % / 60 % / 60 % with a glow / 85 % with</span>
+<span class="c"># a deeper glow (no look draws it: only set here).</span>
+<span class="c"># accent_window_edge = 0</span>
+<span class="c"># The focused pane's frame, 1 px 65 % / 1 px 80 % / 2 px 60 % / 2 px 80 %</span>
+<span class="c"># with a glow around and inside (Visible 1, Bold 2).</span>
+<span class="c"># accent_pane_frame = 1</span>
+<span class="c"># The sidebar's selected row tinted 8 % / 12 % (its icon in the accent),</span>
+<span class="c"># 12 % with the open project framed / 16 %, framed, with a mark at its</span>
+<span class="c"># edge (Visible 1, Bold 2).</span>
+<span class="c"># accent_sidebar = 1</span>
+<span class="c"># The status bar's branch and shell in the accent / and the bar tinted</span>
+<span class="c"># (Bold 1).</span>
+<span class="c"># accent_status_bar = 0</span>
+<span class="c"># A line on top of the status bar, 1 px 50 % / 1 px 80 % / 2 px 80 % /</span>
+<span class="c"># 2 px 100 % (no look draws it: only set here).</span>
+<span class="c"># accent_status_line = 0</span>
+<span class="c"># A gradient in the titlebar from the traffic lights, 4 / 7 / 10 / 14 %</span>
+<span class="c"># (Visible 1, Bold 2).</span>
+<span class="c"># accent_titlebar = 1</span>
+<span class="c"># The sidebar's headings (Projects, Agents) in the accent (no look sets</span>
+<span class="c"># it: only set here).</span>
+<span class="c"># accent_sidebar_headings = false</span>
+<span class="c"># Wave: the titlebar's gradient and the long lines coloured along their</span>
+<span class="c"># length, so the wave runs over them (Visible, Bold).</span>
+<span class="c"># accent_wave_lines = true</span>
 <span class="c"># The icon in the Dock while Flashex runs (Settings › App icon):</span>
 <span class="c"># flashex (the default), its slim, small and light forms, orchid (and</span>
 <span class="c"># orchid_slim, orchid_small, orchid_night), ocean, sunset, grape, mono,</span>
@@ -145,7 +258,27 @@ tips = <span class="k">true</span></code></pre></div>
 theme = <span class="s">&quot;system&quot;</span>
 <span class="c"># Panes, tabs, panels and popups move smoothly; false makes every change</span>
 <span class="c"># instant. macOS &quot;Reduce motion&quot; turns them off too.</span>
-animations = <span class="k">true</span></code></pre></div>
+animations = <span class="k">true</span>
+<span class="c"># Idle critters (macOS, Settings › Appearance): after a while with no key,</span>
+<span class="c"># click, scroll or gesture in Flashex (moving the mouse does not count) a</span>
+<span class="c"># fly lands on the window, more come the longer you are away (at most</span>
+<span class="c"># idle_critters_max_flies, 1 to 12), and ants cross it. A key, click or</span>
+<span class="c"># scroll and they all leave; the pointer over a fly scares only that one.</span>
+<span class="c"># Nothing goes over an agent that waits for you. Off by default; they</span>
+<span class="c"># pause on battery (unless idle_critters_on_battery), with Reduce motion</span>
+<span class="c"># and while Flashex is not in front.</span>
+<span class="c"># idle_critters = false</span>
+<span class="c"># The scene: &quot;insects&quot; (the only one so far).</span>
+<span class="c"># idle_critters_scene = &quot;insects&quot;</span>
+<span class="c"># After how long with nothing done, &quot;1m&quot; to &quot;120m&quot;.</span>
+<span class="c"># idle_critters_after = &quot;5m&quot;</span>
+<span class="c"># Which come: fly, ants, spider (the spider is off by default; it builds</span>
+<span class="c"># a web in a pane's corner and, with idle_critters_spider_hunts, hunts</span>
+<span class="c"># flies, wrapping a caught one in silk - nothing gory).</span>
+<span class="c"># idle_critters_kinds = &quot;fly,ants&quot;</span>
+<span class="c"># idle_critters_max_flies = 7</span>
+<span class="c"># idle_critters_spider_hunts = true</span>
+<span class="c"># idle_critters_on_battery = false</span></code></pre></div>
 <h3 id="cfg-terminal"><code>[terminal]</code></h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
@@ -468,6 +601,7 @@ show_agents = <span class="k">true</span>
 <tr id="cfg-agents-claude_switcher"><td><code>claude_switcher</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-claude_auto_switch"><td><code>claude_auto_switch</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-artifacts"><td><code>artifacts</code></td><td><code>&quot;claude.ai&quot;</code></td></tr>
+<tr id="cfg-agents-local_artifacts"><td><code>local_artifacts</code></td><td><code>true</code></td></tr>
 <tr id="cfg-agents-claude_status"><td><code>claude_status</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-usage_meter"><td><code>usage_meter</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-usage_notice"><td><code>usage_notice</code></td><td><code>false</code></td></tr>
@@ -505,6 +639,13 @@ claude_auto_switch = <span class="k">false</span>
 <span class="c"># computer only (Flashex stops the publishing and tells Claude where the</span>
 <span class="c"># page is: `flashex artifacts`).</span>
 artifacts = <span class="s">&quot;claude.ai&quot;</span>
+<span class="c"># Local artifacts: an HTML, SVG or PDF file an agent shows (`open page.html`</span>
+<span class="c"># in Claude Code's Bash, `flashex browse page.html`) is kept under Artifacts</span>
+<span class="c"># too, with its project, a copy of it (and of the pictures, styles and</span>
+<span class="c"># scripts next to it) and a new version when it changed. Never sent</span>
+<span class="c"># anywhere but to your paired phones. `flashex artifacts add FILE` works</span>
+<span class="c"># either way.</span>
+local_artifacts = <span class="k">true</span>
 <span class="c"># The Usage dashboard's Claude status card (status.claude.com, public; only</span>
 <span class="c"># the request is sent).</span>
 claude_status = <span class="k">false</span>

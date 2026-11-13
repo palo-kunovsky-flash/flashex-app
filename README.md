@@ -20,13 +20,13 @@ and answer from your desk or from your phone. One native app for macOS and Windo
 <!-- download-buttons:start -->
 <p align="center">
 <a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-macos-light.svg"><img src="assets/readme/download-macos-dark.svg" height="62" alt="Download for macOS: Apple Silicon, macOS 13 or later"></picture></a>
-<a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-Windows-x64-setup.exe"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-windows-x64-light.svg"><img src="assets/readme/download-windows-x64-dark.svg" height="62" alt="Download for Windows: x64, Windows 10 and 11"></picture></a>
-<a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-Windows-arm64-setup.exe"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-windows-arm64-light.svg"><img src="assets/readme/download-windows-arm64-dark.svg" height="62" alt="Download for Windows: ARM64, Windows 11"></picture></a>
+<a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-x86_64-setup.exe"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-windows-x64-light.svg"><img src="assets/readme/download-windows-x64-dark.svg" height="62" alt="Download for Windows: x64, Windows 10 and 11"></picture></a>
+<a href="https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-aarch64-setup.exe"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/download-windows-arm64-light.svg"><img src="assets/readme/download-windows-arm64-dark.svg" height="62" alt="Download for Windows: ARM64, Windows 11"></picture></a>
 <br>
 <a href="#macos"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/homebrew-light.svg"><img src="assets/readme/homebrew-dark.svg" height="62" alt="Install with Homebrew: one command on macOS"></picture></a>
 <a href="https://palo-kunovsky-flash.github.io/flashex-app/"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/docs-light.svg"><img src="assets/readme/docs-dark.svg" height="62" alt="Documentation: guides, shortcuts, the CLI"></picture></a>
 </p>
-<p align="center"><sub>Version 0.6.1 · free to use · updates itself · <a href="#all-downloads">Linux (beta) and every file</a></sub></p>
+<p align="center"><sub>Version 0.7.0 · free to use · updates itself · <a href="#all-downloads">Linux (beta) and every file</a></sub></p>
 <!-- download-buttons:end -->
 
 <p>
@@ -314,7 +314,7 @@ Every file of every system, with the newest version each has:
 <!-- downloads:start -->
 | System | Version | Download |
 |---|---|---|
-| **macOS** · Apple Silicon · 13+ | 0.6.1 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
+| **macOS** · Apple Silicon · 13+ | 0.7.0 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
 | **Windows** 10 1809+ / 11 · x64 | 0.6.1 | [**Flashex-0.6.1-windows-x86_64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-x86_64-setup.exe) |
 | **Windows** 11 · ARM64 | 0.6.1 | [**Flashex-0.6.1-windows-aarch64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-aarch64-setup.exe) |
 | **Linux** (beta) · x86_64 | 0.3.2 | [AppImage](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/Flashex-0.3.2-linux-x86_64.AppImage) · [.deb](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex_0.3.2_amd64.deb) · [.tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex-0.3.2-linux-x86_64.tar.gz) |
@@ -358,6 +358,7 @@ Flashex has **no telemetry, no analytics, no account and no crash reporting**. Y
 | Browser pane | pages you open | those pages; text that is no address is searched with DuckDuckGo (`[browser] search_url`) |
 | Git | fetch, pull, push that you start | your remotes, with your own git and credentials |
 | Claude account limits | only with the account switcher or `[agents] usage_api` turned on | `api.anthropic.com`, with that account's own Claude Code login, to read its usage |
+| Artifact refresh | only when you press Refresh copy on an artifact (computer or phone) | `claude.ai`, with that artifact owner's own Claude Code login, to read the page's current version |
 | Claude status card | only if you turn it on (`[agents] claude_status`) | `status.claude.com`, Anthropic's public status page |
 | Public IP in System | only if you turn it on (`[dashboards] public_ip`) | `api.ipify.org` |
 | AI help | only when you press Enter on a `#` line or click Explain, Fix or Send to AI… | the agent CLI or server you chose, which may be a local model |
