@@ -767,6 +767,7 @@ categories = <span class="s">[&quot;To do&quot;, &quot;Done&quot;]</span></code>
 <tbody>
 <tr id="cfg-sync-name"><td><code>name</code></td><td><code>&quot;&quot;</code></td></tr>
 <tr id="cfg-sync-todos"><td><code>todos</code></td><td><code>true</code></td></tr>
+<tr id="cfg-sync-notes"><td><code>notes</code></td><td><code>false</code></td></tr>
 <tr id="cfg-sync-dedupe"><td><code>dedupe</code></td><td><code>&quot;off&quot;</code></td></tr>
 <tr id="cfg-sync-tunnel"><td><code>tunnel</code></td><td><code>[&quot;openssl&quot;, &quot;s_client&quot;, &quot;-quiet&quot;, &quot;-verify_return_error&quot;, &quot;-servername&quot;, &quot;{host}&quot;, &quot;-connect&quot;, &quot;{host}:{port}&quot;]</code> <span class="chip">commented out</span></td></tr>
 </tbody></table></div>
@@ -780,6 +781,9 @@ categories = <span class="s">[&quot;To do&quot;, &quot;Done&quot;]</span></code>
 name = <span class="s">&quot;&quot;</span>
 <span class="c"># The todo lists sync.</span>
 todos = <span class="k">true</span>
+<span class="c"># Notes sync too (off until turned on in the Sync window): their text,</span>
+<span class="c"># marks and pictures/videos up to 2 MB each; guests' links never.</span>
+notes = <span class="k">false</span>
 <span class="c"># After a sync brought new items, a command may look for ones that are the</span>
 <span class="c"># same task in different words; the Todos window then offers to merge them</span>
 <span class="c"># (nothing is merged by itself). &quot;off&quot;, &quot;claude&quot; (claude -p --model opus),</span>

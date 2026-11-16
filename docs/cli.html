@@ -212,6 +212,110 @@ Done (1)
 <h3 id="flashex-todo-rm"><code>flashex todo rm ID</code></h3>
 <p>Deletes an item.</p>
 
+<h3 id="flashex-notes-new"><code>flashex notes new TITLE [--template design-review|bug|meeting|blank|OWN] [--project P]</code></h3>
+<p>Makes a note of a project: a folder <code>notes/&lt;project&gt;/&lt;title&gt;/</code> in Flashex's data folder with <code>note.md</code> and <code>media/</code>. The project is <code>--project</code>, else the project of the terminal the command runs in, else the name of the folder it runs in. A template only gives the note its first sections (<code>design-review</code>: Login, Dashboard, Cart, Settings, To sort; <code>bug</code>: What happened, Steps, Expected, Environment; <code>meeting</code>: Points, Decisions, Tasks; <code>blank</code>: none) and, for a design review or a bug, makes new pictures and videos start open. It prints the note's id.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes new "Design review 1.4" --template design-review --project shop-app
+k3x9q2ab  created Design review 1.4 in shop-app (5 sections)</code></pre></div>
+
+<h3 id="flashex-notes-list"><code>flashex notes list [--project P] [--json]</code></h3>
+<p>The notes (of one project with <code>--project</code>), the last changed first, with their ids and how many blocks are open, done or won't be fixed. <code>--json</code> prints them as an array.</p>
+
+<h3 id="flashex-notes-templates"><code>flashex notes templates [--json] [--copy NAME]</code></h3>
+<p>The templates a note can start from: the four built in and your own, one Markdown file each in the notes' <code>templates/</code> folder (<code>notes/templates/NAME.md</code> in Flashex's data folder). An own template's file is the skeleton of a note: an optional frontmatter (<code>label:</code>, <code>tracks: true</code> to start new pictures and videos open), one <code>## heading</code> per section, and a <code>## Rules for the agent</code> section whose Markdown an agent follows on notes made from it. An own template of a built-in one's name takes its place. Files that are no template are listed with the reason. <code>--copy NAME</code> writes a template there to be changed.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes templates --copy design-review
+~/Library/Application Support/Flashex/notes/templates/design-review.md</code></pre></div>
+
+<h3 id="flashex-notes-rules"><code>flashex notes rules NOTE [--add RULE | --clear] [--json]</code></h3>
+<p>The rules an agent follows on the note, as Markdown under <code>## Rules for the agent</code>: its template's rules, then the note's own. The note's own rules are kept in its frontmatter, one <code>rule:</code> line each, so they never show in the page, on a phone, for guests or in an export. <code>--add</code> adds one, <code>--clear</code> forgets the note's own.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes rules k3x9 --add "Screen names come from src/screens"
+## Rules for the agent
+
+- Sections are the app's screens. …
+- Never change the user's text. Add your own blocks or suggestions only (they are marked Agent and wait for Accept or Discard).
+- Screen names come from src/screens</code></pre></div>
+
+<h3 id="flashex-notes-add"><code>flashex notes add NOTE [--section S] (--text T | --image FILE | --video FILE [--shrink]) [--caption C] [--status open|done|wontfix|none] [--propose]</code></h3>
+<p>Adds a block at the end of section <code>S</code> (made at the end of the note when there is none of that name) or of the note. <code>NOTE</code> is the note's id, its first letters, or its title. <code>--text "- …"</code> is a bullet, <code>--text "### …"</code> a heading, other text a paragraph. A picture (PNG, JPEG, GIF, WebP, HEIC) or video (MP4, MOV, at most 100 MB) is copied into the note and taken only when its bytes are one; an SVG is never taken. A larger video is refused; with <code>--shrink</code> a 720p H.264 copy of it is made first (macOS, by the system's own encoder) and added instead, when that copy is within 100 MB. <code>--status</code> tracks the block; <code>none</code> does not, even in a design review. It prints the new block's id.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes add k3x9 --section Dashboard --image shot.png --caption "Legend covers the chart"
+a1b2c3d4  image added to Design review 1.4 · Dashboard</code></pre></div>
+
+<h3 id="flashex-notes-propose"><code>flashex notes propose NOTE --block ID (--text T | --caption T | --to-section S | --status open|done|wontfix|none)</code></h3>
+<p>How an agent helps with a note without touching what you wrote. Everything an agent sends with <code>--propose</code> (and everything <code>propose</code> sends) lands as its <em>proposal</em>: drawn in a dashed blue frame marked <em>Agent</em> with <em>Accept</em> and <em>Discard</em>. <code>add … --propose</code> proposes a new block; <code>propose --block ID</code> suggests a text for your block (its caption for a picture, its name for a section), shown right under it as <em>Agent suggests</em>; <code>--to-section S</code> suggests moving it to the end of section <code>S</code> (sorting pictures); <code>--status</code> suggests its status. Your block changes only when you accept. An agent may change and delete its own proposals; deleting your blocks or changing the title is refused. Agents never run by themselves: they work only when you ask (<em>Ask the agent…</em> in the note's menu types such a request into your agent's terminal).</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes propose k3x9 --block a1b2 --to-section Settings
+w8e7r6t5  proposed (waits for Accept or Discard)</code></pre></div>
+
+<h3 id="flashex-notes-proposals"><code>flashex notes proposals NOTE [--json]</code></h3>
+<p>The agent's proposals waiting for you, in the note's order: each one's id, what it is (<code>new</code>, <code>text</code>, <code>move</code>, <code>status</code>), the block it is about and its text.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes proposals k3x9
+w8e7r6t5  move    a1b2c3d4 “Legend covers the chart” to Dashboard
+z1x2c3v4  text    for e5f6g7h8 “At 390 pt the legend…”: “Legend hides the last two bars at 390 pt”</code></pre></div>
+
+<h3 id="flashex-notes-accept"><code>flashex notes accept NOTE (--id P | --all)</code></h3>
+<p>Takes a proposal (or all): a new block becomes yours, a suggested text replaces your block's, a move moves it, a status is set. Accepting all is one step that one undo in the Notes tab takes back. A proposal whose block was deleted meanwhile is only removed.</p>
+
+<h3 id="flashex-notes-discard"><code>flashex notes discard NOTE (--id P | --all)</code></h3>
+<p>Throws a proposal (or all) away; your blocks stay as they are.</p>
+
+<h3 id="flashex-notes-todo"><code>flashex notes todo NOTE (--block ID | --section S) [--list L]</code></h3>
+<p>Sends a block to Todos: an item in list <code>L</code> (default: the note's project's list) with the block's text, and a line under it linking back (<code>flashex://note/NOTE#b-BLOCK</code>). The block shows a Todo chip and is tracked (open) if it was not. From then on the two follow each other: the item checked makes the block Done, the block Done (or Won't fix) checks the item, and opening one again opens the other. <code>--section S</code> sends the section's bullets and tracked blocks not in Todos yet (a meeting's Tasks). An item deleted from Todos unlinks its block.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes todo m5n6 --section Tasks
+p9q8r7s6  in Todos (shop-app) as k3x9q2ab: Write the release notes</code></pre></div>
+
+<h3 id="flashex-notes-status"><code>flashex notes status NOTE --block ID open|done|wontfix|none</code></h3>
+<p>Tracks a block (open, done, won't fix) or stops tracking it (<code>none</code>). The block's id may be its first letters.</p>
+
+<h3 id="flashex-notes-show"><code>flashex notes show NOTE [--json]</code></h3>
+<p>A note's blocks by section with their ids and statuses. <code>--json</code> prints the note with every block (<code>id</code>, <code>kind</code>: <code>section</code>, <code>heading</code>, <code>text</code>, <code>bullet</code>, <code>image</code> or <code>video</code>, its text, name or caption, <code>status</code>) and each picture's or video's file as <code>path</code>. A picture with marks also has <code>marks</code> (as <code>media/&lt;id&gt;.marks.json</code> keeps them) and <code>view</code>: the picture with its marks drawn in, redactions' pixels overwritten, cropped (drawn at once when it is not yet). A picture with a redaction gives only its <code>view</code>, not the original's <code>path</code>. A video also has <code>poster</code> (a frame of it, <code>media/&lt;id&gt;.poster.jpg</code>, made once), <code>duration_ms</code>, <code>width</code>, <code>height</code>, <code>trim</code> (<code>start_ms</code>, <code>end_ms</code>, or <code>null</code>), <code>markers</code> (<code>id</code>, <code>at_ms</code>, <code>at</code>, <code>text</code>) and, when trimmed, <code>trimmed</code>: the copy cut to the trim without re-encoding (<code>media/&lt;id&gt;.trim.mp4</code> or <code>.mov</code>, made when it is not there yet). Where videos cannot be cut yet (Windows) <code>trimmed</code> is <code>null</code> and <code>trim_note</code> says to play <code>path</code> from the trim's start to its end.</p>
+
+<h3 id="flashex-notes-export"><code>flashex notes export NOTE --md OUT [--force]</code></h3>
+<p>Writes the note as plain Markdown to <code>OUT</code> (no ids, statuses as words), its pictures and videos in a folder beside it named after <code>OUT</code> with <code>-media</code> (<code>review.md</code>, <code>review-media/</code>). An existing file is replaced only with <code>--force</code>. A picture with marks is exported as its view (<code>&lt;id&gt;.view.png</code>: marks drawn in, redactions' pixels overwritten, cropped), never as the original. A trimmed video goes as its trimmed copy, its markers listed under it with their times in that copy (outside the trim: left out); where it cannot be cut, the whole video goes with the trim said in words.</p>
+
+<h3 id="flashex-notes-export-flashnote"><code>flashex notes export NOTE --out FILE.flashnote [--editable] [--force]</code></h3>
+<p>Writes the note as a <code>.flashnote</code> file to send to a colleague: a zip of <code>note.md</code>, <code>media/</code>, an <code>index.html</code> that any browser opens offline from the unzipped folder (the note in Flashex's look, light or dark as the system is, no scripts) and <code>flashnote.json</code>, which lists every file with its SHA-256. By default it is a copy <b>for reading</b>: every picture as it is seen (marks drawn in, redactions' pixels overwritten, cropped), every trimmed video as its trimmed copy with its markers re-timed, no originals and no marks files, so it is safe to send. <code>--editable</code> makes a copy the colleague's Flashex can go on editing and send back (originals, marks, markers, trims), except that a picture with a redaction still never leaves as its original: its redactions are burned into the copy that goes and its other marks stay editable; the command lists those pictures. Where videos cannot be cut yet (Windows) a trimmed video goes whole and the page plays its trim.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes export k3x9 --out review.flashnote --editable
+review.flashnote  (editable, 9 files, 4.2 MB)
+redactions burned in (the hidden parts are gone in this copy): Token in the header</code></pre></div>
+
+<h3 id="flashex-notes-export-artifact"><code>flashex notes export NOTE --artifact</code></h3>
+<p>Keeps the note's page (as the <code>.flashnote</code>'s <code>index.html</code> for reading, its pictures and videos put inside it) under Artifacts, titled as the note, in the note's project, as <code>flashex artifacts add</code> keeps a page. A note goes to Artifacts only when you export it like this. Videos that would make the page larger than Artifacts keep (30 MB) are left out and shown as their poster. Asks the running Flashex.</p>
+
+<h3 id="flashex-notes-import"><code>flashex notes import FILE.flashnote [--project P] [--merge | --keep-both]</code></h3>
+<p>Takes a <code>.flashnote</code> in as a new note of <code>--project</code> (else of this terminal's project, else of the project it was exported from), the same as dropping the file on the Notes tab. Everything in it is checked first, and the file is refused when any check fails: only the files of a note (no other names, no paths that climb out, no links), each listed in <code>flashnote.json</code> with its size and SHA-256 (a damaged or changed file is refused), pictures and videos by their bytes and within their limits (50 MB a picture, 100 MB a video, 2 GB and 4096 files in all), marks and markers as Flashex writes them. When the note (by its id) is here already the import stops and asks: <code>--merge</code> merges the copy into it by block id (their new blocks added where they stand, a block only they changed takes their change, a block both changed keeps yours with theirs added right after it marked <i>(from …)</i>, blocks they deleted are kept and listed), <code>--keep-both</code> keeps it beside yours as a new note. In the app the whole merge is one step of Undo.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes import review.flashnote --merge
+k3x9q2ab  merged an editable copy from Dan Demo into Design review 1.4: 2 blocks added, 1 block updated, 1 block changed on both sides (theirs added after it)</code></pre></div>
+
+<h3 id="flashex-notes-mark"><code>flashex notes mark NOTE --block ID (--arrow X1,Y1,X2,Y2 | --rect X,Y,W,H | --oval X,Y,W,H | --text X,Y,TEXT | --number X,Y | --blur X,Y,W,H | --crop X,Y,W,H | --clear) [--color red|accent|yellow|green|blue|white] [--size s|m|l]</code></h3>
+<p>Marks a picture as the toolbar over it in the Notes tab does: an arrow (its head at the second point), a frame, an oval, a line of text, the next numbered marker (1, 2, 3…), a redaction or a crop. Places are fractions of the picture's width and height (<code>0.25</code>) or pixels of the original (<code>120px</code>). <code>--clear</code> takes every mark and the crop away. The picture itself never changes: the marks are kept in <code>media/&lt;id&gt;.marks.json</code> beside it, and the view <code>media/&lt;id&gt;.view.png</code> (printed after the mark's id) is drawn at once. <code>--blur</code> really overwrites the pixels in the view (coarse darkened blocks, nothing left to read back); the original in <code>media/</code> still holds them.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes mark k3x9 --block a1b2 --rect 0.62,0.18,0.3,0.2 --color yellow
+q8w2e4r6  rect on a1b2c3d4  …/media/a1b2c3d4.view.png
+<span class="p">❯</span> flashex notes mark k3x9 --block a1b2 --blur 1180px,24px,320px,40px</code></pre></div>
+
+<h3 id="flashex-notes-share"><code>flashex notes share NOTE [--expires 1d|7d|never] [--json]</code></h3>
+<p>A link to this note alone for someone on your tailnet, good for a day, 7 days (the default) or until you revoke it. Through the running Flashex only (it starts the guests' server and, with Tailscale, brings <code>https://&lt;this computer&gt;:8445</code> to it). The person who opens it types their name and waits until you let them in; they only read until you let them edit. The QR code is in the app (<span class="ui">Share › Share live…</span>). The token is printed once and kept only as its hash. <code>--json</code> prints the link's id, address, and when it expires.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes share k3x9 --expires 1d
+https://studio-mac.tail1234.ts.net:8445/#t=jh8rbr_7ywX7UvfeNdjsxFNmeZFgBexcuoy9jMaOcIQ
+link 6-ihNh987Nw, good until 2026-11-15 10:00: this note only, read only; you let each new browser in</code></pre></div>
+<h3 id="flashex-notes-guests"><code>flashex notes guests NOTE [--json]</code></h3>
+<p>The note's links (made, good until, revoked) and the people they let in or who wait: their id, name, whether they read or edit, whether they are connected, the code their screen shows and their tailnet account when Tailscale says it.</p>
+<h3 id="flashex-notes-guest"><code>flashex notes guest NOTE --device ID --read|--edit|--disconnect|--allow|--refuse</code></h3>
+<p>What one guest may do: <code>--allow</code> or <code>--refuse</code> one who asks to join, <code>--edit</code> lets them edit (their page says so at once), <code>--read</code> takes it back from their next change on, <code>--disconnect</code> cuts them off (to come back they would have to ask again).</p>
+<h3 id="flashex-notes-unshare"><code>flashex notes unshare NOTE --link ID|--all</code></h3>
+<p>Revokes one link, or all of the note's: everyone they let in is cut off at once, and the link opens nothing. With no link left anywhere, the guests' server stops and leaves the tailnet.</p>
+<h3 id="flashex-notes-history"><code>flashex notes history NOTE [--limit N] [--json]</code></h3>
+<p>Who changed the note and when, oldest first (<code>--limit N</code>: the last N changes): each change's time (UTC), who made it and from where (<em>this computer</em>, <em>flashex notes</em>, <em>phone</em>), and its steps with the blocks they touched. It is kept beside the note (<code>.history.jsonl</code>, the older part in <code>.history.1.jsonl</code> once it grows past 512 KB) and recorded whether the change came through the running Flashex or was written by the command while Flashex was closed. <code>--json</code> prints the changes with their steps in full.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes history k3x9 --limit 2
+2026-11-14 10:22  Pixel 8 (phone)  edit_text e5f6g7h8
+2026-11-14 10:23  anndemo (flashex notes)  set_status p9q8r7s6</code></pre></div>
+<p>While Flashex is open, <code>flashex notes add</code>, <code>status</code>, <code>mark</code> and <code>video</code> send their changes to it: they show at once in the Notes tab and on a phone with the note open, and a change to a block someone is typing in is refused (<em>Pixel 8 is typing in block …; try again in a few seconds</em>). A picture or video is passed by its path; Flashex copies it with the same checks. With Flashex closed the command writes the note's files itself.</p>
+
+<h3 id="flashex-notes-video"><code>flashex notes video NOTE --block ID [--trim 0:03-0:14 | --no-trim] [--mark 0:08 TEXT] [--unmark MARKER_ID]</code></h3>
+<p>Trims a video and marks moments in it, as the timeline under it in the Notes tab does. The trim is only kept (in the block's comment in <code>note.md</code>, <code>trim:3000-14000</code>): the video never changes, and what takes it out of the note (an export, <code>show --json</code>) gets a copy cut without re-encoding. <code>--no-trim</code> keeps all of it again. <code>--mark TIME TEXT</code> adds a marker (up to 100 a video, 300 characters each), kept beside the video in <code>media/&lt;id&gt;.cues.json</code>; <code>--unmark</code> deletes one by its id (or its first letters). Times are <code>8</code>, <code>8.5</code>, <code>0:08</code> or <code>1:02:03</code> from the video's start; a trim or marker past its end is refused. With none of them it prints the video's length, trim and markers.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex notes video k3x9 --block c3d4 --trim 0:03-0:14 --mark 0:08 "Chart disappears after Save"
+q1w2e3r4  marker on c3d4e5f6
+c3d4e5f6  [video] media/c3d4e5f6.mov  (0:18, trimmed 0:03-0:14, 1 marker)
+  q1w2e3r4  0:08  Chart disappears after Save
+trimmed copy: …/media/c3d4e5f6.trim.mov</code></pre></div>
+
 <h3 id="flashex-sync-status"><code>flashex sync status [--json]</code></h3>
 <p>How <a href="dashboards.html#sync">Sync</a> stands on this computer: its name, whether it is the main one or which one it syncs with, whether todo lists sync, and when each side last synced. It reads what Flashex last wrote, so it answers while Flashex is closed. <code>--json</code> prints the same as an object (<code>name</code>, <code>role</code>: <code>main</code>, <code>client</code> or <code>alone</code>, <code>todos</code>, <code>hub</code> with <code>state</code>: <code>ok</code>, <code>offline</code>, <code>error</code> or <code>never</code>, and <code>devices</code>).</p>
 <div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex sync status
@@ -221,6 +325,17 @@ Mac mini (https://mini.tailnet.ts.net:8443): in sync, synced 2 min ago</code></p
 
 <h3 id="flashex-sync-now"><code>flashex sync now</code></h3>
 <p>Asks the running Flashex to sync with the main Mac at once and waits for how it went (exit code 1 when the main Mac is offline or refuses). On the main Mac there is nothing to do: the others sync with it.</p>
+
+<h3 id="flashex-chess-invite"><code>flashex chess invite [600+5|none] [white|black]</code></h3>
+<p>A game of <a href="dashboards.html#chess-invite">chess with a colleague in a browser</a>, hosted by the running Flashex: prints the game's id and its link (as <span class="ui">New Game › Invite Link or QR</span> makes it). The clock is PGN's (<code>600+5</code>, the default, is 10 minutes and 5 seconds a move; <code>none</code> for no clock), the side is yours (White by default). Whoever opens the link asks to play; you let them in with <code>flashex chess allow</code>.</p>
+<div class="term"><div class="term-bar">zsh</div><pre><code><span class="p">❯</span> flashex chess invite 300+0 black
+{
+  "game": "1794658970-56cd16",
+  "url": "https://mac.tailnet.ts.net:8445/#t=…"
+}</code></pre></div>
+
+<h3 id="flashex-chess"><code>flashex chess WHAT [GAME …]</code></h3>
+<p>The games this Flashex hosts for a browser: <code>invites</code> lists the invites waiting with their links; <code>status GAME</code> prints the game as its player is told it (moves, clocks, offers, the moves legal now) and who asks with its link (name, browser, code); <code>allow GAME GUEST</code> or <code>refuse GAME GUEST</code> answers one of them; <code>move GAME UCI</code> plays your move (<code>e2e4</code>, <code>e7e8q</code>); <code>offer GAME draw|takeback|rematch</code> and <code>answer GAME KIND yes|no</code> ask and answer; <code>resign GAME</code>, <code>phrase GAME N</code> (a quick phrase, 0–5) and <code>cancel GAME</code> (withdraws an invite: its link stops working).</p>
 
 <h3 id="flashex-vault"><code>flashex vault list</code>, <code>get</code>, <code>run</code>, <code>env</code>, <code>import</code></h3>
 <p>Secrets from the Vault (command palette › <strong>Vault…</strong>). <code>flashex vault list [--json]</code> prints the entry names, never values. <code>flashex vault get [-n] [--print] NAME</code> prints an entry's main secret (an API key's value, a login's password, an SSH key's private key) into a pipe or a file; to a terminal only with <code>--print</code>. <code>flashex vault run VARS… -- COMMAND [ARGS…]</code> runs a command with values in its environment. <code>flashex vault env [--format dotenv] [--print] [--out FILE [--force]] VARS…</code> prints <code>KEY=VALUE</code> lines into a pipe or a file (<code>&gt; .env.local</code>); to a terminal only with <code>--print</code>; <code>--out FILE</code> writes a file only you can read. <code>flashex vault import --set NAME [--replace] [FILE|-]</code> saves a <code>.env</code> file (or standard input) as the set NAME (<code>dev</code>, <code>stage</code>, <code>prod</code>) of the terminal's project: entries <code>NAME/VAR</code> tagged NAME; <code>--replace</code> changes values that are there already.</p>
