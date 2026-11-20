@@ -555,6 +555,7 @@ trust = <span class="s">&quot;ask&quot;</span>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
 <tbody>
 <tr id="cfg-browser-local_urls_in_panel"><td><code>local_urls_in_panel</code></td><td><code>true</code></td></tr>
+<tr id="cfg-browser-html_files"><td><code>html_files</code></td><td><code>&quot;browser&quot;</code></td></tr>
 <tr id="cfg-browser-search_url"><td><code>search_url</code></td><td><code>&quot;https://duckduckgo.com/?q=%s&quot;</code></td></tr>
 <tr id="cfg-browser-sleep_after_minutes"><td><code>sleep_after_minutes</code></td><td><code>10</code></td></tr>
 <tr id="cfg-browser-devtools"><td><code>devtools</code></td><td><code>true</code> <span class="chip">commented out</span></td></tr>
@@ -563,12 +564,58 @@ trust = <span class="s">&quot;ask&quot;</span>
 <span class="c"># Cmd+click on a localhost or 127.0.0.1 link in a terminal opens it in a</span>
 <span class="c"># browser panel; other links open in the system browser.</span>
 local_urls_in_panel = <span class="k">true</span>
+<span class="c"># Cmd+click on a path to an .html file in a terminal, or a click on one in</span>
+<span class="c"># the chat: &quot;browser&quot; opens the page in Flashex's browser, &quot;editor&quot; its</span>
+<span class="c"># source. Source and Open Preview switch between them in the same place.</span>
+html_files = <span class="s">&quot;browser&quot;</span>
 <span class="c"># What the address bar searches with (%s is replaced); &quot;&quot; turns it off.</span>
 search_url = <span class="s">&quot;https://duckduckgo.com/?q=%s&quot;</span>
 <span class="c"># Browser tabs out of sight this long are unloaded (0 = never).</span>
 sleep_after_minutes = <span class="k">10</span>
 <span class="c"># Developer tools (Cmd+Alt+I) for pages; on in debug builds.</span>
 <span class="c"># devtools = true</span></code></pre></div>
+<h3 id="cfg-games"><code>[games]</code></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>In the default file</th></tr></thead>
+<tbody>
+<tr id="cfg-games-sounds"><td><code>sounds</code></td><td><code>false</code></td></tr>
+<tr id="cfg-games-coordinates"><td><code>coordinates</code></td><td><code>true</code></td></tr>
+<tr id="cfg-games-loam_mouse_aim"><td><code>loam_mouse_aim</code></td><td><code>false</code></td></tr>
+<tr id="cfg-games-phone"><td><code>phone</code></td><td><code>true</code></td></tr>
+<tr id="cfg-games-loam_key_left"><td><code>loam_key_left</code></td><td><code>&quot;left&quot;</code></td></tr>
+<tr id="cfg-games-loam_key_right"><td><code>loam_key_right</code></td><td><code>&quot;right&quot;</code></td></tr>
+<tr id="cfg-games-loam_key_up"><td><code>loam_key_up</code></td><td><code>&quot;up&quot;</code></td></tr>
+<tr id="cfg-games-loam_key_down"><td><code>loam_key_down</code></td><td><code>&quot;down&quot;</code></td></tr>
+<tr id="cfg-games-loam_key_jump"><td><code>loam_key_jump</code></td><td><code>&quot;z&quot;</code></td></tr>
+<tr id="cfg-games-loam_key_fire"><td><code>loam_key_fire</code></td><td><code>&quot;x&quot;</code></td></tr>
+<tr id="cfg-games-loam_key_tether"><td><code>loam_key_tether</code></td><td><code>&quot;c&quot;</code></td></tr>
+<tr id="cfg-games-loam_key_dig"><td><code>loam_key_dig</code></td><td><code>&quot;v&quot;</code></td></tr>
+<tr id="cfg-games-loam_key_prev"><td><code>loam_key_prev</code></td><td><code>&quot;a&quot;</code></td></tr>
+<tr id="cfg-games-loam_key_next"><td><code>loam_key_next</code></td><td><code>&quot;s&quot;</code></td></tr>
+</tbody></table></div>
+<div class="term"><div class="term-bar">config.toml · [games]</div><pre><code><span class="k">[games]</span>
+<span class="c"># Chess clicks quietly on a move and on a check, Snake blips when it eats</span>
+<span class="c"># (sounds made in code, no files).</span>
+sounds = <span class="k">false</span>
+<span class="c"># Chess shows the files and ranks (a-h, 1-8) in the squares' corners.</span>
+coordinates = <span class="k">true</span>
+<span class="c"># Loam: the mouse aims (a click fires, a right-click throws the tether).</span>
+loam_mouse_aim = <span class="k">false</span>
+<span class="c"># The paired phone lists the game tabs, plays in them and starts new</span>
+<span class="c"># games (with full access).</span>
+phone = <span class="k">true</span>
+<span class="c"># Loam's keys: a letter (not P), 0 or 6-9, &quot;left&quot; &quot;right&quot; &quot;up&quot; &quot;down&quot;,</span>
+<span class="c"># &quot;space&quot; or one of , . / ; ' [ ] - = ` \ ; one key a button.</span>
+loam_key_left = <span class="s">&quot;left&quot;</span>
+loam_key_right = <span class="s">&quot;right&quot;</span>
+loam_key_up = <span class="s">&quot;up&quot;</span>
+loam_key_down = <span class="s">&quot;down&quot;</span>
+loam_key_jump = <span class="s">&quot;z&quot;</span>
+loam_key_fire = <span class="s">&quot;x&quot;</span>
+loam_key_tether = <span class="s">&quot;c&quot;</span>
+loam_key_dig = <span class="s">&quot;v&quot;</span>
+loam_key_prev = <span class="s">&quot;a&quot;</span>
+loam_key_next = <span class="s">&quot;s&quot;</span></code></pre></div>
 <h3 id="cfg-sidebar"><code>[sidebar]</code></h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
@@ -601,6 +648,7 @@ show_agents = <span class="k">true</span>
 <tr id="cfg-agents-claude_switcher"><td><code>claude_switcher</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-claude_auto_switch"><td><code>claude_auto_switch</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-artifacts"><td><code>artifacts</code></td><td><code>&quot;claude.ai&quot;</code></td></tr>
+<tr id="cfg-agents-artifacts_account"><td><code>artifacts_account</code></td><td><code>&quot;you@example.com&quot;</code> <span class="chip">commented out</span></td></tr>
 <tr id="cfg-agents-local_artifacts"><td><code>local_artifacts</code></td><td><code>true</code></td></tr>
 <tr id="cfg-agents-claude_status"><td><code>claude_status</code></td><td><code>false</code></td></tr>
 <tr id="cfg-agents-usage_meter"><td><code>usage_meter</code></td><td><code>false</code></td></tr>
@@ -637,8 +685,13 @@ claude_auto_switch = <span class="k">false</span>
 <span class="c"># Claude's artifacts: &quot;claude.ai&quot; publishes them there as Claude does</span>
 <span class="c"># (Flashex keeps a local copy of each too); &quot;local&quot; keeps them on this</span>
 <span class="c"># computer only (Flashex stops the publishing and tells Claude where the</span>
-<span class="c"># page is: `flashex artifacts`).</span>
+<span class="c"># page is: `flashex artifacts`). Either way Claude is told where the</span>
+<span class="c"># local copy is, so it can go on after a switch to another account.</span>
 artifacts = <span class="s">&quot;claude.ai&quot;</span>
+<span class="c"># The Claude account artifacts are collected under (its e-mail or name, as</span>
+<span class="c"># Claude Accounts shows it): Claude is told when one goes out under</span>
+<span class="c"># another account, and Artifacts marks those to collect. Unset: none.</span>
+<span class="c">#artifacts_account = &quot;you@example.com&quot;</span>
 <span class="c"># Local artifacts: an HTML, SVG or PDF file an agent shows (`open page.html`</span>
 <span class="c"># in Claude Code's Bash, `flashex browse page.html`) is kept under Artifacts</span>
 <span class="c"># too, with its project, a copy of it (and of the pictures, styles and</span>
