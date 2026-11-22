@@ -26,7 +26,7 @@ and answer from your desk or from your phone. One native app for macOS and Windo
 <a href="#macos"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/homebrew-light.svg"><img src="assets/readme/homebrew-dark.svg" height="62" alt="Install with Homebrew: one command on macOS"></picture></a>
 <a href="https://palo-kunovsky-flash.github.io/flashex-app/"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/docs-light.svg"><img src="assets/readme/docs-dark.svg" height="62" alt="Documentation: guides, shortcuts, the CLI"></picture></a>
 </p>
-<p align="center"><sub>Version 0.7.2 · free to use · updates itself · <a href="#all-downloads">Linux (beta) and every file</a></sub></p>
+<p align="center"><sub>Version 0.7.3 · free to use · updates itself · <a href="#all-downloads">Linux (beta) and every file</a></sub></p>
 <!-- download-buttons:end -->
 
 <p>
@@ -314,7 +314,7 @@ Every file of every system, with the newest version each has:
 <!-- downloads:start -->
 | System | Version | Download |
 |---|---|---|
-| **macOS** · Apple Silicon · 13+ | 0.7.2 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
+| **macOS** · Apple Silicon · 13+ | 0.7.3 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
 | **Windows** 10 1809+ / 11 · x64 | 0.6.1 | [**Flashex-0.6.1-windows-x86_64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-x86_64-setup.exe) |
 | **Windows** 11 · ARM64 | 0.6.1 | [**Flashex-0.6.1-windows-aarch64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-aarch64-setup.exe) |
 | **Linux** (beta) · x86_64 | 0.3.2 | [AppImage](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/Flashex-0.3.2-linux-x86_64.AppImage) · [.deb](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex_0.3.2_amd64.deb) · [.tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex-0.3.2-linux-x86_64.tar.gz) |

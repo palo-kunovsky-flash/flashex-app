@@ -8,6 +8,22 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.7.3] - 2026-11-22
+
+### Added
+
+- **The computer's level from the phone.** **New game… › Chess** offers **The computer (Casual)** and **The computer (Harder)**; before, the phone always played Casual. A phone that does not say a level still gets Casual.
+
+### Fixed
+
+- **A Vault entry deleted from the command line while it is open in the Vault.** When `flashex vault delete` (or `vault import --prune`) deleted the entry the Vault card had open, its page or its edit form stayed, and saving the form failed with "no entry named …". The card now goes back to the list and says who deleted it (for example "GH was deleted by flashex vault delete (Claude Code)."), and that unsaved changes in its form were dropped. If you are editing that entry with unsaved changes when the request comes, the question says so ("You are editing this entry; deleting it drops your changes.") before you press **Allow**.
+- **The chat no longer snaps at the end of a slide when the conversation just fills the pane.** When a new message made the conversation only a little taller than the pane (the first message that makes it scroll, or one that leaves it within 30 px of filling it), the slide up stopped short and the list then jumped the rest of the way; it now lands exactly at the end. A message you sent that comes back from the transcript at a different height (its pictures' paths become pictures) slides into place too instead of jumping.
+- **The computer goes on playing the phone's chess game after Flashex starts again.** Which level the computer plays a game against the phone at is kept with the game, so after a restart the computer picks the game up again in a free Chess tab (one is opened when the window has none) and moves when it is its turn; the game is no longer taken as interrupted, so it cannot be claimed as a win. A game the phone put off (adjourned) still goes on when the phone asks.
+- **The phone's game is its own again after Flashex starts anew.** A tap on its row said someone else played there (the seat and its address were kept only in memory); they are now kept beside the game links.
+- **The game page against the computer says so.** Its header said "with" and the name of the person at the computer; it now says **with Computer · Casual** (or **Harder**), also after a restart and in a rematch.
+- **A question Claude Code asks you shows in the chat while its subagents work on.** Its background subagents' tools set the agent back to "working", so the chat (and the phone) hid the question that was on the terminal's screen.
+- **Takeback and Rematch on the phone against the computer.** In a chess game the phone plays against the computer, **Takeback** and, after the game, **Rematch** waited for someone at the computer to say yes, and the game hung. The computer now answers the phone itself after a moment, as a person would: a takeback within the rules is taken (the phone's move again; a move the computer was thinking about for the old position is dropped, so it never moves twice), a draw is declined, and a rematch is taken: the new game starts with the sides swapped, as every rematch does, so the computer plays White and moves first, and it goes on playing. A game the phone put off (adjourned) goes on when the phone asks, without a yes at the computer.
+
 ## [0.7.2] - 2026-11-20
 
 ### Added
@@ -1217,7 +1233,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.7.2...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.7.3...HEAD
+[0.7.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.3
 [0.7.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.2
 [0.7.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.1
 [0.7.0]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.0
