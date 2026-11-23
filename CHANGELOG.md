@@ -8,6 +8,14 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.7.5] - 2026-11-23
+
+### Changed
+
+- **Claude Accounts say how fresh each account's limits are.** A new **Updated** column ("2m ago") on the Mac, and "Updated 2 min ago" under each account on the phone. Limits that could not be read again (Anthropic answered "too many requests") or were read more than 30 minutes ago show their age in the warning colour, and their bars are dimmed, so a week-old 46 % is never taken for today's. The age's tooltip says why and when the next read is.
+- **The header says what Refresh did.** It used to say "Updated 2m ago" after the newest account, even when the others were days old. Now it reads "4 of 6 accounts not updated: Anthropic asks to wait (too many requests) · next try in 4 min", "Reading every account's limits…" while a read runs, or "All updated within 3m ago". The phone says the same.
+- **Fewer reads of the accounts not in use:** every 15 minutes instead of 5. After Anthropic's "too many requests", Flashex waits 5 minutes, then longer, up to 30 (before: 2 to 10). Asking more often kept those accounts refused, so their 5-hour and weekly limits never updated. The account in use is still read sooner as it runs out.
+
 ## [0.7.4] - 2026-11-23
 
 ### Added
@@ -1239,7 +1247,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.7.4...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.7.5...HEAD
+[0.7.5]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.5
 [0.7.4]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.4
 [0.7.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.3
 [0.7.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.2
