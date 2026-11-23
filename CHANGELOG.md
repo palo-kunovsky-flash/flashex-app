@@ -8,6 +8,12 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.7.4] - 2026-11-23
+
+### Added
+
+- **Play with others: a lobby for every game for more than one, and Open games.** **Play with Others** (Snake's header and Games card; **New Game › Play with Others › Open Lobby** in Chess and Soundings; an **Open Seat** in Ridgeline's and Loam's New Game) opens the game's waiting room in its tab: who has joined with **Remove** for each, its QR code and link, **Start** when enough are in (Chess and Soundings start when the second player sits down) and whom it is shown to: **Tailscale network** (on by default), **Local network** (off by default: Bonjour on the same Wi-Fi, without Tailscale, for that game only while its lobby is open) or **Only my computers** (paired computers with Games on). Whoever opens the link takes a free seat at once, without an **Allow**; a removed player is cut off and the link and QR code are made anew, so the old one seats nobody. **Open games** in the Games tab (⌘K › **Open Games: Join a Game**) lists the lobbies open to this computer, with the game, who hosts it on which computer and how many have joined; **Join** opens the game's page in a browser panel and seats you under your name. Other computers are asked only while the section is shown (their guest server's `/lobbies` through Tailscale Serve; a paired computer over its own link; the local network by Bonjour), with the host named as Tailscale says it. On the phone, **Open games** heads Projects with **Join**, and **New game… › Play with others** (Snake, Ridgeline, Loam) opens a lobby on the computer with the phone seated, which a paired computer joins from Open games. Inviting a paired computer, the computer and two players at one computer stay as they were. Also `flashex lobby status|open|reach|remove|start|close|open-games`.
+
 ## [0.7.3] - 2026-11-22
 
 ### Added
@@ -1233,7 +1239,8 @@ The first public release, for Apple Silicon Macs with macOS 13 or later.
 - Animations for splits, zoom, tabs, the sidebar and popups. Turn them off in Settings; they also follow macOS Reduce motion.
 - Light and dark themes with a choice of accent colour.
 
-[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.7.3...HEAD
+[Unreleased]: https://github.com/palo-kunovsky-flash/flashex-app/compare/v0.7.4...HEAD
+[0.7.4]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.4
 [0.7.3]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.3
 [0.7.2]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.2
 [0.7.1]: https://github.com/palo-kunovsky-flash/flashex-app/releases/tag/v0.7.1
