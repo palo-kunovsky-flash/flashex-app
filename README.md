@@ -357,6 +357,7 @@ Flashex has **no telemetry, no analytics, no account and no crash reporting**. Y
 | What's New and release notes | when an update is offered or installed | this repository's `CHANGELOG.md` on GitHub |
 | Browser pane | pages you open | those pages; text that is no address is searched with DuckDuckGo (`[browser] search_url`) |
 | Git | fetch, pull, push that you start | your remotes, with your own git and credentials |
+| Pull request status | about once a minute for the active project, only when `gh` or `glab` is installed and signed in | the repository's own forge, with your own login; the branch name |
 | Claude account limits | only with the account switcher or `[agents] usage_api` turned on | `api.anthropic.com`, with that account's own Claude Code login, to read its usage |
 | Artifact refresh | only when you press Refresh copy on an artifact (computer or phone) | `claude.ai`, with that artifact owner's own Claude Code login, to read the page's current version |
 | Claude status card | only if you turn it on (`[agents] claude_status`) | `status.claude.com`, Anthropic's public status page |

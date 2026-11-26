@@ -2,10 +2,11 @@ Flashex End User Licence
 
 Copyright (c) 2026 Palo Kunovský. All rights reserved.
 
-"Flashex" means the Flashex application in binary form (Flashex.app with the
-flashex and flashex-keeper programs inside it), its updates, and the files
-distributed with it in this repository's releases. The source code of
-Flashex is not published and is not part of this licence.
+"Flashex" means the Flashex application in binary form for any platform
+(the app, its flashex and flashex-keeper programs, its installers and
+packages), its updates, and the files distributed with it in this
+repository's releases. The source code of Flashex is not published and is
+not part of this licence.
 
 1. Licence. You may download, install and use Flashex free of charge, on any
    number of computers, for personal, educational and commercial purposes,
@@ -13,8 +14,9 @@ Flashex is not published and is not part of this licence.
    required.
 
 2. Redistribution. You may share unmodified copies of the release files
-   (the dmg and its checksum and manifest) exactly as published, free of
-   charge, provided this licence and THIRD_PARTY_NOTICES.md go with them.
+   (the installers and packages, their checksums and manifest) exactly as
+   published, free of charge, provided this licence and
+   THIRD_PARTY_NOTICES.md go with them.
    You may not sell Flashex, and you may not distribute a modified,
    repackaged or re-signed copy of Flashex or present it as your own. A
    package manager recipe (such as a Homebrew cask) that downloads the
@@ -22,7 +24,8 @@ Flashex is not published and is not part of this licence.
 
 3. Restrictions. Except where applicable law expressly allows it despite
    this restriction, you may not decompile, disassemble or reverse engineer
-   Flashex, or remove or alter its copyright notices.
+   Flashex, or remove or alter its copyright notices. You may test the
+   security of your own copy and report what you find.
 
 4. Third-party software. Flashex contains open-source components (fonts,
    icons and Rust libraries) that are licensed to you under their own
@@ -31,9 +34,10 @@ Flashex is not published and is not part of this licence.
    components.
 
 5. Your data. Flashex sends no telemetry and nothing about you or your work
-   to the author. Every network connection it makes, and how to turn off
-   the optional ones, is described in DATA_HANDLING.md and on the privacy
-   page of its documentation. You are responsible for the commands,
+   to the author. The network connections it makes, and how to turn off the
+   optional ones, are described in DATA_HANDLING.md for the version it names
+   and on the privacy page of its documentation. That is a description made
+   with care, not a warranty. You are responsible for the commands,
    programs and agents you run in it.
 
 6. Updates. Flashex may check for and offer updates as described in
@@ -50,8 +54,8 @@ Flashex is not published and is not part of this licence.
    CONNECTION WITH FLASHEX OR THE USE OF OR OTHER DEALINGS IN FLASHEX,
    INCLUDING LOSS OF DATA OR WORK. NOTHING IN THIS LICENCE LIMITS OR EXCLUDES
    LIABILITY THAT CANNOT BE LIMITED OR EXCLUDED BY LAW, SUCH AS LIABILITY FOR
-   DAMAGE CAUSED INTENTIONALLY OR BY GROSS NEGLIGENCE, OR THE RIGHTS OF
-   CONSUMERS UNDER MANDATORY LAW.
+   DAMAGE CAUSED INTENTIONALLY OR BY GROSS NEGLIGENCE, LIABILITY UNDER
+   PRODUCT-LIABILITY LAW, OR THE RIGHTS OF CONSUMERS UNDER MANDATORY LAW.
 
 9. Termination. This licence ends automatically if you break its terms. You
    must then stop using and distributing Flashex.
@@ -60,5 +64,6 @@ Flashex is not published and is not part of this licence.
     the version you have stays under the terms it was released with.
 
 11. Terms of use. TERMS.md (the Flashex Terms of Use) applies together with
-    this licence. This licence is governed by the law of the Slovak
-    Republic.
+    this licence; if they conflict, this licence decides what you may do
+    with the software. This licence is governed by the law of the Slovak
+    Republic. If any part of it is invalid, the rest stays in force.
