@@ -26,7 +26,7 @@ and answer from your desk or from your phone. One native app for macOS and Windo
 <a href="#macos"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/homebrew-light.svg"><img src="assets/readme/homebrew-dark.svg" height="62" alt="Install with Homebrew: one command on macOS"></picture></a>
 <a href="https://palo-kunovsky-flash.github.io/flashex-app/"><picture><source media="(prefers-color-scheme: light)" srcset="assets/readme/docs-light.svg"><img src="assets/readme/docs-dark.svg" height="62" alt="Documentation: guides, shortcuts, the CLI"></picture></a>
 </p>
-<p align="center"><sub>Version 0.7.5 · free to use · updates itself · <a href="#all-downloads">Linux (beta) and every file</a></sub></p>
+<p align="center"><sub>Version 0.7.6 · free to use · updates itself · <a href="#all-downloads">Linux (beta) and every file</a></sub></p>
 <!-- download-buttons:end -->
 
 <p>
@@ -171,7 +171,7 @@ Have more than one Claude login? Turn on Settings › AI agents › **Switch bet
 ![Claude Accounts: four accounts with their plans and their 5-hour and weekly limits as bars; one is in use, one is spent, one has a weekly ceiling of 80 %](assets/readme/shots/claude-accounts.png)
 
 - **Switch** makes another account Claude Code's login, running sessions included, without signing in again. MCP servers stay signed in.
-- **Switch automatically** (off by default) takes the account with the most left before the one in use runs out, or the moment an agent stops at its limit.
+- **Switch automatically** (off by default) takes an account with enough left, the one whose limit starts over soonest, before the one in use runs out, or the moment an agent stops at its limit.
 - **Ceilings** keep a share of an account for yourself; **Disable** keeps one out of the rotation.
 - With several Claude Code folders (`CLAUDE_CONFIG_DIR` aliases), each folder switches between its own accounts.
 - The **Usage** dashboard shows where the tokens went, and the phone shows and switches accounts too.
@@ -314,7 +314,7 @@ Every file of every system, with the newest version each has:
 <!-- downloads:start -->
 | System | Version | Download |
 |---|---|---|
-| **macOS** · Apple Silicon · 13+ | 0.7.5 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
+| **macOS** · Apple Silicon · 13+ | 0.7.6 | [**Flashex-macOS-arm64.dmg**](https://github.com/palo-kunovsky-flash/flashex-app/releases/latest/download/Flashex-macOS-arm64.dmg) · or `brew install --cask palo-kunovsky-flash/flashex/flashex` |
 | **Windows** 10 1809+ / 11 · x64 | 0.6.1 | [**Flashex-0.6.1-windows-x86_64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-x86_64-setup.exe) |
 | **Windows** 11 · ARM64 | 0.6.1 | [**Flashex-0.6.1-windows-aarch64-setup.exe**](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.6.1/Flashex-0.6.1-windows-aarch64-setup.exe) |
 | **Linux** (beta) · x86_64 | 0.3.2 | [AppImage](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/Flashex-0.3.2-linux-x86_64.AppImage) · [.deb](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex_0.3.2_amd64.deb) · [.tar.gz](https://github.com/palo-kunovsky-flash/flashex-app/releases/download/v0.3.2/flashex-0.3.2-linux-x86_64.tar.gz) |
@@ -357,7 +357,7 @@ Flashex has **no telemetry, no analytics, no account and no crash reporting**. Y
 | What's New and release notes | when an update is offered or installed | this repository's `CHANGELOG.md` on GitHub |
 | Browser pane | pages you open | those pages; text that is no address is searched with DuckDuckGo (`[browser] search_url`) |
 | Git | fetch, pull, push that you start | your remotes, with your own git and credentials |
-| Pull request status | about once a minute for the active project, only when `gh` or `glab` is installed and signed in (from 0.7.6 `[git] pr_status`) | the repository's own forge, with your own login; the branch name |
+| Pull request status | about once a minute for the active project, only when `gh` or `glab` is installed and signed in (`[git] pr_status`) | the repository's own forge, with your own login; the branch name |
 | Claude account limits | only with the account switcher or `[agents] usage_api` turned on | `api.anthropic.com`, with that account's own Claude Code login, to read its usage |
 | Artifact refresh | only when you press Refresh copy on an artifact (computer or phone) | `claude.ai`, with that artifact owner's own Claude Code login, to read the page's current version |
 | Claude status card | only if you turn it on (`[agents] claude_status`) | `status.claude.com`, Anthropic's public status page |

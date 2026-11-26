@@ -679,8 +679,9 @@ usage_api = <span class="k">false</span>
 <span class="c"># again. Their logins are kept in the system's keychain; their limits are</span>
 <span class="c"># read with Anthropic's usage API.</span>
 claude_switcher = <span class="k">false</span>
-<span class="c"># The switcher switches by itself to the account with the most left when</span>
-<span class="c"># the one in use is nearly spent (off: it offers the switch, a notice).</span>
+<span class="c"># The switcher switches by itself when the one in use is nearly spent, to</span>
+<span class="c"># an account with enough left whose limit starts over soonest (off: it</span>
+<span class="c"># offers the switch, a notice).</span>
 claude_auto_switch = <span class="k">false</span>
 <span class="c"># Claude's artifacts: &quot;claude.ai&quot; publishes them there as Claude does</span>
 <span class="c"># (Flashex keeps a local copy of each too); &quot;local&quot; keeps them on this</span>
@@ -853,12 +854,17 @@ dedupe = <span class="s">&quot;off&quot;</span>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
 <tbody>
 <tr id="cfg-git-autofetch_minutes"><td><code>autofetch_minutes</code></td><td><code>0</code></td></tr>
+<tr id="cfg-git-pr_status"><td><code>pr_status</code></td><td><code>true</code></td></tr>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [git]</div><pre><code><span class="k">[git]</span>
 <span class="c"># Source Control fetches the window's project repositories in the</span>
 <span class="c"># background this often, quietly (0 = off, as in VS Code). A fetch never</span>
 <span class="c"># changes your branches or files; it only learns what the remote has.</span>
-autofetch_minutes = <span class="k">0</span></code></pre></div>
+autofetch_minutes = <span class="k">0</span>
+<span class="c"># The sidebar shows the current branch's pull request: the gh or glab</span>
+<span class="c"># tool, when installed and signed in, asks the repository's own forge</span>
+<span class="c"># about once a minute (it sends the branch name). false: never asked.</span>
+pr_status = <span class="k">true</span></code></pre></div>
 <h3 id="cfg-updates"><code>[updates]</code></h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
@@ -878,12 +884,16 @@ channel = <span class="s">&quot;stable&quot;</span></code></pre></div>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
 <tbody>
 <tr id="cfg-vault-lock_after"><td><code>lock_after</code></td><td><code>&quot;5m&quot;</code></td></tr>
+<tr id="cfg-vault-wait_for_agents"><td><code>wait_for_agents</code></td><td><code>false</code></td></tr>
 </tbody></table></div>
 <div class="term"><div class="term-bar">config.toml · [vault]</div><pre><code><span class="k">[vault]</span>
 <span class="c"># The Vault (palette: Vault…) locks itself after this long without use:</span>
 <span class="c"># &quot;90s&quot;, &quot;5m&quot;, &quot;1h&quot;, or 0 for only by hand. It always locks when the Mac</span>
 <span class="c"># sleeps or the screen locks, and when Flashex quits.</span>
-lock_after = <span class="s">&quot;5m&quot;</span></code></pre></div>
+lock_after = <span class="s">&quot;5m&quot;</span>
+<span class="c"># true: it does not lock while an agent in Flashex is at work or waits</span>
+<span class="c"># for you; lock_after counts from when all of them are idle.</span>
+wait_for_agents = <span class="k">false</span></code></pre></div>
 <h3 id="cfg-ai"><code>[ai]</code></h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Key</th><th>In the default file</th></tr></thead>
