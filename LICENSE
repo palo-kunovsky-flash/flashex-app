@@ -30,10 +30,11 @@ Flashex is not published and is not part of this licence.
    in this licence limits your rights under those licences for those
    components.
 
-5. Your data. Flashex sends no telemetry. Its only network connections are
-   described in README.md (the update check, pages you open in the browser
-   panel, git operations and language servers you run). You are responsible
-   for the commands, programs and agents you run in it.
+5. Your data. Flashex sends no telemetry and nothing about you or your work
+   to the author. Every network connection it makes, and how to turn off
+   the optional ones, is described in DATA_HANDLING.md and on the privacy
+   page of its documentation. You are responsible for the commands,
+   programs and agents you run in it.
 
 6. Updates. Flashex may check for and offer updates as described in
    README.md. Updates are covered by this licence unless they come with
@@ -47,10 +48,17 @@ Flashex is not published and is not part of this licence.
    THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
    CONNECTION WITH FLASHEX OR THE USE OF OR OTHER DEALINGS IN FLASHEX,
-   INCLUDING LOSS OF DATA OR WORK.
+   INCLUDING LOSS OF DATA OR WORK. NOTHING IN THIS LICENCE LIMITS OR EXCLUDES
+   LIABILITY THAT CANNOT BE LIMITED OR EXCLUDED BY LAW, SUCH AS LIABILITY FOR
+   DAMAGE CAUSED INTENTIONALLY OR BY GROSS NEGLIGENCE, OR THE RIGHTS OF
+   CONSUMERS UNDER MANDATORY LAW.
 
 9. Termination. This licence ends automatically if you break its terms. You
    must then stop using and distributing Flashex.
 
 10. Changes. Later versions of Flashex may come with a different licence;
     the version you have stays under the terms it was released with.
+
+11. Terms of use. TERMS.md (the Flashex Terms of Use) applies together with
+    this licence. This licence is governed by the law of the Slovak
+    Republic.

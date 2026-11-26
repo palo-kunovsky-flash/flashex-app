@@ -369,6 +369,8 @@ Agents, language servers and other programs you run in Flashex make their own co
 
 Details worth knowing: the `flashex` socket is open to your user only; programs in a terminal can write the clipboard but never read it; command lines that look like they hold a secret are never saved; the Vault is encrypted with XChaCha20-Poly1305 under an Argon2id key and is never reachable from a phone; `[privacy] hide_host` and `hide_emails` hide your computer's name and account e-mails for screenshots. The [privacy page](https://palo-kunovsky-flash.github.io/flashex-app/privacy.html) lists exactly what each feature reads and sends.
 
+For organisations assessing Flashex: the [Data Handling and Security Statement](DATA_HANDLING.md) sums up where data is kept, every connection and the settings that keep everything on the computer; the [Terms of Use](TERMS.md) and the [licence](LICENSE) say who provides Flashex and on what terms.
+
 ## How the numbers were measured
 
 The table under [Ultra light](#ultra-light) was measured on 2026-11-11 with a build of 0.6.0 made with the release profile, on an Apple M4 (32 GB) with macOS 27.0, in a fresh, empty home folder (no shell configuration, one window, one terminal):
