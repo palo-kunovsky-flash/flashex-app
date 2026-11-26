@@ -99,7 +99,7 @@ connections below goes to a server of the provider.
 
 | Connection | What is sent, and to where | How to turn off |
 |---|---|---|
-| Pull or merge request status | Flashex runs `gh pr view <branch>` or `glab mr list --source-branch <branch>` for the active project, about once a minute, if that tool is installed and signed in. It goes to the repository's own forge (github.com, gitlab.com or a self-hosted one) with the user's credentials and sends the branch name. To recognise the forge it reads host aliases from `~/.ssh/config`. | Sign out of `gh` / `glab` or do not install them (there is no setting yet) |
+| Pull or merge request status | Flashex runs `gh pr view <branch>` or `glab mr list --source-branch <branch>` for the active project, about once a minute, if that tool is installed and signed in. It goes to the repository's own forge (github.com, gitlab.com or a self-hosted one) with the user's credentials and sends the branch name. To recognise the forge it reads host aliases from `~/.ssh/config`. | `[git] pr_status = false` (0.7.6); in 0.7.5, sign out of `gh` / `glab` |
 
 ### 4.3 Available by default, sent only when the user asks
 
@@ -186,13 +186,16 @@ claude_status = false
 [dashboards]
 public_ip = false
 
+[git]
+pr_status = false
+
 [browser]
 search_url = ""
 ```
 
-Without a setting: the pull request lookup through `gh` / `glab` (sign out
-of them to stop it), and live note sharing and game lobbies, which happen
-only when the user starts them. `artifacts = "local"` works through
+Without a setting: live note sharing and game lobbies, which happen only
+when the user starts them. In 0.7.5 the pull request lookup has no setting
+either (`pr_status` comes with 0.7.6): sign out of `gh` / `glab` to stop it. `artifacts = "local"` works through
 Flashex's Claude Code hooks; without the hooks installed, Claude Code
 publishes artifacts by itself.
 

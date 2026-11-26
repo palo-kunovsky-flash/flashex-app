@@ -62,12 +62,10 @@ The provider does not collect, process or store your personal data through
 Flashex and does not act as a controller or processor of data you handle in
 it.
 
-If you contact the provider by e-mail or a GitHub issue, the provider is the
-controller of what you send: it is used to answer you and to fix Flashex
-(legitimate interest), and kept only as long as that needs. You may ask for
-access to it or its deletion, and you may complain to the Slovak data
-protection authority (Úrad na ochranu osobných údajov Slovenskej republiky).
-GitHub issues are public and handled under GitHub's own terms.
+If you write to the provider (by e-mail or a GitHub issue), your message is
+used only to answer you and to improve Flashex, and kept only as long as
+that needs; you may ask for it to be deleted. GitHub issues are public and
+handled under GitHub's own terms.
 
 ## 6. Third-party software and services
 
